@@ -1,0 +1,127 @@
+<!-- meta
+title: Junk Removal in {{TOWN}}, {{ABBR}} | Quick Haul
+description: Junk removal, clean outs, furniture, appliance, mattress and yard waste pickup, plus demo, in {{TOWN}}, {{ABBR}}. Loads start at $149. Book a day online or call.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: town.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-town" data-town-query="{{TOWN_QUERY}}">
+<!-- One template, only the town, state and abbreviation change (copy.md). No local claims per town until Shawn gives them. Towns and prices are placeholders (data/towns.json, data/prices.json, content/placeholders.md); photos are logged stock, must-replace. Words: content/copy.md, Town pages. -->
+
+<!-- ===== Town: page banner. The one banner besides Contact's that carries a pill: these are landing pages from search (revision.md section 5). The photo isn't of the town, so its alt never names it ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner -long" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Junk removal in</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">{{TOWN}}, {{ABBR}}</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Clean outs, single items, yard&nbsp;waste and demo work in {{TOWN}}. Loads start at {{> price-from}}.</p>
+    <div class="o-pageBanner__actions a-reveal">
+      <a class="a-button -cream -large" href="book.html?town={{TOWN_QUERY}}">Book in {{TOWN}}<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
+</section>
+
+<!-- ===== Town: what we haul. Heading, one line, Home's photo tiles with their names only ===== -->
+<section class="b-band -rise o-homeHaul" aria-labelledby="town-haul-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="town-haul-title"><span class="a-section__row -light">What we haul</span> <span class="a-section__row">in {{TOWN}}</span></h2>
+    <p class="a-lede">We come to {{TOWN}} with the truck, load it ourselves and haul it away. You don't need to drag anything to the curb.</p>
+  </div>
+  <ul class="o-homeHaul__grid">
+    <li class="m-tile -seven a-inview">
+      <a class="m-tile__link" href="services.html#junk-removal">
+        {{picture name="tile-junk" class="m-tile__img" alt="A white pickup truck piled high with black trash bags" sizes="(min-width: 1025px) 56vw, 100vw"}}
+        <span class="m-tile__label">Junk removal<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -five a-inview">
+      <a class="m-tile__link" href="services.html#clean-outs">
+        {{picture name="tile-garage" class="m-tile__img" alt="An empty basement with white walls, square pillars and a clear wood floor" sizes="(min-width: 1025px) max(40vw, 580px), 50vw"}}
+        <span class="m-tile__label">Clean outs<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#furniture">
+        {{picture name="tile-sofa" class="m-tile__img" alt="A cream armchair and a small sofa set out by the door of a brick building" sizes="(min-width: 1025px) 32vw, 50vw"}}
+        <span class="m-tile__label">Furniture<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#appliances">
+        {{picture name="tile-fridge" class="m-tile__img" alt="A pale green retro fridge freezer against a brick wall" sizes="(min-width: 1025px) 32vw, 50vw"}}
+        <span class="m-tile__label">Appliances<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#mattresses">
+        {{picture name="tile-mattress" class="m-tile__img -right" alt="A man walking down a sidewalk with a striped mattress on his head" sizes="(min-width: 1025px) 42vw, 50vw"}}
+        <span class="m-tile__label">Mattresses<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -five a-inview">
+      <a class="m-tile__link" href="services.html#yard-waste">
+        {{picture name="tile-yard" class="m-tile__img" alt="The back of an orange work truck loaded with green garden waste" sizes="(min-width: 1025px) 40vw, 100vw"}}
+        <span class="m-tile__label">Yard waste<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+    <li class="m-tile -seven a-inview">
+      <a class="m-tile__link" href="services.html#demo">
+        {{picture name="tile-demo" class="m-tile__img" alt="A weathered wooden garden shed with glazed double doors" sizes="(min-width: 1025px) 56vw, 100vw"}}
+        <span class="m-tile__label">Demo<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+    </li>
+  </ul>
+  <div class="m-rowActions a-inview">
+    <a class="a-link" href="services.html"><span class="a-link__text">See everything we take</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ===== Town: how it works. Home's three small facts, on cream ===== -->
+<section class="b-band o-svcBand o-factBand" aria-labelledby="town-how-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="town-how-title"><span class="a-section__row -light">How it works</span> <span class="a-section__row">in {{TOWN}}</span></h2>
+    <p class="a-lede">Book online or call. Either way, you hear the time and the price before we come.</p>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">You book</strong> <span class="m-fact__text">Pick a day and your load.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">We confirm</strong> <span class="m-fact__text">Shawn checks the job, the time and the price.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">We haul</strong> <span class="m-fact__text">We load it and leave the space clear.</span></li>
+  </ul>
+</section>
+
+<!-- ===== Town: priced by the load, the row of four, the same as Services. Each link carries this town to Book as well as the load ===== -->
+<section class="b-band -slate o-svcPrice" id="pricing" aria-labelledby="pricing-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="pricing-title"><span class="a-section__row -light">Priced by</span> <span class="a-section__row">the load</span></h2>
+    <p class="a-lede">You pay for how much of the truck your junk fills. The prices are the same in {{TOWN}} as everywhere else we go.</p>
+    <a class="a-link" href="pricing.html"><span class="a-link__text">See how pricing works</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+  <ul class="o-svcPrice__row">
+{{> price-row}}
+  </ul>
+</section>
+
+<!-- ===== Town: a slim light strip the trucks park on. Without it the row of four would run straight into the slate estimate band, with no fold under their tyres. It holds the row's closing link ===== -->
+<nav class="b-band -rise o-svcIndex" aria-label="Other towns">
+  <div class="m-rowActions o-townNear a-inview">
+    <p class="o-townNear__label">Also near {{TOWN}}</p>
+    <ul class="o-townNear__chips">
+{{> town-near}}
+    </ul>
+    <a class="a-link" href="service-area.html"><span class="a-link__text">See other towns</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</nav>
+
+<!-- Reviews from this town: built only when real Facebook reviews from this town exist. No sample cards on town pages (copy.md). -->
+
+</div>

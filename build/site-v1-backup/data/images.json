@@ -1,0 +1,31 @@
+{
+  "_note": "Image jobs for tools/images.py. src is the untouched download in src/stock/. ratio is the slot's width over height, focus the focal point (0 to 1) the crop keeps. widths are derivative widths; any wider than the crop are skipped, never upscaled. Every file here is a stock placeholder logged in ../content/placeholders.md (projects/quickhaul/content/placeholders.md) as must-replace.",
+  "images": [
+    {"name": "pickup-trash-bags", "folder": "services", "src": "pickup-trash-bags.jpg", "ratio": 1, "focus": [0.4, 0.364], "zoom": 1.37, "widths": [400, 700, 1000, 1300]},
+    {"name": "basement-cleared", "folder": "services", "src": "basement-cleared.jpg", "ratio": 2.08, "focus": [0.5, 0.58], "widths": [400, 700, 1000, 1300]},
+    {"name": "renovation-tearout", "folder": "services", "src": "renovation-tearout.jpg", "ratio": 2.08, "focus": [0.43, 0.6], "zoom": 1.12, "widths": [400, 700, 1000, 1300]},
+    {"name": "sofa-by-door", "folder": "services", "src": "sofa-by-door.jpg", "ratio": 1, "focus": [0.4, 0.74], "widths": [300, 500, 700]},
+    {"name": "fridge-in-room", "folder": "services", "src": "fridge-in-room.jpg", "ratio": 1, "focus": [0.6, 0.58], "widths": [300, 500, 700]},
+    {"name": "mattress-at-curb", "folder": "services", "src": "mattress-at-curb.jpg", "ratio": 1, "focus": [0.5, 0.55], "widths": [300, 500, 700]},
+    {"name": "yard-waste-truck", "folder": "services", "src": "yard-waste-truck.jpg", "ratio": 1, "focus": [0.62, 0.62], "widths": [300, 500, 700]},
+    {"name": "garage-clutter-before", "folder": "before-after", "src": "garage-clutter-before.jpg", "ratio": 1, "focus": [0.42, 0.5], "widths": [400, 800, 1200, 1600]},
+    {"name": "garage-after", "folder": "before-after", "src": "garage-after.jpg", "ratio": 1, "focus": [0.5, 0.5], "widths": [400, 800, 1200, 1600]},
+
+    {"name": "band-basement", "folder": "services-page", "src": "basement-cleared.jpg", "ratio": 1, "focus": [0.5, 0.58], "widths": [400, 800, 1200, 1600], "quality": 88},
+    {"name": "band-tearout", "folder": "services-page", "src": "renovation-tearout.jpg", "ratio": 1, "focus": [0.665, 0.75], "zoom": 2.01, "widths": [400, 800], "quality": 88},
+    {"name": "band-sofa", "folder": "services-page", "src": "sofa-by-door.jpg", "ratio": 1, "focus": [0.4, 0.74], "widths": [400, 800, 1200, 1600], "quality": 88},
+    {"name": "band-fridge", "folder": "services-page", "src": "fridge-in-room.jpg", "ratio": 1, "focus": [0.6, 0.58], "widths": [400, 800, 1200, 1600], "quality": 88},
+    {"name": "band-man-mattress", "folder": "services-page", "src": "man-carrying-mattress.jpg", "ratio": 1, "focus": [0.62, 0.5], "widths": [400, 800, 1200, 1500], "quality": 88},
+    {"name": "band-yard-truck", "folder": "services-page", "src": "yard-waste-truck.jpg", "ratio": 1, "focus": [0.62, 0.62], "widths": [400, 800, 1200, 1500], "quality": 88},
+
+    {"name": "basement-boxes-before", "folder": "before-after", "src": "room-stacked-boxes.jpg", "ratio": 1, "focus": [0.5, 0.45], "widths": [400, 800, 1200, 1600]},
+    {"name": "basement-empty-after", "folder": "before-after", "src": "basement-unfinished.jpg", "ratio": 1, "focus": [0.5, 0.6], "widths": [400, 800, 1200, 1500]},
+    {"name": "yard-branches-before", "folder": "before-after", "src": "yard-branches.jpg", "ratio": 1, "focus": [0.5, 0.6], "widths": [400, 800, 1200, 1600]},
+    {"name": "yard-lawn-after", "folder": "before-after", "src": "backyard-lawn-fence.jpg", "ratio": 1, "focus": [0.35, 0.6], "widths": [400, 800, 1200, 1500]},
+    {"name": "shed-old-before", "folder": "before-after", "src": "shed-weathered.jpg", "ratio": 1, "focus": [0.5, 0.55], "widths": [400, 800, 1200, 1500]},
+    {"name": "shed-gone-after", "folder": "before-after", "src": "backyard-lawn-deck.jpg", "ratio": 1, "focus": [0.5, 0.6], "widths": [400, 800, 1200, 1500]},
+
+    {"name": "dresser-on-street", "folder": "donate", "src": "dresser-on-street.jpg", "ratio": 1, "focus": [0.5, 0.7], "zoom": 1.5, "widths": [400, 800, 1200, 1600]},
+    {"name": "old-pickup-driveway", "folder": "about", "src": "old-pickup-driveway.jpg", "ratio": 1, "focus": [0.5, 0.58], "widths": [400, 800, 1200, 1500]}
+  ]
+}

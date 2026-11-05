@@ -1,0 +1,40 @@
+The homepage and requests 001 to 013 are done, but **request 014 is not applied and stays open**. Its own condition is that every page has moved in, and I was told not to move any. Applying it now would break the 11 old pages and 12 town pages that still depend on what it deletes.
+
+`build/tmp/v3/r014.py` does the whole cleanup and is ready for integration; keep that file. On a scratch copy with all staged pages moved in:
+- `tools/check.py` passes.
+- Page shots are unchanged apart from known header-pill noise.
+- Every form and interaction test passes.
+
+**Homepage**
+- **Copy and control:** copy v3 is in, at 490 words, with five sample cards and the "plenty" line gone. The load control is now 296 by 36px, down from 1344 by 64, using real radios.
+- **Critic:** one round scored 8.4 PASS with no tells: design 8.5, originality 8, craft 8.5, functionality 9.
+- **After the Critic:** I fixed 6 of its 10 issues. Those fixes aren't re-scored, because only one round was asked for.
+- **QA:** mechanical QA is clean at 1440 and 390, including the keyboard tab pass.
+
+**Bugs the requests' checks caught, now fixed**
+- The Contact and Commercial forms stayed on screen after a successful send.
+- Book's banner sentence was 1.23:1 at 768x1024, and other phone banner sentences were about 3.7:1; all are now 4.59:1 or better.
+- The FAQ band didn't rise over its banner.
+- The new Privacy rules squeezed the old Privacy page.
+
+**My calls, easy to overrule**
+- Review cards are now slate, because the Critic called the pale ones the flattest band on the page. This also applies to the staged Reviews page.
+- The estimate band's faint arrow ring is turned 40 degrees on every page, so its cut end leaves the centre line.
+
+**Left alone**
+- The After photo is still soft, because Varun's default keeps that pair until Shawn sends his own.
+- Each sample card says "sample" up to three times, as copy v3 asks.
+- About's photo shows Chevrolet badges; expect a craft cap from the Critic in P2.
+
+**What remains**
+1. Phase P2: put copy v3 on the staged Reviews, Donate, About and Book pages, move all pages in, then QA and the Critic per page.
+2. Integration: request 014, then the whole-site Critic.
+3. `site/README.md`, the handover, and setting `PREVIEW_LABEL` to True before any preview goes out.
+
+Not tested by anyone: a real phone, Safari, Firefox or a screen reader.
+
+The permission check refused my first run of `checks.sh`, in a command that also included `curl` and `powershell`. I ran its steps (build, check, regression shots) directly instead.
+
+**Good commit point for Varun.** Suggested message: `Quick Haul: homepage copy v3, smaller load control, shared parts for requests 001 to 013`
+
+The preview server is closed. P2's starting notes are in `build/shared-frozen.md`, under "What P2 needs now"; the full record is in `build/progress.md`.

@@ -1,0 +1,39 @@
+Phase B is done for Quick Haul and stopped at checkpoint 2b, but it didn't pass: the Critic scored 7.6 and failed it on craft. Both rounds found no copy or design tells and gave originality 8. I fixed most of what round 2 found afterwards, but the skill caps the Critic at 2 rounds, so those fixes haven't been scored.
+
+**Earlier run.** The spec, tokens, placeholder list and prototype matched the skill and I kept them. Its cut-off Critic round left screenshots but no report, so I re-ran round 1 from scratch. Those screenshots showed two bugs, which I fixed first: the headline ran into the truck drawing between about 1025 and 1300px wide, and the booking strip under the hero was cramped at 1100.
+
+**Critic rounds** (design / originality / craft / functionality → weighted score):
+- **Round 1:** 8 / 8 / 7 / 8 → 7.8, fail. I fixed all 9 issues it found that weren't waiting on Shawn. The main ones:
+  - the phone bottom bar could get stuck on screen;
+  - Chrome's own dropdown appeared in the town field (now a styled list);
+  - the menu faded in with the hero showing through;
+  - hovering the header Book now pushed the call button.
+- **Round 2:** 7.5 / 8 / 7 / 8 → 7.6, fail. Design dropped because it tested more widths: the strip's price and Book now fell below the first screen at 1366x768 and 1100x800.
+
+**After round 2.** The strip is now one row from 1025px, and I checked the result myself in the browser:
+- it ends at y 731 at 1366x768 and y 749 at 1100x800;
+- picking a town no longer makes it jump;
+- a town that isn't on the list now says "Not on our list? Call…" instead of reading as yes;
+- the logo is clipped to a circle, so the phone screenshot's background no longer shows;
+- the alignment at 768 and the awkward line wraps are fixed.
+
+One change was reversed. After round 1, I hid the header Book now on phones while the bottom bar shows. Round 2 found that left the header lopsided, and the brief says Book Now stays in the header, so I put it back.
+
+**Not checked:** a real phone or 2x screen, Safari, Firefox, or a screen reader on the town list.
+
+**Still open:**
+- At 1024x768 (iPad landscape) the booking strip still starts below the fold. Book now stays in the header.
+- Service area, FAQ and Contact aren't in the desktop nav, so the footer will need to carry them.
+- Roboto Mono still loads from Google Fonts in the prototype; the site build should host it itself.
+- Nothing on the page labels it as a design preview with placeholder content yet. The brief requires that before Shawn sees it.
+
+**Decisions for you** (details in `design/handover.md`):
+1. Keep the grey slate palette as picked, or allow one stronger accent from the logo. Both rounds said the boldness comes only from the type.
+2. Approve installing fontTools to convert Bio Sans to woff2, or ship the .otf files.
+3. Until Shawn sends photos, use simple line drawings in the service cells, or leave them empty.
+4. Keep Book now in both the header and the bottom bar on phones, or make the bar call-only.
+5. Ask Shawn for the original logo file. The current one can't go above about 56px tall.
+
+I updated the spec, `tokens.css`, `content/placeholders.md`, `status.md` and `review-log.md` (both Critic runs plus mine). I served the prototype on port 8811 and have stopped that server. Port 8765 is running another project's site (Harbour Care Group) and I left it alone. Playwright left log folders in `projects/quickhaul/.playwright-mcp/` and the studio root; they aren't needed.
+
+This is a good checkpoint. Suggested commit message: `quickhaul: art direction phase B, hero prototype after 2 critic rounds, handover`

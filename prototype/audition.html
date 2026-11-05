@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Quick Haul: type and palette auditions (phase A)</title>
+<!-- Audition only: fonts load from Google Fonts here. Phase B self-hosts the chosen family as woff2. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Barlow:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap">
+<style>
+/* ===== Audition page for Varun: three type pairings, three logo palettes ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #ECEAE7; color: #16191F; font: 400 16px/1.55 Barlow, sans-serif; }
+img { display: block; max-width: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid #16191F; outline-offset: 3px; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---- tool chrome (not part of the design) ---- */
+.tool { max-width: 1440px; margin: 0 auto; padding: 56px 20px 120px; }
+.tool__head { max-width: 860px; margin: 0 0 56px; }
+.tool__head h1 { margin: 0 0 12px; font: 700 34px/1.1 Barlow, sans-serif; letter-spacing: -.01em; }
+.tool__head p { margin: 0 0 10px; }
+.tool__note { margin: 20px 0 0; padding: 16px 20px; border: 1px solid #16191F33; border-radius: 14px; background: #F6F5F3; font-size: 15px; }
+.tool__note strong { font-weight: 700; }
+.tool h2 { margin: 72px 0 8px; font: 700 26px/1.15 Barlow, sans-serif; }
+.tool h2 + p { max-width: 860px; margin: 0 0 28px; }
+.tool__switch { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 24px; font-size: 14px; }
+.tool__switch button { min-height: 40px; padding: 8px 16px; border: 1px solid #16191F55; border-radius: 40px; background: transparent; color: inherit; font: 600 14px/1 Barlow, sans-serif; cursor: pointer; }
+.tool__switch button[aria-pressed="true"] { background: #16191F; color: #F6F5F3; }
+.card { margin: 0 0 48px; border-radius: 20px; overflow: hidden; background: #F6F5F3; box-shadow: 0 1px 0 #16191F14; }
+.card__label { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; padding: 18px 24px; border-bottom: 1px solid #16191F1A; }
+.card__label h3 { margin: 0; font: 700 20px/1.2 Barlow, sans-serif; }
+.card__label p { margin: 0; font-size: 15px; color: #3A3F47; }
+.lic { display: inline-block; padding: 3px 10px; border-radius: 30px; font: 600 12px/1.5 Barlow, sans-serif; letter-spacing: .02em; }
+.lic.-free { background: #1F6B3A1A; color: #1F5A33; }
+.lic.-paid { background: #8A2A1A1A; color: #7A2414; }
+.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; margin: 0; border-top: 1px solid #16191F1A; }
+.meta div { padding: 16px 24px; border-right: 1px solid #16191F1A; font-size: 14px; }
+.meta dt { margin: 0 0 4px; font-weight: 700; }
+.meta dd { margin: 0; color: #3A3F47; }
+
+/* ===== Palettes as role tokens. Values sampled from assets/logo.png (see the palette cards) ===== */
+.p1 { --g: #343D4E; --tx: #F7EFEC; --tx2: #D5D4D3; --acc: #D5D4D3; --cta: #D5D4D3; --ctaInk: #0F141C;
+      --rule: rgba(213,212,211,.26); --band: #F7EFEC; --bandInk: #0F141C; --bandInk2: #343D4E;
+      --bandCta: #343D4E; --bandCtaInk: #F7EFEC; --chip: rgba(213,212,211,.5); --htDot: #0F141C; }
+.p2 { --g: #DEDCDB; --tx: #0F141C; --tx2: #343D4E; --acc: #343D4E; --cta: #343D4E; --ctaInk: #F7EFEC;
+      --rule: rgba(15,20,28,.18); --band: #343D4E; --bandInk: #F7EFEC; --bandInk2: #D5D4D3;
+      --bandCta: #F7EFEC; --bandCtaInk: #0F141C; --chip: rgba(52,61,78,.45); --htDot: #DEDCDB; }
+.p3 { --g: #0C1018; --tx: #F7EFEC; --tx2: #B3B5B7; --acc: #9FAFCB; --cta: #9FAFCB; --ctaInk: #0C1018;
+      --rule: rgba(159,175,203,.22); --band: #F7EFEC; --bandInk: #0C1018; --bandInk2: #2E3D50;
+      --bandCta: #2E3D50; --bandCtaInk: #F7EFEC; --chip: rgba(159,175,203,.5); --htDot: #0C1018; }
+
+/* ===== Type pairings as role tokens ===== */
+/* A: Truewerk's own system (Bio Sans heavy and light caps, Roboto Mono for body, labels and buttons).
+   Bio Sans is commercial and is not loaded; the live text falls back to Barlow at Truewerk's values. */
+.ta { --fd: "Bio Sans", Barlow, sans-serif; --wl: 300; --wb: 900; --lh: 1; --ls: 0; --ws: 0;
+      --fb: "Roboto Mono", monospace; --bw: 400; --bs: 16px; --blh: 1.625;
+      --fl: "Roboto Mono", monospace; --flw: 700; --fls: .04em; --btnR: 0; --btnF: "Roboto Mono", monospace; --btnW: 700; --btnCase: uppercase; }
+/* B: Barlow (closest free match to Bio Sans: same squared rounds, flat terminals, straight-legged R)
+   with Roboto Mono kept from the reference for facts and labels only. Varun's headline system. */
+.tb { --fd: Barlow, sans-serif; --wl: 300; --wb: 700; --lh: .92; --ls: -.005em; --ws: .06em;
+      --fb: Barlow, sans-serif; --bw: 400; --bs: 18px; --blh: 1.5;
+      --fl: "Roboto Mono", monospace; --flw: 500; --fls: .06em; --btnR: 44px; --btnF: Barlow, sans-serif; --btnW: 600; --btnCase: none; }
+/* C: Archivo alone. The width axis does the work: expanded caps for display (an upright echo of the
+   logo's wide, heavy wordmark), normal width for body and labels. */
+.tc { --fd: Archivo, sans-serif; --wl: 300; --wb: 800; --lh: .94; --ls: -.01em; --ws: .06em;
+      --fb: Archivo, sans-serif; --bw: 400; --bs: 17px; --blh: 1.55;
+      --fl: Archivo, sans-serif; --flw: 600; --fls: .08em; --btnR: 44px; --btnF: Archivo, sans-serif; --btnW: 600; --btnCase: none; }
+.tc .hl, .tc .sh { font-stretch: 125%; font-variation-settings: "wdth" 125; }
+.tc .hl { font-size: min(96px, 7.6cqi); }   /* expanded caps: sized so "SPACE BACK" holds one row; phones narrow the width below */
+.tc .sh { font-size: clamp(30px, 5cqi, 58px); }
+.p1 .logo { -webkit-mask: radial-gradient(closest-side, #000 78%, transparent 100%); mask: radial-gradient(closest-side, #000 78%, transparent 100%); }
+
+/* ===== Specimen: a 1440-proportioned hero plus one light band ===== */
+.spec { container-type: inline-size; }
+.spec__hero { position: relative; display: flex; flex-direction: column; min-height: 640px; padding: 0 0 0; overflow: hidden;
+              background: var(--g); color: var(--tx); }
+/* Truewerk's devices, rebuilt live from the measurements in references/deconstruct/truewerk.md
+   (on Truewerk they are baked into one flat image). Sized in cqi so they scale with the hero. */
+/* hazard edge: 25px at 1440, top 52% of the hero, bars 29 degrees off horizontal, 47 on 13 off */
+.fx-stripe { position: absolute; left: 0; top: 0; width: 1.75cqi; height: 52%;
+             background: repeating-linear-gradient(151deg, var(--acc) 0 3.26cqi, transparent 3.26cqi 4.17cqi); }
+/* registration hairlines, like a job sheet */
+.fx-rules { position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(var(--rule), var(--rule)) 0 92px / 100% 1px no-repeat,
+                        linear-gradient(var(--rule), var(--rule)) calc(100% - 48px) 0 / 1px 100% no-repeat; }
+/* base strip: slats cut into the hero's bottom edge in the next band's colour, a 40px strip, then the halftone */
+.fx-base { position: relative; z-index: 1; height: max(40px, 5.56cqi); margin-top: auto; background: var(--band); }
+.fx-base::before { content: ""; position: absolute; bottom: 100%; left: 43%; right: -4cqi; height: max(16px, 2.01cqi);
+                   background: repeating-linear-gradient(90deg, var(--band) 0 11.39cqi, transparent 11.39cqi 14.63cqi);
+                   transform: skewX(29deg); transform-origin: 0 100%; }
+/* halftone: a staggered dot grid (5.5px pitch, 3.1px dots) that thins downward, as Truewerk's tile does */
+.fx-base::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: max(20px, 2.78cqi);
+                  background: radial-gradient(circle, var(--htDot) 0 1.55px, transparent 1.8px) 0 0 / 5.5px 5.6px,
+                              radial-gradient(circle, var(--htDot) 0 1.55px, transparent 1.8px) 2.75px 2.8px / 5.5px 5.6px;
+                  -webkit-mask: linear-gradient(#000, rgba(0,0,0,.6)); mask: linear-gradient(#000, rgba(0,0,0,.6)); }
+.spec__nav { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 20px 48px 0 48px; height: 92px; }
+.spec__nav .pill { justify-self: start; display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 40px;
+                   border: 1px solid var(--chip); font: var(--flw) 12px/1 var(--fl); letter-spacing: var(--fls); text-transform: uppercase; white-space: nowrap; }
+.spec__nav .pill.-right { justify-self: end; background: var(--cta); color: var(--ctaInk); border-color: transparent; }
+/* the client's real logo, cropped to the mark at a quarter of its native pixels so it stays sharp at 2x */
+.logo { position: relative; width: 66px; height: 70px; overflow: hidden; border-radius: 10px; }
+.logo img { position: absolute; width: 184px; left: -61.5px; top: -165.75px; }
+.p2 .logo, .p3 .logo { box-shadow: 0 0 0 1px var(--rule); }
+.spec__copy { position: relative; z-index: 2; max-width: 980px; padding: 9cqi 48px 6cqi 120px; }
+.hl { margin: 0; font-family: var(--fd); font-size: clamp(44px, 8.6cqi, 124px); line-height: var(--lh); letter-spacing: var(--ls);
+      word-spacing: var(--ws); text-transform: uppercase; text-wrap: balance; }
+.hl span { display: block; }
+.hl .l { font-weight: var(--wl); }
+.hl .b { font-weight: var(--wb); }
+.lede { max-width: 34em; margin: 28px 0 0; font: var(--bw) var(--bs)/var(--blh) var(--fb); color: var(--tx2); text-wrap: pretty; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin: 32px 0 0; }
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 26px; border-radius: var(--btnR);
+       background: var(--cta); color: var(--ctaInk); font: var(--btnW) 15px/1 var(--btnF); text-transform: var(--btnCase); text-decoration: none; }
+.btn svg { width: 16px; height: 16px; }
+.call { margin: 0; font: 400 15px/1.4 var(--fb); color: var(--tx2); }
+.call a { display: inline-block; padding: 6px 0; color: var(--tx); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; padding: 0; list-style: none; }
+.facts li { padding: 6px 12px; border: 1px solid var(--chip); border-radius: 30px; font: var(--flw) 12px/1.4 var(--fl); letter-spacing: var(--fls); text-transform: uppercase; color: var(--tx2); }
+.spec__band { padding: 40px 48px 80px 120px; background: var(--band); color: var(--bandInk); }
+.sh { max-width: 1000px; margin: 0; font-family: var(--fd); font-size: clamp(32px, 7.4cqi, 72px);   /* one row for "GARAGE AND BASEMENT" on desktop; three balanced rows at 390 */ line-height: var(--lh); letter-spacing: var(--ls);
+      word-spacing: var(--ws); text-transform: uppercase; text-wrap: balance; }
+.sh span { display: block; }
+.sh .l { font-weight: var(--wl); }
+.sh .b { font-weight: var(--wb); }
+.body { max-width: 36em; margin: 22px 0 0; font: var(--bw) var(--bs)/var(--blh) var(--fb); color: var(--bandInk2); text-wrap: pretty; }
+.band__row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin: 28px 0 0; }
+.band__row .btn { background: var(--bandCta); color: var(--bandCtaInk); }
+.tag { font: var(--flw) 12px/1.4 var(--fl); letter-spacing: var(--fls); text-transform: uppercase; color: var(--bandInk2); }
+
+/* ===== Palette cards ===== */
+.pal { display: grid; grid-template-columns: minmax(0, 736px) minmax(0, 1fr); gap: 0; }
+.frame { position: relative; aspect-ratio: 736 / 400; max-width: 736px; overflow: hidden; background: #343D4E; }
+.frame img { position: absolute; left: 0; top: 0; width: 100%; transform: translateY(-37.5%); }
+.frame__over { position: absolute; right: 3.5%; top: 22%; width: 24%; color: var(--tx); }
+.p2 .frame__over { --tx: #F7EFEC; --cta: #F7EFEC; --ctaInk: #0F141C; }
+.frame__over p { margin: 0 0 10px; font: 700 21px/.95 Barlow, sans-serif; text-transform: uppercase; word-spacing: .06em; }
+.frame__over p .l { font-weight: 300; }
+.frame__over .btn { min-height: 36px; padding: 0 14px; border-radius: 36px; font-size: 12px; }
+.mk { position: absolute; display: grid; place-items: center; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%;
+      background: #fff; color: #111; border: 2px solid #111; font: 700 10px/1 Barlow, sans-serif; }
+.mk.-a { left: 66.4%; top: 2.8%; margin-top: 0; }  .mk.-b { left: 62.6%; top: 50.8%; }  .mk.-c { left: 48.2%; top: 49.2%; }
+.mk.-d { left: 64%; top: 56.2%; }  .mk.-e { left: 60.7%; top: 32.2%; }  .mk.-f { left: 62.9%; top: 39.2%; }
+.mk.-g { left: 62.6%; top: 68.8%; }  .mk.-h { left: 44.2%; top: 64.2%; }  .mk.-i { left: 36.8%; top: 48.8%; }
+.mk.-j { left: 91.7%; top: 2.8%; margin-top: 0; }  .mk.-k { left: 37%; top: 60.5%; }
+.pal__info { padding: 20px 24px; }
+.sw { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; }
+.sw li { font-size: 13px; line-height: 1.35; }
+.sw i { display: block; height: 44px; margin: 0 0 6px; border-radius: 10px; box-shadow: inset 0 0 0 1px #16191F26; }
+.sw b { font-family: "Roboto Mono", monospace; font-weight: 500; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 6px 8px; border-bottom: 1px solid #16191F1A; text-align: left; vertical-align: top; }
+th { font-weight: 700; }
+td.n { font-family: "Roboto Mono", monospace; white-space: nowrap; }
+.pass { color: #1F5A33; font-weight: 700; } .deco { color: #6A5A14; font-weight: 700; }
+
+@media (max-width: 1024px) { .pal { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .spec__nav { padding: 16px 20px 0; height: 76px; gap: 8px; }
+  .spec__nav .pill { padding: 0 14px; letter-spacing: .04em; }
+  .spec__copy { padding: 56px 20px 48px 40px; }
+  .spec__band { padding: 32px 20px 56px 40px; }
+  .fx-stripe { display: none; }
+  .lede, .body { font-size: 16px; }
+  /* C on phones: expanded caps fall to 25px to hold two rows, so phones drop to normal width */
+  .tc .hl, .tc .sh { font-stretch: 100%; font-variation-settings: "wdth" 100; }
+  .tc .hl { font-size: 12cqi; }
+  .fx-rules { background: linear-gradient(var(--rule), var(--rule)) 0 76px / 100% 1px no-repeat; }
+  .frame__over { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<a class="sr-only" href="#type">Skip to the type pairings</a>
+<main class="tool" id="main">
+  <header class="tool__head">
+    <h1>Quick Haul: type and palette auditions</h1>
+    <p>Phase A, 3 November 2026. Primary reference: Truewerk. Pick one concept from design/concepts.md, one type pairing and one palette below, or write your own.</p>
+    <p>Every specimen uses the same working headline and placeholder facts (phone in the 555-01xx range, prices as round figures) so the comparison is fair. The Copywriter writes the real lines later.</p>
+    <div class="tool__note">
+      <p><strong>No hero media exists yet.</strong> The only client image is assets/logo.png: a 736 by 1600 phone screenshot of a mockup, with the chrome mark on a slate wall. The mark itself is only 220 by 233 pixels. So "a real frame from the hero media" here means the one real frame we have, the logo mockup, shown at native size. In the specimens the mark is shown 66 px wide, a quarter of its native pixels, so it stays sharp on 2x screens; it cannot go much past 110 px wide until Shawn sends the original file (the 2.6 MB PNG from Fiverr, or a vector).</p>
+    </div>
+  </header>
+
+  <h2 id="type">1. Type pairings</h2>
+  <p>Each pairing sets the same hero and one light section band. Switch the ground to see a pairing on each palette.</p>
+  <div class="tool__switch" role="group" aria-label="Palette for the type specimens">
+    <span>Ground:</span>
+    <button type="button" data-pal="p1" aria-pressed="true">1 Slate wall</button>
+    <button type="button" data-pal="p2" aria-pressed="false">2 Chrome sheet</button>
+    <button type="button" data-pal="p3" aria-pressed="false">3 Night shift</button>
+  </div>
+
+  <article class="card" aria-labelledby="ta-h">
+    <div class="card__label">
+      <h3 id="ta-h">A. The reference's own approach: Bio Sans with Roboto Mono</h3>
+      <p><span class="lic -paid">Bio Sans: commercial</span> <span class="lic -free">Roboto Mono: free, Apache 2.0</span></p>
+      <p>Bio Sans is not loaded (no licence, and we never load a reference's font files). The live text below is Barlow set to Truewerk's values: 900 and 300 caps, mono body copy, square mono buttons. The real face is in references/deconstruct/truewerk/detail-hero-headline.png.</p>
+    </div>
+    <div class="spec ta p1" data-spec>
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#ta-h">Book a pickup <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            <p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+          <ul class="facts"><li>1/8 truck from $149</li><li>Demo projects too</li></ul>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+      <div class="spec__band">
+        <p class="sh"><span class="l">Garage and basement</span><span class="b">Clean outs</span></p>
+        <p class="body">We take furniture, appliances, mattresses and yard waste, and we clear garages and basements top to bottom. You point, we carry.</p>
+        <div class="band__row"><a class="btn" href="#ta-h">Book a clean out</a><span class="tag">Haverhill, Salem, Nashua, Lowell</span></div>
+      </div>
+    </div>
+    <dl class="meta">
+      <div><dt>Display</dt><dd>Bio Sans 900 and 300, caps, line height .98, no tracking (Truewerk's hero is about 50 px; scaled up here to hero size)</dd></div>
+      <div><dt>Body and labels</dt><dd>Roboto Mono 400 body at 16 px / 1.65; labels and buttons Roboto Mono 700 caps</dd></div>
+      <div><dt>Buttons</dt><dd>Square blocks, as Truewerk. Conflicts with Varun's pill buttons (V move 9), so Phase B would use pills anyway</dd></div>
+      <div><dt>Cost</dt><dd>Bio Sans from Dharma Type via MyFonts, from $29.99 a style. Web licence terms not checked</dd></div>
+    </dl>
+  </article>
+
+  <article class="card" aria-labelledby="tb-h">
+    <div class="card__label">
+      <h3 id="tb-h">B. Closest free substitute: Barlow with Roboto Mono</h3>
+      <p><span class="lic -free">Barlow: free, OFL</span> <span class="lic -free">Roboto Mono: free, Apache 2.0</span></p>
+      <p>Barlow shares Bio Sans's squared rounds, flat terminals and straight-legged R. Set in Varun's headline system: light 300 and bold 700 caps, word spacing .06em. Mono only for facts and labels; body in Barlow so long reading stays easy.</p>
+    </div>
+    <div class="spec tb p1" data-spec>
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#tb-h">Book a pickup <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            <p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+          <ul class="facts"><li>1/8 truck from $149</li><li>Demo projects too</li></ul>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+      <div class="spec__band">
+        <p class="sh"><span class="l">Garage and basement</span><span class="b">Clean outs</span></p>
+        <p class="body">We take furniture, appliances, mattresses and yard waste, and we clear garages and basements top to bottom. You point, we carry.</p>
+        <div class="band__row"><a class="btn" href="#tb-h">Book a clean out</a><span class="tag">Haverhill, Salem, Nashua, Lowell</span></div>
+      </div>
+    </div>
+    <dl class="meta">
+      <div><dt>Display</dt><dd>Barlow 300 and 700, caps, line height .92, word spacing .06em, sized off the column (cqi)</dd></div>
+      <div><dt>Body</dt><dd>Barlow 400 at 18 px / 1.5 (16 px at 390)</dd></div>
+      <div><dt>Labels and chips</dt><dd>Roboto Mono 500 caps 12 px, tracking .06em</dd></div>
+      <div><dt>Buttons</dt><dd>Pills, Barlow 600 sentence case (V move 9)</dd></div>
+    </dl>
+  </article>
+
+  <article class="card" aria-labelledby="tc-h">
+    <div class="card__label">
+      <h3 id="tc-h">C. Alternative: Archivo, one family on its width axis</h3>
+      <p><span class="lic -free">Archivo: free, OFL</span></p>
+      <p>Expanded caps (width 125) for display, an upright echo of the logo's wide, heavy wordmark without its italic. Normal width for body and labels. No mono, so the site reads less like a spec sheet and more like truck lettering.</p>
+    </div>
+    <div class="spec tc p1" data-spec>
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#tc-h">Book a pickup <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            <p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+          <ul class="facts"><li>1/8 truck from $149</li><li>Demo projects too</li></ul>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+      <div class="spec__band">
+        <p class="sh"><span class="l">Garage and basement</span><span class="b">Clean outs</span></p>
+        <p class="body">We take furniture, appliances, mattresses and yard waste, and we clear garages and basements top to bottom. You point, we carry.</p>
+        <div class="band__row"><a class="btn" href="#tc-h">Book a clean out</a><span class="tag">Haverhill, Salem, Nashua, Lowell</span></div>
+      </div>
+    </div>
+    <dl class="meta">
+      <div><dt>Display</dt><dd>Archivo width 125, weights 300 and 800, caps, line height .94, word spacing .06em</dd></div>
+      <div><dt>Body</dt><dd>Archivo width 100, 400 at 17 px / 1.55</dd></div>
+      <div><dt>Labels and chips</dt><dd>Archivo 600 caps 12 px, tracking .08em</dd></div>
+      <div><dt>Risk</dt><dd>Expanded caps eat width. At 390 the expanded hero would fall to about 25 px to hold two rows, so phones switch to normal width (shown here), and the logo echo is weaker on phones</dd></div>
+    </dl>
+  </article>
+
+  <h2 id="palettes">2. Palettes from the logo's pixels</h2>
+  <p>The logo is close to monochrome: a slate blue wall (hue 219), neutral chrome and a blue-black shadow. There is no colour accent in it to take, so Truewerk's lime cannot come across (V move 6: the palette comes from the logo). Numbered markers on each frame show where every swatch was sampled. Text in the top right of each frame sits on the real wall pixels, and its contrast is measured against the brightest wall pixel in that area. Specimen type in this section is pairing B.</p>
+
+  <article class="card p1" aria-labelledby="p1-h">
+    <div class="card__label">
+      <h3 id="p1-h">1. Slate wall</h3>
+      <p>The logo as Shawn shows it: chrome on slate. Dark-led, monochrome, the most literal.</p>
+    </div>
+    <div class="pal">
+      <div class="frame">
+        <img src="../assets/logo.png" alt="Quick Haul logo mockup on a slate wall, the only client image">
+        <span class="mk -a" aria-hidden="true">1</span><span class="mk -b" aria-hidden="true">2</span><span class="mk -c" aria-hidden="true">3</span><span class="mk -d" aria-hidden="true">4</span><span class="mk -e" aria-hidden="true">5</span>
+        <div class="frame__over"><p><span class="l">Junk out</span><br>Space back</p><span class="btn">Book a pickup</span></div>
+      </div>
+      <div class="pal__info">
+        <ul class="sw">
+          <li><i style="background:#343D4E"></i><b>#343D4E</b><br>1 Slate (wall). Hero and dark band ground</li>
+          <li><i style="background:#0F141C"></i><b>#0F141C</b><br>2 Blue-black (mark shadow). Deep band, text on light</li>
+          <li><i style="background:#81858C"></i><b>#81858C</b><br>3 Mid chrome. Halftone, hairlines only</li>
+          <li><i style="background:#D5D4D3"></i><b>#D5D4D3</b><br>4 Bright chrome. Accent, CTA pill on dark, stripe, focus</li>
+          <li><i style="background:#F7EFEC"></i><b>#F7EFEC</b><br>5 Chrome highlight. Headline and body on dark; cream band</li>
+        </ul>
+        <table>
+          <tr><th>Pair</th><th>Ratio</th><th>Use</th></tr>
+          <tr><td>#F7EFEC on #343D4E</td><td class="n">9.62</td><td class="pass">body and headline on slate</td></tr>
+          <tr><td>#D5D4D3 on #343D4E</td><td class="n">7.38</td><td class="pass">body, chips on slate</td></tr>
+          <tr><td>#0F141C on #D5D4D3</td><td class="n">12.48</td><td class="pass">CTA label on chrome pill</td></tr>
+          <tr><td>#0F141C on #F7EFEC</td><td class="n">16.28</td><td class="pass">text on cream band</td></tr>
+          <tr><td>#F7EFEC on #343D4E</td><td class="n">9.62</td><td class="pass">slate CTA pill on cream</td></tr>
+          <tr><td>#F7EFEC on brightest wall pixel behind the text, #394253</td><td class="n">8.91</td><td class="pass">text over the real frame</td></tr>
+          <tr><td>#81858C on #343D4E</td><td class="n">2.95</td><td class="deco">decorative only, never text</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="spec tb p1">
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#p1-h">Book a pickup</a><p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card p2" aria-labelledby="p2-h">
+    <div class="card__label">
+      <h3 id="p2-h">2. Chrome sheet</h3>
+      <p>The chrome becomes the page: a light, steel-plate ground with blue-black type, slate bands and the logo carried in its own slate box. Light-led; the boldness comes from type size, not colour.</p>
+    </div>
+    <div class="pal">
+      <div class="frame">
+        <img src="../assets/logo.png" alt="Quick Haul logo mockup on a slate wall, the only client image">
+        <span class="mk -f" aria-hidden="true">1</span><span class="mk -b" aria-hidden="true">2</span><span class="mk -a" aria-hidden="true">3</span><span class="mk -c" aria-hidden="true">4</span><span class="mk -e" aria-hidden="true">5</span>
+        <div class="frame__over"><p><span class="l">Junk out</span><br>Space back</p><span class="btn">Book a pickup</span></div>
+      </div>
+      <div class="pal__info">
+        <ul class="sw">
+          <li><i style="background:#DEDCDB"></i><b>#DEDCDB</b><br>1 Silver-white (chrome face). Hero ground</li>
+          <li><i style="background:#0F141C"></i><b>#0F141C</b><br>2 Blue-black. Headlines and body</li>
+          <li><i style="background:#343D4E"></i><b>#343D4E</b><br>3 Slate (wall). Accent, CTA pill, dark bands, logo box</li>
+          <li><i style="background:#81858C"></i><b>#81858C</b><br>4 Mid chrome. Hairlines only</li>
+          <li><i style="background:#F7EFEC"></i><b>#F7EFEC</b><br>5 Chrome highlight. Cream band; CTA on slate and on media</li>
+        </ul>
+        <table>
+          <tr><th>Pair</th><th>Ratio</th><th>Use</th></tr>
+          <tr><td>#0F141C on #DEDCDB</td><td class="n">13.51</td><td class="pass">headline and body</td></tr>
+          <tr><td>#343D4E on #DEDCDB</td><td class="n">7.99</td><td class="pass">secondary text, chips</td></tr>
+          <tr><td>#F7EFEC on #343D4E</td><td class="n">9.62</td><td class="pass">CTA label on slate pill</td></tr>
+          <tr><td>#0F141C on #F7EFEC</td><td class="n">16.28</td><td class="pass">cream pill on slate and on media</td></tr>
+          <tr><td>#F7EFEC on brightest wall pixel behind the text, #394253</td><td class="n">8.91</td><td class="pass">text over the real frame</td></tr>
+          <tr><td>#81858C on #DEDCDB</td><td class="n">2.71</td><td class="deco">decorative only, never text</td></tr>
+          <tr><td>#F7EFEC on #DEDCDB</td><td class="n">1.20</td><td class="deco">never pair (cream band needs a hairline to separate)</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="spec tb p2">
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#p2-h">Book a pickup</a><p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card p3" aria-labelledby="p3-h">
+    <div class="card__label">
+      <h3 id="p3-h">3. Night shift</h3>
+      <p>Blue-black ground with one steel-blue accent. The accent is the hue of the logo's most saturated pixel (#323E54, hue 219) lifted to 71% lightness. It is derived, not a literal pixel: the only way to get a colour accent without inventing one.</p>
+    </div>
+    <div class="pal">
+      <div class="frame">
+        <img src="../assets/logo.png" alt="Quick Haul logo mockup on a slate wall, the only client image">
+        <span class="mk -h" aria-hidden="true">1</span><span class="mk -i" aria-hidden="true">2</span><span class="mk -j" aria-hidden="true">3</span><span class="mk -g" aria-hidden="true">4</span><span class="mk -e" aria-hidden="true">5</span><span class="mk -k" aria-hidden="true">6</span>
+        <div class="frame__over"><p><span class="l">Junk out</span><br>Space back</p><span class="btn">Book a pickup</span></div>
+      </div>
+      <div class="pal__info">
+        <ul class="sw">
+          <li><i style="background:#0C1018"></i><b>#0C1018</b><br>1 Deep shadow (mark). Hero ground</li>
+          <li><i style="background:#1B222D"></i><b>#1B222D</b><br>2 Shadow slate. Second dark band</li>
+          <li><i style="background:#2E3D50"></i><b>#2E3D50</b><br>3 Blue slate (wall). Halftone, CTA on cream</li>
+          <li><i style="background:#9FAFCB"></i><b>#9FAFCB</b><br>4 Steel, derived from marker 4 (#323E54). Accent, CTA pill, focus</li>
+          <li><i style="background:#B3B5B7"></i><b>#B3B5B7</b><br>6 Mid-light chrome (mark face). Body text on dark</li>
+          <li><i style="background:#F7EFEC"></i><b>#F7EFEC</b><br>5 Chrome highlight. Headlines; cream band</li>
+        </ul>
+        <table>
+          <tr><th>Pair</th><th>Ratio</th><th>Use</th></tr>
+          <tr><td>#F7EFEC on #0C1018</td><td class="n">16.78</td><td class="pass">headline</td></tr>
+          <tr><td>#B3B5B7 on #0C1018</td><td class="n">9.26</td><td class="pass">body on dark</td></tr>
+          <tr><td>#0C1018 on #9FAFCB</td><td class="n">8.58</td><td class="pass">CTA label on steel pill</td></tr>
+          <tr><td>#9FAFCB on #1B222D</td><td class="n">7.21</td><td class="pass">labels on second band</td></tr>
+          <tr><td>#F7EFEC on #2E3D50</td><td class="n">9.75</td><td class="pass">slate CTA pill on cream</td></tr>
+          <tr><td>#9FAFCB on brightest wall pixel behind the text, #394253</td><td class="n">4.56</td><td class="pass">steel over the real frame (passes 4.5 by a hair; use for large text and labels only)</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="spec tb p3">
+      <div class="spec__hero">
+        <div class="fx-rules" aria-hidden="true"></div><div class="fx-stripe" aria-hidden="true"></div>
+        <div class="spec__nav"><span class="pill">Menu</span><span class="logo"><img src="../assets/logo.png" alt="Quick Haul"></span><span class="pill -right">Book now</span></div>
+        <div class="spec__copy">
+          <p class="hl"><span class="l">Junk out</span><span class="b">Space back</span></p>
+          <p class="lede">Junk removal and demo across Massachusetts and New Hampshire. Pick a day online, or give us a call.</p>
+          <div class="actions"><a class="btn" href="#p3-h">Book a pickup</a><p class="call">Need help booking or have questions? <a href="tel:+16035550142">Give us a call: (603) 555-0142</a></p></div>
+        </div>
+        <div class="fx-base" aria-hidden="true"></div>
+      </div>
+    </div>
+  </article>
+
+  <h2 id="notes">3. What this page does not show</h2>
+  <p>No motion, no header scroll states and no real photos: those are Phase B. Hazard edge, halftone band and hairlines are first rebuilds of Truewerk's devices in each palette, not final values. Placeholder facts on this page (phone, price, towns) are listed in content/placeholders.md before anything ships.</p>
+</main>
+<script>
+/* Ground switcher for the type specimens: swaps the palette class on each type specimen. */
+(function () {
+  'use strict';
+  var buttons = document.querySelectorAll('.tool__switch button');
+  var specs = document.querySelectorAll('[data-spec]');
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () {
+      var pal = btn.getAttribute('data-pal');
+      Array.prototype.forEach.call(buttons, function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      Array.prototype.forEach.call(specs, function (s) { s.classList.remove('p1', 'p2', 'p3'); s.classList.add(pal); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

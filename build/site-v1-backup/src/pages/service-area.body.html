@@ -1,0 +1,38 @@
+<!-- meta
+title: Junk Removal Service Area: MA and NH Towns | Quick Haul
+description: See every Massachusetts and New Hampshire town Quick Haul covers, with prices from $149. Can't see yours? Call us.
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-area">
+
+<!-- ===== Service area: inner banner ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Where</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">we go</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">Towns on both sides of the Massachusetts and New Hampshire line, all at the same prices.</p>
+  </div>
+</section>
+
+<!-- ===== Service area: the map beside the town list, one ruled sheet. Towns are placeholders (content/placeholders.md). The map is our own drawing: the brief's Google Map waits for the real base town. ===== -->
+<section class="b-band -flush" aria-label="Towns we cover">
+  <div class="b-band__inner o-split">
+    <div class="o-split__media a-inview">
+    {{> town-map}}
+    </div>
+    <div class="o-townList">
+{{> town-list}}
+      <div class="o-townList__close a-inview">
+        <p class="o-townList__closeTitle">Can't see your town?</p>
+        <p class="a-body o-townList__closeBody">Call us. If we can get to you, we'll tell you the price on the phone.</p>
+        <a class="a-call" href="tel:+16035550142"><svg class="a-call__icon" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-call__text">Call (603) 555-0142</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>

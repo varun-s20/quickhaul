@@ -1,0 +1,39 @@
+The copy for Quick Haul is written: every page and section in the spec is in `content/copy.md`, ready for the build. Every unconfirmed fact uses a realistic placeholder value. Each one is marked † in the copy and logged in `content/placeholders.md` with where it's used and what real value replaces it.
+
+**What it covers**
+- **Shared parts:** top bar (Shawn's "Need help booking or have questions? Give us a call" line), header, menu, the call-only phone bar, the band before the footer, the footer, and the "design preview" label the brief requires.
+- **Pages:** Home, Services (seven sections, each with a "What we take" list, plus a "what we don't take" list and the #pricing section), Book, Reviews (with the before-and-after gallery), Donate, About, FAQ, Contact, the service-area page with one town template, the commercial enquiry page, 404 and a privacy draft.
+- **Booking:** each step has its field labels, helper text, errors and empty states, plus the confirmation and "something went wrong" screens.
+- **Every page** has a meta title, a meta description and alt text for each image slot.
+- **Voice:** plain and local, written from Shawn's messages. The Demo section opens with his own line, "We do demo projects as well." No em dashes and none of the banned phrases; I searched the file to confirm.
+
+**How the trust claims are handled**
+- **Licensed, insured, guarantee:** the wording is written but marked HOLD and must not be built until Shawn confirms each one. The trust row that does get built only describes how booking works: the price is shown first, a real person answers, and every review links back to Facebook.
+- **Reviews:** the cards are obvious samples ("Sample review, Facebook") with no stars, score or count, as the proposal's terms require.
+- **Charities:** none are named. The Donate page says "local charities and reuse stores", because naming a real charity would be a claim about a real organisation.
+- **Commercial work:** the whole page is placeholder wording that invites an enquiry without claiming any experience, since Shawn never said he does it.
+
+**What I had to leave out or guess**
+The client material says nothing about:
+- payment
+- cancellations
+- arrival windows
+- what each load size holds
+- extra charges
+- carrying items out of the house
+- what he won't take
+- how big a demo job he takes on
+- donations
+- his story
+
+All of these are realistic placeholders now, with 11 questions for Shawn at the end of `copy.md`. I also left out response-time promises, "no hidden fees" and recycling claims, because nothing supports them.
+
+**Decisions for you**
+1. **Sample review cards are visible text.** Your checkpoint rule for reviews calls for obviously sample wording, but anti-slop bans visible placeholder labels. I went with your rule. If you'd rather hide the reviews section until real ones arrive, as the spec first proposed, nothing else changes.
+2. **Booking model.** I wrote it as a request that Shawn confirms, which fits his worry that self-booked slots are "less solid". Lines for instant confirmation sit alongside, so either can be built.
+3. **Stock photos.** The alt text never says a stock photo is one of Quick Haul's jobs. The About photo slot must not use a stock photo of a person, because visitors would take it for Shawn.
+4. **One change to the prototype.** Before a town is typed, the strip now says "Start typing to check we come to you" instead of "We cover Massachusetts and New Hampshire", so it makes no coverage claim. The developer needs to apply that.
+
+I also added a line to `review-log.md`. I didn't touch `status.md`.
+
+This is a good checkpoint. Suggested commit message: `quickhaul: final site copy, placeholder register and copy questions for Shawn`

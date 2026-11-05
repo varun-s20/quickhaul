@@ -1,0 +1,237 @@
+<!-- meta
+title: Book a Junk Pickup | Quick Haul
+description: Pick a day, tell us what's going and add photos. We confirm your time and price before we come. Junk removal and demo across Massachusetts and New Hampshire.
+schema: page.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-book">
+
+<!-- ===== Book: inner banner ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Book a</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">pickup</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">Pick a day, tell us what's going and add a few photos. We'll confirm your time and price before the day.</p>
+  </div>
+</section>
+
+<!-- ===== Book: the ticket. Date first, as Piece of Cake's phone form; Muval's step flow and progress line. Booking wording is request-then-confirm (content/placeholders.md, booking model). ===== -->
+<section class="b-band -flush" aria-label="Booking form">
+  <div class="b-band__inner o-book" data-book-sheet>
+
+    <div class="o-book__main">
+      <form class="o-book__form" action="#" method="post" novalidate data-book>
+
+        <ol class="o-book__progress" data-book-progress>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="0">Day</button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="1">Load</button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="2">Address and details</button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="3">Your details</button></li>
+        </ol>
+
+        <!-- ---- step: day ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Day</h2>
+          <div class="o-book__cells">
+            <fieldset class="o-book__cell" data-book-daycell>
+              <legend class="a-label -legend">Pick a day</legend>
+              <input class="m-calendar__native" type="date" name="day" aria-label="Pick a day" data-cal-native>
+              <div class="m-calendar" role="group" aria-label="Available days" data-cal>
+                <div class="m-calendar__head">
+                  <p class="m-calendar__title" aria-live="polite" data-cal-title></p>
+                  <div class="m-calendar__arrows">
+                    <button class="a-square -prev" type="button" aria-label="Previous month" data-cal-prev><svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                    <button class="a-square" type="button" aria-label="Next month" data-cal-next><svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                  </div>
+                </div>
+                <div class="m-calendar__dows" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+                <div class="m-calendar__grid" data-cal-grid></div>
+                <p class="m-field__note m-calendar__empty" hidden data-cal-empty>No open slots that week. Try the next week, or call us and we'll find a time.</p>
+              </div>
+            </fieldset>
+            <div class="o-book__cell -column">
+              <fieldset class="o-book__group">
+                <legend class="a-label -legend">Pick a time</legend>
+                <div class="o-book__chips -stack">
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="time" value="8am to 11am" aria-describedby="book-time-note"><span class="a-choice__face">8am to 11am</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="time" value="11am to 2pm" aria-describedby="book-time-note"><span class="a-choice__face">11am to 2pm</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="time" value="2pm to 5pm" aria-describedby="book-time-note"><span class="a-choice__face">2pm to 5pm</span></label>
+                </div>
+                <p class="m-field__note" id="book-time-note">These are arrival windows. We'll confirm yours before the day.</p>
+              </fieldset>
+              <div class="o-book__foot">
+                <p class="m-field__error" role="alert" hidden data-book-dayerror>Pick a day and a time to keep going</p>
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: your load<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: load ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Load</h2>
+          <div class="o-book__cells">
+            <fieldset class="o-book__cell">
+              <legend class="a-label -legend">How much junk</legend>
+              <div class="o-book__chips -five">
+                <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="eighth" checked data-price="149" data-unit="for a 1/8 truck" aria-describedby="book-load-note"><span class="a-choice__face">1/8 truck</span></label>
+                <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="quarter" data-price="249" data-unit="for a 1/4 truck" aria-describedby="book-load-note"><span class="a-choice__face">1/4 truck</span></label>
+                <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="half" data-price="399" data-unit="for a 1/2 truck" aria-describedby="book-load-note"><span class="a-choice__face">1/2 truck</span></label>
+                <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="full" data-price="649" data-unit="for a full truck" aria-describedby="book-load-note"><span class="a-choice__face">Full truck</span></label>
+                <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="notsure" aria-describedby="book-load-note"><span class="a-choice__face">Not sure</span></label>
+              </div>
+              <p class="m-field__note" id="book-load-note">1/8 is a couple of big items. Full is a packed garage. Not sure? Pick the closest and add photos.</p>
+              <p class="o-book__price" aria-live="polite" data-book-price data-notsure="We'll price it from your photos.">From $149 for a 1/8 truck</p>
+            </fieldset>
+            <div class="o-book__cell -column">
+              <fieldset class="o-book__group">
+                <legend class="a-label -legend">What kind of job</legend>
+                <div class="o-book__chips -seven">
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="junk-removal"><span class="a-choice__face">Junk removal</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="clean-out"><span class="a-choice__face">Clean out</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="furniture"><span class="a-choice__face">Furniture</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="appliances"><span class="a-choice__face">Appliances</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="mattresses"><span class="a-choice__face">Mattresses</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="yard-waste"><span class="a-choice__face">Yard waste</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="job" value="demo"><span class="a-choice__face">Demo</span></label>
+                </div>
+              </fieldset>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: address and details<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: address and details ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Address and details</h2>
+          <div class="o-book__cells">
+            <div class="o-book__cell -fields">
+              <div class="m-field -wide">
+                <label class="a-label" for="book-street">Street address</label>
+                <input class="m-field__input" id="book-street" name="street" type="text" autocomplete="street-address" aria-describedby="book-street-error" data-required data-error="Add the street address for the pickup">
+                <p class="m-field__error" id="book-street-error" hidden></p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-town">Town</label>
+                <input class="m-field__input" id="book-town" name="town" type="text" autocomplete="address-level2" aria-describedby="book-town-error" data-required data-error="Type your town so we can check we cover it" data-towns="{{> town-names}}" data-book-town>
+                <p class="m-field__error" id="book-town-error" hidden></p>
+                <p class="m-field__note" aria-live="polite" hidden data-book-town-note></p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-zip">ZIP code</label>
+                <input class="m-field__input" id="book-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code">
+              </div>
+              <fieldset class="m-field -wide">
+                <legend class="a-label -legend">Where's the junk</legend>
+                <div class="o-book__chips -five -lead">
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="where" value="curb"><span class="a-choice__face">Curb or driveway</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="where" value="garage"><span class="a-choice__face">Garage</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="where" value="basement"><span class="a-choice__face">Basement</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="where" value="inside"><span class="a-choice__face">Inside the house</span></label>
+                  <label class="a-choice"><input class="a-choice__input" type="radio" name="where" value="yard"><span class="a-choice__face">Yard</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="o-book__cell -column">
+              <div class="m-field">
+                <label class="a-label" for="book-going">What's going</label>
+                <textarea class="m-field__input -area" id="book-going" name="going" rows="4" placeholder="For example: old couch, two mattresses, a pile of boxes in the basement" aria-describedby="book-going-error" data-required data-error="Tell us a little about the job"></textarea>
+                <p class="m-field__error" id="book-going-error" hidden></p>
+              </div>
+              <!-- No file input without a backend (conventions): shown only when window.SITE_FORM_ENDPOINT is set. Flagged in build/handover.md. -->
+              <div class="m-field" hidden data-needs-endpoint>
+                <p class="a-label" id="book-photos-label">Add photos (optional)</p>
+                <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="book-photos-label" aria-describedby="book-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+                <ul class="m-upload__files" aria-live="polite" hidden data-upload-files></ul>
+                <p class="m-field__note" id="book-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo.">Photos help us confirm your price and bring the right gear. A few from different angles is plenty.</p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-know">Anything we should know (optional)</label>
+                <textarea class="m-field__input -area" id="book-know" name="notes" rows="3" placeholder="Gate code, parking, stairs, items you'd like donated"></textarea>
+              </div>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: your details<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: your details ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Your details</h2>
+          <div class="o-book__cells">
+            <div class="o-book__cell -fields">
+              <div class="m-field -wide">
+                <label class="a-label" for="book-name">Your name</label>
+                <input class="m-field__input" id="book-name" name="name" type="text" autocomplete="name" aria-describedby="book-name-error" data-required data-error="Add your name">
+                <p class="m-field__error" id="book-name-error" hidden></p>
+              </div>
+              <div class="m-field -wide">
+                <label class="a-label" for="book-phone">Phone</label>
+                <input class="m-field__input" id="book-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="book-phone-error" data-required data-phone data-error="Add a phone number we can reach you on">
+                <p class="m-field__error" id="book-phone-error" hidden></p>
+              </div>
+              <div class="m-field -wide">
+                <label class="a-label" for="book-email">Email</label>
+                <input class="m-field__input" id="book-email" name="email" type="email" autocomplete="email" aria-describedby="book-email-error" data-required data-email data-error="That email doesn't look right">
+                <p class="m-field__error" id="book-email-error" hidden></p>
+              </div>
+            </div>
+            <div class="o-book__cell -column">
+              <label class="m-check"><input class="m-check__input" type="checkbox" name="sms" value="yes"><span class="m-check__box" aria-hidden="true"></span><span class="m-check__text">Text me booking updates and a reminder the day before. Message and data rates may apply. Reply STOP to opt out.</span></label>
+              <p class="m-field__small">We only use your details for this booking. <a class="m-field__smallLink" href="privacy.html">Read our privacy policy.</a></p>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="submit" data-bar-clear>Send booking request<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- ===== Book: confirmation state. Only shown when the endpoint answered OK (conventions: no fake success). ===== -->
+      <div class="o-book__state" tabindex="-1" hidden data-book-done>
+        <div class="m-sectionHead">
+          <h2 class="a-section"><span class="a-section__row -light">Request</span> <span class="a-section__row">sent</span></h2>
+          <p class="a-body m-sectionHead__text">Thanks, your booking request is in. Shawn will look it over and get back to you to confirm your time and price. A copy is on its way to your email.</p>
+        </div>
+        <dl class="o-book__summary">
+          <div class="o-book__summaryRow"><dt class="a-label">Day</dt><dd data-book-sum="day"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Time</dt><dd data-book-sum="time"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Load</dt><dd data-book-sum="load"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Price from</dt><dd data-book-sum="price"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Address</dt><dd data-book-sum="address"></dd></div>
+        </dl>
+        <div class="o-book__stateFoot">
+          <p class="a-callLine">Need to change something? <a class="a-callLine__link" href="tel:+16035550142">Call (603) 555-0142</a></p>
+          <a class="a-button -slate" href="index.html">Back to home<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <!-- ===== Book: error state. Also what the preview shows on submit: there is no endpoint yet, and a form never reports success without one. ===== -->
+      <div class="o-book__state" tabindex="-1" role="alert" hidden data-book-failed>
+        <div class="m-sectionHead">
+          <h2 class="a-section"><span class="a-section__row -light">Something</span> <span class="a-section__row">went wrong</span></h2>
+          <p class="a-body m-sectionHead__text">Your booking didn't go through, and that's on our end. Give us a call on <a class="m-field__smallLink" href="tel:+16035550142">(603) 555-0142</a> and we'll book it with you on the phone.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Book: call cell. A fixed right cell at 1025 and up, under every step on phones (spec 2b). ===== -->
+    <aside class="o-book__aside" aria-label="Call Quick Haul">
+      <div class="o-book__call">
+        <p class="o-book__callLine">Need help booking or have questions? Give us a call</p>
+        <a class="o-book__callNumber" href="tel:+16035550142">(603) 555-0142</a>
+        <p class="a-label o-book__callHours">Mon to Sat, 7am to 7pm</p>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+</div>

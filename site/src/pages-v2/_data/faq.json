@@ -1,0 +1,45 @@
+{
+  "_note": "FAQ page and its FAQPage JSON-LD, both built from this file by tools/build.py. Words are content/copy.md's (v2, 12 questions), word for word; group names are copy.md's small group labels. Prices, policies and hours are placeholders (content/placeholders.md). art is the one drawn item on the group's seated card: a file in assets/trucks/ with its width and height. The first row of each group starts open.",
+  "groups": [
+    {
+      "id": "pricing",
+      "title": "Pricing",
+      "art": { "item": "boxes", "w": 190, "h": 158 },
+      "items": [
+        {"q": "How much does junk removal cost?", "a": "You pay for how much of the truck your junk fills, from $149 for a 1/8 truck or one item to $649 for a full truck. Demo is priced per job."},
+        {"q": "What if I'm not sure how much I have?", "a": "Pick \"Not sure\" when you book and add a few photos. We'll price it from those and confirm before we come."},
+        {"q": "Can the price change when you get here?", "a": "Only if the job is different from what we agreed, like extra items or heavy material we didn't know about. If it does, we tell you before we load anything."}
+      ]
+    },
+    {
+      "id": "what-we-take",
+      "title": "What we take",
+      "art": { "item": "fridge", "w": 98, "h": 208 },
+      "items": [
+        {"q": "What do you take?", "a": "Furniture, appliances, mattresses, household junk, garage and basement clutter, yard waste and demo debris. The full list is on our <a class=\"a-inlineLink\" href=\"services.html\">services page</a>."},
+        {"q": "What don't you take?", "a": "Paint, oil and chemicals, propane tanks, asbestos, medical waste and car batteries. Not sure about something? Ask us."},
+        {"q": "Do you donate things?", "a": "Yes, where we can. Tell us what's still good when you book and we'll take it to a local charity or reuse store instead of the dump."},
+        {"q": "Do I need to carry anything outside?", "a": "No. We carry it out from wherever it is, including basements and upstairs rooms."}
+      ]
+    },
+    {
+      "id": "booking",
+      "title": "Booking",
+      "art": { "item": "dresser", "w": 152, "h": 126 },
+      "items": [
+        {"q": "How does booking work?", "a": "Pick a day and your load online, add photos if you can, and send it. Shawn looks it over and gets back to you to confirm the time and the price."},
+        {"q": "Can I just call instead?", "a": "Yes. Call <a class=\"a-inlineLink\" href=\"tel:+16035550142\"><span class=\"a-num\">(603) 555-0142</span></a>, Mon to Sat, 7am to 7pm, and we'll book it with you on the phone."},
+        {"q": "How soon can you come?", "a": "Check the <a class=\"a-inlineLink\" href=\"book.html\">calendar</a> for the next open days. If you need it sooner, call us and we'll see what we can do."},
+        {"q": "Do you come to my town?", "a": "Probably. See the full list on our <a class=\"a-inlineLink\" href=\"service-area.html\">service area page</a>, and if yours isn't there, give us a call."}
+      ]
+    },
+    {
+      "id": "paying",
+      "title": "Paying",
+      "art": { "item": "bags", "w": 216, "h": 110 },
+      "items": [
+        {"q": "When and how do I pay?", "a": "When the job's done, before we drive off. Card or cash."}
+      ]
+    }
+  ]
+}

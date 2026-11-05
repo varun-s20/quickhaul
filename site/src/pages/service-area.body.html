@@ -1,0 +1,64 @@
+<!-- meta
+title: Junk Removal Service Area: MA and NH Towns | Quick Haul
+description: See every Massachusetts and New Hampshire town Quick Haul covers. Same prices in all of them. Can't see yours? Give us a call.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-area">
+<!-- Town list, coverage and "same prices" are placeholders (data/towns.json, content/placeholders.md); the photo is logged stock, must-replace. Words: content/copy.md, Service area (hub). -->
+
+<!-- ===== Service area: page banner. Heading and one line, the truck parked on the fold with a quarter of a load, the same as the town pages it leads to ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Where</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">we go</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Towns on both sides of the Massachusetts and New&nbsp;Hampshire line, all at the same prices.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
+</section>
+
+<!-- ===== Service area: find your town. The promo card from Home's towns band, with the drawn map in the picture's place. Town names only, no prices. A chip and its spot on the map light together. The map is our own drawing: the brief's Google Map waits for the real base town ===== -->
+<section class="b-band -rise" aria-labelledby="area-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="area-title"><span class="a-section__row -light">Find</span> <span class="a-section__row">your town</span></h2>
+      <p class="a-lede">Each town has its own page, with what we haul there and what it costs.</p>
+{{> town-list}}
+      <p class="m-promo__line">Can't see your town? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>. If we can get to you, we'll tell you the price on the phone.</p>
+    </div>
+    <div class="m-promo__media -map">{{> town-map}}</div>
+  </div>
+</section>
+
+<!-- ===== Service area: one price list, every town, a slim band ===== -->
+<section class="b-band o-svcBand o-slim" aria-labelledby="list-title">
+  <div class="o-slim__card a-inview">
+    <h2 class="a-section -small" id="list-title"><span class="a-section__row -light">One price list,</span> <span class="a-section__row">every town</span></h2>
+    <p class="a-lede">A load costs the same in Lowell as it does in Londonderry.</p>
+    <div class="m-rowActions"><a class="a-link" href="pricing.html"><span class="a-link__text">See the prices</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ===== Service area: when the curb won't take it. A promo with one photo. General information, so it speaks of many towns and names none ===== -->
+<section class="b-band o-svcBand" aria-labelledby="curb-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="curb-title"><span class="a-section__row -light">When the curb</span> <span class="a-section__row">won't take it</span></h2>
+      <p class="a-lede">Many towns limit big items at the curb or charge for a sticker, and transfer stations have their own rules. Skip the trip and book a pickup.</p>
+    </div>
+    <div class="m-promo__media">{{picture name="pricing-sofa" class="m-promo__img" alt="A cream armchair and a small sofa set out by the door of a brick building" sizes="(min-width: 1025px) max(42vw, 660px), 100vw"}}</div>
+  </div>
+</section>
+
+</div>

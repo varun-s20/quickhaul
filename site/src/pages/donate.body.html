@@ -1,0 +1,105 @@
+<!-- meta
+title: Donate Your Old Furniture and Household Items | Quick Haul
+description: Some of what we haul still has plenty of life in it. Tell us what's still good when you book and we set it aside for donation instead of the dump.
+og_image: assets/images/donate/dresser-on-street.jpg
+og_image_alt: A small wooden dresser set out on an empty street, in front of a wooden fence
+schema: page.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-donate">
+<!-- Whether Quick Haul donates at all, and where, is unconfirmed: this whole page is placeholder wording (content/placeholders.md). No named charities, on purpose. Photos are logged stock, must-replace. Words: content/copy.md, Donate. -->
+
+<!-- ===== Donate: page banner. The truck with the good stuff set apart at the curb. The longest title on the site, so the small size ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner -long" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Still good?</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Someone wants it</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">A lot of what we pick up still works, so the good stuff goes to local charities and reuse stores instead of the dump.</p>
+  </div>
+
+  <div class="o-pageBanner__truck -wide a-reveal">{{> truck-banner-donate}}</div>
+</section>
+
+<!-- ===== Donate: what we can donate, the one band. A big photo beside what can go, what can't, where it goes and how to ask. Can is a plain line and can't is a marked list, so a refusal can't be mistaken for an offer ===== -->
+<section class="b-band -rise" aria-labelledby="donate-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="donate-title"><span class="a-section__row -light">What we</span> <span class="a-section__row">can donate</span></h2>
+    <p class="a-lede">The dresser that doesn't fit the new place, the kids' bikes, the spare couch from the basement. If you'd use it, someone else probably will too.</p>
+  </div>
+  <div class="o-donateBand">
+    <div class="o-donateBand__media a-inview">{{picture name="dresser-on-street" class="o-donateBand__img" alt="A small wooden dresser set out on an empty street, in front of a wooden fence" sizes="(min-width: 1025px) max(46vw, 800px), 100vw"}}</div>
+    <div class="o-donateBand__words a-inview">
+      <p class="m-takes"><strong>Yes to</strong> furniture in good shape, working appliances, kitchenware, clothes and shoes, books, toys, bikes, tools and sports gear.</p>
+      <div class="o-donateBand__not">
+        <p class="m-fact__title">Not these</p>
+        <ul class="m-notList" aria-label="What we can't donate">
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Anything broken, stained or missing parts</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Worn-out mattresses</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Car seats</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Recalled cribs</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Anything that's been in a flood or fire</li>
+        </ul>
+      </div>
+      <p class="m-takes o-donateBand__know"><strong>Good to know</strong> Massachusetts bans clothes and other textiles from the regular trash.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Donate: how it works. A seated card with the good stuff set down on its edge ===== -->
+<section class="b-band o-svcBand o-seatBand" aria-labelledby="how-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="how-title"><span class="a-section__row -light">How it</span> <span class="a-section__row">works</span></h2>
+    <p class="a-lede">Add a note when you book saying what's still good, or tell us when we get there. We'll load it separately.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -dresser" src="assets/trucks/item-dresser.svg" width="152" height="126" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -bike" src="assets/trucks/item-bike.svg" width="200" height="112" alt="" loading="lazy" decoding="async"></div>
+  <ul class="m-factRow -three">
+    <li class="m-fact"><strong class="m-fact__title">Where it goes</strong> <span class="m-fact__text">Local charities and reuse stores in Massachusetts and New Hampshire. We check what they're taking before each drop-off.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">If it can't be donated</strong> <span class="m-fact__text">It goes with the rest of your load, so you're not stuck with it.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Need a receipt?</strong> <span class="m-fact__text">Say so when you book and we'll ask the charity for one.</span></li>
+  </ul>
+  </div>
+</section>
+
+<!-- ===== Donate: getting it ready. Three small facts on cream. General advice ===== -->
+<section class="b-band o-svcBand o-factBand" aria-labelledby="ready-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="ready-title"><span class="a-section__row -light">Getting it</span> <span class="a-section__row">ready</span></h2>
+    <p class="a-lede">Charities are more likely to say yes to things that are clean and complete.</p>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">Empty it</strong> <span class="m-fact__text">Check drawers, pockets and boxes, and take out anything personal.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Keep it together</strong> <span class="m-fact__text">Tape screws, shelves and cords to the piece they belong to.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Wipe it down</strong> <span class="m-fact__text">A quick clean goes a long way.</span></li>
+  </ul>
+</section>
+
+<!-- ===== Donate: run a charity nearby, a slim band. It invites and claims no partner ===== -->
+<section class="b-band o-svcBand o-slim" aria-labelledby="charity-title">
+  <div class="o-slim__card a-inview">
+    <h2 class="a-section -small" id="charity-title"><span class="a-section__row -light">Run a charity</span> <span class="a-section__row">nearby?</span></h2>
+    <p class="a-lede">If you run a shelter, a thrift store or a reuse store in Massachusetts or New&nbsp;Hampshire, tell us what you can use.</p>
+    <div class="m-rowActions"><a class="a-link" href="contact.html"><span class="a-link__text">Get in touch</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ===== Donate: estimate band, in its own words (copy.md). It sits in the page because the footer partial's band has fixed words, and the meta above turns that one off ===== -->
+<section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
+  {{> estimate-ring}}
+  <div class="o-estimate__inner a-inview">
+    <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Ready to</span> <span class="a-section__row">clear it out?</span></h2>
+    <p class="a-lede">Book a pickup and tell us what's still good. Want to check an item first? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>.</p>
+    <a class="a-button -cream -large" href="book.html">Book a pickup<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</div>

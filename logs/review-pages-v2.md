@@ -1,0 +1,11 @@
+# Review-log lines from the pages session
+Merged into review-log.md on 2026-11-05 by P2 batch a, all lines below. Kept for reference; new lines go straight to review-log.md.
+
+2026-11-05 | developer (pages session, phase P1, Services) | claude-opus-5-5 | effort max | Staged site/src/pages-v2/services.body.html from copy.md on the prototype's structure. Not built, not run in a browser, no QA, no Critic: phase P1 forbids them. Request 001 filed.
+2026-11-05 | developer (pages session, phase P1, Book, Service area hub, town template) | claude-opus-5-5 | effort max | Staged three sources from copy.md on the inner-page pattern. Not built, not run in a browser, no QA, no Critic: phase P1 forbids them. Requests 002 to 005 filed.
+2026-11-05 | developer (pages session, phase P1, Reviews) | claude-opus-5-5 | effort max | Staged the page and _data/reviews.json from copy.md. Not built, not run in a browser, no QA, no Critic. Request 006 filed.
+2026-11-05 | developer (pages session, phase P1, About, Donate) | claude-opus-5-5 | effort max | Staged both from copy.md. Not built, not run in a browser, no QA, no Critic. Requests 007 and 008 filed. About's stock photo shows Chevrolet badges that can't be cropped out: flagged for Varun, unchanged.
+2026-11-05 | developer (pages session, phase P1, FAQ) | claude-opus-5-5 | effort max | Staged the page and _data/faq.json from copy.md. Not built, not run in a browser, no QA, no Critic. Request 009 filed.
+2026-11-05 | developer (pages session, phase P1, Contact) | claude-opus-5-5 | effort max | Staged from copy.md. Not built, not run in a browser, no QA, no Critic. Request 010 filed.
+2026-11-05 | developer (pages session, phase P1, Commercial, 404, Privacy) | claude-opus-5-5 | effort max | Staged all three from copy.md, the last of the phase's pages. Not built, not run in a browser, no QA, no Critic. Requests 011 to 013 filed.
+2026-11-05 | developer (pages session, phase P1, close) | claude-opus-5-5 | effort max | All 12 sources staged, requests 001 to 014 filed, notes in build/progress-pages-v2.md. Read-only text checks on its own files only: copy against copy.md, classes, blocks, picture names, ids. Nothing built or seen in a browser; request code and CSS values are unrun and unmeasured. Stopped at the end of P1 as gate 1 requires.

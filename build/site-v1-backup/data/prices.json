@@ -1,0 +1,9 @@
+{
+  "_note": "Placeholder prices and what fits in each load (content/placeholders.md). Feeds the four price cards on Services #pricing and on the town pages (tools/build.py). fill is how high the card's truck bed glyph is filled. The ticket's chips carry the same prices in src/partials/ticket.html, and the FAQ's answers in data/faq.json; change all three.",
+  "cards": [
+    { "label": "1/8 truck", "price": 149, "fill": 0.125, "fits": "A couple of big items, like a couch and a chair, or one mattress set." },
+    { "label": "1/4 truck", "price": 249, "fill": 0.25, "fits": "A room's worth: a bedroom set, or a pile of boxes and bags." },
+    { "label": "1/2 truck", "price": 399, "fill": 0.5, "fits": "A small garage or basement clean out." },
+    { "label": "Full truck", "price": 649, "fill": 1, "fits": "A packed garage, a full basement or a whole move-out." }
+  ]
+}

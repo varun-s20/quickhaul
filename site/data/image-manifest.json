@@ -1,0 +1,1199 @@
+{
+ "hero-yard": {
+  "folder": "assets/images/home",
+  "crop": [
+   2400,
+   1350
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/hero-yard-1000.webp",
+    "w": 1000,
+    "h": 562
+   },
+   {
+    "file": "assets/images/home/hero-yard-1600.webp",
+    "w": 1600,
+    "h": 900
+   },
+   {
+    "file": "assets/images/home/hero-yard-2200.webp",
+    "w": 2200,
+    "h": 1238
+   },
+   {
+    "file": "assets/images/home/hero-yard-2400.webp",
+    "w": 2400,
+    "h": 1350
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/hero-yard.jpg",
+   "w": 1000,
+   "h": 562
+  }
+ },
+ "hero-yard-phone": {
+  "folder": "assets/images/home",
+  "crop": [
+   996,
+   1607
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/hero-yard-phone-500.webp",
+    "w": 500,
+    "h": 807
+   },
+   {
+    "file": "assets/images/home/hero-yard-phone-800.webp",
+    "w": 800,
+    "h": 1291
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/hero-yard-phone.jpg",
+   "w": 800,
+   "h": 1291
+  }
+ },
+ "tile-junk": {
+  "folder": "assets/images/home",
+  "crop": [
+   2084,
+   1302
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-junk-500.webp",
+    "w": 500,
+    "h": 312
+   },
+   {
+    "file": "assets/images/home/tile-junk-900.webp",
+    "w": 900,
+    "h": 562
+   },
+   {
+    "file": "assets/images/home/tile-junk-1500.webp",
+    "w": 1500,
+    "h": 937
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-junk.jpg",
+   "w": 900,
+   "h": 562
+  }
+ },
+ "tile-mattress": {
+  "folder": "assets/images/home",
+  "crop": [
+   2068,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-mattress-500.webp",
+    "w": 500,
+    "h": 385
+   },
+   {
+    "file": "assets/images/home/tile-mattress-800.webp",
+    "w": 800,
+    "h": 615
+   },
+   {
+    "file": "assets/images/home/tile-mattress-1100.webp",
+    "w": 1100,
+    "h": 846
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-mattress.jpg",
+   "w": 800,
+   "h": 615
+  }
+ },
+ "tile-sofa": {
+  "folder": "assets/images/home",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-sofa-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/home/tile-sofa-700.webp",
+    "w": 700,
+    "h": 700
+   },
+   {
+    "file": "assets/images/home/tile-sofa-900.webp",
+    "w": 900,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-sofa.jpg",
+   "w": 900,
+   "h": 900
+  }
+ },
+ "tile-fridge": {
+  "folder": "assets/images/home",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-fridge-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/home/tile-fridge-700.webp",
+    "w": 700,
+    "h": 700
+   },
+   {
+    "file": "assets/images/home/tile-fridge-900.webp",
+    "w": 900,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-fridge.jpg",
+   "w": 900,
+   "h": 900
+  }
+ },
+ "tile-yard": {
+  "folder": "assets/images/home",
+  "crop": [
+   1600,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-yard-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/home/tile-yard-700.webp",
+    "w": 700,
+    "h": 700
+   },
+   {
+    "file": "assets/images/home/tile-yard-900.webp",
+    "w": 900,
+    "h": 900
+   },
+   {
+    "file": "assets/images/home/tile-yard-1200.webp",
+    "w": 1200,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-yard.jpg",
+   "w": 900,
+   "h": 900
+  }
+ },
+ "tile-garage": {
+  "folder": "assets/images/home",
+  "crop": [
+   2600,
+   2000
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-garage-500.webp",
+    "w": 500,
+    "h": 385
+   },
+   {
+    "file": "assets/images/home/tile-garage-800.webp",
+    "w": 800,
+    "h": 615
+   },
+   {
+    "file": "assets/images/home/tile-garage-1100.webp",
+    "w": 1100,
+    "h": 846
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-garage.jpg",
+   "w": 800,
+   "h": 615
+  }
+ },
+ "tile-demo": {
+  "folder": "assets/images/home",
+  "crop": [
+   2400,
+   1412
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/tile-demo-500.webp",
+    "w": 500,
+    "h": 294
+   },
+   {
+    "file": "assets/images/home/tile-demo-900.webp",
+    "w": 900,
+    "h": 530
+   },
+   {
+    "file": "assets/images/home/tile-demo-1500.webp",
+    "w": 1500,
+    "h": 882
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/tile-demo.jpg",
+   "w": 900,
+   "h": 530
+  }
+ },
+ "compare-before": {
+  "folder": "assets/images/home",
+  "crop": [
+   2182,
+   1364
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/compare-before-700.webp",
+    "w": 700,
+    "h": 438
+   },
+   {
+    "file": "assets/images/home/compare-before-1300.webp",
+    "w": 1300,
+    "h": 813
+   },
+   {
+    "file": "assets/images/home/compare-before-2000.webp",
+    "w": 2000,
+    "h": 1250
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/compare-before.jpg",
+   "w": 700,
+   "h": 438
+  }
+ },
+ "compare-after": {
+  "folder": "assets/images/home",
+  "crop": [
+   1500,
+   938
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/compare-after-700.webp",
+    "w": 700,
+    "h": 438
+   },
+   {
+    "file": "assets/images/home/compare-after-1300.webp",
+    "w": 1300,
+    "h": 813
+   },
+   {
+    "file": "assets/images/home/compare-after-1500.webp",
+    "w": 1500,
+    "h": 938
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/compare-after.jpg",
+   "w": 700,
+   "h": 438
+  }
+ },
+ "towns-street": {
+  "folder": "assets/images/home",
+  "crop": [
+   1670,
+   1590
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/towns-street-500.webp",
+    "w": 500,
+    "h": 476
+   },
+   {
+    "file": "assets/images/home/towns-street-800.webp",
+    "w": 800,
+    "h": 762
+   },
+   {
+    "file": "assets/images/home/towns-street-1100.webp",
+    "w": 1100,
+    "h": 1047
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/towns-street.jpg",
+   "w": 800,
+   "h": 762
+  }
+ },
+ "og-home": {
+  "folder": "assets/images/home",
+  "crop": [
+   2380,
+   1250
+  ],
+  "webp": [
+   {
+    "file": "assets/images/home/og-home-1200.webp",
+    "w": 1200,
+    "h": 630
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/home/og-home.jpg",
+   "w": 1200,
+   "h": 630
+  }
+ },
+ "footer-joists": {
+  "folder": "assets/fx",
+  "crop": [
+   2400,
+   1000
+  ],
+  "webp": [
+   {
+    "file": "assets/fx/footer-joists-1400.webp",
+    "w": 1400,
+    "h": 583
+   }
+  ],
+  "fallback": null
+ },
+ "page-street": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1043
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/page-street-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/page-street-1600.webp",
+    "w": 1600,
+    "h": 695
+   },
+   {
+    "file": "assets/images/banners/page-street-2200.webp",
+    "w": 2200,
+    "h": 956
+   },
+   {
+    "file": "assets/images/banners/page-street-2400.webp",
+    "w": 2400,
+    "h": 1043
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/page-street.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "page-street-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1176,
+   1590
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/page-street-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/page-street-phone-800.webp",
+    "w": 800,
+    "h": 1082
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/page-street-phone.jpg",
+   "w": 800,
+   "h": 1082
+  }
+ },
+ "svc-junk": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   2380,
+   1134
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-junk-700.webp",
+    "w": 700,
+    "h": 334
+   },
+   {
+    "file": "assets/images/services-page/svc-junk-1300.webp",
+    "w": 1300,
+    "h": 619
+   },
+   {
+    "file": "assets/images/services-page/svc-junk-2000.webp",
+    "w": 2000,
+    "h": 953
+   },
+   {
+    "file": "assets/images/services-page/svc-junk-2380.webp",
+    "w": 2380,
+    "h": 1134
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-junk.jpg",
+   "w": 700,
+   "h": 334
+  }
+ },
+ "svc-garage": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   1361,
+   1194
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-garage-500.webp",
+    "w": 500,
+    "h": 439
+   },
+   {
+    "file": "assets/images/services-page/svc-garage-800.webp",
+    "w": 800,
+    "h": 702
+   },
+   {
+    "file": "assets/images/services-page/svc-garage-1100.webp",
+    "w": 1100,
+    "h": 965
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-garage.jpg",
+   "w": 800,
+   "h": 702
+  }
+ },
+ "svc-sofa": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   2400,
+   2791
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-sofa-400.webp",
+    "w": 400,
+    "h": 465
+   },
+   {
+    "file": "assets/images/services-page/svc-sofa-700.webp",
+    "w": 700,
+    "h": 814
+   },
+   {
+    "file": "assets/images/services-page/svc-sofa-900.webp",
+    "w": 900,
+    "h": 1047
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-sofa.jpg",
+   "w": 900,
+   "h": 1047
+  }
+ },
+ "svc-fridge": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   2400,
+   2790
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-fridge-400.webp",
+    "w": 400,
+    "h": 465
+   },
+   {
+    "file": "assets/images/services-page/svc-fridge-700.webp",
+    "w": 700,
+    "h": 814
+   },
+   {
+    "file": "assets/images/services-page/svc-fridge-900.webp",
+    "w": 900,
+    "h": 1046
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-fridge.jpg",
+   "w": 900,
+   "h": 1046
+  }
+ },
+ "svc-mattress": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   1368,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-mattress-400.webp",
+    "w": 400,
+    "h": 465
+   },
+   {
+    "file": "assets/images/services-page/svc-mattress-700.webp",
+    "w": 700,
+    "h": 814
+   },
+   {
+    "file": "assets/images/services-page/svc-mattress-900.webp",
+    "w": 900,
+    "h": 1047
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-mattress.jpg",
+   "w": 900,
+   "h": 1047
+  }
+ },
+ "svc-yard": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   2400,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-yard-500.webp",
+    "w": 500,
+    "h": 333
+   },
+   {
+    "file": "assets/images/services-page/svc-yard-800.webp",
+    "w": 800,
+    "h": 533
+   },
+   {
+    "file": "assets/images/services-page/svc-yard-1200.webp",
+    "w": 1200,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/svc-yard-1600.webp",
+    "w": 1600,
+    "h": 1067
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-yard.jpg",
+   "w": 800,
+   "h": 533
+  }
+ },
+ "svc-shed": {
+  "folder": "assets/images/services-page",
+  "crop": [
+   2400,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/svc-shed-500.webp",
+    "w": 500,
+    "h": 333
+   },
+   {
+    "file": "assets/images/services-page/svc-shed-800.webp",
+    "w": 800,
+    "h": 533
+   },
+   {
+    "file": "assets/images/services-page/svc-shed-1200.webp",
+    "w": 1200,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/svc-shed-1600.webp",
+    "w": 1600,
+    "h": 1067
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/svc-shed.jpg",
+   "w": 800,
+   "h": 533
+  }
+ },
+ "pickup-trash-bags": {
+  "folder": "assets/images/services",
+  "crop": [
+   1452,
+   1452
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/pickup-trash-bags-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-700.webp",
+    "w": 700,
+    "h": 700
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-1000.webp",
+    "w": 1000,
+    "h": 1000
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-1300.webp",
+    "w": 1300,
+    "h": 1300
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/pickup-trash-bags.jpg",
+   "w": 1000,
+   "h": 1000
+  }
+ },
+ "garage-clutter-before": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2134,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/garage-clutter-before-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/garage-clutter-before.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "garage-after": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2238,
+   1678
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/garage-after-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/garage-after-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/garage-after-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/garage-after-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/garage-after.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "about-yard": {
+  "folder": "assets/images/about",
+  "crop": [
+   2400,
+   1143
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/about-yard-700.webp",
+    "w": 700,
+    "h": 333
+   },
+   {
+    "file": "assets/images/about/about-yard-1300.webp",
+    "w": 1300,
+    "h": 619
+   },
+   {
+    "file": "assets/images/about/about-yard-2000.webp",
+    "w": 2000,
+    "h": 952
+   },
+   {
+    "file": "assets/images/about/about-yard-2380.webp",
+    "w": 2380,
+    "h": 1133
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/about-yard.jpg",
+   "w": 700,
+   "h": 333
+  }
+ },
+ "pricing-basement": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   2000,
+   2000
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-basement-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/pricing/pricing-basement-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/pricing/pricing-basement-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/pricing/pricing-basement-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-basement.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "pricing-sofa": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-sofa-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/pricing/pricing-sofa-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/pricing/pricing-sofa-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/pricing/pricing-sofa-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-sofa.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "pricing-fridge": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-fridge-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/pricing/pricing-fridge-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/pricing/pricing-fridge-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/pricing/pricing-fridge-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-fridge.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "storage-room-before": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2133,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/storage-room-before-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/storage-room-before-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/storage-room-before-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/storage-room-before-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/storage-room-before.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "basement-empty-after": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2134,
+   1601
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/basement-empty-after-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/basement-empty-after.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "cellar-shelves": {
+  "folder": "assets/images/reviews",
+  "crop": [
+   2000,
+   1500
+  ],
+  "webp": [
+   {
+    "file": "assets/images/reviews/cellar-shelves-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/reviews/cellar-shelves-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/reviews/cellar-shelves-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/reviews/cellar-shelves-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/reviews/cellar-shelves.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "yard-branches-before": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2400,
+   1800
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/yard-branches-before-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/yard-branches-before.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "yard-lawn-after": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   1200,
+   900
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/yard-lawn-after-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/yard-lawn-after-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/yard-lawn-after-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/yard-lawn-after.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "shed-old-before": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   2134,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/shed-old-before-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/shed-old-before.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "shed-gone-after": {
+  "folder": "assets/images/before-after",
+  "crop": [
+   1600,
+   1200
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/shed-gone-after-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-1200.webp",
+    "w": 1200,
+    "h": 900
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-1600.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/shed-gone-after.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "dresser-on-street": {
+  "folder": "assets/images/donate",
+  "crop": [
+   1156,
+   1155
+  ],
+  "webp": [
+   {
+    "file": "assets/images/donate/dresser-on-street-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/donate/dresser-on-street-800.webp",
+    "w": 800,
+    "h": 799
+   },
+   {
+    "file": "assets/images/donate/dresser-on-street-1156.webp",
+    "w": 1156,
+    "h": 1155
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/donate/dresser-on-street.jpg",
+   "w": 800,
+   "h": 799
+  }
+ },
+ "fall-house-drive": {
+  "folder": "assets/images/about",
+  "crop": [
+   2050,
+   2050
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/fall-house-drive-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/about/fall-house-drive-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/about/fall-house-drive-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/about/fall-house-drive-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/fall-house-drive.jpg",
+   "w": 800,
+   "h": 800
+  }
+ }
+}

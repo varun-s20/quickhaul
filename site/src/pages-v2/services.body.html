@@ -1,0 +1,158 @@
+<!-- meta
+title: Junk Removal Services in MA and NH | Quick Haul
+description: Garage and basement clean outs, furniture, appliance, mattress and yard waste removal, plus demo projects. See what we take, what it costs and book a day online.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: services.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-services">
+<!-- Every fact on this page is a placeholder from content/placeholders.md; every photo is logged stock, must-replace. The "we take" lists need Shawn's check. Words: content/copy.md, Services. -->
+
+<!-- ===== Services: page banner. Colour photo, heading, one line (V5), and the truck parked on the fold with half a load. No pills: the header's Book now and number are right there, so it never reads as a second homepage hero ===== -->
+<!-- Stock, must-replace: the slot wants Shawn's truck on a real job. -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Our</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">services</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Clean outs, single items, yard waste and demo work across Massachusetts and New&nbsp;Hampshire.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner}}</div>
+</section>
+
+<!-- ===== Services: jump chips. A long page gets an index ===== -->
+<nav class="b-band -rise o-svcIndex" aria-label="On this page">
+  <ul class="m-jump a-inview">
+    <li><a class="a-chip -light" href="#junk-removal">Junk removal</a></li>
+    <li><a class="a-chip -light" href="#clean-outs">Clean outs</a></li>
+    <li><a class="a-chip -light" href="#furniture">Furniture</a></li>
+    <li><a class="a-chip -light" href="#appliances">Appliances</a></li>
+    <li><a class="a-chip -light" href="#mattresses">Mattresses</a></li>
+    <li><a class="a-chip -light" href="#yard-waste">Yard waste</a></li>
+    <li><a class="a-chip -light" href="#demo">Demo</a></li>
+    <li><a class="a-chip -light" href="#pricing">Pricing</a></li>
+  </ul>
+</nav>
+
+<!-- ===== Services: junk removal, the lead band. Centred heading and line, one wide photo, what we take, one action ===== -->
+<!-- Book links name the job, so Book opens with it picked (the form's job values). -->
+<section class="b-band o-svcBand" id="junk-removal" aria-labelledby="junk-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="junk-title"><span class="a-section__row">Junk</span> <span class="a-section__row -light">removal</span></h2>
+    <p class="a-lede">Got a pile and no easy way to get rid of it? Tell us how much of the truck it fills and pick a day. We do the lifting.</p>
+  </div>
+  <div class="o-svcBand__media a-inview">
+    {{picture name="svc-junk" class="o-svcBand__img" alt="A white pickup truck piled high with black trash bags" sizes="(min-width: 1025px) 94vw, 100vw"}}
+  </div>
+  <div class="o-svcBand__foot a-inview">
+    <p class="m-takes"><strong>We take</strong> boxes and bags, old furniture and rugs, exercise equipment, bikes and toys, move-out leftovers, scrap wood and metal.</p>
+    <a class="a-button -slate -large" href="book.html?job=junk-removal">Book now<span class="sr-only"> for junk removal</span><svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ===== Services: garage and basement clean outs, the promo band (V8). A slate card, words and one big photo; the photo leads when stacked ===== -->
+<section class="b-band o-svcBand" id="clean-outs" aria-labelledby="clean-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="clean-title"><span class="a-section__row -light">Garage and basement</span> <span class="a-section__row">clean outs</span></h2>
+      <p class="a-lede">Garages and basements fill up slowly, then all at once. Point at what goes and what stays, and we leave you with a floor you can actually use.</p>
+      <p class="m-takes"><strong>We take</strong> boxes and bins, shelving, old furniture, tools nobody uses, carpet and rugs.</p>
+      <a class="a-button -cream -large m-promo__action" href="book.html?job=clean-out">Book a clean out<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="m-promo__media">{{picture name="svc-garage" class="m-promo__img" alt="A garage crowded with a ride-on mower, a workbench, shelving and gas cans" sizes="(min-width: 1025px) 42vw, 100vw"}}</div>
+  </div>
+</section>
+
+<!-- ===== Services: furniture, appliances and mattresses. Three cards with portrait photos, each with a link naming the job ===== -->
+<section class="b-band o-svcBand" aria-label="Furniture, appliance and mattress removal">
+  <div class="m-svcCards -three">
+    <article class="m-svcCard a-inview" id="furniture" aria-labelledby="furniture-title">
+      <div class="m-svcCard__media">{{picture name="svc-sofa" class="m-svcCard__img" alt="A cream armchair and a small sofa set out by the door of a brick building" sizes="(min-width: 1025px) 31vw, (min-width: 641px) 40vw, 100vw"}}</div>
+      <h2 class="a-section -card m-svcCard__title" id="furniture-title"><span class="a-section__row">Furniture</span> <span class="a-section__row -light">removal</span></h2>
+      <p class="m-svcCard__line">Too big for your car or too heavy to move on your own? We take it, and pieces in good shape can go to donation.</p>
+      <p class="m-takes"><strong>We take</strong> couches and sectionals, recliners, dressers, desks and dining sets.</p>
+      <a class="a-link m-svcCard__book" href="book.html?job=furniture"><span class="a-link__text">Book a furniture pickup</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+    <article class="m-svcCard a-inview" id="appliances" aria-labelledby="appliances-title">
+      <div class="m-svcCard__media">{{picture name="svc-fridge" class="m-svcCard__img" alt="A pale green retro fridge freezer against a brick wall" sizes="(min-width: 1025px) 31vw, (min-width: 641px) 40vw, 100vw"}}</div>
+      <h2 class="a-section -card m-svcCard__title" id="appliances-title"><span class="a-section__row">Appliance</span> <span class="a-section__row -light">removal</span></h2>
+      <p class="m-svcCard__line">Old fridge in the garage? Washer that finally quit? Heavy and awkward is the part we handle.</p>
+      <p class="m-takes"><strong>We take</strong> fridges and freezers, washers and dryers, stoves, dishwashers and water heaters.</p>
+      <a class="a-link m-svcCard__book" href="book.html?job=appliances"><span class="a-link__text">Book an appliance pickup</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+    <article class="m-svcCard a-inview" id="mattresses" aria-labelledby="mattresses-title">
+      <div class="m-svcCard__media">{{picture name="svc-mattress" class="m-svcCard__img" alt="A man walking down a sidewalk with a striped mattress on his head" sizes="(min-width: 1025px) 31vw, (min-width: 641px) 40vw, 100vw"}}</div>
+      <h2 class="a-section -card m-svcCard__title" id="mattresses-title"><span class="a-section__row">Mattress</span> <span class="a-section__row -light">removal</span></h2>
+      <p class="m-svcCard__line">The one thing nobody wants to wrestle into a car. Book one pickup on its own, or add it to a bigger load.</p>
+      <p class="m-takes"><strong>We take</strong> mattresses from twin to king, box springs, bed frames and futons.</p>
+      <a class="a-link m-svcCard__book" href="book.html?job=mattresses"><span class="a-link__text">Book a mattress pickup</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<!-- ===== Services: yard waste and demo. Two cards, the same recipe, bigger. Demo keeps its own heading, anchor and booking link (revision.md, conflict 15) ===== -->
+<section class="b-band o-svcBand" aria-label="Yard waste removal and demo projects">
+  <div class="m-svcCards -two">
+    <article class="m-svcCard a-inview" id="yard-waste" aria-labelledby="yard-title">
+      <div class="m-svcCard__media">{{picture name="svc-yard" class="m-svcCard__img" alt="The back of an orange work truck loaded with green garden waste" sizes="(min-width: 641px) 48vw, 100vw"}}</div>
+      <h2 class="a-section -card m-svcCard__title" id="yard-title"><span class="a-section__row">Yard waste</span> <span class="a-section__row -light">removal</span></h2>
+      <p class="m-svcCard__line">Spring cleanup, a storm that brought half a tree down or a whole fall's worth of leaves. Bag the small stuff if you can and we'll take care of the rest.</p>
+      <p class="m-takes"><strong>We take</strong> brush and branches, bagged leaves, old fencing, planters and pots, swing sets.</p>
+      <a class="a-link m-svcCard__book" href="book.html?job=yard-waste"><span class="a-link__text">Book a yard waste pickup</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+    <article class="m-svcCard a-inview" id="demo" aria-labelledby="demo-title">
+      <div class="m-svcCard__media">{{picture name="svc-shed" class="m-svcCard__img" alt="A weathered wooden garden shed with glazed double doors" sizes="(min-width: 641px) 48vw, 100vw"}}</div>
+      <h2 class="a-section -card m-svcCard__title" id="demo-title"><span class="a-section__row">Demo</span> <span class="a-section__row -light">projects</span></h2>
+      <p class="m-svcCard__line">We take it apart and haul the debris away, so there's no dumpster sitting in your driveway for a week. Every job is different, so we price it with you.</p>
+      <p class="m-takes"><strong>We take down</strong> sheds, decks and porches, fences, playsets, kitchen and bathroom tear-outs.</p>
+      <a class="a-link m-svcCard__book" href="book.html?job=demo"><span class="a-link__text">Book a demo project</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<!-- ===== Services: priced by the load, the slate row. Spans the width, four trucks parked on the fold ===== -->
+<!-- Prices and what fits are placeholders (data/prices.json, content/placeholders.md). Each row link sends ?load= to Book, which reads it. -->
+<section class="b-band -slate o-svcPrice" id="pricing" aria-labelledby="pricing-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="pricing-title"><span class="a-section__row -light">Priced by</span> <span class="a-section__row">the load</span></h2>
+    <p class="a-lede">You pay for how much of the truck your junk fills. The price covers the loading, the hauling and the drop-off, and we confirm it before we show&nbsp;up.</p>
+    <ul class="m-factChips" aria-label="Good to know">
+      <li class="a-factChip">One item: priced as a 1/8 load</li>
+      <li class="a-factChip">Demo: priced per job</li>
+      <li class="a-factChip">Concrete, dirt and shingles can cost more</li>
+    </ul>
+  </div>
+  <ul class="o-svcPrice__row">
+{{> price-row}}
+  </ul>
+</section>
+
+<!-- ===== Services: what we can't take, a slim light band rising over the row of trucks. Heading, one line, a marked list in a seated card with three drawn things set down on its edge ===== -->
+<section class="b-band -rise o-svcNot" aria-labelledby="not-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="not-title"><span class="a-section__row -light">What we</span> <span class="a-section__row">can't take</span></h2>
+    <p class="a-lede">A few things can't go on the truck. Not sure about something? Send a photo with your booking, or <a class="a-inlineLink" href="tel:+16035550142">give us a call</a>.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-svcNot__paint" src="assets/trucks/item-paint.svg" width="120" height="132" alt="" loading="lazy" decoding="async"><img class="o-svcNot__tank" src="assets/trucks/item-propane.svg" width="114" height="188" alt="" loading="lazy" decoding="async"><img class="o-svcNot__battery" src="assets/trucks/item-battery.svg" width="156" height="110" alt="" loading="lazy" decoding="async"></div>
+    <ul class="m-notList" aria-label="What we can't take">
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Paint, oil and chemicals</li>
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Propane tanks and gas cylinders</li>
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Asbestos</li>
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Medical waste</li>
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Car batteries</li>
+      <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Anything still connected to gas</li>
+    </ul>
+  </div>
+</section>
+
+</div>

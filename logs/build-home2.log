@@ -1,0 +1,40 @@
+**The Quick Haul homepage still hasn't passed, though all five decisions are applied.** The last Critic score was 7.9, a fail by 0.1 (it was 7.8 before this rerun). Round 1 of this rerun scored 7.85, so the two rounds the skill allows are used up.
+
+| Round 2 scores | |
+|---|---|
+| Design | 8 |
+| Originality | 8 |
+| Craft | 7, capped by clipped text at the end of the towns rail |
+| Functionality | 9 |
+| Copy and design tells | none |
+
+I fixed that clipped text after round 2, so the fix hasn't been scored. The Critic estimated 8.0 if that was the only change and craft reaches 7.5, but I also changed the tile scrim and the grade, so I can't call it a pass until it's scored again.
+
+## The five decisions
+1. **Before/after:** the two stock garages stay, logged as must-replace until Shawn's real pair from one spot arrives.
+2. **Alt text:** every photo alt, plus the social share image's, now describes the stock photo shown. The list is in `content/placeholders.md`.
+3. **Photo swaps:** junk removal is now a white pickup piled with black trash bags, cropped so the number plate is out of frame. Clean-outs is now an empty basement, because the only empty home garages I found were paid Unsplash+ images. Both licences were checked and logged.
+4. **Photo grade:** it's much stronger, and the first attempt was redone after it turned the trucks pink. The set now sits close to monochrome inside the slate.
+5. **Section openings:** on desktop, the towns heading now sits in a ruled cell beside two rows of cards. Phones keep the stacked layout.
+
+## Other fixes from the Critic
+- **Towns and reviews:** the frame line no longer cuts through card text, and the towns rail now ends on whole cards.
+- **Headings:** all six section headings are now 72px at 1440.
+- **Before/after slider:** each label now fades when its side closes.
+- **Photos:** I shortened the tile scrim, moved the junk removal crop so the title clears the tail lamp, and cropped out the SMEG and Elliot names.
+
+## Questions for rerun 2
+These need your call because they change copy or the spec:
+1. Should the two reviews lines come out until real reviews arrive? "Tap any review…" and "Every review on this site links back to Facebook" sit beside sample cards that aren't links, and both Critic rounds flagged them. I'd hold both lines, since they're false as they stand.
+2. Should the town cards keep "$149 1/8 truck" on all twelve? Both rounds flagged it as filler. I'd state the price once and make the cards town, state and arrow, but the figure is in the spec and copy.
+3. Should the hero lede change? It says to pick a town, load and day "to see your price", but $149 shows from the start and only the load changes it. That's one for the Copywriter.
+
+Smaller items are in `build/progress.md`: the mattress photo reads as a tarp, the Sterling OSB stamps can't be cropped out, and footer rows don't line up where a link wraps.
+
+## Not re-checked after the last fixes
+- **Scrim contrast:** I measured it at 1440 and 1100, where the lowest reading was 6.74:1, but not at 800.
+- **Full QA pass:** the reduced-motion pass, full tab-through and all screen stops weren't repeated. The Critic rounds only sampled focus and reduced motion, and neither followed inner-page links, tested touch or checked at 2x.
+
+No packages were installed, and the browser and local server are closed.
+
+This is a good commit point. Suggested message: `Quick Haul homepage rerun 1: checkpoint 2c decisions, new stock and grade, towns opening, critic fixes`

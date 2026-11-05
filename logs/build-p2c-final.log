@@ -1,0 +1,39 @@
+FAQ, Contact and Commercial are moved in and I've stopped after Commercial as told. `check.py` passes on all 24 pages, and every moved-in page's flow is clean, including the form flows, with Home checked first. The preview server is stopped. Only 404 and Privacy are still on `LEGACY_PAGES`.
+
+| Page | Critic round 1 | Critic round 2 |
+|---|---|---|
+| FAQ | 7.75 fail | 8.1 pass |
+| Contact | 7.7 fail | 8.2 pass |
+| Commercial | 8.05 pass | not needed |
+
+All three passes are narrow, and the fixes made after each last round have not been re-scored. No wording changed on these pages. The Critic judged the form states from script captures, because it may not press Send.
+
+**Rulings:** Donate's banner truck now carries a quarter load. The basement photo and "local" stay as built, so they needed no change.
+
+**Your call, each easy to undo:**
+- **Commercial truck:** your ruling named only Donate, but its reason reaches this page, so I drew a full truck bed with no heap. The label still reads "with a full load". Price rows and the load picker still show the heap at Full, so "piled high" is Home's alone among banners only.
+- **FAQ layout (spec change):** three bands, with group names as headings instead of small labels. The first round's main complaint was four identical grey cards.
+- **Contact layout (spec change):** the form now comes before the map, and the map is a full-width band.
+- **Contact after a send:** the estimate band disappears once a send succeeds.
+- **For the Copywriter:** "One job or regular", "How often" and "How should we get back to you" behave as optional but aren't labelled so.
+
+**Check on this machine:** during FAQ's second round the Critic reports clicking the phone bar's `tel:` link twice by accident. It saw no call placed but can't see the desktop, so look for a leftover "open with" prompt.
+
+**Shared changes:** these are logged in `build/shared-frozen.md`.
+- **Forms:** a form can't send twice, errors carry a mark, chips can be taken back, and there's no resize grip.
+- **Every page:** the estimate ring shows whole on phones, and the header's phone number stays until the footer's number shows.
+- **Drawn items:** the hard shadows are gone, which also reaches About, Reviews, Home and Donate.
+
+**Not tested:** a real phone, Safari, Firefox, a screen reader, a real form endpoint, or find-in-page itself.
+
+**Left, in order:**
+1. 404 and Privacy
+2. Request 014
+3. Integration review
+4. Whole-site Critic
+5. README with the form field names, and the handover
+6. Checkpoint 3, with the preview line on or a gate before any deploy-preview
+
+No new stock photos this batch. Placeholder notes are merged for these three pages, and `logs/review-pages-v2.md` had nothing new to merge.
+
+This is a good commit point. Suggested message: `Quick Haul: move FAQ, Contact and Commercial to the new design; lighter Donate truck`

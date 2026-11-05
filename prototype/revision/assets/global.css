@@ -1,0 +1,752 @@
+/* ===== Quick Haul: revision prototype, global CSS (round 2, 2026-11-04) =====
+   Direction: design/revision.md. Casual, image-led, a mix of pictures and words, one clear thing per section.
+   Loads before global.js. Every page loads this one file. Tokens are design/tokens.css, pasted below; the additions this direction needs are marked "new" and listed in revision.md,
+   so tokens.css itself stays as approved until the Developer takes them across. */
+
+/* ---- fonts: the site's own files. Bio Sans Regular is new: Bio Sans takes over body text from Roboto Mono ---- */
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roboto Mono"; src: url("fonts/robotomono-latin.woff2") format("woff2"); font-weight: 100 700; font-style: normal; font-display: swap; }
+
+:root {
+  /* ---- colour: unchanged. Palette 1, Slate wall, from the logo's pixels. No new UI colour (2b decision 1) ---- */
+  --c-slate: #343D4E;      /* logo wall. Header and dark bands. Cream text on it 9.62:1, chrome text 7.38:1 */
+  --c-ink: #0F141C;        /* logo mark shadow. Footer ground, text on light. On cream 16.28:1, on chrome 12.48:1 */
+  --c-chrome: #D5D4D3;     /* bright chrome. CTA pill on dark, focus ring on dark */
+  --c-chromeMid: #81858C;  /* mid chrome. Borders on dark. Never text (2.95:1 on slate) */
+  --c-cream: #F7EFEC;      /* chrome highlight. Headline on dark, light bands, CTA pill on photos (V9) */
+  --c-steel: #4A5263;      /* slate darkened toward ink. Secondary text on cream 6.91:1 */
+  --c-focus: var(--c-ink);
+  --c-rule: rgba(213, 212, 211, .2);
+  --c-scrim: rgba(15, 20, 28, .55);
+
+  /* ---- type: Bio Sans leads; Roboto Mono keeps one small job, phone numbers and price units ---- */
+  --f-display: "Bio Sans", "Roboto Mono", ui-monospace, monospace;
+  --f-body: "Bio Sans", ui-sans-serif, sans-serif;   /* new: was Roboto Mono */
+  --f-mono: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w-light: 300; --w-body: 400; --w-semi: 600; --w-heavy: 800;
+  --t-heroLh: .92;
+  /* Three heading sizes, set by the kind of band and nothing else (critic r2-1: 88, 68, 64, 56 and 52 with no logic) */
+  --t-section: min(8.8rem, 12.6vw);   /* new: full-width bands. Larger than the built site's, since sections now hold less */
+  --t-sectionSmall: min(6.4rem, 12vw); /* new: slim bands, promo cards, a row of two cards */
+  --t-card: min(5.2rem, 11vw);        /* new: a row of three cards */
+  --t-lede: 1.8rem;                   /* new: the one or two supporting lines under a heading (round 2). 2rem from 1025 */
+  --t-body: 1.8rem;                   /* new: was 1.5 to 1.6rem mono */
+  --t-bodyLh: 1.45;
+  --t-button: 1.5rem;
+  --t-nav: 1.4rem;
+  --tr-display: -.005em;
+  --ws-display: .06em;     /* V1 */
+  --tr-nav: .04em;
+
+  /* ---- spacing ---- */
+  --s-1: .4rem;  --s-2: .8rem;  --s-3: 1.2rem; --s-4: 1.6rem; --s-5: 2.4rem;
+  --s-6: 3.2rem; --s-7: 4.8rem; --s-8: 6.4rem; --s-9: 9.6rem; --s-10: 12.8rem;
+  --gutter: 2rem;
+  --h-header: 6.4rem;
+  --h-button: 4.4rem;
+  --h-buttonLarge: 5.6rem;  /* new: hero, price and estimate pills */
+
+  /* ---- radii: V8 and V7. Square frames retire (revision.md) ---- */
+  --r-pill: 4.4rem;
+  --r-image: 2.4rem;        /* new: V8 promo card radius */
+  --r-band: 3.2rem;         /* new: V7 rising band */
+
+  /* ---- logo: the sharp ceiling is 108 to 117px on a 2x screen (mark is 234px in the phone screenshot) ---- */
+  --logo: 8.8rem;           /* new */
+  --logoSmall: .68;         /* new: scale once the page has scrolled 32px, so it fits inside the bar. 60px on phones (critic r2: 55px was small) */
+
+  /* ---- motion ---- */
+  --e-out: cubic-bezier(.22, 1, .36, 1);
+  --e-ui: ease-in-out;
+  --e-drop: cubic-bezier(.3, 1.28, .5, 1);  /* new: a load landing, with a little settle */
+  --d-ui: 150ms; --d-nudge: 400ms; --d-breathe: 1000ms; --d-rise: 700ms; --d-reveal: 1100ms; --d-stagger: 90ms; --d-menu: 400ms;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; }
+/* 2px less than the bar: a section lands just under the bar's edge, so a fractional scroll position can never leave a sliver of the band above showing (critic r1, rulings R0 A7) */
+html { font-size: 62.5%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 62px; }
+@media (min-width: 641px) { html { scroll-padding-top: 70px; } }
+@media (min-width: 1025px) { html { scroll-padding-top: 86px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (min-width: 1441px) { html { font-size: min(.6944vw, 17.78px); } }
+body { margin: 0; background: var(--c-cream); color: var(--c-ink); font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+h1, h2, p, ul, figure, blockquote, fieldset { margin: 0; padding: 0; border: 0; }
+ul { list-style: none; }
+a { color: inherit; }
+picture { display: contents; }
+img { display: block; width: 100%; height: auto; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; margin: -1px !important; padding: 0 !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; border: 0 !important; }
+.qh-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.a-svg { display: block; width: 1.6rem; height: 1.6rem; }
+.a-num { font-family: var(--f-mono); font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.a-nowrap { white-space: nowrap; }
+
+/* ===== Type ===== */
+/* V1: caps, light plus heavy, no full stop, no colour change. */
+.a-hero { font: var(--w-heavy) min(12.8rem, 16.6cqi, 14.6vh)/var(--t-heroLh) var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; color: var(--c-cream); }
+/* 16.6cqi: "SPACE BACK" runs 5.76em, so the longest row just fills its column. */
+.a-hero__row { display: block; overflow: hidden; padding: .04em 0 .02em; }
+.a-hero__row.-light { font-weight: var(--w-light); }
+.a-hero__line { display: block; }
+.a-section { font: var(--w-heavy) var(--t-section)/.94 var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; }
+.a-section__row { display: block; }
+.a-section__row.-light { font-weight: var(--w-light); }
+.a-section.-small { font-size: var(--t-sectionSmall); }
+.a-section.-card { font-size: var(--t-card); line-height: .96; }
+/* Round 2 (Varun, 4 Nov: "a tad more text all around"). One or two supporting lines under a heading; --c-soft follows the ground: steel on cream 6.91:1, chrome on slate 7.38:1 */
+.a-lede { margin-top: var(--s-4); color: var(--c-soft); font: var(--w-body) var(--t-lede)/1.4 var(--f-body); text-wrap: balance; }
+@media (min-width: 1025px) { :root { --t-lede: 2rem; } }
+
+/* ===== Reveal system ===== */
+/* Headline rows rise out of their masks once; everything else fades and rises 15px. No hidden state without the script. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .a-hero__line { transform: translateY(110%); transition: transform var(--d-reveal) var(--e-out) 150ms; }
+  .js .a-hero__line.-second { transition-delay: 240ms; }
+  .js.is-loaded .a-hero__line { transform: none; }
+  .js .a-reveal { opacity: 0; transform: translateY(15px); transition: opacity var(--d-rise) var(--e-out) 420ms, transform var(--d-rise) var(--e-out) 420ms; }
+  .js .a-reveal + .a-reveal { transition-delay: 510ms; }
+  .js.is-loaded .a-reveal { opacity: 1; transform: none; }
+  .js .a-inview { opacity: 0; transform: translateY(15px); transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); }
+  .js .a-inview.is-inview { opacity: 1; transform: none; }
+}
+
+/* ===== Atoms ===== */
+.a-skip { position: absolute; top: -10rem; left: var(--gutter); z-index: 300; display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 var(--s-5); border-radius: var(--r-pill); background: var(--c-chrome); color: var(--c-ink); font: var(--w-semi) var(--t-button)/1 var(--f-body); text-decoration: none; }
+.a-skip:focus { top: var(--s-2); }
+
+/* ---- buttons (V9): pills, sentence case, the fill follows the ground ---- */
+.a-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3); min-height: var(--h-button); padding: 0 2.4rem; overflow: hidden; border-radius: var(--r-pill); font: var(--w-semi) var(--t-button)/1.1 var(--f-body); text-decoration: none; white-space: nowrap; cursor: pointer; transition: padding var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-button::before { content: ""; position: absolute; inset: 0 0 50% 0; background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, 0)); opacity: 0; pointer-events: none; transition: opacity var(--d-breathe) var(--e-out); }
+.a-button__arrow { flex: none; width: 1.5rem; height: 1.5rem; transition: transform var(--d-nudge) var(--e-out); }
+/* Primary pill on every dark ground, photos and slate alike. Ink on cream 16.28:1. V6 would put the logo's chrome here, but next to cream a flat chrome pill read as switched off (critic r1); listed in revision.md. */
+.a-button.-cream { background: var(--c-cream); color: var(--c-ink); }
+.a-button.-slate { background: var(--c-slate); color: var(--c-cream); }   /* on cream. 9.62:1 */
+.a-button.-line { box-shadow: inset 0 0 0 1px var(--c-slate); color: var(--c-slate); }
+/* A frosted second pill on photos: V4's menu pill. The ink behind the blur carries the contrast whatever the photo does. */
+.a-button.-glass { box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .4); background: rgba(15, 20, 28, .56); color: var(--c-cream); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.a-button.-large { min-height: var(--h-buttonLarge); padding: 0 3rem; font-size: 1.6rem; }
+.a-button:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .a-button:hover { padding-right: 3.2rem; padding-left: 3.2rem; }
+  .a-button.-large:hover { padding-right: 3.8rem; padding-left: 3.8rem; }
+  .a-button:hover::before { opacity: 1; }
+  .a-button:hover .a-button__arrow:last-child { transform: translateX(.6rem); }
+}
+.a-button:focus-visible::before { opacity: 1; }
+
+/* ---- links ---- */
+.a-link { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); color: inherit; font: var(--w-semi) 1.6rem/1.3 var(--f-body); text-decoration: none; }
+.a-link__text { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.a-link__arrow { flex: none; width: 1.4rem; height: 1.4rem; transition: transform var(--d-nudge) var(--e-out); }
+.a-link:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-link:hover .a-link__text { background-size: 0 1px; background-position: 100% 100%; }
+  .a-link:hover .a-link__arrow { transform: translateX(.6rem); }
+}
+.a-inlineLink { position: relative; font-weight: var(--w-semi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-ui) var(--e-ui); }
+.a-inlineLink::after { content: ""; position: absolute; inset: -1.2rem -.4rem; }   /* 44px target without a taller line */
+@media (hover: hover) and (any-pointer: fine) { .a-inlineLink:hover { text-decoration-color: transparent; } }
+
+/* ---- chips (V3): outlined pills, town names and loads ---- */
+.a-chip { display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 2rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); color: var(--c-cream); font: var(--w-semi) 1.6rem/1 var(--f-body); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-chip:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-chip:hover { background: var(--c-cream); box-shadow: none; color: var(--c-ink); } }
+/* On cream: slate outline, ink text, slate fill on hover */
+.a-chip.-light { box-shadow: inset 0 0 0 1px var(--c-steel); color: var(--c-ink); }
+@media (hover: hover) and (any-pointer: fine) { .a-chip.-light:hover { background: var(--c-slate); box-shadow: none; color: var(--c-cream); } }
+
+/* Fact chips (V3: facts in outlined chips under the copy). Text only, smaller and quieter than a link chip so nobody tries to tap them. Ink on cream and cream on slate stay above 7:1 at this opacity.
+   One row of two or three facts at most on a page: a whole list of them read as a wall of buttons (critic r2-1). Lists of things go in .m-takes */
+.a-factChip { display: inline-flex; align-items: center; min-height: 3.2rem; padding: .4rem 1.4rem; border-radius: 3rem; box-shadow: inset 0 0 0 1px currentColor; font: 500 1.4rem/1.2 var(--f-body); opacity: .8; }
+.m-factChips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+
+/* What a service takes: one plain line, the way Shawn lists them himself ("Take furniture, appliances, mattresses, yard waste") */
+.m-takes { font: var(--w-body) 1.6rem/1.45 var(--f-body); text-wrap: pretty; }
+.m-takes strong { font-weight: var(--w-semi); }
+
+/* What we can't take: a real list with a mark on every row, so a refusal can't be mistaken for an offer */
+.m-notList { display: grid; gap: var(--s-3) var(--s-6); width: fit-content; max-width: 112rem; margin: 0 auto; }
+.m-notList__item { display: flex; align-items: center; gap: var(--s-3); font: var(--w-semi) 1.8rem/1.25 var(--f-body); }
+.m-notList__mark { flex: none; width: 3.2rem; height: 3.2rem; padding: .8rem; border-radius: 50%; background: var(--c-slate); color: var(--c-cream); }
+@media (min-width: 641px) { .m-notList { grid-template-columns: repeat(2, auto); } }
+@media (min-width: 1025px) { .m-notList { grid-template-columns: repeat(3, auto); } }
+
+/* Small facts: a short title and one line. No icons, no cards, no numbers (anti-slop) */
+.m-fact__title { display: block; font: var(--w-semi) 1.8rem/1.25 var(--f-body); }
+.m-fact__text { display: block; margin-top: .2rem; color: var(--c-soft); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: pretty; }
+
+/* A centred heading and its line, the opening of most bands (V7: one axis) */
+.m-head { max-width: 92rem; margin: 0 auto var(--s-6); text-align: center; }
+@media (min-width: 1025px) { .m-head { margin-bottom: var(--s-7); } }
+/* The closing action of a band: one pill and at most one link */
+.m-rowActions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-2) var(--s-5); margin-top: var(--s-6); }
+
+/* A real radio behind each load pill: keyboard and screen reader get the native group */
+.a-choice { position: relative; display: block; cursor: pointer; }
+.a-choice__input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.a-choice__face { display: flex; align-items: center; justify-content: center; min-width: 6.8rem; min-height: var(--h-buttonLarge); padding: 0 2rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); color: var(--c-cream); font: var(--w-semi) 1.7rem/1 var(--f-body); transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+/* Picked load: a heavier cream ring and a light wash, so the cream Book pill stays the only filled thing and the loudest (critic r1: two cream fills competed; critic r2: a chrome fill looked washed out). Cream on the wash about 7:1 */
+.a-choice__input:checked + .a-choice__face { background: rgba(247, 239, 236, .16); box-shadow: inset 0 0 0 2px var(--c-cream); }
+.a-choice__input:focus-visible + .a-choice__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.a-choice:active .a-choice__face { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-choice:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: inset 0 0 0 1px var(--c-cream); } }
+
+/* Round 2 (Varun, 4 Nov: the priced-by-load section must span the full width). One long pill, edge to edge, four equal stops: the picked stop's ring slides along it, so it reads as one scale from a little to a lot.
+   The ring is a transform, so tapping quickly through the stops retargets instead of restarting. Without the script there's no ring to slide and each checked face draws its own. */
+.m-loadPicker { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); min-width: 0; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); }
+.m-loadPicker__thumb { display: none; }
+.js .m-loadPicker__thumb { position: absolute; top: 0; left: 0; display: block; width: 25%; height: 100%; border-radius: var(--r-pill); background: rgba(247, 239, 236, .16); box-shadow: inset 0 0 0 2px var(--c-cream); pointer-events: none; transition: transform 320ms var(--e-out); }
+.m-loadPicker[data-level="2"] .m-loadPicker__thumb { transform: translateX(100%); }
+.m-loadPicker[data-level="3"] .m-loadPicker__thumb { transform: translateX(200%); }
+.m-loadPicker[data-level="4"] .m-loadPicker__thumb { transform: translateX(300%); }
+.m-loadPicker .a-choice__face { min-width: 0; padding: 0 .4rem; box-shadow: none; font-size: 1.5rem; white-space: nowrap; }
+.js .m-loadPicker .a-choice__input:checked + .a-choice__face { background: none; box-shadow: none; }
+/* margin, not a space: the face is a flex box, and a flex box drops the space before its second item */
+.a-choice__unit { margin-left: .3em; }
+@media (max-width: 379px) { .a-choice__unit { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } }
+@media (min-width: 641px) { .m-loadPicker .a-choice__face { font-size: 1.7rem; } }
+@media (min-width: 1025px) { .m-loadPicker .a-choice__face { min-height: 6.4rem; font-size: 1.8rem; } }
+
+.a-socialPill { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.2rem; border-radius: 5rem; box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .2); color: var(--c-cream); font: var(--w-semi) 1.4rem/1 var(--f-body); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-socialPill__icon { flex: none; width: 1.6rem; height: 1.6rem; fill: currentColor; }
+.a-socialPill:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-socialPill:hover { background: var(--c-cream); color: var(--c-ink); } }
+
+/* ===== Chrome: header ===== */
+/* A slate bar with the logo as its main thing. The bar is 88px, under the 90px cap, at every scroll position. The logo hangs below it as a round badge at the top of the page
+   (108px wide, the largest that stays sharp on 2x), then settles to 84px inside the bar so it stays the main thing all the way down but can never sit on a heading (critic r1: 65px was too small).
+   --logoSettled runs 0 to 1 over the first 32px of scroll, set by the script from the scroll position itself (critic r2-2). */
+.m-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; display: grid; grid-template-columns: 1fr 1fr; align-items: center; height: var(--h-header); padding: 0 var(--gutter); background: var(--c-slate); box-shadow: 0 1px 0 rgba(15, 20, 28, .4), 0 .8rem 2.4rem rgba(15, 20, 28, .14); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.m-header__left { display: flex; align-items: center; }
+.m-header__right { display: flex; align-items: center; justify-content: flex-end; gap: var(--s-4); }
+.m-header__nav { display: none; }
+.m-header__navList { display: flex; gap: 3rem; }
+.m-header__link { display: inline-flex; align-items: center; min-height: var(--h-button); font: var(--w-semi) var(--t-nav)/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1.1rem) / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__link:hover { background-size: 100% 1px; } }
+.m-header__link:focus-visible, .m-header__link[aria-current="page"] { background-size: 100% 1px; }
+.m-header__menuBtn { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.4rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); font: var(--w-semi) 1.4rem/1 var(--f-body); transition: box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.m-header__menuIcon { width: 1.6rem; height: 1.6rem; }
+.m-header__menuBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__menuBtn:hover { box-shadow: inset 0 0 0 1px var(--c-cream); } }
+
+/* The disc is the bar's own slate, so the mark sits on the bar with no tile edge and only its lower curve shows, over the photo */
+.m-header__logo { position: absolute; top: 2px; left: 50%; display: block; width: var(--logo); height: var(--logo); margin-left: calc(var(--logo) / -2); border-radius: 50%; background: var(--c-slate); transform: scale(calc(1 - (1 - var(--logoSmall)) * var(--logoSettled, 0))); transform-origin: 50% 0; }
+.m-header__logo::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 .8rem 2rem rgba(15, 20, 28, .32); clip-path: inset(62% -3rem -3rem -3rem); pointer-events: none; opacity: calc(1 - var(--logoSettled, 0)); }
+.m-header__mark { position: relative; z-index: 1; width: 100%; height: 100%; transition: transform var(--d-menu) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__logo:hover .m-header__mark { transform: scale(1.03); } }
+.m-header__logo:active .m-header__mark { transform: scale(.97); }
+
+.m-header__call { display: none; flex-direction: column; align-items: flex-end; justify-content: center; gap: .4rem; min-height: var(--h-button); text-decoration: none; transition: opacity var(--d-menu) var(--e-out), visibility var(--d-menu); }
+.m-header__callLine { color: var(--c-chrome); font: var(--w-body) 1.3rem/1 var(--f-body); }
+.m-header__callNumber { font: 600 1.5rem/1 var(--f-mono); letter-spacing: -.01em; }
+@media (hover: hover) and (any-pointer: fine) { .m-header__call:hover .m-header__callNumber { text-decoration: underline; text-underline-offset: .3rem; text-decoration-thickness: 1px; } }
+.m-header__book .a-button__arrow { display: none; }
+
+/* State. is-callElsewhere: the hero's pill or the footer has the number on screen. Without the script neither state is set, so the number stays visible. */
+.m-header.is-callElsewhere .m-header__call { visibility: hidden; opacity: 0; }
+
+@media (max-width: 379px) {
+  :root { --logo: 7.6rem; }
+  .m-header__menuBtn { padding: 0 1.2rem; }
+  .m-header__book { padding: 0 1.4rem; }
+}
+@media (min-width: 641px) {
+  /* Tablets have the room for a bigger bar and logo than phones (critic r2) */
+  :root { --gutter: 3.2rem; --h-header: 72px; --logo: 96px; --logoSmall: .7; }
+  .m-header__call { display: flex; }
+  .m-header__book .a-button__arrow { display: block; }
+}
+@media (min-width: 1025px) {
+  /* Capped in pixels: the root grows past 1440, but the logo file doesn't (critic r1: 144px at 1920 would go soft, and the bar broke its cap) */
+  :root { --gutter: 4.8rem; --h-header: 88px; --logo: 108px; --logoSmall: .78; }
+  .m-header__nav { display: block; }
+  .m-header__menuBtn { display: none; }
+  .m-header__logo { top: 3px; }
+}
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .m-header__navList { gap: 2rem; }
+  .m-header__link { font-size: 1.3rem; }
+  .m-header__callLine { display: none; }
+}
+/* Past 1440 the root grows but this bar doesn't, so what's in it stays at its 1440 size and the logo stays the main thing (critic r2: at 2560 the pill nearly filled the bar) */
+@media (min-width: 1441px) {
+  .m-header__navList { gap: 30px; }
+  .m-header__link { font-size: 14px; background-position: 0 calc(50% + 11px); }
+  .m-header__call { gap: 4px; min-height: 44px; }
+  .m-header__callLine { font-size: 13px; }
+  .m-header__callNumber { font-size: 15px; }
+  .m-header__right { gap: 16px; }
+  .m-header__book { gap: 12px; min-height: 44px; padding: 0 24px; font-size: 15px; }
+  .m-header__book .a-button__arrow { width: 15px; height: 15px; }
+}
+@media (min-width: 1441px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-header__book:hover { padding: 0 32px; }
+}
+
+/* ---- menu (phones and tablets): an opaque panel that wipes down, a real dialog ---- */
+.m-menu { position: fixed; inset: 0; z-index: 200; background: var(--c-scrim); --c-focus: var(--c-ink); }
+.m-menu[hidden] { display: none; }
+.m-menu__panel { position: absolute; inset: .8rem; display: flex; flex-direction: column; padding: var(--s-3) var(--s-5) var(--s-5); overflow-y: auto; border-radius: var(--r-image); background: var(--c-cream); color: var(--c-ink); }
+/* Tablets: a sheet down the side the Menu pill is on, not a phone menu stretched to 1008px (critic r1) */
+@media (min-width: 641px) { .m-menu__panel { right: auto; width: 44rem; max-width: calc(100vw - 1.6rem); } }
+@media (prefers-reduced-motion: no-preference) {
+  .m-menu__panel { animation: menu-in var(--d-menu) var(--e-out); }
+  @keyframes menu-in { from { clip-path: inset(0 0 100% 0 round var(--r-image)); } to { clip-path: inset(0 0 0 0 round var(--r-image)); } }
+}
+.m-menu__top { display: flex; justify-content: flex-end; }
+.m-menu__close { display: grid; place-items: center; width: 4.4rem; height: 4.4rem; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--c-slate); transition: transform 160ms var(--e-out); }
+.m-menu__close:active { transform: scale(.97); }
+.m-menu__list { margin-top: var(--s-3); }
+.m-menu__link { display: flex; align-items: center; min-height: 5.6rem; font: var(--w-heavy) 2.8rem/1 var(--f-display); text-transform: uppercase; text-decoration: none; }
+.m-menu__link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .5rem; }
+.m-menu__actions { display: flex; flex-direction: column; gap: var(--s-2); margin-top: auto; padding-top: var(--s-5); }
+
+/* ---- call-only bar on phones ---- */
+/* visibility as well as the slide: parked off screen it must not take keyboard focus, or paint in a full-page capture */
+.m-actionBar { position: fixed; right: 0; bottom: 0; left: 0; z-index: 40; display: flex; padding: var(--s-2) var(--s-3) calc(var(--s-2) + env(safe-area-inset-bottom)); background: var(--c-ink); --c-focus: var(--c-chrome); visibility: hidden; transform: translateY(110%); transition: transform var(--d-menu) var(--e-out), visibility var(--d-menu); }
+.m-actionBar .a-button { width: 100%; }
+.m-actionBar.is-shown { visibility: visible; transform: none; }
+@media (min-width: 641px) { .m-actionBar { display: none; } }
+
+/* ===== Bands ===== */
+.b-band { position: relative; padding: var(--s-9) var(--gutter); --c-focus: var(--c-ink); --c-soft: var(--c-steel); }
+.b-band.-slate { background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+/* V7: a light band rises over the hero with round top corners. The truck parks on its edge. */
+.b-band.-rise { z-index: 2; margin-top: calc(var(--r-band) * -1); border-radius: var(--r-band) var(--r-band) 0 0; background: var(--c-cream); }
+@media (min-width: 1025px) { .b-band { padding: var(--s-10) var(--gutter); } }
+
+/* ===== Home: hero ===== */
+/* Fills the first screen and leaves a sliver of the next band in view, so the truck has something to stand on and the page visibly carries on.
+   Round 2 (Varun, 4 Nov: "come down a bit and sit closer to the centre of the hero"). The words are centred on the hero's height and set in from the left by --heroInset; the truck stays bottom right. V5 centres the headline on the page's axis too, but a stack on that axis leaves no room for the truck under 900px tall (revision.md, conflicts).
+   Inner page banners share this recipe: photo, scrim, words, truck parked on the fold. */
+.t-page { padding-top: var(--h-header); }
+/* overflow-x clip: the truck waits off to the right before it backs in, and the page must not get wider while it does. Vertical stays open so its wheels can land on the next band. */
+.o-homeHero, .o-pageBanner { position: relative; display: flex; flex-direction: column; justify-content: center; overflow-x: clip; color: var(--c-cream); --c-focus: var(--c-cream); --truckW: calc(100% - 1.6rem); --heroInset: var(--gutter); }
+.o-homeHero { min-height: max(58rem, calc(100svh - var(--h-header) - 1.6rem)); }
+.o-homeHero__media, .o-pageBanner__media { position: absolute; inset: 0; overflow: hidden; background: var(--c-slate); }
+.o-homeHero__img, .o-pageBanner__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.o-homeHero__img { object-position: 50% 42%; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .o-homeHero__img { transform: scale(1.05); transition: transform 2400ms var(--e-out); }
+  .js.is-loaded .o-homeHero__img { transform: none; }
+}
+/* Sampled, not guessed: see the contrast table in revision.md. Dark only where the words sit, so the rest of the photo keeps its colour. */
+.o-homeHero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 20, 28, .66) 0%, rgba(15, 20, 28, .6) 44%, rgba(15, 20, 28, .12) 66%, rgba(15, 20, 28, 0) 76%); }
+/* z-index 4: above the truck, so the words win at any size where the two ever meet.
+   The bottom padding keeps the words above the truck on phones and portrait tablets, whatever the sentence's row count: .5244 is the drawing's height over its width (558 of 1064). Then the hero's flex centring sits them in the space that's left. */
+.o-homeHero__copy, .o-pageBanner__copy { position: relative; z-index: 4; width: 100%; padding: calc(var(--logo) - var(--h-header) + var(--s-5)) var(--gutter) calc(var(--truckW) * .5244 + var(--r-band) + var(--s-3)) var(--heroInset); container-type: inline-size; }
+.o-homeHero .a-hero, .o-pageBanner .a-hero { text-shadow: 0 .2rem 2.8rem rgba(15, 20, 28, .4); }
+.o-homeHero__line, .o-pageBanner__line { max-width: 36ch; margin-top: var(--s-4); font: var(--w-body) 1.9rem/1.35 var(--f-body); text-shadow: 0 .1rem 1.4rem rgba(15, 20, 28, .6); text-wrap: pretty; }
+.o-homeHero__actions, .o-pageBanner__actions { display: flex; flex-direction: column; align-items: stretch; gap: var(--s-2); margin-top: var(--s-5); }
+/* Tablets and small laptops: phone icon and number only. The shorter pill keeps clear of the truck's load at short window heights (critic r2: 1033px of overlap at 1025x700) */
+@media (min-width: 641px) and (max-width: 1240px) { .o-homeHero__callLabel { display: none; } }
+.o-homeHero__truck, .o-pageBanner__truck { position: absolute; right: .8rem; bottom: calc(var(--r-band) - .6rem); z-index: 3; width: var(--truckW); pointer-events: none; }
+/* 3.58%: the drawing's ground line sits that far up from the bottom of its viewBox (20 of 558 units). So the tyres land .6rem inside the band at any size. On the svg, not the holder, because the holder carries the roll-in's transform. */
+.o-homeHero__truck .m-truck, .o-pageBanner__truck .m-truck { transform: translateY(3.58%); }
+.m-truck { display: block; width: 100%; height: auto; overflow: visible; }
+.js .o-homeHero__truck { visibility: hidden; }
+.js.is-loaded .o-homeHero__truck { visibility: visible; }
+.m-truck__spin { transform-box: fill-box; transform-origin: center; }
+.m-truck__body { transform-box: view-box; transform-origin: 360px 540px; transition: transform var(--d-rise) var(--e-out); }
+
+@media (min-width: 641px) {
+  .o-homeHero { --truckW: min(88vw, 64vh); }
+  .o-pageBanner { --truckW: min(70vw, 40vh); }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 40ch; font-size: 2.2rem; }
+  .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+  /* V5: darken only where the words sit. An ellipse round the copy; the lawn, the fence and the house keep their colour. */
+  .o-homeHero__scrim { background: radial-gradient(ellipse 70% 58% at 22% 42%, rgba(15, 20, 28, .66) 0%, rgba(15, 20, 28, .6) 50%, rgba(15, 20, 28, .3) 76%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Portrait tablets: the headline runs nearly the full width, out over the bright sky, so the scrim goes back to the phone's top-down wash (measured 2.52:1 with the ellipse) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .o-homeHero__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .64) 0%, rgba(15, 20, 28, .62) 52%, rgba(15, 20, 28, .1) 66%, rgba(15, 20, 28, 0) 74%); }
+}
+/* Landscape tablets and up: the truck stands beside the lower half of the words, not under them, so the padding only lifts the block to the hero's optical centre. */
+@media (min-width: 641px) and (orientation: landscape) {
+  .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: calc(var(--r-band) + 5vh); }
+  .o-homeHero { --heroInset: max(var(--gutter), 5vw); }
+  .o-pageBanner { --heroInset: max(var(--gutter), 5vw); }
+}
+/* The sentence stops short of the truck beside it (measured 32px of overlap at 1024x768 before this) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .o-homeHero__line, .o-pageBanner__line { max-width: 42vw; }
+}
+@media (min-width: 1025px) {
+  /* 78vh and 46vw keep the truck's load clear of the lower words: measured at 1025x700 up to 2560x1300, see revision.md */
+  .o-homeHero { --truckW: min(46vw, 78vh); --heroInset: 5.5vw; }
+  .o-pageBanner { --truckW: min(42vw, 70vh); --heroInset: 5.5vw; }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__copy, .o-pageBanner__copy { width: min(68vw, 96rem); }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 44ch; }
+  /* Follows the words down (round 2). Same two-part wash as before: the main ellipse stops above the lawn, the small one sits behind the sentence, which needs 4.5:1 where the headline needs 3:1. Measured values: revision.md */
+  .o-homeHero__scrim { background: radial-gradient(ellipse 30% 14% at 25% 60%, rgba(15, 20, 28, .42) 0%, rgba(15, 20, 28, .34) 55%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 36% at 30% 44%, rgba(15, 20, 28, .52) 0%, rgba(15, 20, 28, .49) 62%, rgba(15, 20, 28, .22) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Small laptops: a shorter measure keeps the sentence clear of the truck */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .o-homeHero__line, .o-pageBanner__line { max-width: min(40ch, 42vw); }
+}
+@media (min-width: 1241px) {
+  .o-homeHero { --truckW: min(52vw, 78vh, 100rem); --heroInset: 8.33vw; }
+  .o-pageBanner { --truckW: min(46vw, 70vh, 88rem); --heroInset: 8.33vw; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .o-homeHero, .o-pageBanner { --truckW: 42vw; min-height: 46rem; }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 1.6rem; }
+  .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: var(--r-band); }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 44vw; font-size: 1.7rem; }
+  .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* ===== Home: what we haul ===== */
+.o-homeHaul { padding-top: var(--s-10); }
+.o-homeHaul__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-5) 1rem; }
+.m-tile { position: relative; }
+/* Phones: one wide, four in two rows, two wide. No tile ever sits alone beside a gap. */
+.m-tile.-seven, .m-tile.-five:nth-child(6) { grid-column: span 2; }
+.m-tile__link { position: relative; display: block; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); text-decoration: none; --c-focus: var(--c-cream); }
+/* Round 2: one line under each photo, on the cream, so the photo stays clean */
+.m-tile__line { margin-top: var(--s-2); padding: 0 .4rem; color: var(--c-soft); font: var(--w-body) 1.5rem/1.35 var(--f-body); text-wrap: pretty; }
+/* The ring has to sit above the photo, or the photo paints over it (critic r1: focus changed 19 pixels). Cream with an ink edge so it shows on any picture. */
+.m-tile__link:focus-visible { outline: none; }
+.m-tile__link:focus-visible::after { content: ""; position: absolute; inset: .6rem; z-index: 2; border-radius: calc(var(--r-image) - .6rem); box-shadow: 0 0 0 3px var(--c-cream), 0 0 0 5px var(--c-ink); pointer-events: none; }
+.m-tile__img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.m-tile.-seven .m-tile__img, .m-tile.-five:nth-child(6) .m-tile__img { aspect-ratio: 16 / 10; }
+.m-tile__img.-right { object-position: 66% 50%; }
+.m-tile__label { position: absolute; bottom: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: var(--s-2); min-height: 4rem; max-width: calc(100% - 2rem); padding: .8rem 1.4rem; border-radius: 2rem; background: var(--c-cream); color: var(--c-ink); font: var(--w-semi) 1.5rem/1.15 var(--f-body); }
+.m-tile__arrow { display: none; flex: none; width: 1.4rem; height: 1.4rem; transition: transform var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-tile__img { transition: transform 1500ms var(--e-out); }
+  .m-tile__link:hover .m-tile__img { transform: scale(1.04); }
+  .m-tile__link:hover .m-tile__arrow { transform: translateX(.5rem); }
+}
+@media (min-width: 641px) {
+  .o-homeHaul__grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6) 1.6rem; }
+  .m-tile.-seven { grid-column: span 7; }
+  .m-tile.-five, .m-tile.-five:nth-child(6) { grid-column: span 5; }
+  .m-tile.-four { grid-column: span 4; }
+  .m-tile.-seven .m-tile__img, .m-tile.-five .m-tile__img, .m-tile.-five:nth-child(6) .m-tile__img { position: absolute; inset: 0; aspect-ratio: auto; }
+  .m-tile.-seven .m-tile__link, .m-tile.-five .m-tile__link { min-height: 34rem; }
+  .m-tile__label { bottom: 1.6rem; left: 1.6rem; max-width: calc(100% - 3.2rem); min-height: var(--h-button); padding: .8rem 1.8rem; font-size: 1.6rem; border-radius: 2.2rem; }
+  .m-tile__arrow { display: block; }
+  .m-tile__line { font-size: 1.6rem; }
+}
+@media (min-width: 1025px) {
+  .o-homeHaul { padding-top: 16rem; }
+  .m-tile.-seven .m-tile__link, .m-tile.-five .m-tile__link { min-height: 44rem; }
+}
+
+/* ===== Home: priced by the load ===== */
+/* The one place the work order's load cell survives on Home. One truck, one picker, one price.
+   Round 2 (Varun, 4 Nov: "the text is cramped at the left end... must span the full width"). Heading and line on the axis, the picker edge to edge, then price on the left, truck in the middle, small facts on the right.
+   Everything is visible at once, so you can watch the truck fill as you pick. The truck parks on the next band's edge, the same move as the hero. */
+.o-homePrice { padding-bottom: calc(var(--s-7) + var(--r-band)); text-align: center; --gaugeW: calc(100vw - 1.6rem); }
+.o-homePrice__stage { display: flex; flex-direction: column; gap: var(--s-5); }
+/* Phones: pick a load and watch the truck fill right under your thumb, then the price and the pill, with the small print last (critic r2-1: the caveats came before any price, and the truck below the pill) */
+.o-homePrice__loads { order: 1; }
+.o-homePrice__truck { position: relative; z-index: 3; order: 2; align-self: center; width: var(--gaugeW); }
+.o-homePrice__readout { order: 3; display: flex; flex-direction: column; align-items: center; gap: var(--s-4); }
+.o-homePrice__facts { order: 4; display: grid; gap: var(--s-3); }
+/* Tablets up: the truck parks on the next band's edge, as in the hero */
+@media (min-width: 641px) {
+  .o-homePrice { padding-bottom: 0; }
+  .o-homePrice__truck { margin-bottom: calc(var(--r-band) - .6rem - var(--gaugeW) * .01877); }
+}
+.m-truck.-gauge { width: 100%; }
+.m-truck__item { transition: transform 620ms var(--e-drop), opacity 200ms linear; }
+/* Exits are quick and go first: heavier loads land slowly, one piece at a time (stagger set by the script). */
+.m-truck__item.-off { opacity: 0; transform: translateY(-48px); transition: transform 200ms var(--e-out), opacity 140ms linear; }
+.m-truck[data-level="2"] .m-truck__body { transform: translateY(1.2px); }
+.m-truck[data-level="3"] .m-truck__body { transform: translateY(2.4px); }
+.m-truck[data-level="4"] .m-truck__body { transform: translateY(4px); }
+.o-homePrice__price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 var(--s-3); }
+.o-homePrice__figure { font: var(--w-heavy) 6.4rem/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.o-homePrice__unit { font: 500 1.5rem/1.2 var(--f-mono); color: var(--c-chrome); }
+/* Room for two rows, so the band doesn't jump when the note changes length */
+.o-homePrice__note { min-height: 2.9em; margin-top: var(--s-2); color: var(--c-chrome); font-size: 1.7rem; line-height: 1.45; text-wrap: balance; }
+/* Tablets: heading on one row, the three facts spread across the top, then price beside the truck, so picker and whole truck fit on one screen at 1024x768 (critic r1) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .o-homePrice { padding-top: var(--s-8); --gaugeW: min(58vw, 54vh); }
+  .o-homePrice__title { font-size: min(6.4rem, 8.4vw); }
+  .o-homePrice__title .a-section__row { display: inline; }
+  .o-homePrice__stage { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto; gap: var(--s-5) var(--s-5); text-align: left; }
+  .o-homePrice__facts { grid-column: 1 / -1; grid-row: 2; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+  .o-homePrice__loads { grid-column: 1 / -1; grid-row: 1; }
+  .o-homePrice__readout { grid-column: 1; grid-row: 3; align-items: flex-start; align-self: start; padding-bottom: var(--s-7); }
+  .o-homePrice__price { justify-content: flex-start; }
+  .o-homePrice__truck { grid-column: 2; grid-row: 3; align-self: end; margin-right: calc(var(--gutter) * -.5); }
+}
+/* Laptops up: three columns under the picker. The truck takes the middle half and overhangs its column a little, because the drawing carries its own margin. The side columns stop above the fold. */
+@media (min-width: 1025px) {
+  .o-homePrice { padding-top: var(--s-9); --gaugeW: min(50vw, 78vh, 96rem); }
+  .o-homePrice__title .a-section__row { display: inline; }
+  .o-homePrice__stage { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr); grid-template-rows: auto auto; gap: var(--s-6); text-align: left; }
+  .o-homePrice__loads { grid-column: 1 / -1; grid-row: 1; }
+  .o-homePrice__readout { grid-column: 1; grid-row: 2; align-items: flex-start; align-self: start; gap: var(--s-5); padding-bottom: var(--s-8); }
+  .o-homePrice__price { justify-content: flex-start; }
+  .o-homePrice__figure { font-size: 8.8rem; }
+  .o-homePrice__unit { flex-basis: 100%; margin-top: var(--s-2); }
+  /* A little left of centre: the words on the left stop well short of it, and the cab's mirror sat 29px from the facts on the right (critic r2-1) */
+  .o-homePrice__truck { grid-column: 2; grid-row: 2; justify-self: center; align-self: end; transform: translateX(-1.6rem); }
+  .o-homePrice__facts { grid-column: 3; grid-row: 2; align-self: start; gap: var(--s-4); padding-bottom: var(--s-8); }
+}
+/* Short laptops: less air above the heading, so the band still fits one screen with the bar on top */
+@media (min-width: 641px) and (max-height: 820px) { .o-homePrice { padding-top: var(--s-7); } }
+
+/* ===== Home: before and after ===== */
+.o-homeProof__stage { max-width: 134.4rem; margin: 0 auto; }
+/* pan-y: the page scrolls as normal; only a sideways drag moves the divider (critic r1: a vertical swipe made it jump). The script handles the pointer; the range input stays for keyboard and screen readers. */
+.m-compare { position: relative; aspect-ratio: 4 / 3.4; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); cursor: ew-resize; --pos: 50%; touch-action: pan-y; }
+.m-compare__layer { position: absolute; inset: 0; }
+.m-compare__layer.-after { clip-path: inset(0 0 0 var(--pos)); }
+.m-compare__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-compare__tag { position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; min-height: 3.6rem; padding: 0 1.4rem; border-radius: 2rem; background: var(--c-cream); color: var(--c-ink); font: var(--w-semi) 1.4rem/1 var(--f-body); pointer-events: none; }
+.m-compare__tag.-after { right: 1rem; left: auto; }
+.m-compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--c-cream); pointer-events: none; }
+/* clamped so the knob and its focus ring are never clipped at either end (rulings: R0 B3; critic r1) */
+.m-compare__knob { position: absolute; top: 50%; left: clamp(3.4rem, var(--pos), calc(100% - 3.4rem)); display: flex; align-items: center; justify-content: center; width: 5.6rem; height: 5.6rem; margin: -2.8rem 0 0 -2.8rem; border-radius: 50%; background: var(--c-cream); color: var(--c-ink); box-shadow: 0 .6rem 2rem rgba(15, 20, 28, .3); pointer-events: none; transition: transform 160ms var(--e-out); }
+.m-compare__chev { width: 1.4rem; height: 1.4rem; }
+.m-compare__chev.-left { transform: scaleX(-1); }
+.m-compare__range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
+.m-compare__range:focus-visible ~ .m-compare__knob { outline: 2px solid var(--c-ink); outline-offset: 3px; }
+.m-compare.is-dragging .m-compare__knob { transform: scale(.94); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-compare:hover .m-compare__knob { transform: scale(1.06); } .m-compare.is-dragging:hover .m-compare__knob { transform: scale(.94); } }
+.o-homeProof { padding-bottom: var(--s-8); }
+@media (min-width: 641px) { .m-compare { aspect-ratio: 16 / 9; } }
+@media (min-width: 1025px) {
+  .m-compare { aspect-ratio: 1.9; }
+  .m-compare__tag { top: 2rem; left: 2rem; min-height: var(--h-button); padding: 0 1.8rem; font-size: 1.6rem; border-radius: 2.2rem; }
+  .m-compare__tag.-after { right: 2rem; left: auto; }
+  .o-homeProof { padding-bottom: var(--s-9); }
+}
+
+/* ===== Home: one review ===== */
+/* Its own band, so before and after holds one idea (critic r2). A card shaped like what will fill it: a Facebook review, with who wrote it and when (V8: testimonial card with an initials avatar).
+   No stock job photo beside it, because a review shouldn't borrow a job that isn't the writer's. Its picture is the load's own sofa and chair, set down on the card's edge, the same move as the truck on the fold (anti-slop: a custom illustration when real media is missing). A real job photo can take their place. */
+.o-homeReview { padding-top: 0; padding-bottom: var(--s-8); }
+.o-homeReview .m-head { margin-bottom: 0; text-align: center; }
+/* The seated card: a soft card with a few drawn things set down on its top edge. For a band with no photo to carry it (review on Home, "can't take" on Services, and FAQ or Contact groups later). Slate at 8% on cream: no new colour */
+.m-seatCard { position: relative; max-width: 96rem; margin: 12.8rem auto 0; padding: var(--s-6) var(--s-5) var(--s-5); border-radius: var(--r-image); background: rgba(52, 61, 78, .08); }
+.m-seatCard__art { position: absolute; right: var(--s-5); bottom: calc(100% - .5rem); display: flex; align-items: flex-end; gap: .4rem; pointer-events: none; }
+.m-quote__sofa { width: 15rem; }
+.m-quote__chair { width: 8rem; }
+.m-quote__text { font: var(--w-light) 2.4rem/1.3 var(--f-body); text-wrap: pretty; }
+.m-quote__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); margin-top: var(--s-5); }
+.m-quote__who { display: flex; align-items: center; gap: var(--s-3); }
+.m-quote__avatar { display: grid; flex: none; place-items: center; width: 4.4rem; height: 4.4rem; border-radius: 50%; background: var(--c-slate); color: var(--c-cream); font: var(--w-semi) 1.4rem/1 var(--f-body); }
+.m-quote__name { display: block; font: var(--w-semi) 1.6rem/1.25 var(--f-body); }
+.m-quote__source { display: block; color: var(--c-steel); font: 500 1.3rem/1.3 var(--f-mono); }
+@media (min-width: 641px) {
+  .m-seatCard { padding: var(--s-7) var(--s-7) var(--s-6); }
+  .m-seatCard__art { right: var(--s-7); }
+  .m-quote__sofa { width: 19rem; }
+  .m-quote__chair { width: 10rem; }
+}
+@media (min-width: 1025px) {
+  .m-quote__text { font-size: 3.2rem; }
+  .o-homeReview { padding-bottom: var(--s-9); }
+}
+
+/* ===== Home: towns (V8 promo card: one photo, a heading, the names) ===== */
+.o-homeTowns { padding-top: 0; }
+.m-promo { display: flex; flex-direction: column; max-width: 134.4rem; margin: 0 auto; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+.m-promo__copy { padding: var(--s-7) var(--s-5); }
+.m-promo__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); }
+.m-promo__line { margin-top: var(--s-5); color: var(--c-chrome); }
+.m-promo__line .a-inlineLink { color: var(--c-cream); }
+.m-promo__media { position: relative; aspect-ratio: 4 / 3; }
+.m-promo__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+@media (min-width: 641px) and (max-width: 1024px) { .m-promo__media { aspect-ratio: 16 / 7; } }
+/* Stacked: the picture leads, like every other band, so a promo never opens as a block of text (critic r2-2) */
+@media (max-width: 1024px) { .m-promo__media { order: -1; } }
+@media (min-width: 1025px) {
+  .m-promo { display: grid; grid-template-columns: 7fr 5fr; }
+  .m-promo__copy { align-self: center; padding: var(--s-8); }
+  .m-promo__media { aspect-ratio: auto; min-height: 52rem; }
+}
+
+/* ===== Estimate band (V10) ===== */
+/* Round 2: on Home, How it works lands here as three small facts (agreed scope, three steps). Inner pages show the same band without the list. No call line: the footer's number sits right below (critic r1). */
+.o-estimate { overflow: hidden; text-align: center; }
+.o-estimate__glyph { position: absolute; top: 50%; left: 50%; width: 76rem; max-width: 170vw; color: var(--c-cream); opacity: .07; transform: translate(-50%, -50%); pointer-events: none; }
+.o-estimate__inner { position: relative; display: flex; flex-direction: column; align-items: center; }
+.o-estimate__steps { display: grid; gap: var(--s-4); max-width: 112rem; margin-top: var(--s-6); }
+@media (min-width: 641px) { .o-estimate__steps { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); } }
+.o-estimate .a-button { margin-top: var(--s-6); }
+
+/* ===== Inner pages: the pattern every inner page follows (design/revision.md, inner-page pattern) ===== */
+/* ---- banner: the hero's recipe, shorter. Photo, words, truck parked on the fold. Shared rules sit with the hero above ---- */
+/* 520px at 1440, inside V5's 440 to 580: heading and one line, no pills, so the next band is in view on the first screen and it doesn't read as a second homepage hero (critic r2-1, r2-2). Phones let the words and the truck set the height. */
+.o-pageBanner__img { object-position: 50% 62%; }
+.a-hero.-banner { font-size: min(10.4rem, 15.4cqi, 13.4vh); }   /* 15.4cqi: "SERVICES" and the longer titles keep to two rows inside the column */
+/* Phones: stops above the truck, and as light as the words allow, so the street keeps its colour (critic r2-2). Lightest over the headline, which needs 3:1; darkest behind the sentence, which needs 4.5:1. Sampled: revision.md */
+.o-pageBanner__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 20, 28, .46) 0%, rgba(15, 20, 28, .5) 28%, rgba(15, 20, 28, .62) 33%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
+@media (min-width: 641px) {
+  /* Stops well short of the truck and the far houses, so the street keeps its evening sun. Sampled: revision.md */
+  .o-pageBanner__scrim { background: radial-gradient(ellipse 30% 15% at 28% 59%, rgba(15, 20, 28, .2) 0%, rgba(15, 20, 28, .15) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .62) 0%, rgba(15, 20, 28, .6) 58%, rgba(15, 20, 28, .1) 76%, rgba(15, 20, 28, 0) 86%); }
+}
+/* Landscape tablets: a shorter banner, so the sentence sits lower and the small wash follows it (measured 4.44:1 without this) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .2) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (min-width: 1025px) {
+  .o-pageBanner { min-height: min(52rem, calc(100svh - var(--h-header) - 8rem)); }
+  .o-pageBanner__copy { padding-top: var(--s-6); padding-bottom: calc(var(--r-band) + var(--s-5)); }
+}
+
+/* ---- jump chips: a long page gets an index to its sections (critic, built Services r1). Only pages with more than four sections get them ---- */
+.m-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2); }
+/* Phones: one row you can swipe, running off the edge so the cut-off chip says there's more. Four wrapped rows put the first service a screen and a bit down the page (critic r2-1) */
+@media (max-width: 640px) {
+  .m-jump { flex-wrap: nowrap; justify-content: flex-start; margin: 0 calc(var(--gutter) * -1); padding: .6rem var(--gutter); overflow-x: auto; scrollbar-width: none; }
+  .m-jump::-webkit-scrollbar { display: none; }
+  .m-jump > li { flex: none; }
+}
+
+/* ---- services page rhythm: centred lead, slate promo, three cards, two cards, slate price row, slim light band ---- */
+.o-svcIndex { padding-top: var(--s-7); padding-bottom: var(--s-7); }
+/* scroll-margin: a jump from the chips lands with air under the bar */
+.o-svcBand { padding-top: 0; scroll-margin-top: var(--s-6); }
+.m-promo__action { margin-top: var(--s-5); }
+.o-svcBand__media { position: relative; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 4 / 3; }
+.o-svcBand__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.o-svcBand__foot { display: flex; flex-direction: column; align-items: center; gap: var(--s-4); margin-top: var(--s-5); text-align: center; }
+.m-promo .m-takes { margin-top: var(--s-4); }
+@media (min-width: 641px) { .o-svcBand__media { aspect-ratio: 2.1; } }
+@media (min-width: 1025px) {
+  .o-svcBand__foot { flex-direction: row; justify-content: space-between; gap: var(--s-7); text-align: left; }
+  .o-svcBand__foot .m-takes { max-width: 78rem; font-size: 1.8rem; }
+  .o-svcBand__foot .a-button { flex: none; }
+  .o-svcIndex { padding-top: var(--s-8); padding-bottom: var(--s-8); }
+}
+
+/* ---- service card: one photo, a two-row heading, a line, what it takes, an action ---- */
+.m-svcCards { display: grid; gap: var(--s-7); }
+/* Flex column: the cards in a row share a height, so margin-top auto lines their Book pills up */
+.m-svcCard { display: flex; flex-direction: column; min-width: 0; scroll-margin-top: var(--s-6); }
+/* Portrait crops: a fridge, a chair and a man under a mattress all stand upright (critic r2-1: a landscape crop left the fridge a pale slab). A little wider on phones, or three of them run the page long */
+.m-svcCard__media { position: relative; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 1.05; }
+.m-svcCard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-svcCard__title { margin-top: var(--s-4); }
+.m-svcCard__line { margin-top: var(--s-3); color: var(--c-soft); font: var(--w-body) 1.7rem/1.45 var(--f-body); text-wrap: pretty; }
+.m-svcCard .m-takes { margin-top: var(--s-3); margin-bottom: var(--s-4); }
+/* A plain link that names the job, not a row of five identical pills: Book now on every service as the brief asks, without the hard sell (critic r2-2) */
+.m-svcCard__book { align-self: flex-start; margin-top: auto; }
+.m-svcCards.-two .m-svcCard__media { aspect-ratio: 1.5; }
+/* Tablets: three narrow cards would break the headings, so each card sits as a row: photo beside words */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .m-svcCards.-three .m-svcCard { display: grid; grid-template-columns: 5fr 7fr; column-gap: var(--s-5); align-items: start; }
+  .m-svcCards.-three .m-svcCard__media { grid-row: 1 / span 5; aspect-ratio: .86; }
+  .m-svcCards.-three .m-svcCard__title { grid-column: 2; margin-top: 0; }
+  .m-svcCards.-three .m-svcCard__line, .m-svcCards.-three .m-takes, .m-svcCards.-three .m-svcCard__book { grid-column: 2; justify-self: start; }
+  .m-svcCards.-two { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+}
+@media (min-width: 1025px) {
+  /* Shared rows: each card's picture, heading, line, list and pill take a row of the band's grid, so they line up across the cards however each one wraps, with no room held for a line nobody wrote */
+  .m-svcCards.-three, .m-svcCards.-two { grid-template-rows: repeat(5, auto); gap: 0 var(--s-4); }
+  .m-svcCards.-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .m-svcCards.-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-svcCard { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+  .m-svcCard__book { justify-self: start; }
+  .m-svcCards.-three .m-svcCard__media { aspect-ratio: .86; }
+  .m-svcCards.-two .a-section.-card { font-size: var(--t-sectionSmall); }
+}
+
+/* ---- price row: the truck set, one load each, all parked on the fold (the band under this one rises over their tyres' edge) ---- */
+/* Heading on one row from tablets up, the same as Home's price band, so prices and all four trucks fit one screen at 1440x900 */
+/* Phones keep room below the last row, because the trucks there stand on their own prices rather than on the fold */
+.o-svcPrice { padding-bottom: calc(var(--s-7) + var(--r-band)); text-align: center; scroll-margin-top: 0; }
+@media (min-width: 641px) {
+  .o-svcPrice { padding-bottom: 0; }
+  .o-svcPrice .a-section__row { display: inline; }
+}
+/* Tablets: the same size as Home's price heading, so it holds one row and never leaves "LOAD" alone on the second */
+@media (min-width: 641px) and (max-width: 1024px) { .o-svcPrice .a-section { font-size: min(6.4rem, 8.4vw); } }
+@media (min-width: 1025px) { .o-svcPrice { padding-top: var(--s-9); } }
+.o-svcPrice .m-factChips { justify-content: center; margin-top: var(--s-4); }
+/* Phones: three stacked pills looked like filters, so the facts become plain small lines, as in Home's price band (critic r2-2) */
+@media (max-width: 640px) {
+  .o-svcPrice .m-factChips { flex-direction: column; gap: .2rem; }
+  .o-svcPrice .a-factChip { display: block; min-height: 0; padding: 0; box-shadow: none; color: var(--c-soft); font-size: 1.5rem; font-weight: var(--w-body); opacity: 1; }
+}
+.o-svcPrice__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7) var(--s-2); margin-top: var(--s-6); }
+.m-load { display: flex; flex-direction: column; min-width: 0; }
+.m-load__label { font: var(--w-semi) 1.7rem/1.2 var(--f-body); }
+.m-load__figure { margin-top: var(--s-1); font: var(--w-heavy) 4.8rem/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.m-load__note { margin-top: var(--s-2); margin-bottom: var(--s-1); color: var(--c-soft); font: var(--w-body) 1.5rem/1.35 var(--f-body); text-wrap: balance; }
+/* flex 1 and an auto margin: the links line up across a row however long each note runs */
+.m-load__copy { display: flex; flex: 1 0 auto; flex-direction: column; }
+.m-load__link { align-self: center; margin-top: auto; }
+/* Phones: two to a row, so each truck stands directly on its own price and can't read as belonging to the row below (critic r2-1). DOM order stays words first; the drawing is only a picture of them.
+   Tablets up: margin-top auto, the drawing sits at the foot of the column however long the note runs. The % margin is of the column, the same width as the truck: 1.877% is the ground line's height in the drawing, as on Home */
+.m-load__truck { position: relative; z-index: 3; order: -1; margin-bottom: var(--s-2); }
+@media (min-width: 641px) {
+  .o-svcPrice__row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-3); }
+  .m-load .m-load__truck { order: 0; margin-top: auto; margin-bottom: calc(var(--r-band) - .6rem - 1.877%); padding-top: var(--s-3); }
+}
+@media (min-width: 1025px) {
+  .m-load__figure { font-size: 6.4rem; }
+  .m-load__note { font-size: 1.6rem; }
+  .o-svcPrice__row { gap: var(--s-4); }
+}
+
+/* ---- the slim light band that closes the price row: a heading, a line, the list in a seated card, with three of the things that can't go on the truck set down on its edge (critic r2-2: it was the one band with no picture) ---- */
+.o-svcNot { padding-top: var(--s-10); }
+.o-svcNot .m-head { margin-bottom: 0; }
+/* 104rem: wide enough that no item in the three columns wraps at 1440 */
+.o-svcNot .m-seatCard { max-width: 104rem; margin-top: 14.4rem; }
+.o-svcNot__paint { width: 6.4rem; }
+.o-svcNot__tank { width: 6.1rem; }
+.o-svcNot__battery { width: 8.3rem; }
+@media (min-width: 641px) {
+  .o-svcNot .m-seatCard { margin-top: 15.2rem; }
+  .o-svcNot__paint { width: 8.4rem; }
+  .o-svcNot__tank { width: 8rem; }
+  .o-svcNot__battery { width: 10.9rem; }
+}
+
+/* ===== Footer (V10) ===== */
+/* margin-top -1px: overlaps the slate band, so a fractional boundary can't show the page's cream through as a light line (critic r1, rulings R0 A7). No room kept for the call bar: it hides while the footer is on screen. */
+.o-footer { position: relative; margin-top: -1px; padding: var(--s-8) var(--gutter) var(--s-5); overflow: hidden; background: var(--c-ink); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.o-footer::before { content: ""; position: absolute; inset: 0; background: url("images/footer-joists-1400.webp") 50% 50% / cover no-repeat; opacity: .14; pointer-events: none; }
+.o-footer__inner { position: relative; display: grid; gap: var(--s-7); }
+.o-footer__phone { display: inline-flex; align-items: center; min-height: 4.4rem; font: 700 3.2rem/1 var(--f-mono); letter-spacing: -.02em; text-underline-offset: .8rem; text-decoration-thickness: 2px; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
+.o-footer__hours { margin-top: var(--s-2); color: var(--c-chrome); font-size: 1.6rem; }
+.o-footer__email { display: inline-flex; align-items: center; min-height: 4.4rem; font: 600 1.8rem/1 var(--f-body); text-underline-offset: .3rem; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
+@media (hover: hover) and (any-pointer: fine) { .o-footer__phone:hover, .o-footer__email:hover { color: var(--c-chrome); text-decoration-color: transparent; } }
+.o-footer__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-5); }
+.m-footerCol__title { font: var(--w-heavy) 1.4rem/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; }
+.m-footerCol__list { margin-top: var(--s-2); }
+.m-footerCol__link { display: inline-flex; align-items: center; min-height: 4rem; color: var(--c-chrome); font-size: 1.5rem; line-height: 1.2; text-decoration: underline transparent 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-nudge) var(--e-out), color var(--d-ui) var(--e-ui); }
+.m-footerCol__link:focus-visible { text-decoration-color: currentColor; }
+@media (hover: hover) and (any-pointer: fine) { .m-footerCol__link:hover { color: var(--c-cream); text-decoration-color: currentColor; } }
+.o-footer__base { display: grid; gap: var(--s-4); padding-top: var(--s-5); border-top: 1px solid var(--c-rule); }
+.o-footer__social { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.o-footer__fact { color: var(--c-chrome); font-size: 1.5rem; }
+.o-footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); font-size: 1.4rem; }
+.o-footer__credit { color: var(--c-chrome); }
+@media (min-width: 641px) {
+  .o-footer { padding-bottom: var(--s-5); }
+  .o-footer__cols { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1025px) {
+  .o-footer__inner { grid-template-columns: 5fr 7fr; }
+  .o-footer__phone { font-size: 4.4rem; }
+  .o-footer__base { grid-column: 1 / -1; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s-6); }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .js .o-homeHero__truck { visibility: visible; }
+  .a-button, .a-chip, .a-choice__face, .m-header, .m-header__mark, .m-truck__item, .m-truck__body, .m-actionBar, .js .m-loadPicker__thumb { transition-duration: 1ms; }
+}

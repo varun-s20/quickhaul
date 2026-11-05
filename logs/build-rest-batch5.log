@@ -1,0 +1,47 @@
+Reviews and About are both built and ticked in `build/progress.md`, but **neither passed the Critic**, so I've stopped at the 2-page limit. Each page used its 2 Critic rounds, with no tells. I fixed more after each last round; QA is clean, but those fixes haven't been re-scored.
+
+| Page | Round 1 | Round 2 (pass is 8.0) |
+|---|---|---|
+| Reviews | 7.3 | 7.9 |
+| About | 7.4 | 7.6 |
+
+**Pages left:** Donate, FAQ, Contact, Commercial, 404, Privacy, then the final whole-site pass with `README.md` and the handover.
+
+**What I found on resuming:**
+- **Service-area hub:** it already had both Critic scores (7.5, 7.9), so nothing was missing.
+- **Reviews:** it had a QA run on disk, but no QA report entry and no Critic run. Both are now done.
+
+**Homepage:** `index.html` is byte-identical to the approved version, but this run did edit the shared `global.css` and `global.js`. The changes are scoped to these pages, plus one menu rule that can't show on the homepage. I didn't re-run QA on the homepage or the earlier pages.
+
+## Your decisions
+1. **Should I fix these two bugs on the approved homepage?** Both are in the shared header and footer, so they affect every page. I measured them on Home and About and left them alone because the homepage is frozen; each looks like a small fix.
+   - **Back to top at 1440:** it barely moves the page (6629 to 6521 on Home).
+   - **Closing the menu at 390:** the page jumps up (1500 to 640 on both pages).
+2. **What should the About photo show?** Round 1 faulted a man with boxes, because he read as Shawn and the van had a Turkish plate. Round 2 faulted the old pickup that replaced him, for having no person and no work in it. I kept the pickup, since only Shawn's own photo really settles this.
+3. **Can the copy change in these three places?**
+   - **Reviews:** the page says every review is copied from Facebook, right beside sample cards. It's the same contradiction as the open homepage question.
+   - **About, intro:** the banner line and the statement below it say the same thing back to back.
+   - **About, call line:** "Or call Shawn on…" forces Book now to come first under "Pick up the phone". I set the number large to compensate, but swapping the order means rewording that line.
+
+## Also open
+- **Before/after sliders:** the Critic saw a vertical swipe move a slider under emulated touch. This needs checking on a real phone, and the same slider is on the homepage.
+- **Before/after photos:** the pairs still read as two unrelated places until Shawn's own arrive, and the grade is uneven across them.
+- **Filter announcements:** the Reviews filter doesn't announce results to screen readers, because that needs a word from the copywriter.
+
+## Changes from the spec
+These are logged in `build/progress.md`:
+- **Reviews gallery:** Book now moved up beside the heading. The closing cell looked like a leftover slot right above the estimate band's own Book now.
+- **About, How we work:** now four full-width rows, not a row of cells.
+- **New stock photo:** Joseph Lee's pickup, shot in Arizona, is logged as must-replace in `content/placeholders.md`.
+
+No packages were installed and all browsers and the local server are closed.
+
+## Commit point
+Good commit point; suggested message:
+
+`Quick Haul: add Reviews and About pages, fixes from critic rounds, stock log update`
+
+**Sources (photo choice):**
+- [Blue pickup, Joseph Lee (used)](https://unsplash.com/photos/a-blue-pick-up-truck-parked-in-front-of-a-house-e5wPdn2-HKE)
+- [Black truck in driveway (rejected)](https://unsplash.com/photos/a-black-truck-parked-in-a-driveway-mwhfM5c9wDI)
+- [Truck at a house, Vince Fleming (rejected)](https://unsplash.com/photos/a-truck-is-parked-in-front-of-a-house-7ILKzw7zbS0)

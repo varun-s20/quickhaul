@@ -1,0 +1,22 @@
+{
+  "_note": "Sample cards from content/copy.md, worded so nobody can mistake them for real reviews. No stars, score, count, job tags, source or links on a sample. Each one holds the place of one of Shawn's real Facebook reviews and is logged in content/placeholders.md as must-replace; replace them word for word (initials, name, date, post link), never edit them into real-sounding reviews. home feeds the five cards on the homepage, the same words as cards 1 to 5 of reviews_page. reviews_page feeds the Reviews page grid in reading order: a quote item is one card, a photo item is one stock photo (a name from data/image-manifest.json and its alt), never inside a card, and never next to a card about the same job at any width (copy.md; order checked in the browser at nine widths, build/tmp/v3/photo_order.py). col is the column an item lands in from 1025 up; below that they flow in reading order. lead puts a photo at the top of its column from 1025 up. tone soft sets a card on the seated ground. art names a drawn item from assets/trucks for the card's top edge. A real review adds source (Facebook), date and url, and the cards print those slots only when they are there. facebook_url is the bare platform address until Shawn sends his page (content/placeholders.md).",
+  "facebook_url": "https://www.facebook.com/",
+  "home": [
+    { "quote": "Sample review. A garage clean out goes here, told by the person whose garage it was.", "who": "Sample review", "initials": "SR" },
+    { "quote": "Sample review. A quick word about a mattress pickup.", "who": "Sample review", "initials": "SR" },
+    { "quote": "Sample review. A real customer's words about a furniture pickup belong here.", "who": "Sample review", "initials": "SR" },
+    { "quote": "Sample review. A longer one fits here, about a yard cleanup, the kind people write after a big job.", "who": "Sample review", "initials": "SR" },
+    { "quote": "Sample review. Saved for a shed or deck demo, with the writer's name and date.", "who": "Sample review", "initials": "SR" }
+  ],
+  "reviews_page": [
+    { "col": 1, "tone": "soft", "art": "item-boxes", "quote": "Sample review. A garage clean out goes here, told by the person whose garage it was.", "who": "Sample review", "initials": "SR" },
+    { "col": 1, "quote": "Sample review. A quick word about a mattress pickup.", "who": "Sample review", "initials": "SR" },
+    { "col": 1, "photo": "cellar-shelves", "alt": "Dark wooden shelves crammed with jars, saws, hardware and bags" },
+    { "col": 2, "tone": "soft", "quote": "Sample review. A real customer's words about a furniture pickup belong here.", "who": "Sample review", "initials": "SR" },
+    { "col": 2, "lead": true, "photo": "pickup-trash-bags", "alt": "A white pickup truck piled high with black trash bags" },
+    { "col": 2, "tone": "soft", "quote": "Sample review. A longer one fits here, about a yard cleanup, the kind people write after a big job.", "who": "Sample review", "initials": "SR" },
+    { "col": 3, "tone": "soft", "art": "item-bags", "quote": "Sample review. Saved for a shed or deck demo, with the writer's name and date.", "who": "Sample review", "initials": "SR" },
+    { "col": 3, "quote": "Sample review. An old fridge or a dead washer goes here, in the words of whoever had to live with it.", "who": "Sample review", "initials": "SR" },
+    { "col": 3, "photo": "svc-mattress", "alt": "A man walking down a sidewalk with a striped mattress on his head" }
+  ]
+}

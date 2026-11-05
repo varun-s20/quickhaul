@@ -1,0 +1,37 @@
+<!-- meta
+title: Page Not Found | Quick Haul
+robots: noindex
+og_image: assets/images/services/pickup-trash-bags.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+estimate: no
+-->
+<div class="t-notFound">
+
+<!-- ===== 404: inner banner. The truck's load sinks out of its bed as the page loads: copy.md's "like the truck after a drop-off". With no JS or reduced motion the bed is simply empty. Spec 2b says one Book now, so the estimate band with its second one stays off this page ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Nothing</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">to haul here</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">This page is empty, like the truck after a <span class="m-banner__nowrap">drop-off</span>. It may have moved, or the link was typed wrong.</p>
+    <div class="m-actions a-reveal">
+      <a class="a-button" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 404: the ways on, in the ruled strip the ticket has on the homepage. tools/build.py writes every local path here from the site root, because a host serves this page at whatever address was asked for ===== -->
+<nav class="o-jump" aria-label="More pages">
+  <ul class="o-jump__list a-reveal">
+    <li class="o-jump__item"><a class="o-jump__link" href="index.html">Home<svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="services.html">Services<svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="services.html#pricing">Pricing<svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="contact.html">Contact<svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+  </ul>
+</nav>
+
+</div>

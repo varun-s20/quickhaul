@@ -1,0 +1,28 @@
+The Quick Haul homepage is built and has had both critic rounds the skill allows, but it hasn't passed: the last score was **7.8 against an 8.0 pass mark**. It's stopped at checkpoint 2c, and the rest needs your decisions.
+
+**Resuming.** The earlier run got as far as QA and was killed partway through critic round 1, so that round's report was lost. Nothing in site/ had changed since QA, the build and check scripts passed, and Pillow was already installed. I kept that work and reran round 1.
+
+**Critic rounds**
+- **Round 1: 6.9, fail.** The How it works step lines read as full-stop sentence headlines, which counts as a design tell and capped originality at 5. I fixed all ten issues it raised:
+  - **Step lines:** they now run in at the start of each step's sentence, with the copy unchanged. This changes the spec, and the change is logged.
+  - **Photos:** I replaced the derelict shed, the rusted fridge, the mattresses in a ruined room and the brick-wall "before" garage, and lightened the dark overlay on the tiles. Every swap is in content/placeholders.md with photographer, source page, Unsplash licence and where it's used.
+  - **Layout:** shorter town cards, less dead space, a light-plus-heavy footer tagline, brand icons on the social pills (CC0 Simple Icons) on one row at 390, and smaller ticket and caption fixes.
+- **Round 2: 7.8, fail on the total only.** No copy or design tells, originality up to 8. I fixed two more issues: a one-word last line in the estimate band and empty ruled rows around How it works. Those weren't re-scored because of the cap.
+
+QA was rerun after the fixes (build/qa-report.md). Text over photos is at least 5.04:1, there are no console errors, reduced motion and reveals behave, and nothing overflows at 1440 or 390.
+
+**Decisions for you** (full list in build/progress.md):
+1. **Before/after:** Unsplash has no free pair of one room before and after. The two sides are still different garages, and the "after" is organised rather than bare. Keep it, show a single photo until Shawn's pair arrives, or leave the section out for now?
+2. **Alt text:** copy.md's alt text describes the photos we intended, so six of seven don't match the stock that's there. Screen readers will describe things that aren't in the picture. Should the alts be rewritten to match the stock, or left until Shawn's photos arrive?
+3. **Two photos:** the junk removal photo reads as firewood delivery and the clean-outs photo shows a busy workshop. Replace them now?
+4. **Photo colour:** the colour grade from the spec is applied, but it's mild, so the red pickup and orange truck still stand out against the slate. Make it stronger?
+5. **Section openings:** services, towns and reviews all open the same way, with the statement on the left and the right half empty, as the spec asks. Vary one?
+
+**Also to know:**
+- The demo photo's photographer is inferred from Annie Spratt's upload batch; it's flagged in the log to confirm.
+- site/README.md isn't written yet; it's due in the final pass.
+- My cleanup delete of build/tmp/ was refused, so that scratch folder is still there and safe to remove.
+- The local server and all browser sessions are closed.
+
+This is a good commit point. Suggested message:
+`Quick Haul homepage: critic rounds 1 and 2, fixes, stock swaps logged`

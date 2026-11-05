@@ -1,0 +1,3 @@
+The QA run is still going, with a watcher set to tell me when the page checks finish. Once they do, I'll read the results, fix any failures, and write the handover and logs.
+
+The flow tests are running now. When they finish, I'll fix the wrapped headline and run the sweep, one browser at a time.

@@ -1,0 +1,47 @@
+<!-- meta
+title: Junk Removal FAQ: Prices, Booking and What We Take | Quick Haul
+description: How much junk removal costs, what we take and don't take, how booking works and where we go. Straight answers from Quick Haul.
+og_image: assets/images/services/pickup-trash-bags.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: faq.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-faq">
+
+<!-- ===== FAQ: inner banner ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Questions</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">answered</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">Prices, booking and what we take. Can't find yours? Give us a call on <a class="a-textLink" href="tel:+16035550142">(603) 555-0142</a>.</p>
+  </div>
+</section>
+
+<!-- ===== FAQ: the four topics as one ruled row, the jump strip from Services. The words are copy.md's accordion headings ===== -->
+<nav class="o-jump" aria-label="On this page">
+  <ul class="o-jump__list">
+    <li class="o-jump__item"><a class="o-jump__link" href="#pricing">Pricing<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="#what-we-take">What we take<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="#booking">Booking<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+    <li class="o-jump__item"><a class="o-jump__link" href="#paying">Paying<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+  </ul>
+</nav>
+
+<!-- ===== FAQ: four groups of rows, generated from data/faq.json, which also writes this page's FAQPage JSON-LD ===== -->
+{{> faq-groups}}
+
+<!-- ===== FAQ: close, the ledger's last line: the question left, the number opposite. copy.md's Book now is left out here, because the estimate band's sits directly under it and the two read as leftover parts (critic r1). Logged in build/progress.md ===== -->
+<section class="b-band -flush" aria-labelledby="faq-close">
+  <div class="b-band__inner o-faqClose a-inview">
+    <h2 class="o-faqClose__ask" id="faq-close">Still have a question?</h2>
+    <a class="o-faqClose__call" href="tel:+16035550142">
+      <span class="o-faqClose__lead"><svg class="a-call__icon" aria-hidden="true"><use href="#i-phone"/></svg>Give us a call</span>
+      <span class="o-faqClose__number">(603) 555-0142</span>
+    </a>
+  </div>
+</section>
+
+</div>

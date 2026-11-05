@@ -1,0 +1,131 @@
+<!-- meta
+title: Commercial and Repeat Junk Removal | Quick Haul
+description: Landlords, realtors and property managers: tell us about turnovers, move-outs or regular pickups across Massachusetts and New Hampshire.
+og_image: assets/images/services/pickup-trash-bags.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+estimate: no
+-->
+<div class="t-commercial">
+
+<!-- ===== Commercial: inner banner. The headline is the page's picture, two rows across the whole sheet; the drawing stands beside the lede ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art-commercial}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Landlords, realtors</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">and property managers</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">Turnovers, move-outs and regular pickups. Tell us about the property and we'll get back to you with a plan and a price.</p>
+  </div>
+</section>
+
+<!-- ===== Commercial: the enquiry form, directly under the banner as the ticket sits under the hero (spec 2b: ticket-ruled form). No estimate band after it, as on Book: "Got a garage full of junk?" talks to a homeowner straight after this page's own send (critic r1), and Varun has asked for fewer sections (design/choices.md). Copy.md's field order. Field names are listed in site/README.md. copy.md gives this page no error lines, so it reuses Contact's three and Book's email line (build/plan.md) ===== -->
+<section class="b-band -flush" aria-label="Commercial enquiry">
+  <div class="b-band__inner">
+    <form action="#" method="post" novalidate data-request>
+      <div class="o-enquiry">
+
+        <div class="m-field o-enquiry__cell a-reveal">
+          <label class="a-label" for="enquiry-name">Your name</label>
+          <input class="m-field__input" id="enquiry-name" name="name" type="text" autocomplete="name" aria-describedby="enquiry-name-error" data-required data-error="Add your name">
+          <p class="m-field__error" id="enquiry-name-error" hidden></p>
+        </div>
+        <div class="m-field o-enquiry__cell a-reveal">
+          <label class="a-label" for="enquiry-company">Company (optional)</label>
+          <input class="m-field__input" id="enquiry-company" name="company" type="text" autocomplete="organization">
+        </div>
+        <fieldset class="m-field o-enquiry__cell -half a-reveal">
+          <legend class="a-label -legend">You are</legend>
+          <div class="o-enquiry__chips -role">
+            <label class="a-choice"><input class="a-choice__input" type="radio" name="role" value="Landlord"><span class="a-choice__face">Landlord</span></label>
+            <label class="a-choice"><input class="a-choice__input" type="radio" name="role" value="Realtor"><span class="a-choice__face">Realtor</span></label>
+            <label class="a-choice"><input class="a-choice__input" type="radio" name="role" value="Property manager"><span class="a-choice__face">Property manager</span></label>
+            <label class="a-choice"><input class="a-choice__input" type="radio" name="role" value="Contractor"><span class="a-choice__face">Contractor</span></label>
+            <label class="a-choice"><input class="a-choice__input" type="radio" name="role" value="Other"><span class="a-choice__face">Other</span></label>
+          </div>
+        </fieldset>
+
+        <div class="m-field o-enquiry__cell a-reveal">
+          <label class="a-label" for="enquiry-phone">Phone</label>
+          <input class="m-field__input" id="enquiry-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="enquiry-phone-error" data-either="enquiry-email" data-error="Add a phone number or email so we can reach you">
+          <p class="m-field__error" id="enquiry-phone-error" hidden></p>
+        </div>
+        <div class="m-field o-enquiry__cell a-reveal">
+          <label class="a-label" for="enquiry-email">Email</label>
+          <input class="m-field__input" id="enquiry-email" name="email" type="email" autocomplete="email" aria-describedby="enquiry-email-error" data-email data-error="That email doesn't look right">
+          <p class="m-field__error" id="enquiry-email-error" hidden></p>
+        </div>
+        <div class="m-field o-enquiry__cell -half a-reveal">
+          <label class="a-label" for="enquiry-property">Property address or town</label>
+          <input class="m-field__input" id="enquiry-property" name="property" type="text" autocomplete="street-address">
+        </div>
+
+        <!-- How often shows only for regular pickups. Without JS it stays on show, and it stays out of the send until it applies -->
+        <div class="o-enquiry__cell -half o-enquiry__rhythm a-reveal">
+          <fieldset class="m-field">
+            <legend class="a-label -legend">One job or regular</legend>
+            <div class="o-enquiry__chips">
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="job_type" value="One job" data-rhythm><span class="a-choice__face">One job</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="job_type" value="Regular pickups" data-rhythm="regular"><span class="a-choice__face">Regular pickups</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="m-field o-enquiry__often" data-rhythm-often>
+            <legend class="a-label -legend">How often</legend>
+            <div class="o-enquiry__chips -four">
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="frequency" value="Weekly"><span class="a-choice__face">Weekly</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="frequency" value="Every two weeks"><span class="a-choice__face">Every two weeks</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="frequency" value="Monthly"><span class="a-choice__face">Monthly</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="frequency" value="As needed"><span class="a-choice__face">As needed</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="o-enquiry__cell -half o-enquiry__job a-reveal">
+          <div class="m-field o-enquiry__jobField">
+            <label class="a-label" for="enquiry-job">Tell us about the job</label>
+            <textarea class="m-field__input -area" id="enquiry-job" name="job" rows="3" placeholder="For example: unit turnover, tenant left furniture and a full basement" aria-describedby="enquiry-job-error" data-required data-error="Tell us a little about the job"></textarea>
+            <p class="m-field__error" id="enquiry-job-error" hidden></p>
+          </div>
+        </div>
+
+        <!-- photos only with a backend: no file input without one (conventions). The button and error words are Book's approved ones; copy.md gives this page only the label. A row of its own: in the job's cell it left a hole beside How often (critic r2) -->
+        <div class="m-field o-enquiry__cell -half o-enquiry__photos" hidden data-needs-endpoint>
+          <span class="a-label" id="enquiry-photos-label">Add photos (optional)</span>
+          <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="enquiry-photos-label" aria-describedby="enquiry-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+          <ul class="m-upload__files" aria-live="polite" hidden data-upload-files></ul>
+          <p class="m-field__note" id="enquiry-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo."></p>
+        </div>
+
+        <div class="o-enquiry__cell -half o-enquiry__small a-reveal">
+          <p class="m-field__small">We only use your details to answer your enquiry. <a class="a-textLink" href="privacy.html">Read our privacy policy.</a></p>
+        </div>
+        <div class="o-enquiry__cell -half o-enquiry__send a-reveal">
+          <button class="a-button -slate" type="submit" data-bar-clear>Send enquiry<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+
+      </div>
+
+      <!-- no endpoint, or it failed: the form stays filled and the phone is offered. copy.md gives this page no failure copy, so this reuses Book's approved headline and the global call line, as Contact does -->
+      <div class="o-contactForm__state" tabindex="-1" role="alert" hidden data-request-failed>
+        <h2 class="o-contactForm__stateTitle"><span class="o-contactForm__stateLight">Something</span> went wrong</h2>
+        <div>
+          <p class="m-contactCell__line">Need help booking or have questions? Give us a call</p>
+          <a class="m-contactCell__value -phone" href="tel:+16035550142">(603) 555-0142</a>
+        </div>
+      </div>
+    </form>
+
+    <!-- copy.md's words in its order; "Thanks, we've got it" takes the headline's place without its full stop, and the number closes the row. data-request-head: with no form heading above it, the panel itself is where the page scrolls to (critic r1: at 390 it landed 300px below the header) -->
+    <div class="o-contactForm__state" tabindex="-1" role="status" hidden data-request-done data-request-head>
+      <h2 class="o-contactForm__stateTitle"><span class="o-contactForm__stateLight">Thanks,</span> we've got it</h2>
+      <div>
+        <p class="m-contactCell__line">We'll get back to you to talk it through. Need it sooner? Call</p>
+        <a class="m-contactCell__value -phone" href="tel:+16035550142">(603) 555-0142</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>

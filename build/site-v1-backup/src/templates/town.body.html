@@ -1,0 +1,56 @@
+<!-- meta
+title: Junk Removal in {{TOWN}}, {{ABBR}} | Quick Haul
+description: Junk removal, clean outs, furniture, appliance, mattress and yard waste pickup, plus demo, in {{TOWN}}, {{ABBR}}. Prices from $149. Book a day online or call.
+og_image: assets/images/services/pickup-trash-bags.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: town.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-town">
+
+<!-- ===== Town: inner banner. Its truck is the one the ticket's load chips fill, as on the homepage ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art-live}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Junk removal in</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">{{TOWN}}, {{ABBR}}</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">Clean outs, single items, yard waste and demo work in {{TOWN}}. Pick your load and a day below, or give us a call.</p>
+  </div>
+</section>
+
+{{> ticket}}
+
+<!-- ===== Town: what we haul, beside the map with this town marked (was a stock photo; the map is what makes this page this town's) ===== -->
+<section class="b-band -flush" aria-labelledby="town-services-title">
+  <div class="b-band__inner o-split -flip">
+    <div class="o-split__media a-inview">
+    {{> town-map}}
+    </div>
+    <div class="o-split__text a-inview">
+      <div class="m-sectionHead">
+        <h2 class="a-section" id="town-services-title"><span class="a-section__row -light">What we haul</span> <span class="a-section__row">in {{TOWN}}</span></h2>
+        <p class="a-body m-sectionHead__text">Garage and basement clean outs, furniture, appliances, mattresses, yard waste and demo projects. We come to {{TOWN}} with the truck, load everything ourselves and haul it away, with the good stuff going to donation where we can. Prices start at $149 for a 1/8 truck, and you'll know your price before the day.</p>
+      </div>
+      <div class="m-actions">
+        <a class="a-button -slate" href="book.html?town={{TOWN_QUERY}}">Book in {{TOWN}}<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="a-link" href="services.html"><span class="a-link__text">See everything we take</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="a-link" href="service-area.html"><span class="a-link__text">Service area</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Town: price cards, the same four as Services #pricing ===== -->
+<section class="b-band -flush" aria-label="Pricing">
+  <div class="b-band__inner">
+    <ul class="o-pricing__cards" data-stagger>
+{{> price-cards}}
+    </ul>
+  </div>
+</section>
+
+<!-- Reviews from this town: built only when real Facebook reviews from this town exist. No sample cards on town pages (copy.md). -->
+
+</div>

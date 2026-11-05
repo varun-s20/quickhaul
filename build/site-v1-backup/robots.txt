@@ -1,0 +1,3 @@
+# Design preview: not for search engines yet. tools/build.py PREVIEW = False at launch.
+User-agent: *
+Disallow: /

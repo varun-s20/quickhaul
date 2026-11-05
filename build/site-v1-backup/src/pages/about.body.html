@@ -1,0 +1,75 @@
+<!-- meta
+title: About Quick Haul | Local Junk Removal in MA and NH
+description: Quick Haul is a local junk removal and demo crew working across Massachusetts and New Hampshire. Meet Shawn and see how we work.
+og_image: assets/images/about/old-pickup-driveway.jpg
+og_image_alt: A work truck parked in a residential driveway
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-about">
+
+<!-- ===== About: inner banner ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">About</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Quick Haul</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">A local junk removal and demo crew, working towns across Massachusetts and New Hampshire.</p>
+  </div>
+</section>
+
+<!-- ===== About: statement block. A light sentence across the full measure (spec 2b); a paragraph, not a heading, so it stays in sentence case ===== -->
+<section class="b-band -flush" aria-label="About Quick Haul">
+  <div class="b-band__inner o-aboutStatement">
+    <p class="o-aboutStatement__text a-inview">Quick Haul is Shawn and a small crew who clear out garages, basements and yards across Massachusetts and New Hampshire, and take down the sheds and decks that need taking down.</p>
+  </div>
+</section>
+
+<div class="a-halftone" aria-hidden="true"></div>
+
+<!-- ===== About: split band. Stock photo, must-replace with Shawn's own (content/placeholders.md). A truck, not a stock person: the only person on the page would read as Shawn (critic r1; copy.md's own note). The call is the loudest action, because the band is about the phone: the number is set like the price figures, in the same order and words as copy.md ===== -->
+<section class="b-band -flush -slate" aria-labelledby="phone-title">
+  <div class="b-band__inner o-split">
+    <div class="o-split__media a-inview"><div class="b-photo">{{picture name="old-pickup-driveway" alt="A work truck parked in a residential driveway" sizes="(min-width: 1025px) calc(54.6vw - 24px), calc(100vw - 66px)"}}</div></div>
+    <div class="o-split__text a-inview">
+      <div class="m-sectionHead">
+        <h2 class="a-section" id="phone-title"><span class="a-section__row -light">Pick up</span> <span class="a-section__row">the phone</span></h2>
+        <p class="a-body m-sectionHead__text">Shawn started Quick Haul in 2022 and still answers the phone himself. That's on purpose. A two-minute call tells him what's in the garage, how to get the truck close and what to bring, and it tells you who's showing up and what it costs. You can book online any time, but if you'd rather talk it through first, call. That's what the number is for.</p>
+      </div>
+      <p class="a-body o-split__para">Every job is the same idea: show up when we said, carry out what you point at, leave the space clear and take the good stuff to donation where we can. No sales pitch, no guessing on the price.</p>
+      <div class="m-actions">
+        <a class="a-button" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <a class="o-aboutCall" href="tel:+16035550142">
+        <span class="o-aboutCall__lead"><svg class="a-call__icon" aria-hidden="true"><use href="#i-phone"/></svg>Or call Shawn on</span>
+        <span class="o-aboutCall__number">(603) 555-0142</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About: how we work. Four ruled rows, lines on the job ticket, on the split band's column line; no icons, no numbers. Spec 2b's ruled cells, set as rows because a four-up read as anyone's values strip (critic r2) ===== -->
+<section class="b-band -flush" aria-label="How we work">
+  <div class="b-band__inner o-aboutWork">
+    <div class="o-aboutWork__cell a-inview">
+      <h2 class="o-aboutWork__label">Local</h2>
+      <p class="a-body o-aboutWork__text">We work towns on both sides of the Massachusetts and New Hampshire line, so we're never far away.</p>
+    </div>
+    <div class="o-aboutWork__cell a-inview">
+      <h2 class="o-aboutWork__label">Upfront</h2>
+      <p class="a-body o-aboutWork__text">You see the starting price before you book, and we confirm it before the day.</p>
+    </div>
+    <div class="o-aboutWork__cell a-inview">
+      <h2 class="o-aboutWork__label">Reachable</h2>
+      <p class="a-body o-aboutWork__text">A real number with a real person on the end of it, Mon to Sat, 7am to 7pm.</p>
+    </div>
+    <div class="o-aboutWork__cell a-inview">
+      <h2 class="o-aboutWork__label">Less in the dump</h2>
+      <p class="a-body o-aboutWork__text">Anything still good goes to donation where we can, not straight on the pile.</p>
+    </div>
+  </div>
+</section>
+
+</div>

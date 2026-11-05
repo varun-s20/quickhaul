@@ -1,0 +1,46 @@
+I've rewritten `content/copy.md` for every page at the new text level. By my hand count, Home is 359 words and Services 512, both on target. The old copy is saved as `content/copy-v1.md`; without a shell I couldn't do a byte comparison, but its line and pattern counts match the original.
+
+## Open copy points
+- **Reviews lines:** the new lines are true now and once real reviews arrive: the reviews are on Shawn's Facebook page, and any we bring over stay word for word. "Plenty" is Shawn's own word from the chat. Sample cards no longer have links, and the old claims are on HOLD until real reviews go in.
+- **Town-card price:** no town name carries a price any more. The price sits in "Priced by the load", and one line says it's the same in every town.
+- **Hero lede:** now reads "Junk removal, clean outs and demo work across Massachusetts and New Hampshire. Loads start at $149. You point, we carry." The prototype's line priced demo at $149, but demo is priced per job.
+- **About intro and call line:** the banner line replaces the statement block, so nothing is said twice. The one action in "Pick up the phone" is now "Call Shawn (603) 555-0142".
+- **Card links:** all confirmed except "Book a yard clean-up", now "Book a yard waste pickup". That's Shawn's own term, and "clean-up" promised a yard tidy he never offered.
+
+## What changed per page
+- **Global:** top bar, footer tagline and repeated call line cut; US English throughout.
+- **Home:** ticket, trust row and town cards cut; How it works moved into the estimate band; one sample review.
+- **Services:** long bands became two big bands plus five cards; "What we can't take" is now its own band.
+- **Book:** added three small facts and one helper per step, plus new lines for demo and "Not sure" prices.
+- **Reviews:** filter cut; "Used us already?" is now a line and two links.
+- **Donate:** the 74-word statement became two lines, with its own estimate band.
+- **About:** statement, second paragraph and second action cut; 60-word story and three small facts.
+- **FAQ:** 17 questions down to 12; close row cut.
+- **Contact:** most contact cells cut; call pill added to the banner; real failed state written.
+- **Service area hub:** $149 cut from the meta; new heading and line above the town chips.
+- **Town pages:** ticket, map and paragraph cut.
+- **Commercial:** new headline, "Commercial and repeat work"; "enquiry" became "request".
+- **404:** down to one line and three links.
+- **Privacy:** same length, three small fixes.
+
+## For Varun to check
+- **Word targets:** Book is over (204 against about 170), and going lower means dropping a form field. Reviews (82), Donate (145) and About (153) are under their targets of 120, 170 and 180, because more words would only have been repeats.
+- **FAQ cuts:** "Do I need to be home?" and "Can I change or cancel?" are gone because their answers were invented policy. They should come back once Shawn gives his rules.
+- **"Plenty" of reviews:** this rests only on Shawn's chat line, as nobody here has seen his Facebook page.
+- **Year on About:** 2022 is no longer on the page; it remains only in the held footer line.
+- **Trust claims:** licensed, insured and guarantee stay HOLD and unbuilt. With the trust row cut, they have no slot if Shawn confirms them.
+
+## Not checked
+- **Proposal PDF:** I couldn't re-read it because the tools refused it, so its terms come from the quotes in `brief.md`.
+- **Word counts and layout:** the counts are by hand and nothing was seen in a browser. The hero line is about 10 characters longer than the prototype's, so its clearance from the truck needs rechecking.
+
+The Developer should build from `copy.md`, not the prototype's text, because several Home and Services lines now differ. `copy-changes.md` lists those lines and the other build notes, including `site/data` updates and a conflict in `revision.md` over whether Privacy gets the estimate band. I didn't touch `site/` or the prototype.
+
+This is a good checkpoint. Suggested commit message: `Quick Haul: rewrite copy for the revised design, keep v1, log new placeholders`
+
+Files are in `projects/quickhaul/`:
+- `content/copy.md`
+- `content/copy-v1.md`
+- `content/copy-changes.md`
+- `content/placeholders.md`
+- `review-log.md`

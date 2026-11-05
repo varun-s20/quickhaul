@@ -1,0 +1,52 @@
+{
+  "_note": "FAQ page and its FAQPage JSON-LD, both built from this file by tools/build.py. Words are content/copy.md's, word for word; group names are copy.md's accordion headings. Prices, policies and hours are placeholders (content/placeholders.md). The first row of each group starts open.",
+  "groups": [
+    {
+      "id": "pricing",
+      "title": "Pricing",
+      "art": "loads",
+      "items": [
+        {"q": "How much does junk removal cost?", "a": "You pay for how much of the truck your junk fills. A 1/8 truck is $149, a 1/4 truck $249, a 1/2 truck $399 and a full truck $649. Loading, hauling and drop-off are included."},
+        {"q": "What if I'm not sure how much I have?", "a": "Pick the closest size when you book and add a few photos. We'll confirm the price before the day."},
+        {"q": "Can the price change on the day?", "a": "Only if the job is different from what we agreed, like extra items or heavy material we didn't know about. If it does, we tell you before we load anything."},
+        {"q": "How much for just one item?", "a": "A single item is priced as a 1/8 load, $149."},
+        {"q": "How is demo priced?", "a": "Every demo job is different, so we price it per job. Send photos with your booking or call us and we'll talk it through."}
+      ]
+    },
+    {
+      "id": "what-we-take",
+      "title": "What we take",
+      "art": "items",
+      "ground": "slate",
+      "items": [
+        {"q": "What do you take?", "a": "Furniture, appliances, mattresses, household junk, garage and basement clutter, yard waste and demo debris. The full list is on our <a class=\"a-textLink\" href=\"services.html\">services page</a>."},
+        {"q": "What don't you take?", "a": "Paint, oil and chemicals, propane tanks, asbestos, medical waste and car batteries. Not sure about something? Ask us."},
+        {"q": "Do you donate things?", "a": "Yes, where we can. Tell us what's still good when you book and we'll take it to a local charity or reuse store instead of the dump."},
+        {"q": "Do I need to carry anything outside?", "a": "No. We carry it out from wherever it is, including basements and upstairs rooms."}
+      ]
+    },
+    {
+      "id": "booking",
+      "title": "Booking",
+      "art": "calendar",
+      "items": [
+        {"q": "How does booking work?", "a": "Pick your town, your load and a day online, add photos if you can, and send it. Shawn looks over every booking and gets back to you to confirm the time and the price."},
+        {"q": "Can I just call instead?", "a": "Yes, any time. Call <a class=\"a-textLink\" href=\"tel:+16035550142\">(603) 555-0142</a>, Mon to Sat, 7am to 7pm, and we'll book it with you on the phone."},
+        {"q": "How soon can you come?", "a": "Check the <a class=\"a-textLink\" href=\"book.html\">calendar</a> for the next open days. If you need it sooner, call us and we'll see what we can do."},
+        {"q": "Do I need to be home?", "a": "Not always. If the junk is outside and the price is agreed, we can do the job while you're out. Tell us when you book."},
+        {"q": "Can I change or cancel my booking?", "a": "Yes. Call us at least a day ahead and we'll move it or cancel it."},
+        {"q": "Do you come to my town?", "a": "We cover towns across Massachusetts and New Hampshire. Type yours into the <a class=\"a-textLink\" href=\"book.html\">booking form</a> to check, or see the full list on our <a class=\"a-textLink\" href=\"service-area.html\">service area page</a>."}
+      ]
+    },
+    {
+      "id": "paying",
+      "title": "Paying",
+      "art": "payment",
+      "ground": "slate",
+      "items": [
+        {"q": "When do I pay?", "a": "When the job's done, before we drive off."},
+        {"q": "How can I pay?", "a": "Card or cash."}
+      ]
+    }
+  ]
+}

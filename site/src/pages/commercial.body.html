@@ -1,0 +1,133 @@
+<!-- meta
+title: Commercial and Repeat Junk Removal | Quick Haul
+description: Landlords, realtors and property managers: tell us about turnovers, move-outs or regular pickups across Massachusetts and New Hampshire.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-commercial">
+<!-- Shawn has not said he does commercial or repeat work (brief section 2). This whole page is placeholder wording, must-confirm, and invites a request without claiming a track record (content/placeholders.md). Words: content/copy.md, Commercial. -->
+
+<!-- ===== Commercial: short banner. Heading and one line, the truck parked on the fold with a full body and no heap (copy.md's truck labels; "piled high" is Home's alone, revision.md section 5). No estimate band on this page: the form is its one action ===== -->
+<section class="o-pageBanner -short" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner -long" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Commercial and</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">repeat work</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Turnovers, <span class="a-nowrap">move-outs</span> and regular pickups for landlords, realtors and property managers. Tell us about the property and we'll get back to you.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-full}}</div>
+</section>
+
+<!-- ===== Commercial: who this is for. Three small facts. The kinds of job each one might ask about; nothing says we have done them ===== -->
+<section class="b-band -rise o-factBand" aria-labelledby="for-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="for-title"><span class="a-section__row -light">Who this</span> <span class="a-section__row">is for</span></h2>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">Landlords</strong> <span class="m-fact__text">Unit turnovers, what tenants leave behind, shared basements and storage.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Realtors</strong> <span class="m-fact__text">Clearing a listing before photos or showings.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Property managers and contractors</strong> <span class="m-fact__text">Regular pickups, and debris after a job.</span></li>
+  </ul>
+</section>
+
+<!-- ===== Commercial: the request form, under who it's for, in copy.md's field order. Field names are listed in site/README.md. With no endpoint a send shows the failed state and keeps what was typed ===== -->
+<section class="b-band o-svcBand" aria-label="Request form">
+  <form class="m-form m-seatCard a-inview" action="#" method="post" novalidate data-request>
+    <div class="m-seatCard__art" aria-hidden="true"><img class="m-form__item -sofa" src="assets/trucks/item-sofa.svg" width="248" height="142" alt="" loading="lazy" decoding="async"><img class="m-form__item -armchair" src="assets/trucks/item-armchair.svg" width="124" height="132" alt="" loading="lazy" decoding="async"><img class="m-form__item -boxes" src="assets/trucks/item-boxes.svg" width="190" height="158" alt="" loading="lazy" decoding="async"><img class="m-form__item -bags" src="assets/trucks/item-bags.svg" width="216" height="110" alt="" loading="lazy" decoding="async"></div>
+    <p class="m-takes m-form__intro"><strong>It helps to tell us</strong> how many units or rooms, how close the truck can get and how soon you need it.</p>
+    <div class="m-field">
+      <label class="m-field__label" for="commercial-name">Your name</label>
+      <input class="m-field__input" id="commercial-name" name="name" type="text" autocomplete="name" aria-describedby="commercial-name-error" data-required data-error="Add your name">
+      <p class="m-field__error" id="commercial-name-error" hidden></p>
+    </div>
+    <div class="m-field">
+      <label class="m-field__label" for="commercial-company">Company (optional)</label>
+      <input class="m-field__input" id="commercial-company" name="company" type="text" autocomplete="organization">
+    </div>
+    <fieldset class="m-field -wide">
+      <legend class="m-field__label">You are (optional)</legend>
+      <div class="m-form__chips">
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="role" value="Landlord" data-clearable><span class="a-choice__face">Landlord</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="role" value="Realtor" data-clearable><span class="a-choice__face">Realtor</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="role" value="Property manager" data-clearable><span class="a-choice__face">Property manager</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="role" value="Contractor" data-clearable><span class="a-choice__face">Contractor</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="role" value="Other" data-clearable><span class="a-choice__face">Other</span></label>
+      </div>
+    </fieldset>
+    <div class="m-field">
+      <label class="m-field__label" for="commercial-phone">Phone</label>
+      <input class="m-field__input" id="commercial-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="commercial-phone-error commercial-reach-note" data-either="commercial-email" data-error="Add a phone number or email so we can reach you">
+      <p class="m-field__error" id="commercial-phone-error" hidden></p>
+    </div>
+    <div class="m-field">
+      <label class="m-field__label" for="commercial-email">Email</label>
+      <input class="m-field__input" id="commercial-email" name="email" type="email" autocomplete="email" aria-describedby="commercial-email-error commercial-reach-note" data-email data-error="That email doesn't look right">
+      <p class="m-field__error" id="commercial-email-error" hidden></p>
+    </div>
+    <p class="m-field__note m-form__help" id="commercial-reach-note">Phone or email is enough.</p>
+    <div class="m-field -wide">
+      <label class="m-field__label" for="commercial-property">Property address or town (optional)</label>
+      <input class="m-field__input" id="commercial-property" name="property" type="text" autocomplete="street-address">
+    </div>
+    <!-- How often shows only for regular pickups. Without JS it stays on show, and it stays out of the send until it applies -->
+    <div class="m-form__rhythm">
+      <fieldset class="m-field">
+        <legend class="m-field__label">One job or regular</legend>
+        <div class="m-form__chips">
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job_type" value="One job" data-rhythm data-clearable><span class="a-choice__face">One job</span></label>
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job_type" value="Regular pickups" data-rhythm="regular" data-clearable><span class="a-choice__face">Regular pickups</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="m-field m-form__often" data-rhythm-often>
+        <legend class="m-field__label">How often</legend>
+        <div class="m-form__chips">
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="frequency" value="Weekly" data-clearable><span class="a-choice__face">Weekly</span></label>
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="frequency" value="Every two weeks" data-clearable><span class="a-choice__face">Every two weeks</span></label>
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="frequency" value="Monthly" data-clearable><span class="a-choice__face">Monthly</span></label>
+          <label class="a-choice -light"><input class="a-choice__input" type="radio" name="frequency" value="As needed" data-clearable><span class="a-choice__face">As needed</span></label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="m-field -wide">
+      <label class="m-field__label" for="commercial-job">Tell us about the job</label>
+      <textarea class="m-field__input -area" id="commercial-job" name="job" rows="4" placeholder="For example: unit turnover, tenant left furniture and a full basement" aria-describedby="commercial-job-error" data-required data-error="Tell us a little about the job"></textarea>
+      <p class="m-field__error" id="commercial-job-error" hidden></p>
+    </div>
+    <!-- photos only with a backend: no file input without one (conventions) -->
+    <div class="m-field -wide" hidden data-needs-endpoint>
+      <p class="m-field__label" id="commercial-photos-label">Add photos (optional)</p>
+      <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="commercial-photos-label" aria-describedby="commercial-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+      <ul class="m-upload__files" aria-live="polite" hidden data-upload-files data-remove="Remove"></ul>
+      <p class="m-field__note" id="commercial-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo.">Photos help us give you a real price instead of a guess.</p>
+    </div>
+    <!-- no endpoint, or it failed: the form stays filled and the phone is offered -->
+    <div class="m-formState" tabindex="-1" role="alert" hidden data-request-failed>
+      <h2 class="a-section -card"><span class="a-section__row -light">Something</span> <span class="a-section__row">went wrong</span></h2>
+      <p class="a-lede">Your request didn't go through, and that's on our end. What you typed is still in the form, so try again, or give us a call at <a class="a-inlineLink" href="tel:+16035550142"><span class="a-num">(603) 555-0142</span></a></p>
+    </div>
+    <div class="m-form__foot">
+      <p class="m-field__small">We only use your details to answer your request. <a class="a-inlineLink" href="privacy.html">Read our privacy policy.</a></p>
+      <button class="a-button -slate -large" type="submit" data-bar-clear>Send request<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    </div>
+
+  </form>
+
+  <!-- data-request-head: with no form heading above it, the panel itself is where the page scrolls to (critic, built Commercial r1) -->
+  <div class="m-formState" tabindex="-1" role="status" hidden data-request-done data-request-head>
+    <h2 class="a-section -card"><span class="a-section__row -light">Thanks,</span> <span class="a-section__row">we've got it</span></h2>
+    <p class="a-lede">We'll get back to you to talk it through. Need it sooner? <a class="a-inlineLink" href="tel:+16035550142">Call <span class="a-num">(603) 555-0142</span></a></p>
+  </div>
+</section>
+
+</div>

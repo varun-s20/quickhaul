@@ -1,0 +1,78 @@
+<!-- meta
+title: Donate Your Old Furniture and Household Items | Quick Haul
+description: Some of what we haul still has plenty of life in it. Tell us what's still good when you book and we set it aside for donation instead of the dump.
+og_image: assets/images/donate/dresser-on-street.jpg
+og_image_alt: A small wooden dresser set out on an empty street, in front of a wooden fence and rooftops
+schema: page.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-donate">
+<!-- Whether Quick Haul donates at all, and where, is unconfirmed: this whole page is placeholder wording (content/placeholders.md). No named charities, on purpose. Photos are logged stock, must-replace. Words: content/copy.md, Donate. -->
+
+<!-- ===== Donate: page banner. The truck with the good stuff set apart at the curb. The longest title on the site, so the small size ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner -long" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Still good?</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Someone wants it</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">A lot of what we pick up still works, so the good stuff goes to local charities and reuse stores instead of the dump.</p>
+  </div>
+
+  <div class="o-pageBanner__truck -wide a-reveal">{{> truck-banner-donate}}</div>
+</section>
+
+<!-- ===== Donate: what we can donate, the one band. A big photo beside what can go, what can't, where it goes and how to ask. Can is a plain line and can't is a marked list, so a refusal can't be mistaken for an offer ===== -->
+<section class="b-band -rise" aria-labelledby="donate-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="donate-title"><span class="a-section__row -light">What we</span> <span class="a-section__row">can donate</span></h2>
+    <p class="a-lede">The dresser that doesn't fit the new place, the kids' bikes, the spare couch from the basement. If you'd use it, someone else probably will too.</p>
+  </div>
+  <div class="o-donateBand">
+    <div class="o-donateBand__media a-inview">{{picture name="dresser-on-street" class="o-donateBand__img" alt="A small wooden dresser set out on an empty street, in front of a wooden fence and rooftops" sizes="(min-width: 1025px) 46vw, 100vw"}}</div>
+    <div class="o-donateBand__words a-inview">
+      <p class="m-takes"><strong>Yes to</strong> furniture in good shape, working appliances, kitchenware, clothes and shoes, books, toys, bikes, tools and sports gear.</p>
+      <div class="o-donateBand__not">
+        <p class="m-fact__title">Not these</p>
+        <ul class="m-notList" aria-label="What we can't donate">
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Anything broken, stained or missing parts</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Worn-out mattresses</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Car seats</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Recalled cribs</li>
+          <li class="m-notList__item"><svg class="m-notList__mark" aria-hidden="true"><use href="#i-close"/></svg>Anything that's been in a flood or fire</li>
+        </ul>
+      </div>
+      <ul class="o-donateBand__facts">
+        <li class="m-fact"><strong class="m-fact__title">Where it goes</strong> <span class="m-fact__text">Local charities and reuse stores in Massachusetts and New Hampshire. We check what they're taking before each drop-off.</span></li>
+        <li class="m-fact"><strong class="m-fact__title">How to ask</strong> <span class="m-fact__text">Add a note when you book saying what's still good, or tell us when we get there. We'll load it separately.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Donate: estimate band, in its own words (copy.md). It sits in the page because the footer partial's band has fixed words, and the meta above turns that one off. Same markup and glyph as the partial's: if the ring ever changes, change both ===== -->
+<section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
+  <!-- the logo's three arrows redrawn as one faint ring (spec 2b, V10 glyph at 7%); decorative -->
+  <svg class="o-estimate__glyph" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <path d="M27.7 70.8A78 78 0 0 1 131.7 28.7" fill="none" stroke="currentColor" stroke-width="9"/>
+    <path d="M146.9 37.7L135.6 16.2L125.4 40.2Z" fill="currentColor"/>
+    <path d="M161.5 52.0A78 78 0 0 1 136.6 168.9" fill="none" stroke="currentColor" stroke-width="9"/>
+    <path d="M120.2 175.3L144.1 179.6L131.5 156.9Z" fill="currentColor"/>
+    <path d="M100.0 178.0A78 78 0 0 1 22.0 102.7" fill="none" stroke="currentColor" stroke-width="9"/>
+    <path d="M23.4 85.1L9.1 104.8L35.1 103.4Z" fill="currentColor"/>
+  </svg>
+  <div class="o-estimate__inner a-inview">
+    <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Ready to</span> <span class="a-section__row">clear it out?</span></h2>
+    <p class="a-lede">Book a pickup and tell us what's still good. Want to check an item first? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>.</p>
+    <a class="a-button -cream -large" href="book.html">Book a pickup<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</div>

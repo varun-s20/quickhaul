@@ -1,0 +1,130 @@
+<!-- meta
+title: Customer Reviews | Quick Haul Junk Removal
+description: Read what customers say about Quick Haul on Facebook, and see before and after photos of garage, basement and yard clean outs.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-reviews">
+<!-- Sample cards from data/reviews.json, replaced and never edited into real-sounding reviews (content/placeholders.md). No stars, score or count (proposal term 05). Every photo is logged stock, must-replace. Words: content/copy.md, Reviews. -->
+
+<!-- ===== Reviews: page banner. Heading and one line, the truck parked on the fold with a quarter of a load ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Customer</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">reviews</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Real reviews from our Facebook page land here, just as their writers left them. Until then, the cards below are samples.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
+</section>
+
+<!-- ===== Reviews: quotes mixed with photos in a loose grid. No filter column (revision.md: dead with few reviews). A photo never sits inside a quote card, so no photo reads as the job a review is about (copy.md) ===== -->
+<section class="b-band -rise o-reviewGrid" aria-label="Reviews">
+  <div class="o-reviewGrid__cols">
+{{> review-grid}}
+  </div>
+  <!-- the end of the grid: one link. It goes to the bare platform address until Shawn sends his page (data/reviews.json, content/placeholders.md) -->
+  <div class="o-reviewGrid__end a-inview">
+    <div class="m-rowActions"><a class="a-link" href="{{> facebook-url}}" target="_blank" rel="noopener"><span class="a-link__text">Read the real ones on Facebook</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ===== Reviews: word for word. A seated card, from proposal term 05. Future tense while the samples are up; the launch line is under Held lines in copy.md ===== -->
+<section class="b-band o-svcBand o-seatBand" aria-labelledby="word-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="word-title"><span class="a-section__row -light">Word</span> <span class="a-section__row">for word</span></h2>
+    <p class="a-lede">When our real reviews go up, they go up the way people wrote them.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -boxes" src="assets/trucks/item-boxes.svg" width="190" height="158" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -bags" src="assets/trucks/item-bags.svg" width="216" height="110" alt="" loading="lazy" decoding="async"></div>
+  <ul class="m-factRow -three">
+    <li class="m-fact"><strong class="m-fact__title">Nothing edited</strong> <span class="m-fact__text">No trimming and no tidying, typos and all.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">A name and a date</strong> <span class="m-fact__text">Each one shows who wrote it and when.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">A link back</strong> <span class="m-fact__text">Each one links to its Facebook post, so you can read it there too.</span></li>
+  </ul>
+  </div>
+</section>
+
+<!-- ===== Reviews: before and after. Heading, one line, the pairs, one line. No pill: above the pairs it asks before it shows (critic, Reviews r1), and under them it read as a leftover right above the estimate band's own Book now (critic, old Reviews r1). revision.md: one action a band at most, usually the estimate band alone ===== -->
+<!-- Every pair is stock from two different places, must-replace with Shawn's own pairs from one spot (content/placeholders.md). So no alt says "the same", and the "own jobs" line stays HOLD. -->
+<section class="b-band o-reviewPanel" id="before-after" aria-labelledby="pairs-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="pairs-title"><span class="a-section__row -light">Before</span> <span class="a-section__row">and after</span></h2>
+    <p class="a-lede">Drag each line across to see the difference. Garages, basements, yards and demo jobs, cleared and ready to use.</p>
+  </div>
+  <div class="o-reviewPairs">
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <!-- each tag lives inside its own photo's layer, so it can only ever show over that photo -->
+        <div class="m-compare__layer">{{picture name="garage-clutter-before" class="m-compare__img" alt="Before: a garage crowded with a ride-on mower, a workbench, shelving and stacked gear" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="garage-after" class="m-compare__img" alt="After: a garage with a clear concrete floor and tools hung tidily on the wall" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the garage clean out" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Garage clean out <span class="o-reviewPairs__note">A garage like this is usually a 1/2 to a full truck.</span></figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="storage-room-before" class="m-compare__img" alt="Before: a low storage room with loaded shelves, a blue barrel, a covered board and a snowblower" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="basement-empty-after" class="m-compare__img" alt="After: an empty unfinished basement with exposed joists, steel poles and stairs" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the basement clean out" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Basement clean out <span class="o-reviewPairs__note">Usually around a 1/2 truck, depending on what's on the shelves.</span></figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="yard-branches-before" class="m-compare__img" alt="Before: a heap of cut branches and brush on grass" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="yard-lawn-after" class="m-compare__img" alt="After: a lawn scattered with a few leaves, in front of a wooden fence and a small deck" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the yard cleanup" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Yard cleanup <span class="o-reviewPairs__note">A pile like this is usually a 1/4 to a 1/2 truck.</span></figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="shed-old-before" class="m-compare__img" alt="Before: a weathered wooden garden shed with glazed double doors" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="shed-gone-after" class="m-compare__img" alt="After: a fenced back yard with clear lawn, a concrete patio and a large tree" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the shed demo" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Shed demo <span class="o-reviewPairs__note">Demo is priced per job, so send a photo and we'll price it with you.</span></figcaption>
+    </figure>
+
+  </div>
+  <p class="a-lede o-reviewPairs__end a-inview">Got a spot like one of the befores? Add a photo when you book and we'll price it from there.</p>
+</section>
+
+<!-- ===== Reviews: used us already. Three small facts on cream, rising over the panel, one link. The link after the job is a placeholder practice (content/placeholders.md) ===== -->
+<section class="b-band -rise o-factBand" aria-labelledby="used-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="used-title"><span class="a-section__row -light">Used us</span> <span class="a-section__row">already?</span></h2>
+    <p class="a-lede">Tell the next person what it was like. A line or two is all it takes, and we'll send you the link after the job.</p>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">What it was</strong> <span class="m-fact__text">A garage, a couch, a pile of brush.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">How it went</strong> <span class="m-fact__text">Did it go the way you were told it would?</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Which town</strong> <span class="m-fact__text">So your neighbors know we come to them.</span></li>
+  </ul>
+  <div class="m-rowActions a-inview"><a class="a-link" href="{{> facebook-url}}" target="_blank" rel="noopener"><span class="a-link__text">Leave a review on Facebook</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+</div>

@@ -1,0 +1,1846 @@
+/* =====================================================================
+   Quick Haul: global stylesheet (site build, 2026-11-04)
+   Loads on every page, first. After it: assets/global.js (deferred). Nothing loads before it.
+   The first :root block is design/tokens.css pasted in (plus three solid rule colours, noted there).
+   Change a token in both places. Built from design/design-spec.md and the approved hero prototype
+   (prototype/). Primary reference technique: Truewerk. Donors: FREITAG ruling and labelled cells,
+   Muval chips and town cards, Piece of Cake quote-plus-call pairing.
+   Order: fonts, tokens, reset, type, blocks, reveals, atoms, chrome, home sections in page order,
+   footer, reduced motion. Each component carries its own breakpoints directly under it.
+   ===================================================================== */
+
+/* ===== Fonts ===== */
+/* Bio Sans by Dharma Type, from projects/quickhaul/assets/fonts/biosans. Shipped as .otf on purpose (Varun,
+   2026-11-03 and 2026-11-04: no package installs, no woff2 conversion). Web licence still to be confirmed. */
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+/* Roboto Mono (Google, Apache 2.0), self-hosted variable woff2, one file per subset (weights 100 to 700). */
+@font-face { font-family: "Roboto Mono"; src: url("fonts/robotomono-latin.woff2") format("woff2"); font-weight: 100 700; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Roboto Mono"; src: url("fonts/robotomono-latin-ext.woff2") format("woff2"); font-weight: 100 700; font-style: normal; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ===== Tokens (pasted from design/tokens.css) ===== */
+:root {
+  --c-slate: #343D4E;      /* logo wall. Hero, header, dark bands. Cream text on it 9.62:1, chrome 7.38:1 */
+  --c-ink: #0F141C;        /* logo mark shadow. Top bar, footer, text on light. On cream 16.28:1, on chrome 12.48:1 */
+  --c-chrome: #D5D4D3;     /* accent: stripe, CTA pill on dark, focus on dark, lede on slate 7.38:1 */
+  --c-chromeMid: #81858C;  /* outlined pill and circle borders on dark, registration marks. Never text (2.95:1 on slate) */
+  --c-cream: #F7EFEC;      /* headline on slate 9.62:1, ticket and light band ground */
+  --c-steel: #4A5263;      /* secondary text on cream 6.91:1 */
+  --c-text: var(--c-cream);
+  --c-focus: var(--c-chrome);   /* focus ring on dark; light bands set it to --c-ink */
+  --c-rule: rgba(213, 212, 211, .2);
+  --c-ruleLight: rgba(15, 20, 28, .16);
+  --c-chipLine: rgba(52, 61, 78, .4);
+  --c-scrim: rgba(15, 20, 28, .55);
+  --c-ruleSolidLight: #D2CCCB;  /* added in the build: --c-ruleLight flattened on cream, for 1px gap rules (no doubled lines) */
+  --c-ruleSolid: #545B69;       /* added in the build: --c-rule flattened on slate */
+  --c-ruleSolidInk: #373A41;    /* added in the build: --c-rule flattened on ink (footer) */
+  --f-display: "Bio Sans", "Roboto Mono", ui-monospace, monospace;
+  --f-mono: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w-light: 300;
+  --w-semi: 600;
+  --w-heavy: 800;
+  --w-body: 400;
+  --w-label: 500;
+  --w-button: 600;
+  --t-hero: min(12rem, 17cqi);
+  --t-heroLh: .9;
+  --t-section: min(7.2rem, 12.5cqi);   /* spec 11cqi; 12.5 on phones so the longest row ("TO BARE FLOOR", 7.5em) fills the 318px column at 39px (critic rule: no undersized 390 headings). Desktop step below restores 11cqi */
+  --t-price: 4rem;
+  --t-day: 2.2rem;
+  --t-menu: 2.4rem;
+  --t-nav: 1.3rem;
+  --t-body: 1.5rem;
+  --t-bodyLh: 1.6;
+  --t-button: 1.4rem;
+  --t-label: 1.1rem;
+  --t-bar: 1.1rem;
+  --tr-display: -.005em;
+  --ws-display: .06em;
+  --tr-label: .08em;
+  --tr-bar: .03em;
+  --tr-nav: .04em;
+  --s-1: .4rem;
+  --s-2: .8rem;
+  --s-3: 1.2rem;
+  --s-4: 1.6rem;
+  --s-5: 2.4rem;
+  --s-6: 3.2rem;
+  --s-7: 4.8rem;
+  --s-8: 6.4rem;
+  --s-9: 9.6rem;
+  --s-10: 12.8rem;
+  --gutter: 2rem;
+  --cell: 1.6rem;
+  --h-bar: 3.2rem;
+  --h-header: 5.6rem;
+  --h-control: 5.6rem;
+  --h-button: 4.4rem;
+  --h-halftone: 2rem;
+  --r-pill: 4.4rem;
+  --r-chip: 3rem;
+  --r-frame: 0;
+  --e-out: cubic-bezier(.22, 1, .36, 1);
+  --e-ui: ease-in-out;
+  --d-ui: 150ms;
+  --d-nudge: 400ms;
+  --d-breathe: 1000ms;
+  --d-rise: 700ms;
+  --d-reveal: 1100ms;
+  --d-stagger: 90ms;
+  --d-fill: 1200ms;
+  --d-menu: 500ms;
+}
+/* token steps: phone first, then 641 (tablet), 1025 (desktop, designed at 1440), then the 1025 to 1366 tightening */
+@media (min-width: 641px) {
+  :root { --gutter: 3.2rem; --cell: 2rem; --t-hero: min(9.6rem, 17cqi); }   /* capped: at 1024 the full-width column made it 115px, above the 104px at 1440 */
+}
+@media (min-width: 1025px) {
+  :root { --t-hero: min(12rem, 17cqi); --t-section: min(7.2rem, 11cqi); --gutter: 4.8rem; --cell: 2.4rem; --h-header: 6rem; --t-body: 1.6rem; --t-bodyLh: 1.625; --t-bar: 1.2rem; --t-price: 4.8rem; --h-halftone: 4rem; }
+}
+/* 1025 to 1366: the ticket row tightens (see Ticket). Written as a min-width step with the 1440 values restored at
+   1367, because a max-width: 1366px query missed a 1366 window with a fractional width. */
+@media (min-width: 1025px) {
+  :root { --cell: 1.6rem; --t-price: 4rem; }
+}
+@media (min-width: 1367px) {
+  :root { --cell: 2.4rem; --t-price: 4.8rem; }
+}
+@media (min-width: 1441px) {
+  html { font-size: min(.6944vw, 13.33px); }   /* the 1440 layout scales evenly up to 1920 wide, then holds */
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 62.5%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--h-header) + 1.6rem); }
+body { margin: 0; background: var(--c-cream); color: var(--c-ink); font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-mono); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, ul, ol, fieldset, legend, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+fieldset { min-width: 0; border: 0; }
+picture { display: contents; }
+img { display: block; width: 100%; height: auto; }
+svg { display: block; }
+a { color: inherit; }
+button, input { margin: 0; font: inherit; color: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none; }
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; margin: -1px !important; padding: 0 !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; border: 0 !important; }
+@media (min-width: 641px) {
+  html { scroll-padding-top: calc(var(--h-bar) + var(--h-header) + 1.6rem); }   /* the top bar sticks from 641 */
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ===== Type classes ===== */
+/* Hero headline: V1 light plus heavy caps in one headline, sized off its column (cqi).
+   Longest row "SPACE BACK" is 5.76em in Bio Sans 800, so 17cqi fills about 98% of the column. */
+.a-hero { font: var(--w-heavy) var(--t-hero)/var(--t-heroLh) var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; color: var(--c-cream); }
+.a-hero__row { display: block; overflow: hidden; padding: .04em 0 .02em; }  /* the mask each row rises out of */
+.a-hero__row.-light { font-weight: var(--w-light); }
+.a-hero__line { display: block; }
+.a-hero__line.-second { --i: 1; }
+/* Section statements: the same light plus heavy caps system, sized off the head column (spec 3: min(7.2rem, 11cqi)).
+   Longest rows: "FROM BOOKING" / "TO BARE FLOOR" (7.5em), so 11cqi of the 1296px head column caps at 72px. */
+.a-section { font: var(--w-heavy) var(--t-section)/.92 var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; text-wrap: balance; }
+.a-section__row { display: block; }
+.a-section__row.-light { font-weight: var(--w-light); }
+.a-lede { max-width: 52ch; font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-mono); color: var(--c-chrome); text-wrap: balance; }   /* balance, not pretty: pretty left "a call." alone at 1100 and 390 */
+.a-body { max-width: 60ch; font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-mono); text-wrap: pretty; }
+/* Mono caps label with FREITAG's square bullet. Field and fact labels only, never a section eyebrow. */
+.a-label { display: flex; align-items: center; gap: var(--s-2); font: var(--w-label) var(--t-label)/1.4 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-steel); }
+.a-label::before { content: ""; flex: none; width: .6rem; height: .6rem; background: currentColor; }
+
+/* ===== Container ===== */
+.a-skip { position: absolute; top: -10rem; left: var(--gutter); z-index: 300; display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 var(--s-5); border-radius: var(--r-pill); background: var(--c-chrome); color: var(--c-ink); font: var(--w-button) var(--t-button)/1 var(--f-mono); text-decoration: none; --c-focus: var(--c-ink); }
+.a-skip:focus { top: var(--s-2); }
+
+/* ===== Blocks: bands and frame ===== */
+/* Every band below the hero: a full-bleed ground with FREITAG's frame lines at the page margins, so the ruling
+   runs down the whole page. Light bands set the focus ring to ink. overflow-x: clip keeps bleeding rows (town
+   cards) from widening the page without making a scroll container, so sticky chrome still works. */
+.b-band { position: relative; overflow-x: clip; padding: var(--s-8) 0; background: var(--c-cream); color: var(--c-ink); --c-focus: var(--c-ink); --c-line: var(--c-ruleLight); --c-lineSolid: var(--c-ruleSolidLight); --c-soft: var(--c-steel); }
+.b-band.-slate { background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-line: var(--c-rule); --c-lineSolid: var(--c-ruleSolid); --c-soft: var(--c-chrome); }
+.b-band::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter); border-left: 1px solid var(--c-line); border-right: 1px solid var(--c-line); pointer-events: none; }
+.b-band__inner { position: relative; margin: 0 calc(var(--gutter) + 1px); }   /* inside the frame lines, so no rule is doubled */
+@media (min-width: 1025px) {
+  .b-band { padding: var(--s-9) 0; }
+}
+
+/* ---- section head: statement, then the supporting line under it (stacked, never heading-left body-right) ---- */
+.m-sectionHead { container-type: inline-size; padding: 0 var(--cell) var(--s-6); }
+.m-sectionHead__text { margin: var(--s-5) 0 0; color: var(--c-soft); }
+.m-sectionHead.-center { text-align: center; }
+.m-sectionHead.-center .m-sectionHead__text { margin-left: auto; margin-right: auto; text-wrap: balance; }   /* centred: pretty left "show up." alone at 1440 (critic r2) */
+@media (min-width: 1025px) {
+  .m-sectionHead { padding-bottom: var(--s-7); }
+}
+
+/* ---- photo frame: one grade (baked in by tools/images.py) plus the hero's speck grain at low opacity ---- */
+.b-photo { position: relative; overflow: hidden; background: var(--c-slate); }
+.b-photo__img { width: 100%; height: 100%; object-fit: cover; transition: transform 1500ms var(--e-out); }
+.b-photo::after { content: ""; position: absolute; inset: 0; background: url("fx/grain.svg") 0 0 / 26rem 26rem; opacity: .08; pointer-events: none; }   /* was .14: with the stronger grade (checkpoint 2c, 4 Nov) it read as dirt on the pale walls */
+
+/* ===== Reveal system ===== */
+/* Start states exist only when JS runs (.js on html). Load sequence: .is-ready is added once fonts are in, or after
+   700ms. In-view: global.js adds .is-inview once per element, then stops watching it. */
+.js .a-hero__line { transform: translateY(108%); }
+.js .a-reveal { opacity: 0; transform: translateY(1.5rem); }
+.is-ready .a-hero__line { transform: none; transition: transform var(--d-reveal) var(--e-out); transition-delay: calc(150ms + var(--i, 0) * var(--d-stagger)); }
+.is-ready .a-reveal { opacity: 1; transform: none; transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); transition-delay: calc(350ms + var(--i, 0) * var(--d-stagger)); }
+.js .a-inview { opacity: 0; transform: translateY(1.5rem); }
+.js .a-inview.is-inview { opacity: 1; transform: none; transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); }
+
+/* ===== Atoms: buttons ===== */
+/* V9: pills only, sentence case 14px/600, a small arrow. Fill follows the ground. Hover: the label breathes
+   8px wider each side (1s), the arrow nudges 8px (.4s), a faint top sheen slides in (1s). Press .97. */
+.a-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 2.5rem; overflow: hidden; border: 0; border-radius: var(--r-pill); background: var(--c-chrome); color: var(--c-ink); font: var(--w-button) var(--t-button)/1 var(--f-mono); text-decoration: none; white-space: nowrap; transition: padding var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-button::before { content: ""; position: absolute; inset: 0 0 50% 0; background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, 0)); opacity: 0; pointer-events: none; transition: opacity var(--d-breathe) var(--e-out); }
+.a-button__arrow { width: 1.4rem; height: 1.4rem; flex: none; transition: transform var(--d-nudge) var(--e-out); }
+.a-button.-slate { background: var(--c-slate); color: var(--c-cream); }   /* on cream: cream on slate 9.62:1 */
+.a-button.-ghost { box-shadow: inset 0 0 0 1px var(--c-chromeMid); background: transparent; color: var(--c-cream); }
+.a-button.-line { box-shadow: inset 0 0 0 1px var(--c-slate); background: transparent; color: var(--c-slate); }   /* outlined, on cream */
+.a-button.-block { width: 100%; }
+.a-button:active { transform: scale(.97); }
+/* the breathing label is motion, so it only exists when motion is allowed; pills that fill a fixed slot don't breathe */
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .a-button:hover { padding: 0 3.3rem; }
+  .a-button.-block:hover, .m-menu__actions .a-button:hover, .m-actionBar .a-button:hover { padding: 0 1.2rem; }
+}
+@media (hover: hover) and (any-pointer: fine) {
+  .a-button:hover::before { opacity: 1; }
+  .a-button:hover .a-button__arrow { transform: translateX(.8rem); }
+}
+.a-button:focus-visible::before { opacity: 1; }
+.a-button:focus-visible .a-button__arrow { transform: translateX(.8rem); }
+
+/* ---- call link: Piece of Cake's text-only secondary, a phone glyph plus words, no fill ---- */
+.a-call { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 4.4rem; color: inherit; font: var(--w-label) 1.3rem/1.3 var(--f-mono); text-decoration: none; }
+.a-call__icon { width: 1.6rem; height: 1.6rem; flex: none; transition: transform var(--d-nudge) var(--e-out); }
+.a-call__text { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.a-call:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-call:hover .a-call__icon { transform: rotate(-12deg); }
+  .a-call:hover .a-call__text { background-size: 0 1px; background-position: 100% 100%; }
+}
+.a-call:focus-visible .a-call__icon { transform: rotate(-12deg); }
+
+/* ---- call line: Shawn's own sentence with only the number as the link (estimate band, How it works) ---- */
+.a-callLine { font: var(--w-label) 1.3rem/1.5 var(--f-mono); color: var(--c-soft, var(--c-steel)); text-wrap: balance; }
+.a-callLine__link { display: inline-flex; align-items: center; min-height: 4.4rem; color: inherit; font-weight: var(--w-button); text-decoration: underline; text-underline-offset: .35rem; text-decoration-thickness: 1px; white-space: nowrap; }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-callLine__link:hover { text-decoration-color: transparent; }
+}
+
+/* ---- text link: mono with a 1px underline that slides off on hover, and the small arrow ---- */
+.a-link { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 4.4rem; color: inherit; font: var(--w-label) 1.3rem/1.3 var(--f-mono); text-decoration: none; }
+.a-link__text { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.a-link__arrow { width: 1.3rem; height: 1.3rem; flex: none; transition: transform var(--d-nudge) var(--e-out); }
+.a-link:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-link:hover .a-link__text { background-size: 0 1px; background-position: 100% 100%; }
+  .a-link:hover .a-link__arrow { transform: translateX(.6rem); }
+}
+.a-link:focus-visible .a-link__arrow { transform: translateX(.6rem); }
+
+/* ---- text link inside a sentence: plain inline, the inline exception to the 44px rule. A 44px box overlapped the next line's link and its focus ring crossed the lines around it (critic, FAQ r1). Never breaks across lines ---- */
+.a-textLink { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3rem; white-space: nowrap; transition: text-decoration-color var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-textLink:hover { text-decoration-color: transparent; }
+}
+
+/* ---- square arrow buttons under a row (Truewerk product row: 41px square, 1px border; 44px here for touch) ---- */
+.a-square { display: grid; place-items: center; width: 4.4rem; height: 4.4rem; padding: 0; border: 1px solid currentColor; border-radius: var(--r-frame); background: transparent; color: inherit; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), opacity var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-square .a-svg { width: 1.6rem; height: 1.6rem; }
+.a-square.-prev .a-svg { transform: scaleX(-1); }
+.a-square:disabled { opacity: .3; cursor: default; }
+.a-square:active:not(:disabled) { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-square:hover:not(:disabled) { background: var(--c-ink); color: var(--c-cream); }
+  .b-band.-slate .a-square:hover:not(:disabled) { background: var(--c-chrome); color: var(--c-ink); }
+}
+
+/* ---- choice chips: real radios with a visible checked and focus state (Muval's chips had neither) ---- */
+.a-choice { position: relative; display: block; flex: 1 1 0; min-width: 0; cursor: pointer; }
+.a-choice__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.a-choice__face { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; height: var(--h-control); padding: 0 .4rem; border: 1px solid var(--c-chipLine); border-radius: var(--r-chip); background: transparent; color: var(--c-slate); font: var(--w-label) 1.3rem/1 var(--f-mono); white-space: nowrap; transition: background-color var(--d-ui) var(--e-ui), border-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-choice__glyph { width: 2.2rem; height: 1.4rem; flex: none; }
+.a-choice__glyph rect + rect { fill: currentColor; opacity: .55; }
+.a-choice.-day .a-choice__face { gap: .3rem; }
+.a-choice__dow { font: var(--w-label) 1rem/1 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; }
+.a-choice__num { font: var(--w-heavy) var(--t-day)/.9 var(--f-display); }
+.a-choice__input:checked + .a-choice__face { border-color: var(--c-slate); background: var(--c-slate); color: var(--c-cream); }
+.a-choice__input:checked + .a-choice__face .a-choice__glyph rect + rect { opacity: 1; }
+.a-choice__input:focus-visible + .a-choice__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.a-choice:active .a-choice__face { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-choice:hover .a-choice__face { border-color: var(--c-slate); background: rgba(52, 61, 78, .06); }
+  .a-choice:hover .a-choice__input:checked + .a-choice__face { background: var(--c-slate); }
+}
+/* tablets: room for the glyph beside the label (the phone and 1025 to 1366 rows stack it above) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .a-choice__face { flex-direction: row; gap: .6rem; padding: 0 .8rem; }
+  .a-choice.-day .a-choice__face { flex-direction: column; gap: .3rem; padding: 0 .4rem; }
+}
+
+/* ---- halftone: Truewerk's band, rebuilt as two offset dot grids (5.5px pitch) that thin downward ---- */
+.a-halftone { height: var(--h-halftone); background: radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 0 0 / 5.5px 5.6px, radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 2.75px 2.8px / 5.5px 5.6px, var(--c-cream); -webkit-mask: linear-gradient(#000, rgba(0, 0, 0, .55)); mask: linear-gradient(#000, rgba(0, 0, 0, .55)); }
+/* Above the footer the band sits between the slate estimate band and the ink footer, so it runs the other way:
+   ink dots on slate that thicken downward into the footer (Truewerk's sits on off-white; we have no light band there). */
+.a-halftone.-dark { background: radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 0 0 / 5.5px 5.6px, radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 2.75px 2.8px / 5.5px 5.6px, var(--c-slate); -webkit-mask: none; mask: none; position: relative; }
+.a-halftone.-dark::after { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--c-slate), rgba(52, 61, 78, .25)); }
+
+/* ===== Chrome: preview label ===== */
+/* Brief: the preview must say it is a design preview with placeholder content. Remove at launch (tools/build.py PREVIEW). */
+.m-preview { margin: 0; padding: .6rem var(--gutter); background: var(--c-chrome); color: var(--c-ink); font: var(--w-label) 1.1rem/1.4 var(--f-mono); letter-spacing: .02em; text-align: center; text-wrap: balance; }
+
+/* ===== Chrome: top bar ===== */
+/* Truewerk's dark mono announcement bar, kept slim. Carries Shawn's own line and the number on every page.
+   Phones: the top bar scrolls away and only the header sticks (critic r1: fixed chrome took 149 of 844px). */
+.m-topbar { position: relative; z-index: 60; display: flex; align-items: center; justify-content: center; gap: var(--s-5); height: var(--h-bar); padding: 0 var(--gutter); background: var(--c-ink); color: var(--c-chrome); font: var(--w-label) var(--t-bar)/1 var(--f-mono); letter-spacing: var(--tr-bar); text-transform: uppercase; }
+.m-topbar__line { margin: 0; white-space: nowrap; }
+.m-topbar__long, .m-topbar__hours { display: none; }
+/* The bar is 32px; the link's hit area reaches 44px with an invisible extension (conventions: 44px targets). */
+.m-topbar__call { position: relative; color: var(--c-cream); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.m-topbar__call::after { content: ""; position: absolute; inset: -1.4rem -.6rem; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-topbar__call:hover { background-size: 0 1px; background-position: 100% 100%; }
+}
+/* The 1px shadow covers the seam a fractional scroll leaves above a sticky bar. */
+@media (min-width: 641px) {
+  .m-topbar { position: sticky; top: 0; justify-content: space-between; box-shadow: 0 -1px 0 var(--c-ink); }
+  .m-topbar__short { display: none; }
+  .m-topbar__long, .m-topbar__hours { display: inline; }
+}
+
+/* ===== Chrome: header ===== */
+/* Truewerk's sticky header, slimmed to 60px. FREITAG's boxed logo cell in the centre, framed by hairlines. */
+.m-header { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--h-header); padding: 0 var(--gutter); border-bottom: 1px solid var(--c-rule); background: var(--c-slate); box-shadow: 0 -1px 0 var(--c-slate); color: var(--c-cream); }
+.m-header__left { display: flex; align-items: center; justify-self: start; }
+.m-header__right { display: flex; align-items: center; gap: var(--s-2); justify-self: end; }
+.m-header__nav { display: none; }
+.m-header__navList { display: flex; gap: 3.2rem; }
+.m-header__link { display: inline-flex; align-items: center; min-height: 4.4rem; font: var(--w-semi) var(--t-nav)/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-decoration: none; color: var(--c-cream); background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1.1rem) / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out); }
+.m-header__link[aria-current="page"] { background-size: 100% 1px; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__link:hover { background-size: 100% 1px; }
+}
+.m-header__link:focus-visible { background-size: 100% 1px; }
+/* Logo: the client's real file, unchanged (assets/images/brand/quickhaul-logo.png, a 736x1600 phone screenshot
+   of a wall mockup). The mark sits at x 259-485, y 682-915 of it (design/scripts/measure_b.py). The tile shows
+   only the mark: --mark is the mark's on-screen height, the ratios below place its centre (372, 798.5) in the
+   tile, and the mask clips it to a hard circle at the badge edge. Kept to a quarter of native pixels or less. */
+.m-header__logo { position: relative; display: block; width: 6.4rem; height: var(--h-header); overflow: hidden; border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); --mark: 5rem; }
+.m-header__logoImg { position: absolute; top: calc(50% - var(--mark) * 3.4124); left: calc(50% - var(--mark) * 1.5897); width: calc(var(--mark) * 3.1453); max-width: none; height: auto; -webkit-mask: radial-gradient(circle at 50.54% 49.91%, #000 calc(var(--mark) * .5), transparent calc(var(--mark) * .5 + 1px)); mask: radial-gradient(circle at 50.54% 49.91%, #000 calc(var(--mark) * .5), transparent calc(var(--mark) * .5 + 1px)); }
+.m-header__menuBtn { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.4rem; border: 1px solid var(--c-chromeMid); border-radius: var(--r-pill); background: transparent; color: var(--c-cream); font: var(--w-button) 1.3rem/1 var(--f-mono); transition: border-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__menuIcon { width: 1.6rem; height: 1.6rem; }
+.m-header__menuBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__menuBtn:hover { border-color: var(--c-cream); }
+}
+/* FREITAG icon circle for the call, shown from 641px */
+.m-header__callBtn { display: none; place-items: center; width: 4.4rem; height: 4.4rem; border: 1px solid var(--c-chromeMid); border-radius: 50%; color: var(--c-cream); transition: border-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__callBtn .a-svg { width: 1.6rem; height: 1.6rem; transition: transform var(--d-nudge) var(--e-out); }
+.m-header__callBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__callBtn:hover { border-color: var(--c-cream); }
+  .m-header__callBtn:hover .a-svg { transform: rotate(-12deg); }
+}
+/* All three header pieces are 44px. On desktop the pill keeps a fixed width so its hover never pushes the call
+   circle (critic r1); V9's breathing happens inside the box as a wider gap between label and arrow. */
+.m-header__book { min-height: var(--h-button); padding: 0 1.6rem; transition: background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__book .a-button__arrow { display: none; }
+@media (min-width: 641px) {
+  .m-header { top: var(--h-bar); }
+  .m-header__callBtn { display: grid; }
+  .m-header__book .a-button__arrow { display: block; }
+  .m-header__logo { width: 7.6rem; }
+}
+@media (min-width: 1025px) {
+  .m-header__nav { display: block; }
+  .m-header__menuBtn { display: none; }
+  .m-header__logo { width: 8.8rem; --mark: 5.6rem; }
+  .m-header__book { width: 15.6rem; padding: 0; transition: gap var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+}
+@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-header__book:hover { gap: 1.6rem; padding: 0; }
+}
+
+/* ---- menu (phones and tablets) ---- */
+/* Truewerk's mobile menu: a panel inset 8px, big caps rows on hairlines, the nut-shaped (hexagon) close button.
+   Ends with Piece of Cake's two closing pills and the hours. The panel is always opaque and wipes down from the
+   top (a clip, not a fade), so the page never shows through the links (critic r1). The links rise in after it lands. */
+.m-menu { position: fixed; inset: 0; z-index: 200; background: rgba(15, 20, 28, 0); transition: background-color var(--d-menu) var(--e-out); }
+.m-menu.is-open { background: var(--c-scrim); }
+.m-menu__panel { position: absolute; inset: .8rem; display: flex; flex-direction: column; overflow-y: auto; padding: var(--s-4) var(--s-5) var(--s-6); background: var(--c-cream); color: var(--c-ink); clip-path: inset(0 0 100% 0); transition: clip-path var(--d-menu) var(--e-out); --c-focus: var(--c-ink); overscroll-behavior: contain; }
+.m-menu.is-open .m-menu__panel { clip-path: inset(0 0 0 0); }
+.m-menu__item, .m-menu__actions, .m-menu__hours { opacity: 0; transform: translateY(.8rem); transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); }
+.m-menu.is-open .m-menu__item, .m-menu.is-open .m-menu__actions, .m-menu.is-open .m-menu__hours { opacity: 1; transform: none; transition-delay: calc(220ms + var(--i, 0) * 35ms); }
+.m-menu__item:nth-child(2) { --i: 1; }
+.m-menu__item:nth-child(3) { --i: 2; }
+.m-menu__item:nth-child(4) { --i: 3; }
+.m-menu__item:nth-child(5) { --i: 4; }
+.m-menu__item:nth-child(6) { --i: 5; }
+.m-menu__item:nth-child(7) { --i: 6; }
+.m-menu__item:nth-child(8) { --i: 7; }
+.m-menu__actions { --i: 8; }
+.m-menu__hours { --i: 9; }
+.m-menu__top { display: flex; align-items: center; justify-content: space-between; min-height: 5.6rem; margin: 0 0 var(--s-4); }
+.m-menu__close { display: grid; place-items: center; width: 4.4rem; height: 4.8rem; padding: 0; border: 0; background: transparent; color: var(--c-cream); transition: transform var(--d-ui) var(--e-ui); }
+.m-menu__hex { width: 4rem; height: 4.4rem; }
+.m-menu__hexFill { fill: var(--c-ink); }
+.m-menu__close:active { transform: scale(.97); }
+/* the real mark in its own slate cell, the header logo cell at phone size, in place of a text title */
+.m-menu__logo { width: 6.4rem; height: 5.6rem; border: 0; --mark: 5rem; --c-focus: var(--c-ink); }
+.m-menu__list { border-top: 1px solid var(--c-ruleLight); }
+.m-menu__item { border-bottom: 1px solid var(--c-ruleLight); }
+.m-menu__link { display: flex; align-items: center; justify-content: space-between; min-height: 5.7rem; font: var(--w-heavy) var(--t-menu)/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-decoration: none; color: var(--c-ink); }
+.m-menu__link .a-svg { width: 1.8rem; height: 1.8rem; color: var(--c-steel); transition: transform var(--d-nudge) var(--e-out); }
+.m-menu__link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em; }   /* the desktop nav underlines the current page; the menu had no mark (critic, Reviews r1). No Home row in the menu, so this never shows on the homepage */
+@media (hover: hover) and (any-pointer: fine) {
+  .m-menu__link:hover .a-svg { transform: translateX(.6rem); }
+}
+.m-menu__link:focus-visible .a-svg { transform: translateX(.6rem); }
+.m-menu__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); margin: var(--s-6) 0 0; }
+.m-menu__actions .a-button { padding: 0 1.2rem; }
+.m-menu__call { box-shadow: inset 0 0 0 1px var(--c-slate); background: transparent; color: var(--c-slate); }
+.m-menu__hours { margin: var(--s-3) 0 0; font: var(--w-label) var(--t-label)/1.5 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-steel); }
+
+/* ---- a focused element or a jump never lands under the phone bar, 61px tall (critic, FAQ r2). Inner pages only, the ones with a banner: the homepage is approved as built, so it waits for Varun's yes ---- */
+@media (max-width: 640px) {
+  html:has(.m-banner) { scroll-padding-bottom: 7.6rem; }
+}
+/* ---- action bar (phones): call-only, in thumb reach once the ticket's own buttons have scrolled away ---- */
+/* Varun, 2b decision 4: Book now stays in the header only; the bottom bar is call-only. */
+.m-actionBar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr; padding: var(--s-2) var(--gutter) calc(var(--s-2) + env(safe-area-inset-bottom)); border-top: 1px solid var(--c-rule); background: var(--c-ink); transform: translateY(100%); visibility: hidden; transition: transform var(--d-menu) var(--e-out), visibility 0s linear var(--d-menu); }
+.m-actionBar.is-shown { transform: none; visibility: visible; transition: transform var(--d-menu) var(--e-out), visibility 0s; }
+.m-actionBar .a-button { padding: 0 1.2rem; }
+@media (min-width: 641px) {
+  .m-actionBar { display: none; }
+}
+
+/* ===== Home: page scope ===== */
+/* Page wrapper and section hooks. Each home section is its own stacking context, so the in-view rises and the
+   tile push-in never paint over the sticky header or the next band. */
+.t-home { display: block; }
+.o-homeServices, .o-homeTowns, .o-homeReviews, .o-homeHow, .o-homeCompare { isolation: isolate; }
+
+/* ===== Home: hero ===== */
+/* Truewerk's banner, rebuilt live: slate field, speck grain, chrome hazard edge, registration hairlines, and
+   off-white slats cut into the bottom edge in the colour of the ticket below. On Truewerk all of it is one image. */
+.o-homeHero { position: relative; isolation: isolate; overflow: hidden; padding: var(--s-7) var(--gutter) var(--s-8); background: var(--c-slate); color: var(--c-cream); }
+/* speck grain (assets/fx/grain.svg), fading toward the bottom as Truewerk's does */
+.o-homeHero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("fx/grain.svg") 0 0 / 26rem 26rem; opacity: .45; -webkit-mask: linear-gradient(#000, rgba(0, 0, 0, .35)); mask: linear-gradient(#000, rgba(0, 0, 0, .35)); pointer-events: none; }
+/* FREITAG frame lines at the page margins, continuing the ticket's outer rules up to the header */
+.o-homeHero::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter); z-index: -1; border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); pointer-events: none; }
+.o-homeHero__stripe { display: none; }
+.o-homeHero__mark { position: absolute; top: -.6rem; width: 1.3rem; height: 1.3rem; pointer-events: none; }
+.o-homeHero__mark::before, .o-homeHero__mark::after { content: ""; position: absolute; background: var(--c-chromeMid); }
+.o-homeHero__mark::before { left: .6rem; top: 0; width: 1px; height: 100%; }
+.o-homeHero__mark::after { top: .6rem; left: 0; width: 100%; height: 1px; }
+.o-homeHero__mark.-left { left: calc(var(--gutter) - .6rem); }
+.o-homeHero__mark.-right { right: calc(var(--gutter) - .7rem); }
+.o-homeHero__copy { position: relative; z-index: 2; container-type: inline-size; padding: 0 var(--cell); }
+.o-homeHero__lede { margin: var(--s-5) 0 0; }
+.o-homeHero__art { position: relative; z-index: 1; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+/* slats: Truewerk 390 values (16px tall, 56 wide, pitch 72, from 28% across, 28-29 degree lean), in vw */
+.o-homeHero__slats { position: absolute; left: 28%; right: -20vw; bottom: 0; height: 4.1vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 14.36vw, transparent 14.36vw 18.46vw); transform: skewX(29deg); transform-origin: 0 100%; pointer-events: none; }
+@media (min-width: 641px) {
+  .o-homeHero__stripe { position: absolute; top: 0; left: 0; display: block; width: max(1.2rem, 1.75vw); height: 52%; background: repeating-linear-gradient(151deg, var(--c-chrome) 0 3.26vw, transparent 3.26vw 4.17vw); }
+  .o-homeHero__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+@media (min-width: 1025px) {
+  /* Hero at 1440: a 480px banner (Truewerk 515), copy left, drawing right on the same ground line */
+  .o-homeHero { min-height: 48rem; padding: 7.2rem var(--gutter) 9.6rem; }
+  /* The copy column stops short of the drawing's left edge at every desktop width: the drawing starts at
+     58vw - 48px, so half the viewport keeps a clear gap from 1025 up (it collided below 1303 at a fixed 660). */
+  .o-homeHero__copy { width: min(66rem, calc(50vw - var(--gutter))); }
+  .o-homeHero__art { position: absolute; right: var(--gutter); bottom: 4.8rem; width: min(60rem, 42vw); margin: 0; padding: 0; }
+  /* slats: Truewerk 1440 values (29px tall, 164 wide, pitch 210.6, from 43% across) */
+  .o-homeHero__slats { left: 43%; height: 2.01vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 11.39vw, transparent 11.39vw 14.63vw); }
+}
+
+/* ---- truck bed drawing: a custom illustration from the logo's own loaded truck ---- */
+/* The load inside the bed rises to the size picked in the ticket. 148 is the bed's inner height in SVG units.
+   Strokes in bright chrome at 75% (about 5:1 on slate): critic r1 found mid chrome too faint. */
+.m-truck { display: block; width: 100%; height: auto; overflow: visible; color: var(--c-chrome); --load: .125; }
+.m-truck__line { fill: none; stroke: currentColor; stroke-opacity: .75; stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.m-truck__line.-soft { stroke: var(--c-rule); }
+.m-truck__wheel { fill: var(--c-slate); }
+.m-truck__heap { fill: url(#qh-dots); }
+.m-truck__heapEdge { fill: none; stroke: var(--c-chrome); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.m-truck__dots { fill: var(--c-chrome); }
+.m-truck__load { transform: translateY(calc((1 - var(--load)) * 148px)); transition: transform var(--d-fill) var(--e-out); }
+.m-truck__level { stroke: var(--c-chrome); stroke-width: 1.25; stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }
+/* 17 SVG units: about 14px at 1440 (drawing 600 wide) and 11px at 1100 (462 wide), never under the 11px label size */
+.m-truck__gauge { font: var(--w-label) 17px/1 var(--f-mono); letter-spacing: .04em; fill: var(--c-chrome); }
+.m-truck__tick { stroke: var(--c-chrome); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.m-truck__gaugeSet { display: none; }   /* below 1025 the labels would be under 9px, so the whole gauge goes with them */
+.js .m-truck { --load: 0; }
+.js .m-truck__body, .js .m-truck__load { opacity: 0; }
+.is-ready .m-truck__body { opacity: 1; transition: opacity 900ms var(--e-out) 500ms; }
+.is-ready .m-truck__load { opacity: 1; transition: opacity 900ms var(--e-out) 500ms, transform var(--d-fill) var(--e-out); }
+@media (min-width: 1025px) {
+  .m-truck__gaugeSet { display: inline; }
+}
+
+/* ===== Home: ticket ===== */
+/* The work order: four facts and the booking, as one ruled strip on cream (FREITAG's ruled sheet). It grows out of
+   Truewerk's strip under the hero; the slats above bite into the hero from it. */
+.o-homeTicket { position: relative; padding: 0 var(--gutter); background: var(--c-cream); color: var(--c-ink); --c-focus: var(--c-ink); }
+.o-homeTicket__form { display: grid; grid-template-columns: 1fr; border-left: 1px solid var(--c-ruleLight); border-right: 1px solid var(--c-ruleLight); }
+.o-homeTicket__cell { min-width: 0; padding: var(--cell); border-bottom: 1px solid var(--c-ruleLight); }
+.o-homeTicket__cell .a-label { margin: 0 0 var(--s-3); }
+.o-homeTicket__cell .a-label.-legend { float: left; width: 100%; }   /* a floated legend sits inside the cell like the town label, not on its border */
+.o-homeTicket__row { display: flex; gap: .6rem; clear: both; }
+/* town field: an underline field set in the display face, like writing on the ticket */
+.o-homeTicket__town { display: block; width: 100%; height: var(--h-control); padding: 0; border: 0; border-bottom: 1px solid var(--c-slate); border-radius: 0; background: transparent; color: var(--c-ink); font: var(--w-semi) 2.2rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .01em; transition: border-color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui); }
+.o-homeTicket__town::placeholder { color: var(--c-steel); font-weight: var(--w-light); opacity: 1; }   /* light, so the hint never reads as an entered town */
+.o-homeTicket__town:focus-visible { outline-offset: 4px; }
+.o-homeTicket__town[aria-invalid="true"] { border-bottom-color: var(--c-ink); box-shadow: 0 1px 0 var(--c-ink); }
+/* town suggestions: our own listbox in the ticket's ruling, replacing the browser's datalist popup (critic r1).
+   Offset .6rem out and down so its edges meet the field's focus ring (2px at 4px offset), not 6px inside it (build r1). */
+.o-homeTicket__combo { position: relative; }
+.o-homeTicket__options { position: absolute; top: calc(100% + .6rem); left: -.6rem; right: -.6rem; z-index: 20; max-height: 26.4rem; overflow-y: auto; border: 1px solid var(--c-slate); border-top: 0; background: var(--c-cream); overscroll-behavior: contain; }
+.o-homeTicket__option { display: flex; align-items: center; min-height: 4.4rem; padding: 0 var(--s-4); border-bottom: 1px solid var(--c-ruleLight); color: var(--c-ink); font: var(--w-semi) 1.5rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em; cursor: pointer; transition: background-color var(--d-ui) var(--e-ui); }
+.o-homeTicket__option[hidden] { display: none; }   /* must beat the display: flex above; the global [hidden] rule ties and loses on order */
+.o-homeTicket__option:last-child { border-bottom: 0; }
+.o-homeTicket__option[aria-selected="true"] { background: var(--c-slate); color: var(--c-cream); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-homeTicket__option:hover { background: rgba(52, 61, 78, .08); }
+  .o-homeTicket__option[aria-selected="true"]:hover { background: var(--c-slate); }
+}
+/* The line under each control: the town note, the load helper, and the day cell's error or empty line. All three
+   keep two lines reserved, so the strip never jumps when one of them changes (critic r2). */
+.o-homeTicket__note { min-height: 3.6rem; margin: var(--s-2) 0 0; font: var(--w-body) 1.2rem/1.5 var(--f-mono); color: var(--c-steel); text-wrap: balance; }
+.o-homeTicket__note a { color: var(--c-ink); font-weight: var(--w-button); }
+.o-homeTicket__note.is-error { color: var(--c-ink); font-weight: var(--w-button); }
+.o-homeTicket__cell.is-invalid .a-choice__face { border-color: var(--c-ink); }
+@media (max-width: 1024px) {
+  .o-homeTicket__note:empty { min-height: 0; margin: 0; }   /* stacked cells: an empty day line was 60px of blank (build r1); the one-row strip keeps it reserved */
+}
+.o-homeTicket__price { display: flex; align-items: baseline; gap: var(--s-3); }
+.o-homeTicket__figure { font: var(--w-heavy) var(--t-price)/1 var(--f-display); letter-spacing: -.01em; color: var(--c-ink); }
+.o-homeTicket__unit { font: var(--w-body) 1.2rem/1.4 var(--f-mono); color: var(--c-steel); text-wrap: balance; }
+.o-homeTicket__cell.-price { display: grid; grid-template-columns: auto 1fr; align-items: end; align-content: start; gap: 0 var(--s-4); }
+.o-homeTicket__cell.-price .a-label { grid-column: 1 / -1; }
+.o-homeTicket__cell.-action { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: var(--s-1); }
+.o-homeTicket__cell.-action .a-call { color: var(--c-ink); }
+.o-homeTicket__cell:nth-child(1) { --i: 2; }
+.o-homeTicket__cell:nth-child(2) { --i: 3; }
+.o-homeTicket__cell:nth-child(3) { --i: 4; }
+.o-homeTicket__cell:nth-child(4) { --i: 5; }
+.o-homeTicket__cell:nth-child(5) { --i: 6; }
+@media (min-width: 641px) {
+  .o-homeTicket__form { grid-template-columns: 1fr 1fr; }
+  .o-homeTicket__cell { border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell:nth-child(2n) { border-right: 0; }
+  .o-homeTicket__cell.-action { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: flex-start; gap: var(--s-5); border-right: 0; }
+  .o-homeTicket__cell.-action .a-button { flex: 0 1 26rem; }
+}
+/* The work order is one ruled row of five cells at every desktop width, so the price and Book now stay on the
+   first screen at 1366x768 and 1100x800 (critic r2). 1025 to 1366: the same row tightened (16px cell padding from
+   the token step, glyph over label on the load chips, 40px figure, 12px call line, 20px town field).
+   Fitted at 1100: load chips 51px wide, call line 182px in a 191px cell. */
+@media (min-width: 1025px) {
+  .o-homeTicket__form { grid-template-columns: 1fr 1.45fr .95fr .8fr 1.2fr; }
+  .o-homeTicket__cell { border-bottom: 0; border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell:nth-child(2n) { border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell.-action { grid-column: auto; flex-direction: column; align-items: stretch; justify-content: center; gap: var(--s-1); border-right: 0; }
+  .o-homeTicket__cell.-action .a-button { flex: none; }
+  .o-homeTicket__cell.-price { display: block; }
+  .o-homeTicket__price { flex-direction: column; gap: var(--s-1); }
+  .o-homeTicket__town { font-size: 2rem; }
+  .o-homeTicket__cell.-action .a-call { font-size: 1.2rem; }
+}
+@media (min-width: 1367px) {
+  .o-homeTicket__form { grid-template-columns: 1.15fr 1.6fr 1fr .8fr 1.05fr; }
+  .o-homeTicket__cell .a-choice__face { flex-direction: row; gap: .6rem; padding: 0 .8rem; }
+  .o-homeTicket__cell .a-choice.-day .a-choice__face { flex-direction: column; gap: .3rem; padding: 0 .4rem; }
+  .o-homeTicket__town { font-size: 2.2rem; }
+  .o-homeTicket__cell.-action .a-call { font-size: 1.3rem; }
+}
+
+/* ===== Home: services overview ===== */
+/* Truewerk's category tile grid as FREITAG ruled cells: junk removal spans 2 columns and 2 rows, the two clean-out
+   and demo cells stack beside it (Truewerk's 667x288 tiles, so these two are 2:1, not square), then a row of four
+   square cells. Rules are 1px gaps over the solid rule colour, so no line is ever doubled; the grid is always full.
+   Each cell is one link to its section on the Services page. 12px inner padding (FREITAG). Phones: the big cell,
+   then two across with the label under the photo (a 151px tile can't hold a label and a line over the photo). */
+.o-homeServices__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); background: var(--c-lineSolid); }
+.o-homeServices__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); padding: var(--s-6) var(--cell) 0; }
+.m-serviceTile { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 1.2rem; background: var(--c-cream); color: var(--c-ink); text-decoration: none; }
+.m-serviceTile__media { aspect-ratio: 1; }
+.m-serviceTile__body { display: block; padding: var(--s-3) .4rem .4rem; }
+.m-serviceTile__label { display: block; font: var(--w-heavy) 1.6rem/1.05 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-wrap: balance; }
+.m-serviceTile__line { display: block; margin: var(--s-2) 0 0; font: var(--w-body) 1.2rem/1.5 var(--f-mono); color: var(--c-steel); text-wrap: pretty; }
+.m-serviceTile.-lead { grid-column: 1 / -1; }
+.m-serviceTile.-lead .m-serviceTile__label { font-size: 2.4rem; }
+.m-serviceTile:active { transform: scale(.99); }
+.m-serviceTile:focus-visible { outline-offset: -4px; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-serviceTile:hover .b-photo__img { transform: scale(1.06); }   /* Truewerk's slow push-in, 1.5s on its own curve */
+}
+/* From 641: labels move onto the photo, bottom-left 24px, over an ink scrim that only darkens the lower part.
+   Its stops are in rem, not %, so the text block (at most about 11rem tall) is always covered whatever the tile
+   height (a % scrim left the tablet garage tile at 2.9:1). Measured worst cases in build/qa-report.md. */
+@media (min-width: 641px) {
+  .o-homeServices__grid { grid-template-columns: repeat(4, 1fr); }
+  /* the lead cell is square and sets the two rows; the photo fills the cell whatever height the rows end up
+     (at tablet the stacked cells' text can make the rows taller than half the square) */
+  .m-serviceTile.-lead { grid-column: 1 / 3; grid-row: 1 / 3; aspect-ratio: 1; }
+  .m-serviceTile.-wide { grid-column: 3 / 5; }
+  .m-serviceTile.-lead .m-serviceTile__media, .m-serviceTile.-wide .m-serviceTile__media { position: absolute; inset: 1.2rem; aspect-ratio: auto; }
+  /* critic r1: the scrim reached 26rem and made the grid murky. Critic rerun r2: 18rem still covered 58% of a 311px tile, so it now stops at 15rem, just past the text block */
+  .m-serviceTile__media::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(15, 20, 28, .88) 0, rgba(15, 20, 28, .76) 9rem, rgba(15, 20, 28, .56) 11.5rem, rgba(15, 20, 28, 0) 15rem); pointer-events: none; }
+  .m-serviceTile.-lead .m-serviceTile__media::before { background: linear-gradient(to top, rgba(15, 20, 28, .88) 0, rgba(15, 20, 28, .78) 12rem, rgba(15, 20, 28, .34) 17rem, rgba(15, 20, 28, 0) 21rem); }   /* the lead title is 4rem, so its scrim runs 3rem higher. It sits over a white tailgate (critic, rerun 1) */
+  .m-serviceTile__body { position: absolute; left: 1.2rem; right: 1.2rem; bottom: 1.2rem; z-index: 2; padding: 0 var(--s-5) var(--s-5); color: var(--c-cream); }
+  .m-serviceTile__line { max-width: 34ch; color: var(--c-chrome); }
+  .m-serviceTile__label { font-size: 2rem; }
+  .m-serviceTile.-lead .m-serviceTile__label { font-size: 3.2rem; }
+  .m-serviceTile.-wide { min-height: 18rem; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .m-serviceTile__body { padding: 0 var(--s-4) var(--s-4); }
+  .m-serviceTile__line { display: none; }   /* 176px squares at 768: the line moves to the lead cell only */
+  .m-serviceTile.-lead .m-serviceTile__line, .m-serviceTile.-wide .m-serviceTile__line { display: block; }
+  .m-serviceTile__label { font-size: 1.6rem; }
+}
+@media (min-width: 1025px) {
+  .m-serviceTile__label { font-size: 2.4rem; }
+  .m-serviceTile.-lead .m-serviceTile__label { font-size: 4rem; }
+  .o-homeServices__actions { padding-top: var(--s-7); }
+}
+
+/* ===== Home: price and service area ===== */
+/* Muval's town cards rebuilt as square ruled cards on slate: town, state label, then the "from" figure loudest
+   (figure over label, unit beside it on one baseline). About 3:2, not square (critic r1: a square card held about
+   150px of nothing). A min-height, not aspect-ratio, so the row stretches every card to the call card's height. A horizontal row with a peek past the right frame line,
+   Truewerk's square arrows and progress hairline under it. No photos on these cards (spec 2b). */
+.m-rail { position: relative; }
+.m-rail__track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(28.9rem, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.m-rail__track::-webkit-scrollbar { display: none; }
+.m-rail__track.-bleed { margin-right: calc(var(--gutter) * -1 - 1px); }   /* out past the right frame line to the screen edge (Muval's peek) */
+.m-rail__controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); padding: var(--s-5) var(--cell) 0; }
+.m-rail__progress { position: relative; flex: 1 1 12rem; height: 1px; background: var(--c-line); }
+.m-rail__thumb { position: absolute; top: -.5px; left: 0; width: 25%; height: 2px; background: currentColor; transition: transform var(--d-ui) linear; }
+.m-rail__arrows { display: flex; gap: var(--s-2); }
+.m-rail.is-static .m-rail__progress, .m-rail.is-static .m-rail__arrows { display: none; }   /* nothing to scroll: no controls */
+@media (max-width: 640px) {
+  .m-rail__controls .a-link { flex: 1 0 100%; }   /* phones: the link takes its own row, the progress line and arrows share the next */
+}
+@media (min-width: 1025px) {
+  .m-rail__track { grid-auto-columns: minmax(31.2rem, 1fr); }   /* 4 cards and a 96px peek in the 1344px row at 1440 */
+}
+
+.m-townCard { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 19.2rem; min-width: 0; padding: var(--cell); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); border-right: 1px solid var(--c-line); background: var(--c-slate); color: inherit; text-decoration: none; scroll-snap-align: start; transition: background-color var(--d-ui) var(--e-ui); }
+.m-townCard__town { display: block; font: var(--w-heavy) 2.4rem/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); }
+.m-townCard__state { margin: var(--s-3) 0 0; color: var(--c-chrome); }
+.m-townCard__from { display: block; font: var(--w-label) var(--t-label)/1.4 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-chrome); }
+.m-townCard__price { display: flex; align-items: baseline; gap: var(--s-2); margin: var(--s-1) 0 0; }
+.m-townCard__figure { font: var(--w-heavy) 4rem/1 var(--f-display); letter-spacing: -.01em; }
+.m-townCard__unit { font: var(--w-body) 1.2rem/1.4 var(--f-mono); color: var(--c-chrome); }
+.m-townCard__arrow { position: absolute; top: var(--cell); right: var(--cell); width: 1.8rem; height: 1.8rem; color: var(--c-chrome); transition: transform var(--d-nudge) var(--e-out); }
+.m-townCard:focus-visible { outline-offset: -4px; }
+/* The opaque ground above is what stops the frame line: the rail runs past it to the screen edge, and a clear card let
+   the line cut through "1/8 truck" and the phone peek (critic, rerun 1). Must stay a solid colour. */
+.m-townCard.-call { justify-content: flex-start; gap: var(--s-3); }
+.m-townCard__body { font: var(--w-body) 1.3rem/1.55 var(--f-mono); color: var(--c-chrome); text-wrap: pretty; }
+.m-townCard.-call .a-call { justify-content: flex-start; margin-top: auto; color: var(--c-cream); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-townCard.-link:hover { background: #3E4656; }   /* chrome at 6% over slate, solid: the card has to stay opaque over the frame line */
+  .m-townCard.-link:hover .m-townCard__arrow { transform: translateX(.6rem); }
+}
+.m-townCard.-link:focus-visible .m-townCard__arrow { transform: translateX(.6rem); }
+@media (min-width: 1025px) {
+  .m-townCard { min-height: 20.8rem; }   /* 312px cards at 1440: 3:2 */
+  .m-townCard__figure { font-size: 4rem; }
+}
+
+/* ---- towns opening, desktop: the question in a ruled cell, the towns beside it ---- */
+/* Checkpoint 2c, 4 Nov: "vary the opening ... so services, towns and reviews do not all open statement-left, right-half-empty."
+   The stacked head stays stacked (statement over its supporting line, never heading-left body-right); what moves is the
+   cards, which come up beside it in two rows, so the question sits next to its answer on one ruled sheet. Was: stacked
+   head with an empty right half, then one row of 4 cards and a peek. Below 1025 the stacked head and one row stay.
+   .m-rail is display: contents here, so its track and controls join this grid and the controls run the full width.
+   Must sit after the base .m-rail and .m-townCard rules. */
+@media (min-width: 1025px) {
+  .o-homeTowns__sheet { display: grid; grid-template-columns: 5fr 7fr; }
+  .o-homeTowns__sheet .m-rail { display: contents; }
+  .o-homeTowns__head { --t-section: min(7.2rem, 14.5cqi); display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-5); min-width: 0; padding: var(--cell); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); border-right: 1px solid var(--c-line); }   /* longest row "DO YOU COME" is 6.4em wide: 14.5cqi fits the cell from 1025 up, capped at the other statements' 72px */
+  .o-homeTowns__head .m-sectionHead__text { margin: 0; }
+  /* Two rows, about 2.7 cards across at 1440, so the third column's peek still says it scrolls. Six columns hold the
+     12 towns (data/towns.json: change the 6 if the real list differs). The seventh, the call card, takes what the track
+     shows minus one column, so the last stop lands whole: one full town column, then the call card to the screen edge
+     (critic rerun r2: the old last stop cut cards mid-glyph). The track shows 7/12 of the inner row plus the bleed. */
+  .o-homeTowns__sheet .m-rail__track { grid-template-rows: 1fr 1fr; grid-template-columns: repeat(6, 31.2rem) calc((100vw - var(--gutter) * 2 - 2px) * 7 / 12 + var(--gutter) + 1px - 31.2rem); grid-auto-columns: 31.2rem; min-width: 0; }
+  .o-homeTowns__sheet .m-rail__controls { grid-column: 1 / -1; }
+  .o-homeTowns__sheet .m-townCard:nth-child(even) { border-top: 0; }   /* the row above already draws this rule */
+  .o-homeTowns__sheet .m-townCard.-call { grid-row: 1 / -1; padding-right: calc(var(--cell) + var(--gutter)); }   /* 12 towns fill six columns; the closing call card takes the seventh at full height, so no half-empty column ends the row. Its right edge is the screen, so the extra padding keeps its text inside the frame line */
+}
+
+/* ===== Home: featured reviews ===== */
+/* Piece of Cake's review pairing without a score row (no real rating yet, proposal term 05), then Truewerk's
+   product-row pitch as ruled quote cells. Sample cards are worded so nobody can mistake them for real reviews. */
+.m-quote { display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-6); min-height: 30rem; min-width: 0; padding: var(--cell); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); border-right: 1px solid var(--c-line); background: var(--c-cream); scroll-snap-align: start; }   /* solid ground over the frame line, as on the town cards */
+.m-quote__text { font: var(--w-light) 2rem/1.3 var(--f-display); letter-spacing: -.005em; text-wrap: pretty; }
+.m-quote__who { color: var(--c-steel); }
+@media (min-width: 1025px) {
+  .m-quote { min-height: 34rem; }
+  .m-quote__text { font-size: 2.4rem; }
+}
+
+/* ---- trust row: FREITAG labelled cells, one ruled row inside the reviews band ---- */
+.o-homeReviews__trust { display: grid; grid-template-columns: 1fr; gap: 1px; margin: var(--s-8) 0 0; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); background: var(--c-lineSolid); }
+.m-fact { padding: var(--cell); background: var(--c-cream); }
+.m-fact__label { margin: 0 0 var(--s-3); color: var(--c-ink); }
+.m-fact__body { max-width: 44ch; font: var(--w-body) 1.4rem/1.6 var(--f-mono); color: var(--c-steel); text-wrap: pretty; }
+@media (min-width: 641px) {
+  .o-homeReviews__trust { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1025px) {
+  .o-homeReviews__trust { margin-top: var(--s-7); }   /* was s-9 and a 48px foot in each cell: dead ruled space (critic r1) */
+}
+
+/* ===== Home: how it works ===== */
+/* FREITAG's 3 + 6 + 3 row: the outer cells are empty ruled margins, the middle cell holds the head and three
+   stacked ticket lines (mono label, one Bio Sans 600 line, one mono sentence) on hairlines. No numbers, no icons.
+   Build round 1 (critic, 4 Nov): the 600 line read as a full-stop sentence headline (ruling R0 A11) and broke the caps
+   headline system, so it now runs in at the start of the mono sentence, set heavier and in cream. The mono label
+   (the h3) does the heading job. Copy unchanged. Logged in build/progress.md as a spec change. */
+/* The sheet runs edge to edge in its band (critic r2: the band's own 96px padding above and below the sheet read as
+   two empty ruled rows, back to back with the reviews band's foot). The band edges are the sheet's top and bottom. */
+.o-homeHow { padding: 0; }
+.o-homeHow__sheet { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--c-lineSolid); }
+.o-homeHow__margin { display: none; background: var(--c-slate); }
+.o-homeHow__middle { display: grid; gap: 1px; background: var(--c-lineSolid); }
+.o-homeHow__head { padding: var(--s-8) var(--cell) var(--s-5); background: var(--c-slate); }
+.m-step { padding: var(--s-5) var(--cell) var(--s-6); background: var(--c-slate); }
+.m-step__label { margin: 0 0 var(--s-4); color: var(--c-cream); font-size: 1.4rem; }   /* the step's heading now (build r1): cream, one size up from the field labels */
+.m-step__text { max-width: 56ch; color: var(--c-chrome); }
+.m-step__line { color: var(--c-cream); font-weight: var(--w-button); }
+.o-homeHow__close { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); padding: var(--s-6) var(--cell) var(--s-8); background: var(--c-slate); }
+.o-homeHow__close .a-callLine { color: var(--c-chrome); }
+@media (min-width: 1025px) {
+  .o-homeHow__sheet { grid-template-columns: 3fr 6fr 3fr; }
+  .o-homeHow__margin { display: block; }
+  .o-homeHow { padding: 0; }   /* beats the 1025 band padding above */
+  .o-homeHow__head { --t-section: min(7.2rem, 12cqi); padding-top: var(--s-8); }   /* was 11cqi, 68px at 1440. "TO BARE FLOOR" is 7.5em and fits 12cqi, so it matches the other statements' 72px (critic, rerun 1) */
+  .o-homeHow__close { padding-bottom: var(--s-8); }   /* the band has no padding of its own now */   /* was s-9: about 96px of empty ruled cell above the heading (critic r1) */
+  .m-step { padding: var(--s-6) var(--cell); }
+}
+
+/* ===== Home: before and after ===== */
+/* Truewerk's split band: a square frame (786 of 1440, 54.6%) beside a 524 text column with 20px inner padding.
+   The frame holds a native range input over one stock pair (must-replace, content/placeholders.md). The after
+   photo is clipped to the slider position; the labels sit in the top corners, never under the divider at rest. */
+.o-homeCompare__split { display: grid; grid-template-columns: 1fr; gap: var(--s-6); }
+.o-homeCompare__figure { padding: 0; }
+.m-compare { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--c-slate); --pos: 50%; }
+.m-compare__layer { position: absolute; inset: 0; }
+.m-compare__layer.-after { clip-path: inset(0 0 0 var(--pos)); }
+.m-compare__layer .b-photo { height: 100%; }
+.m-compare__tag { position: absolute; top: var(--s-4); z-index: 3; padding: .6rem 1.2rem; border-radius: var(--r-chip); background: rgba(15, 20, 28, .78); color: var(--c-cream); font: var(--w-label) var(--t-label)/1.2 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; pointer-events: none; }
+.m-compare__tag.-before { left: var(--s-4); }
+.m-compare__tag.-after { right: var(--s-4); }
+.m-compare__tag { transition: opacity var(--d-ui) var(--e-ui); }
+.m-compare__tag.is-covered { opacity: 0; }   /* its side has closed: a label on the wrong photo says the wrong thing (critic, rerun 1) */
+.m-compare__divider { position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 2px; margin-left: -1px; background: var(--c-cream); pointer-events: none; }
+/* the knob is clamped inside the frame so it is never cut at 0% or 100% (critic ruling) */
+.m-compare__knob { position: absolute; top: 50%; left: clamp(2.6rem, var(--pos), calc(100% - 2.6rem)); z-index: 3; display: grid; place-items: center; width: 5.2rem; height: 5.2rem; margin: -2.6rem 0 0 -2.6rem; border-radius: 50%; background: var(--c-cream); color: var(--c-ink); pointer-events: none; transition: transform var(--d-ui) var(--e-ui); }
+.m-compare__knob .a-svg { width: 1.4rem; height: 1.4rem; }
+.m-compare__knob .a-svg:first-child { transform: scaleX(-1); }   /* points left, the second points right */
+.m-compare__knobArrows { display: flex; gap: .2rem; }
+.m-compare__range { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.m-compare__range:focus-visible ~ .m-compare__knob { outline: 2px solid var(--c-cream); outline-offset: 3px; box-shadow: 0 0 0 5px var(--c-ink); }
+.o-homeCompare__caption { margin: var(--s-3) 0 0; padding: 0 var(--cell); }   /* the figure is flush to the frame line below 1025 (critic r1) */
+.o-homeCompare__text { padding: 0 var(--cell); }
+.o-homeCompare__text .m-sectionHead { padding: 0 0 var(--s-5); }
+.o-homeCompare__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin: var(--s-6) 0 0; }
+@media (min-width: 1025px) {
+  .o-homeCompare__split { grid-template-columns: 786fr 524fr; gap: 3rem; align-items: center; }
+  .o-homeCompare__text { padding: 0 2rem; }
+  .o-homeCompare__text .m-sectionHead { --t-section: min(7.2rem, 15cqi); }   /* was 11cqi, 53px at 1440. "AND AFTER" is about 5.2em and fits 15cqi, so it matches the other statements' 72px (critic, rerun 1) */
+  .o-homeCompare__figure { padding: 0 0 0 var(--cell); }
+  .o-homeCompare__caption { padding: 0; }
+}
+
+/* ===== Estimate band ===== */
+/* V10: centred heading, one button and the call line, with a faint giant arrow ring behind it, redrawn from the
+   logo's own three arrows at 7% (spec 2b; the redraw is listed for Varun's check in build/progress.md). */
+.o-estimate { padding: var(--s-9) 0; text-align: center; }
+.o-estimate__glyph { position: absolute; top: 50%; left: 50%; width: min(78rem, 140vw); height: auto; color: var(--c-chrome); opacity: .07; transform: translate(-50%, -50%); pointer-events: none; }
+.o-estimate__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 0 var(--cell); }
+.o-estimate .m-sectionHead { width: 100%; max-width: 96rem; padding: 0 0 var(--s-6); }   /* a size container has no width of its own in a centred flex column */
+.o-estimate__call { margin: var(--s-3) 0 0; color: var(--c-chrome); }
+@media (min-width: 1025px) {
+  .o-estimate { padding: 16rem 0; }
+}
+
+/* ===== Footer ===== */
+/* V10 content order on Truewerk's dark footer: the big tappable phone and email first, a heavy two-line caps
+   tagline, four short link columns, social pills, the fact line, Back to top and the credit. Phones: link columns
+   become accordion rows (Truewerk 390), never a long centred list. */
+.o-footer { padding: var(--s-8) 0 calc(var(--s-6) + 6.4rem); background: var(--c-ink); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.o-footer { position: relative; }
+.o-footer::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter); border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); pointer-events: none; }
+.o-footer__inner { margin: 0 calc(var(--gutter) + 1px); padding: 0 var(--cell); }
+.o-footer__contact { display: flex; flex-direction: column; align-items: flex-start; }
+.o-footer__phone { display: inline-flex; align-items: center; min-height: 4.4rem; color: var(--c-cream); font: 700 2.6rem/1.1 var(--f-mono); text-decoration: underline; text-underline-offset: .5rem; text-decoration-thickness: 1px; }
+.o-footer__hours { margin: var(--s-1) 0 0; font: var(--w-label) var(--t-label)/1.5 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-chrome); }
+.o-footer__email { display: inline-flex; align-items: center; min-height: 4.4rem; margin: var(--s-3) 0 0; color: var(--c-cream); font: 700 1.8rem/1.2 var(--f-mono); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1.3rem) / 100% 1px no-repeat; }
+.o-footer__tagline { margin: var(--s-7) 0 0; font: var(--w-heavy) 3.2rem/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); }
+.o-footer__taglineRow { display: block; }
+.o-footer__taglineRow.-light { font-weight: var(--w-light); }   /* the hero's light plus heavy rows (critic r1: it was all heavy) */
+.o-footer__cols { margin: var(--s-7) 0 0; border-top: 1px solid var(--c-rule); }
+.m-footerCol { border-bottom: 1px solid var(--c-rule); }
+.m-footerCol__head { font: var(--w-semi) 1.4rem/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; }
+.m-footerCol__title { display: none; }
+.m-footerCol__toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 5.6rem; padding: 0; border: 0; background: transparent; color: var(--c-cream); font: inherit; letter-spacing: inherit; text-transform: inherit; text-align: left; }
+.m-footerCol__plus { position: relative; width: 1.4rem; height: 1.4rem; }
+.m-footerCol__plus::before, .m-footerCol__plus::after { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 1.5px; margin-top: -.75px; background: currentColor; transition: transform var(--d-nudge) var(--e-out); }
+.m-footerCol__plus::after { transform: rotate(90deg); }
+.m-footerCol__toggle[aria-expanded="true"] .m-footerCol__plus::after { transform: rotate(0deg); }
+.m-footerCol__list { padding: 0 0 var(--s-4); }
+.m-footerCol__link { display: inline-flex; align-items: center; min-height: 4.4rem; color: var(--c-chrome); font: var(--w-body) 1.4rem/1.3 var(--f-mono); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1rem) / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out), color var(--d-ui) var(--e-ui); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-footerCol__link:hover { background-size: 100% 1px; color: var(--c-cream); }
+  .o-footer__email:hover { background-size: 0 1px; }
+  .o-footer__phone:hover { text-decoration-color: transparent; }
+}
+.m-footerCol__link:focus-visible { background-size: 100% 1px; color: var(--c-cream); }
+/* inner pages: an underline follows the text. The hover line above is placed for one row, so it struck through the second row of a wrapped link (critic, Book r2 and Contact r1). The homepage is approved as built, so it waits for Varun's yes; then this replaces the line above and the html:has() goes */
+html:has(.m-banner) .m-footerCol__link { background: none; text-decoration: underline transparent 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-nudge) var(--e-out), color var(--d-ui) var(--e-ui); }
+html:has(.m-banner) .m-footerCol__link:focus-visible { text-decoration-color: currentColor; }
+@media (hover: hover) and (any-pointer: fine) {
+  html:has(.m-banner) .m-footerCol__link:hover { text-decoration-color: currentColor; }
+}
+.o-footer__base { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-5); margin: var(--s-7) 0 0; }
+.o-footer__social { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.a-socialPill { display: inline-flex; align-items: center; min-height: 4.4rem; padding: 0 2rem; border: 1px solid var(--c-rule); border-radius: var(--r-pill); color: var(--c-cream); font: var(--w-button) 1.3rem/1 var(--f-mono); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), border-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-socialPill__icon { flex: none; width: 1.6rem; height: 1.6rem; margin: 0 .8rem 0 0; fill: currentColor; }
+.a-socialPill__icon.-facebook { fill: #0866FF; }    /* brand blue, 3.9:1 on ink, non-text */
+.a-socialPill__icon.-instagram { fill: #FF0069; }   /* brand pink, 4.7:1 on ink, non-text */
+.a-socialPill__icon.-tiktok { fill: currentColor; }   /* single-colour mark: cream on ink, ink on the cream hover fill */
+.a-socialPill:active { transform: scale(.97); }
+@media (max-width: 640px) {
+  .o-footer__social { flex-wrap: nowrap; width: 100%; }
+  .o-footer__social li { flex: 1 1 auto; }
+  .a-socialPill { justify-content: center; width: 100%; padding: 0 1rem; font-size: 1.2rem; }   /* all three on one row at 390 (critic r1: TikTok wrapped alone) */
+  .a-socialPill__icon { margin-right: .6rem; }
+}
+@media (hover: hover) and (any-pointer: fine) {
+  .a-socialPill:hover { border-color: var(--c-cream); background: var(--c-cream); color: var(--c-ink); }
+}
+.o-footer__fact { font: var(--w-label) var(--t-label)/1.5 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-chrome); }
+.o-footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); width: 100%; padding: var(--s-4) 0 0; border-top: 1px solid var(--c-rule); }
+.o-footer__credit { font: var(--w-body) 1.2rem/1.5 var(--f-mono); color: var(--c-chrome); }
+.o-footer__top { color: var(--c-cream); }
+@media (min-width: 641px) {
+  .o-footer { padding-bottom: var(--s-6); }   /* the call bar only exists on phones */
+  .o-footer__cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-5); border-top: 0; }
+  .m-footerCol { border-bottom: 0; }
+  .m-footerCol__title { display: block; margin: 0 0 var(--s-3); }
+  .m-footerCol__toggle { display: none; }
+  .m-footerCol__list { display: block; padding: 0; }
+}
+@media (min-width: 1025px) {
+  .o-footer { padding-top: var(--s-9); }
+  .o-footer__main { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-7); }
+  .o-footer__cols { grid-template-columns: repeat(4, 1fr); margin: 0; }
+  .o-footer__tagline { font-size: 4.8rem; }
+  .o-footer__base { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: var(--s-9); }
+}
+
+/* ===== Inner banner ===== */
+/* Every inner page opens here (spec 2b): the homepage hero's slate field, grain, hazard stripe, registration marks and
+   slats, compact, no breadcrumbs. The h1 uses the hero's rows, so it rises the same way. --fit is the size off the copy
+   column: each page sets it to what its longest row allows, so the row count holds at every width. The hairline truck
+   sits right on the hero's ground line at 1025 and up, so short headlines never leave an empty right half. */
+.m-banner { position: relative; isolation: isolate; overflow: hidden; padding: var(--s-7) var(--gutter) 7.2rem; background: var(--c-slate); color: var(--c-cream); }
+.m-banner::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("fx/grain.svg") 0 0 / 26rem 26rem; opacity: .45; -webkit-mask: linear-gradient(#000, rgba(0, 0, 0, .35)); mask: linear-gradient(#000, rgba(0, 0, 0, .35)); pointer-events: none; }
+.m-banner::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter); z-index: -1; border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); pointer-events: none; }
+.m-banner__stripe { display: none; }
+.m-banner__mark { position: absolute; top: -.6rem; width: 1.3rem; height: 1.3rem; pointer-events: none; }
+.m-banner__mark::before, .m-banner__mark::after { content: ""; position: absolute; background: var(--c-chromeMid); }
+.m-banner__mark::before { left: .6rem; top: 0; width: 1px; height: 100%; }
+.m-banner__mark::after { top: .6rem; left: 0; width: 100%; height: 1px; }
+.m-banner__mark.-left { left: calc(var(--gutter) - .6rem); }
+.m-banner__mark.-right { right: calc(var(--gutter) - .7rem); }
+.m-banner__copy { position: relative; z-index: 2; container-type: inline-size; padding: 0 var(--cell); }
+.m-banner .a-hero { --t-hero: min(10.4rem, var(--fit, 17cqi)); text-wrap: balance; }
+.m-banner__lede { margin: var(--s-5) 0 0; }
+.m-banner__art { display: none; }
+.m-banner__slats { position: absolute; left: 28%; right: -20vw; bottom: -1px; height: 4.1vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 14.36vw, transparent 14.36vw 18.46vw); transform: skewX(29deg); transform-origin: 0 100%; pointer-events: none; }
+/* the slats' feet run 1px past the banner's clip: a skewed box's bottom edge is antialiased, and on a page with a fractional banner height it left a faint line through the cream (critic, Commercial r2) */
+/* how full the banner's truck is: each page sets --banner-load, and it rises on load like the hero's */
+.m-banner .m-truck { --load: var(--banner-load, .5); }
+.js .m-banner .m-truck { --load: 0; }
+.is-ready .m-banner .m-truck { --load: var(--banner-load, .5); }
+@media (min-width: 641px) {
+  .m-banner__stripe { position: absolute; top: 0; left: 0; display: block; width: max(1.2rem, 1.75vw); height: 52%; background: repeating-linear-gradient(151deg, var(--c-chrome) 0 3.26vw, transparent 3.26vw 4.17vw); }
+}
+@media (min-width: 1025px) {
+  .m-banner { min-height: 44rem; padding: 6.4rem var(--gutter) 8.8rem; }
+  .m-banner__copy { width: min(66rem, calc(50vw - var(--gutter))); }
+  .m-banner__art { position: absolute; right: var(--gutter); bottom: 4.8rem; display: block; width: min(60rem, 42vw); }
+  .m-banner__slats { left: 43%; height: 2.01vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 11.39vw, transparent 11.39vw 14.63vw); }
+}
+
+/* ===== Inner blocks: bands, split, lists ===== */
+/* A -flush band has no padding of its own: its ruled sheet meets the band's edges. -ruled draws the hairline between
+   two bands on the same ground. */
+.b-band.-flush { padding: 0; }
+.b-band.-ruled { border-top: 1px solid var(--c-line); }
+
+/* ---- split band: Truewerk's square image beside a text column, as FREITAG ruled cells ---- */
+/* 786 + 558 of the 1344 row at 1440 (Truewerk 786 + 524 plus its 30px gap, which the rule replaces). The photo fills its
+   cell to 12px (spec 2c). It stretches if the text runs taller than the square (1025 to 1366), so no empty foot. */
+.o-split { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-split__media { padding: 1.2rem; }
+.o-split__media .b-photo { display: block; width: 100%; height: 100%; aspect-ratio: 1; }   /* the width must be set: with a definite height, aspect-ratio would otherwise take the width from the height and overflow the cell */
+.o-split__media .m-map { height: 100%; }
+.o-split__text { padding: var(--s-6) var(--cell) var(--s-7); border-top: 1px solid var(--c-line); }
+.o-split__text .m-sectionHead { --t-section: min(7.2rem, 16cqi); padding: 0; }
+.o-split .a-label { color: var(--c-soft); }
+.o-split__label { margin: var(--s-5) 0 var(--s-3); }
+.o-split__para { margin: var(--s-4) 0 0; color: var(--c-soft); }
+@media (min-width: 1025px) {
+  .o-split { grid-template-columns: minmax(0, 786fr) minmax(0, 558fr); }
+  .o-split__media { border-right: 1px solid var(--c-line); }
+  .o-split__text { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: var(--s-6) var(--cell); border-top: 0; }   /* was 48px and 28px: the tallest column (clean outs) pushed its band to 794 and the photo off square, and the text edge sat 4px off the ruled bands (critic, Services r2) */
+  .o-split.-flip { grid-template-columns: minmax(0, 558fr) minmax(0, 786fr); }
+  .o-split.-flip .o-split__media { order: 2; border-right: 0; border-left: 1px solid var(--c-line); }
+}
+
+/* ---- action row: button then call link. The button's hover grows into a negative margin, so it never pushes the call link (critic r1) ---- */
+.m-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); margin: var(--s-6) 0 0; }
+.m-actions .a-button { transition: padding var(--d-breathe) var(--e-out), margin var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-actions .a-button:hover { margin-right: -1.6rem; }
+}
+
+/* ---- jump strip: the eight sections of a long page as one ruled row under the banner, the place the ticket has on the homepage ---- */
+.o-jump { padding: 0 var(--gutter); background: var(--c-cream); color: var(--c-ink); --c-focus: var(--c-ink); }
+.o-jump__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border-left: 1px solid var(--c-ruleLight); border-right: 1px solid var(--c-ruleLight); border-bottom: 1px solid var(--c-ruleLight); background: var(--c-ruleSolidLight); }
+.o-jump__item { display: flex; background: var(--c-cream); }
+.o-jump__link { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-2); width: 100%; min-height: 6.4rem; padding: var(--s-3) var(--cell); font: var(--w-semi) 1.3rem/1.2 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-decoration: none; color: var(--c-ink); transition: background-color var(--d-ui) var(--e-ui); }
+.o-jump__link:focus-visible { outline-offset: -4px; }
+.o-jump__link .a-svg { flex: none; width: 1.4rem; height: 1.4rem; color: var(--c-steel); transform: rotate(90deg); transition: transform var(--d-nudge) var(--e-out); }   /* the chevron points down the page */
+.o-jump__link:active { transform: scale(.98); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-jump__link:hover { background: rgba(52, 61, 78, .07); }
+  .o-jump__link:hover .a-svg { transform: rotate(90deg) translateX(.4rem); }
+}
+@media (min-width: 641px) {
+  .o-jump__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 1025px) {
+  .o-jump__list { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .o-jump__link { min-height: 9.6rem; padding: var(--s-4); }
+}
+
+/* ---- trio: three single-item services as one ruled row (critic r1: seven split bands read as one module repeated) ---- */
+.o-trio { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-trio__cell { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--c-line); }
+.o-trio__cell:first-child { border-top: 0; }
+.o-trio__text { display: flex; flex: 1; flex-direction: column; padding: var(--s-5) var(--cell) var(--s-7); }
+.o-trio__text .m-sectionHead { --t-section: min(7.2rem, 16cqi); padding: 0; }
+.o-trio .a-label { color: var(--c-soft); }
+.o-trio .m-actions { margin-top: auto; padding-top: var(--s-6); }
+@media (min-width: 1025px) {
+  .o-trio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .o-trio__cell { border-top: 0; border-left: 1px solid var(--c-line); }
+  .o-trio__cell:first-child { border-left: 0; }
+  .o-trio .o-split__media { border-right: 0; }
+  /* Subgrid so the photo, the statement and paragraph, the label, the list and the actions share rows across the three
+     cells: on a ruled sheet the eye reads straight across (critic, Services r2: labels stepped 27px). One h2 size off the
+     viewport, not the cell, because fractional cell widths gave 63.89 against 63.77px and a 1px step. */
+  .o-trio__cell { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
+  .o-trio__text { display: grid; grid-row: 2 / span 4; grid-template-rows: subgrid; }
+  .o-trio__text .m-sectionHead { --t-section: min(7.2rem, 4.43vw); }
+}
+
+/* ---- checklist: FREITAG's small solid square bullets ---- */
+.m-checklist { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-2) var(--s-5); font: var(--w-body) 1.4rem/1.45 var(--f-mono); }
+.m-checklist li { position: relative; padding: 0 0 0 1.6rem; }
+.m-checklist li::before { content: ""; position: absolute; top: .55em; left: 0; width: .6rem; height: .6rem; background: currentColor; }
+.m-checklist.-no li::before { background: transparent; border: 1px solid currentColor; }   /* hollow: not on the truck */
+@media (min-width: 641px) {
+  .m-checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-checklist.-single { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 1025px) {
+  .m-checklist { grid-template-columns: minmax(0, 1fr); }   /* 1025 to 1366: the text column is too narrow for two */
+}
+@media (min-width: 1367px) {
+  .m-checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-checklist.-single { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ===== Services: what we take and what we don't ===== */
+/* Head cell beside two list cells on one ruled sheet (as the homepage towns sheet), so it doesn't open like the bands above. */
+.o-take { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--c-line); }
+.b-band.-slate + .b-band .o-take { border-top: 0; }
+.o-take__head { padding: var(--s-8) var(--cell) var(--s-6); }
+.o-take__col { padding: var(--s-5) var(--cell) var(--s-6); border-top: 1px solid var(--c-line); }
+.o-take__label { margin: 0 0 var(--s-4); color: var(--c-ink); }
+.o-take__close.m-actions { margin: 0; padding: var(--s-5) var(--cell); border-top: 1px solid var(--c-line); }
+@media (min-width: 1025px) {
+  .o-take { grid-template-columns: 6fr 3fr 3fr; }
+  .o-take__head { --t-section: min(7.2rem, 12cqi); padding: var(--s-8) var(--cell); }   /* "AND WHAT WE DON'T" is about 9.9em: fits 12cqi of the 621px cell, about 67px at 1440 */
+  .o-take__col { padding: var(--s-8) var(--cell); border-top: 0; border-left: 1px solid var(--c-line); }
+}
+
+/* ===== Pricing: four load cards ===== */
+/* Muval's figure over label, as ruled cells. The glyph is the ticket chip's truck bed, filled to that load. Shared by
+   Services #pricing and the town pages. Cream ground: the slate estimate band always follows. On Services the statement
+   sits in a ruled cell beside the cards in two rows, as on the homepage towns sheet, so its right half is never empty. */
+.o-pricing__head { padding: var(--s-8) var(--cell) var(--s-6); }
+.o-pricing__cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); background: var(--c-lineSolid); }
+.m-priceCard { display: flex; flex-direction: column; min-width: 0; padding: var(--cell); background: var(--c-cream); }
+/* The rules are the grid's own ground showing through its 1px gaps, so it stays clear until the last card is in: it read as a grey loading bar (critic, Service area r2). */
+@media (prefers-reduced-motion: no-preference) {
+  .o-pricing__cards { transition: background-color var(--d-rise) var(--e-ui); }
+  .js .o-pricing__cards:has(.a-inview:not(.is-inview)) { background: transparent; }
+}
+.m-priceCard__glyph { width: 15rem; height: auto; margin: 0 0 var(--s-5); overflow: visible; }
+.m-priceCard__line { fill: none; stroke: var(--c-slate); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.m-priceCard__fill { fill: var(--c-slate); }
+.m-priceCard__label { color: var(--c-ink); }
+.m-priceCard__figure { margin: var(--s-2) 0 var(--s-3); font: var(--w-heavy) 5.6rem/1 var(--f-display); letter-spacing: -.01em; color: var(--c-ink); }
+.m-priceCard__fits { max-width: 34ch; font: var(--w-body) 1.4rem/1.55 var(--f-mono); color: var(--c-steel); text-wrap: pretty; }
+.o-pricing__close { padding: var(--s-5) var(--cell) var(--s-7); }
+.o-pricing__close .m-actions { margin: 0; }
+.o-pricing__note { margin: var(--s-4) 0 0; color: var(--c-steel); }
+@media (min-width: 641px) {
+  .o-pricing__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1025px) {
+  .o-pricing__cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .m-priceCard__glyph { width: 17.6rem; }
+  .m-priceCard__figure { font-size: 6.4rem; }
+  /* the actions sit at the foot of the statement cell, so that column has no hollow under its copy (critic, Services r2) */
+  .o-pricing__sheet { display: grid; grid-template-columns: 5fr 7fr; grid-template-rows: 1fr auto; }
+  .o-pricing__sheet .o-pricing__head { grid-column: 1; grid-row: 1; border-bottom: 0; }
+  .o-pricing__sheet .o-pricing__close { grid-column: 1; grid-row: 2; padding: var(--s-5) var(--cell) var(--s-7); border-right: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); }
+  .o-pricing__sheet .o-pricing__cards { grid-column: 2; grid-row: 1 / span 2; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; }
+  .o-pricing__head { --t-section: min(7.2rem, 14.5cqi); padding: var(--s-7) var(--cell); border-bottom: 1px solid var(--c-line); border-right: 1px solid var(--c-line); }
+}
+
+/* ---- halftone above the footer on the one page with no estimate band (Book): ink dots off the cream, thickening down ---- */
+.a-halftone.-toInk { position: relative; -webkit-mask: none; mask: none; }
+.a-halftone.-toInk::after { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--c-cream), rgba(247, 239, 236, .2)); }
+
+/* ===== Services: page ===== */
+.t-services { --banner-load: 1; --fit: 20cqi; }   /* SERVICES is 4.6em: 20cqi fills the phone column at 64px, so the h1 clearly outranks the 44px h2s (critic r1). Capped at 104px above that */
+@media (max-width: 640px) {
+  .t-services .m-sectionHead { --t-section: 14cqi; }   /* one h2 size down the page at 390, about 44px (critic r1: 50px and 39.5px mixed) */
+}
+
+/* ===== Forms: fields shared by Book, Contact and Commercial ===== */
+/* One ruled box for every field, square like the frames, so a blank field reads as a field and sits tight under its
+   label (critic, Book r1: underlines and boxes mixed, labels 60px off their line). 16px text, so phones don't zoom on focus. */
+.m-field { min-width: 0; }
+.m-field .a-label { margin: 0 0 var(--s-2); }
+.m-field .a-label.-legend { float: left; width: 100%; margin-bottom: var(--s-3); }
+.m-field__input { display: block; width: 100%; height: var(--h-control); padding: 0 var(--s-3); border: 1px solid var(--c-chipLine); border-radius: 0; background: transparent; color: var(--c-ink); font: var(--w-body) 1.6rem/1.4 var(--f-mono); transition: box-shadow var(--d-ui) var(--e-ui); }
+.m-field__input::placeholder { color: var(--c-steel); font-size: 1.4rem; font-weight: var(--w-light); opacity: 1; }   /* lighter and smaller, so a hint never reads as an entered answer */
+.m-field__input:focus-visible { outline-offset: 4px; }
+.m-field__input.-area { height: auto; min-height: 11.2rem; padding: var(--s-3); resize: vertical; }
+.m-field__input[aria-invalid="true"] { border-color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }
+.m-field__note { margin: var(--s-2) 0 0; font: var(--w-body) 1.3rem/1.5 var(--f-mono); color: var(--c-steel); text-wrap: pretty; }
+.m-field__note.is-error { color: var(--c-ink); font-weight: var(--w-button); }
+.m-field__error { margin: var(--s-2) 0 0; padding-left: 1.6rem; color: var(--c-ink); font: var(--w-button) 1.3rem/1.5 var(--f-mono); text-indent: -1.6rem; }   /* a hanging indent the width of the square and its gap, so a wrapped line sits under the words (critic, Commercial r1) */
+.m-field__error::before { content: ""; display: inline-block; width: .8rem; height: .8rem; margin-right: .8rem; background: currentColor; }   /* the labels' square, filled, so an error doesn't read as a helper line (critic, Contact r1) */
+.m-field__input.is-also { border-color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }   /* the other half of an either-or rule */
+.m-field__small { font: var(--w-body) 1.3rem/1.5 var(--f-mono); color: var(--c-steel); }
+.m-field__smallLink { color: var(--c-ink); text-underline-offset: .3rem; text-decoration-thickness: 1px; }
+/* ---- tick box: a square, like the frames, because it is not a chip ---- */
+.m-check { position: relative; display: flex; gap: var(--s-3); min-height: 4.4rem; cursor: pointer; }
+.m-check__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.m-check__box { flex: none; position: relative; width: 2.4rem; height: 2.4rem; border: 1px solid var(--c-slate); background: transparent; }
+.m-check__input:checked + .m-check__box { background: var(--c-slate); }
+.m-check__input:checked + .m-check__box::after { content: ""; position: absolute; top: .4rem; left: .75rem; width: .7rem; height: 1.2rem; border: solid var(--c-cream); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.m-check__input:focus-visible + .m-check__box { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.m-check__text { font: var(--w-body) 1.3rem/1.5 var(--f-mono); color: var(--c-steel); text-wrap: pretty; }
+/* ---- photo upload: only shown when a form endpoint exists ---- */
+.m-upload { position: relative; display: inline-block; cursor: pointer; }
+.m-upload__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.m-upload__face { display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 2.5rem; border: 1px solid var(--c-slate); border-radius: var(--r-pill); color: var(--c-slate); font: var(--w-button) var(--t-button)/1 var(--f-mono); transition: background-color var(--d-ui) var(--e-ui); }
+.m-upload__input:focus-visible + .m-upload__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.m-upload__files { margin: var(--s-2) 0 0; color: var(--c-ink); font: var(--w-body) 1.3rem/1.5 var(--f-mono); overflow-wrap: anywhere; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-upload:hover .m-upload__face { background: rgba(52, 61, 78, .06); }
+}
+
+/* ===== Book: the ticket ===== */
+/* A ruled sheet: progress line, the step's cells, and the call cell fixed to the right at 1025 and up (spec 2b). */
+.t-book { --banner-load: .25; --fit: 22cqi; --c-chipLine: rgba(52, 61, 78, .6); }   /* "PICKUP" is about 3.7em: 22cqi gives 70px at 390, capped at 104px above that. chipLine was .4, 2.1:1; .6 is 3.3:1 on cream, for a form the visitor must find its fields in (critic, Book r2). This page only: the homepage ticket is approved as built */
+.o-book { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-book__main { display: flex; flex-direction: column; min-width: 0; }
+/* :not([hidden]): a display set here would beat the global [hidden] rule and keep the form on screen beside its result */
+.o-book__form:not([hidden]) { display: flex; flex: 1; flex-direction: column; }
+.o-book__step:not([hidden]) { display: flex; flex: 1; flex-direction: column; }
+.o-book__progress { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); --done: .25; }
+.o-book__progress::before { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--c-slate); transform: scaleX(var(--done)); transform-origin: 0 0; transition: transform var(--d-nudge) var(--e-out); }
+.o-book__progressItem { display: flex; border-left: 1px solid var(--c-line); }
+.o-book__progressItem:first-child { border-left: 0; }
+.o-book__progressBtn { display: flex; align-items: center; width: 100%; min-height: 6.4rem; padding: var(--s-2); border: 0; background: transparent; color: var(--c-steel); font: var(--w-semi) 1.2rem/1.2 var(--f-display); letter-spacing: var(--tr-nav); text-align: left; text-transform: uppercase; transition: background-color var(--d-ui) var(--e-ui); }
+.o-book__progressBtn[aria-current="step"] { color: var(--c-ink); font-weight: var(--w-heavy); }
+.o-book__progressBtn:disabled { cursor: default; font-weight: var(--w-light); }   /* was opacity .6, 2.8:1 (critic, Book r1). Steel is 6.91:1; weight does the job */
+.o-book__progressBtn:focus-visible { outline-offset: -4px; }
+[data-book-heading]:focus { outline: 0; }
+.o-book__cells { display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); }
+.o-book__cell { min-width: 0; padding: var(--s-5) var(--cell) var(--s-6); border-top: 1px solid var(--c-line); }
+.o-book__cells .o-book__cell:first-child { border-top: 0; }
+.o-book__cell.-column { display: flex; flex-direction: column; gap: var(--s-5); }
+.o-book__cell.-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); align-content: start; }
+.o-book__cell .a-label.-legend { float: left; width: 100%; margin: 0 0 var(--s-3); }
+.o-book__group { min-width: 0; }
+.o-book__chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; clear: both; }
+.o-book__chips.-stack { grid-template-columns: minmax(0, 1fr); }
+.o-book__chips.-five .a-choice:last-child { grid-column: 1 / -1; }   /* "Not sure" is the way out of the load row, so its own row suits it (critic, Book r1) */
+/* an odd list takes its first, most common option full width, so no minor option is the biggest thing in the group
+   (critic, Book r2: Demo and Yard each had a whole row) and none is stranded (critic, Book r1) */
+.o-book__chips.-seven .a-choice:first-child { grid-column: 1 / -1; }
+@media (max-width: 640px) {
+  .o-book__chips.-lead .a-choice:first-child { grid-column: 1 / -1; }
+  .o-book__chips.-lead .a-choice:last-child { grid-column: auto; }   /* must sit after the -five rule above */
+}
+.o-book__chips .a-choice__face { flex-direction: row; padding: 0 var(--s-2); line-height: 1.2; text-align: center; white-space: normal; }
+.o-book__price { margin: var(--s-5) 0 0; font: var(--w-heavy) 2.8rem/1.1 var(--f-display); color: var(--c-ink); text-wrap: balance; }
+.o-book__foot { margin-top: auto; padding-top: var(--s-3); }
+.o-book__foot .m-field__error { margin: 0 0 var(--s-3); }
+/* ---- calendar: Piece of Cake's inline date grid. Cells are 44px tall, not the spec's 39px (conventions: 44px targets) ---- */
+.m-calendar__native { display: block; clear: both; width: 100%; height: var(--h-control); border: 0; border-bottom: 1px solid var(--c-slate); background: transparent; font: var(--w-body) 1.6rem/1 var(--f-mono); }
+.js .m-calendar__native { display: none; }
+.m-calendar { display: none; clear: both; }
+.js .m-calendar { display: block; }
+.m-calendar__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.m-calendar__title { font: var(--w-heavy) 2.2rem/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; }
+.m-calendar__arrows { display: flex; gap: var(--s-1); }
+.m-calendar__dows { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; margin: 0 0 var(--s-1); color: var(--c-steel); font: var(--w-label) 1rem/1.4 var(--f-mono); letter-spacing: var(--tr-label); text-align: center; text-transform: uppercase; }
+.m-calendar__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; }
+.a-choice.-cal .a-choice__face { height: 4.4rem; padding: 0; font: var(--w-semi) 1.6rem/1 var(--f-display); }
+.a-choice.-off { cursor: default; }
+.a-choice.-off .a-choice__face { border-color: transparent; background: transparent; color: var(--c-steel); opacity: .45; }
+.a-choice.-off:active .a-choice__face { transform: none; }
+.m-calendar__empty { margin-top: var(--s-3); }
+/* ---- states ---- */
+.o-book__state { padding: var(--s-7) var(--cell) var(--s-8); }
+.o-book__state:focus { outline: 0; }
+.o-book__state .m-sectionHead { padding: 0; }
+.o-book__summary { margin: var(--s-6) 0 0; border-top: 1px solid var(--c-line); }
+.o-book__summaryRow { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--c-line); }
+.o-book__summaryRow dd { margin: 0; font: var(--w-body) 1.5rem/1.5 var(--f-mono); }
+.o-book__stateFoot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3) var(--s-5); margin: var(--s-5) 0 0; }
+/* ---- call cell ---- */
+.o-book__aside { border-top: 1px solid var(--c-line); }
+.o-book__call { padding: var(--s-5) var(--cell) var(--s-6); }
+.o-book__callLine { max-width: 28ch; color: var(--c-steel); font: var(--w-body) 1.4rem/1.5 var(--f-mono); text-wrap: balance; }
+.o-book__callNumber { display: inline-flex; align-items: center; min-height: 4.4rem; margin: var(--s-2) 0; color: var(--c-ink); font: var(--w-heavy) 2.8rem/1 var(--f-display); text-underline-offset: .4rem; text-decoration-thickness: 1px; }
+.o-book__callHours { color: var(--c-steel); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-book__progressBtn:not(:disabled):hover { background: rgba(52, 61, 78, .06); }
+  .o-book__callNumber:hover { text-decoration-color: transparent; }
+}
+@media (min-width: 641px) {
+  .o-book__progressBtn { padding: var(--s-3) var(--cell); font-size: 1.3rem; }
+  .o-book__chips { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .o-book__chips.-five { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .o-book__chips.-five .a-choice { grid-column: span 2; }
+  .o-book__chips.-five .a-choice:nth-child(n + 4) { grid-column: span 3; }
+  .o-book__cell.-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-field.-wide { grid-column: 1 / -1; }
+}
+@media (min-width: 1025px) {
+  .t-book .m-banner { min-height: 34rem; padding-top: 4rem; padding-bottom: 6.4rem; }   /* spec 2b 440px; this page is a task, so the calendar and Next come up sooner (critic, Book r1) */
+  .t-book .m-banner__art { bottom: 3.2rem; width: min(46rem, 32vw); }
+  .o-book { grid-template-columns: minmax(0, 9fr) minmax(0, 3fr); min-height: 56rem; }
+  .o-book__main { border-right: 1px solid var(--c-line); }
+  .o-book__cells { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .o-book__cell { padding: var(--s-6) var(--cell); border-top: 0; }
+  .o-book__cell + .o-book__cell { border-left: 1px solid var(--c-line); }
+  .o-book__aside { border-top: 0; }
+  .o-book__call { position: sticky; top: calc(var(--h-bar) + var(--h-header) + 1.6rem); padding: var(--s-6) var(--cell); }
+  .o-book__callNumber { font-size: clamp(2.2rem, 2vw, 2.8rem); }
+  .o-book__state { padding: var(--s-8) var(--cell); }
+  .o-book__state .m-sectionHead { --t-section: min(7.2rem, 11cqi); }
+}
+
+/* ===== Service area: hub ===== */
+/* The map in the split band's square frame, the towns beside it on the same ruled sheet. At 1025 and up the rows stretch,
+   so the list runs the full height of the map with no hollow under it. */
+.t-area { --banner-load: .5; --fit: 24cqi; }   /* "WHERE" is about 3em: 24cqi gives 76px at 390, capped at 104px above that */
+.m-map { display: block; width: 100%; aspect-ratio: 1; border: 1px solid var(--c-line); }
+.m-map__north { stroke: none; }   /* its fill is the halftone pattern, set on the path */
+.m-map__halftone { fill: var(--c-slate); opacity: .32; }
+.m-map__river { fill: none; stroke: var(--c-chromeMid); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; opacity: .55; }
+.m-map__border { fill: none; stroke: var(--c-slate); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.m-map__dot { transform-box: fill-box; transform-origin: center; transform: scale(1.5); fill: var(--c-ink); transition: transform var(--d-ui) var(--e-ui); }   /* 6px at 390, where 10 units draws at 4px; scale(1) from 641 */
+/* a cream edge on each label, so a name stays clean over the halftone and the state line */
+.m-map__town { font: var(--w-semi) 3rem/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; fill: var(--c-ink); stroke: var(--c-cream); stroke-width: 6px; paint-order: stroke; }   /* 13px at 390: the frame draws the 800-wide map at .41. Any bigger and METHUEN touches Pelham's dot */
+@media (max-width: 640px) {
+  .m-map__town.-drop { transform: translateY(9px); }
+}
+.m-map__state { font: var(--w-label) 2.6rem/1 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; fill: var(--c-steel); stroke: var(--c-cream); stroke-width: 6px; paint-order: stroke; }
+.m-map__link { pointer-events: none; }   /* a mouse convenience only: on touch the targets would be under 44px and the list is just below */
+.m-map__hit { fill: transparent; }
+.m-map__place.is-lit .m-map__dot { transform: scale(1.8); }
+.m-map__place.is-lit .m-map__town { font-weight: var(--w-heavy); }
+.m-townRow.is-lit { background: rgba(52, 61, 78, .07); }
+.o-townList { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; border-top: 1px solid var(--c-line); }
+.o-townList__state { display: flex; flex-direction: column; min-width: 0; padding: var(--s-5) 0 0; }
+.o-townList__state + .o-townList__state { border-top: 1px solid var(--c-line); }
+.o-townList__label { margin: 0 var(--cell) var(--s-3); }
+.o-townList__rows { display: flex; flex: 1; flex-direction: column; }
+.o-townList__rows li { display: flex; flex: 1; }
+.m-townRow { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); width: 100%; min-height: 5.6rem; padding: 0 var(--cell); border-top: 1px solid var(--c-line); color: var(--c-ink); font: var(--w-heavy) 2.2rem/1 var(--f-display); text-decoration: none; text-transform: uppercase; word-spacing: var(--ws-display); transition: background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-townRow__name { min-width: 0; }
+.m-townRow__arrow { flex: none; width: 1.8rem; height: 1.8rem; color: var(--c-steel); transition: transform var(--d-nudge) var(--e-out); }
+.m-townRow:focus-visible { outline-offset: -4px; }
+.m-townRow:active { transform: scale(.98); }
+.o-townList__close { padding: var(--s-5) var(--cell) var(--s-6); border-top: 1px solid var(--c-line); }
+.o-townList__closeTitle { font: var(--w-heavy) 2.4rem/1.05 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); }
+.o-townList__closeBody { margin: var(--s-3) 0 var(--s-2); color: var(--c-soft); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-townRow:hover { background: rgba(52, 61, 78, .07); }
+  .m-townRow:hover .m-townRow__arrow { transform: translateX(.6rem); }
+}
+@media (min-width: 641px) {
+  .o-townList { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-townList__state + .o-townList__state { border-top: 0; border-left: 1px solid var(--c-line); }
+  .o-townList__close { grid-column: 1 / -1; }
+  .m-map__dot { transform: none; }
+  .m-map__town { font-size: 2.2rem; }
+  .m-map__state { font-size: 1.6rem; }
+}
+@media (min-width: 1025px) {
+  .o-townList { grid-template-rows: 1fr auto; border-top: 0; }
+}
+@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) {
+  .m-map__link { cursor: pointer; pointer-events: auto; }
+}
+/* The banner truck under the lede on phones and tablets, as on the homepage hero (critic r1: it was simply gone at 390). */
+@media (max-width: 1024px) {
+  .t-area .m-banner, .t-town .m-banner { display: flex; flex-direction: column; }
+  .t-area .m-banner__copy, .t-town .m-banner__copy { order: -1; }
+  .t-area .m-banner__art, .t-town .m-banner__art { position: relative; z-index: 1; display: block; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-area .m-banner__art, .t-town .m-banner__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+
+/* ===== Service area: town pages ===== */
+/* One template for all 12 (copy.md: only town, state and abbreviation change). --banner-load is unset here: the truck is the
+   ticket's, and the ticket's own script fills it. Every town keeps one headline size, so the template never looks different per town. */
+.t-town { --fit: 11cqi; }   /* the two longest rows are about 8.7em ("LONDONDERRY, NH", "JUNK REMOVAL IN"): 11cqi fills about 96% of the column */
+.t-town .o-split__text .m-sectionHead { --t-section: min(6rem, 9cqi); }   /* "IN LONDONDERRY" is about 8.2em; 9cqi keeps it a clear step under the h1 at every width (10cqi nearly tied it at 390, critic r2) */
+/* The map's marked town: this page's town in the heavy weight on registration hairlines, the neighbours quiet (critic r1: no sense of place). */
+.t-town .m-map__town { fill: var(--c-steel); }
+.t-town .m-map__place.-here .m-map__town { font-weight: var(--w-heavy); fill: var(--c-ink); }
+.t-town .m-map__place.-here .m-map__dot { transform: scale(2.4); }
+.t-town .m-map__place.is-lit .m-map__town { fill: var(--c-ink); }
+.m-map__reg { fill: none; stroke: var(--c-ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+@media (min-width: 641px) {
+  .t-town .m-map__place.-here .m-map__dot { transform: scale(1.8); }
+}
+@media (min-width: 1025px) {
+  /* The h1 was 67px under a 72px estimate heading (critic r2). A wider copy column gives it 76px at 1440; LONDONDERRY, NH still stops short of the truck. */
+  .t-town .m-banner__copy, .t-reviews .m-banner__copy { width: min(74rem, calc(54vw - var(--gutter))); }
+  /* Text from the top of its cell, actions at the foot, so no blank cell follows the ticket. The split lands on the ticket's second divider: its first two columns are 2.45 of 5.4 up to 1366. */
+  .t-town .o-split.-flip { grid-template-columns: minmax(0, 2.45fr) minmax(0, 2.95fr); }
+  .t-town .o-split__text { justify-content: flex-start; }
+  .t-town .m-actions { margin-top: auto; padding-top: var(--s-6); }
+}
+@media (min-width: 1367px) {
+  .t-town .o-split.-flip { grid-template-columns: minmax(0, 2.75fr) minmax(0, 2.85fr); }   /* the ticket's 2.75 of 5.6 from 1367 */
+}
+
+/* ===== Reviews ===== */
+/* Spec 2b's collection layout: a 300px filter column on hairline rows beside a 3-column ruled grid; one row of chips on phones. */
+.t-reviews { --banner-load: .75; --fit: 12cqi; }   /* "OUR CUSTOMERS" is the longest row at about 8.2em: 12cqi fills the column and holds two rows (was 11.6cqi; raised so the h1 outranks the page's h2s at 390, critic r1) */
+.o-reviews { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-reviews__filter { min-width: 0; padding: var(--s-4) 0; border-bottom: 1px solid var(--c-line); }
+.o-reviews__filterLabel { margin: 0 var(--cell) var(--s-2); color: var(--c-steel); }
+/* one row that scrolls sideways, flush to the frame lines, so the last chip peeks past the edge */
+.o-reviews__options { display: flex; gap: var(--s-1); overflow-x: auto; padding: .4rem var(--cell); scrollbar-width: none; }
+.o-reviews__options::-webkit-scrollbar { display: none; }
+.a-filter { flex: none; min-height: 4.4rem; padding: 0 var(--s-3); border: 1px solid var(--c-chipLine); border-radius: var(--r-chip); background: transparent; color: var(--c-slate); font: var(--w-label) 1.3rem/1 var(--f-mono); cursor: pointer; transition: background-color var(--d-ui) var(--e-ui), border-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-filter[aria-pressed="true"] { border-color: var(--c-slate); background: var(--c-slate); color: var(--c-cream); }
+.a-filter:active { transform: scale(.97); }
+.o-reviews__grid { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; min-width: 0; }
+.m-quote.-grid { min-height: 0; border-top: 0; border-right: 0; scroll-snap-align: none; }
+.m-quote.-grid[hidden] { display: none; }
+/* The first and fourth cards lead, so the grid stops reading as a table (critic r1). Copy sizes card four for a longer review. */
+.m-quote.-grid:nth-child(1) .m-quote__text, .m-quote.-grid:nth-child(4) .m-quote__text { font-size: 2.4rem; line-height: 1.25; }
+/* Long real reviews stop at nine lines and Read on Facebook carries the rest, so one long review can't stretch its row (critic r1). A filtered card shows in full. */
+.m-quote.-grid .m-quote__text p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 9; }
+.o-reviews__grid.is-filtered .m-quote__text p { display: block; overflow: visible; }
+.m-quote__foot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-1); }
+/* the attribution is the person, so it reads as a name, not one more label beside the job. Real reviews put the customer's name here. */
+.m-quote.-grid .m-quote__who { font: var(--w-semi) 1.6rem/1.25 var(--f-display); letter-spacing: 0; text-transform: none; color: var(--c-ink); }
+.m-quote.-grid .m-quote__who::before { content: none; }
+.m-quote__job { color: var(--c-steel); }
+.m-quote__foot .a-link { margin-top: var(--s-1); }
+.o-reviews__empty { padding: var(--s-6) var(--cell); color: var(--c-soft); }
+.o-reviews__empty[hidden] { display: none; }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-filter:hover { border-color: var(--c-slate); background: rgba(52, 61, 78, .06); }
+  .a-filter[aria-pressed="true"]:hover { background: var(--c-slate); }
+}
+@media (min-width: 641px) {
+  .o-reviews__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-quote.-grid { min-height: 32rem; border-right: 1px solid var(--c-line); }
+  .m-quote.-grid:nth-child(2n) { border-right: 0; }
+  .o-reviews__grid.is-filtered .m-quote.-grid { grid-column: 1 / -1; min-height: 0; border-right: 0; }
+  .o-reviews__empty { grid-column: 1 / -1; }
+}
+@media (min-width: 1025px) {
+  .o-reviews { grid-template-columns: 30rem minmax(0, 1fr); }
+  .o-reviews__filter { padding: var(--s-5) 0 0; border-right: 1px solid var(--c-line); border-bottom: 0; }
+  .o-reviews__options { flex-direction: column; gap: 0; overflow: visible; padding: 0; }
+  /* hairline rows here, not pills: the pressed row fills edge to edge */
+  .a-filter { display: flex; align-items: center; min-height: 5.2rem; padding: 0 var(--cell); border: 0; border-top: 1px solid var(--c-line); border-radius: 0; text-align: left; }
+  .a-filter:focus-visible { outline-offset: -4px; }
+  .a-filter[aria-pressed="true"]:focus-visible { outline-color: var(--c-cream); }
+  .o-reviews__options .a-filter:last-child { border-bottom: 1px solid var(--c-line); }
+  /* Three rows that close flush with no leftover cell: 4 + 2, 2 + 4, 3 + 3 of six columns. Was 2 + 2 + 2 in every row (critic r1). A filter drops the pattern: nth-child counts hidden cards, so each result takes the whole row at the lead size. */
+  .o-reviews__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .m-quote.-grid { grid-column: span 3; min-height: 30rem; border-right: 1px solid var(--c-line); }
+  .m-quote.-grid:nth-child(1), .m-quote.-grid:nth-child(4) { grid-column: span 4; }
+  .m-quote.-grid:nth-child(2), .m-quote.-grid:nth-child(3) { grid-column: span 2; }
+  .m-quote.-grid:nth-child(2), .m-quote.-grid:nth-child(4), .m-quote.-grid:nth-child(6) { border-right: 0; }
+  .m-quote.-grid:nth-child(1) .m-quote__text, .m-quote.-grid:nth-child(4) .m-quote__text { font-size: 3.2rem; line-height: 1.2; }
+  .m-quote.-grid:nth-child(5) .m-quote__text, .m-quote.-grid:nth-child(6) .m-quote__text { font-size: 2.4rem; line-height: 1.25; }
+  /* results share the rail's height: one short review left a ruled void beside the rail (critic r2) */
+  .o-reviews__grid.is-filtered { grid-auto-rows: 1fr; align-content: stretch; }
+  .o-reviews__grid.is-filtered .m-quote.-grid { grid-column: 1 / -1; }
+  .o-reviews__grid.is-filtered .m-quote.-grid .m-quote__text { font-size: 3.2rem; line-height: 1.2; }
+}
+/* 92px is the top bar plus the header, both sticky from here up, plus 24px so the label isn't pinched under them (was 92px, critic r2). The height guard keeps all seven rows reachable on short windows. Keeps the filter in reach through the whole grid (critic r1). */
+@media (min-width: 1025px) and (min-height: 600px) {
+  .o-reviews__rail { position: sticky; top: 11.6rem; }
+}
+
+/* ---- leave a review ---- */
+/* One ruled strip of three cells at 1025 and up, read like the ticket: statement, body, actions. Not another stacked head with an empty right half (homepage open item 4). */
+.o-leave { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-leave__head { container-type: inline-size; padding: var(--s-7) var(--cell) var(--s-6); }
+.o-leave__title { --t-section: min(6rem, 11.5cqi); }   /* same size as the gallery's h2 and under the h1: was 60px at 390 against a 37px h1 (critic r1) */
+.o-leave__body { margin: 0; padding: var(--s-5) var(--cell) 0; border-top: 1px solid var(--c-line); color: var(--c-soft); }
+.o-leave__actions { margin: 0; padding: var(--s-5) var(--cell) var(--s-7); }
+@media (min-width: 1025px) {
+  .o-leave { grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* the gallery's columns, so the rules run on through both bands (was 4.2 / 4.4 / 3.4; they missed by 23px, critic r2) */
+  .o-leave__head { padding: var(--s-7) var(--cell); }
+  .o-leave__title { --t-section: min(6rem, 15cqi); }   /* same cell width and sizing as the gallery's h2: 60px at 1440 */
+  .o-leave__body, .o-leave__actions { padding: var(--s-7) var(--cell); border-top: 0; border-left: 1px solid var(--c-line); }
+  .o-leave__actions { flex-direction: column; align-items: flex-start; flex-wrap: nowrap; }
+}
+
+/* ---- before and after gallery ---- */
+/* Head beside a 2 by 2 of pairs at 1025 and up, with no leftover cell. The head stays in view while the pairs scroll past. */
+.o-gallery__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-gallery__head { min-width: 0; padding: var(--s-6) 0; }
+.o-gallery__head .m-sectionHead { --t-section: min(6rem, 11.5cqi); }
+.o-gallery__action { padding: 0 var(--cell); }
+.o-gallery__pair { min-width: 0; margin: 0; padding: 1.2rem; border-top: 1px solid var(--c-line); }
+.o-gallery__caption { margin: var(--s-2) 0 var(--s-1); color: var(--c-steel); }
+/* 8px more travel than the shared knob, so its 5px focus ring isn't cut by the frame at either end (critic r1). Scoped here: the homepage is frozen. */
+.t-reviews .m-compare__knob { left: clamp(3.4rem, var(--pos), calc(100% - 3.4rem)); }
+@media (min-width: 641px) {
+  .o-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-gallery__head { grid-column: 1 / -1; }
+  .o-gallery__pair:nth-of-type(odd) { border-right: 1px solid var(--c-line); }
+}
+@media (min-width: 1025px) {
+  .o-gallery__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .o-gallery__head { grid-column: 1; grid-row: 1 / 3; border-right: 1px solid var(--c-line); }
+  .o-gallery__head .m-sectionHead { --t-section: min(6rem, 15cqi); }   /* "AND AFTER" is about 5.2em; 60px at 1440, as the leave band's h2 */
+  .o-gallery__pair:nth-of-type(1), .o-gallery__pair:nth-of-type(2) { border-top: 0; }
+  .o-gallery__pair:nth-of-type(even) { border-right: 1px solid transparent; }   /* same inner width as the ruled column, so photos and captions line up across a row (critic r2) */
+}
+@media (min-width: 1025px) and (min-height: 600px) {
+  .o-gallery__headInner { position: sticky; top: 12rem; }   /* 92px of chrome plus the cell's own 28px of air */
+}
+@media (max-width: 1024px) {
+  .t-reviews .m-banner { display: flex; flex-direction: column; }
+  .t-reviews .m-banner__copy { order: -1; }
+  .t-reviews .m-banner__art { position: relative; z-index: 1; display: block; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-reviews .m-banner__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+
+/* ===== About ===== */
+.t-about { --banner-load: .5; --fit: 16cqi; }   /* "QUICK HAUL" is about 5.8em: 16cqi fills about 93% of the 390 column at 51px, capped at 104px above that */
+/* ---- statement: Truewerk's light sentence across the full measure, 42px at 1440 (spec 2b) ---- */
+.o-aboutStatement { padding: var(--s-7) var(--cell); }
+.o-aboutStatement__text { margin: 0; font: var(--w-light) 2.6rem/1.25 var(--f-display); letter-spacing: -.005em; text-wrap: balance; }   /* balance, not pretty: pretty still left "taking down." short on the last row at 1440 */
+/* ---- the call: under a band called Pick up the phone, the number is the loudest thing after the heading (critic r1). 34px fits the 318px phone column ---- */
+.t-about .o-split__media { padding: var(--cell) var(--cell) 0; }
+.t-about .o-split__text { border-top: 0; }
+.t-about .o-split__text .m-sectionHead { --t-section: 13cqi; }   /* about 41px at 390, a clear step under the 51px h1 (critic r1: 50.6 against 50.9) */
+.o-aboutCall { display: block; margin: var(--s-5) 0 0; padding: var(--s-4) 0 0; border-top: 1px solid var(--c-line); color: var(--c-cream); text-decoration: none; }
+.o-aboutCall__lead { display: flex; align-items: center; gap: var(--s-2); font: var(--w-label) 1.3rem/1.4 var(--f-mono); color: var(--c-soft); }
+.o-aboutCall__number { display: block; margin: var(--s-1) 0 0; font: var(--w-heavy) 3.4rem/1.1 var(--f-display); letter-spacing: -.01em; text-decoration: underline transparent 2px; text-underline-offset: .15em; transition: text-decoration-color var(--d-nudge) var(--e-out); }
+.o-aboutCall:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-aboutCall:hover .o-aboutCall__number { text-decoration-color: currentColor; }
+}
+.o-aboutCall:focus-visible .o-aboutCall__number { text-decoration-color: currentColor; }
+@media (min-width: 1025px) {
+  .t-about .o-split__media { padding: 1.2rem; }
+  .t-about .o-split__text .m-sectionHead { --t-section: min(7.2rem, 16cqi); }
+  .o-aboutCall__number { font-size: min(4.8rem, 3.6vw); }
+}
+/* ---- how we work: four ruled rows. Big title, then the site's mono body, so the page has one body voice (critic r2). At 1025 and up the rule continues the split band's above it, at 786 of 1344 ---- */
+.o-aboutWork { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-aboutWork__cell { display: grid; gap: var(--s-2); min-width: 0; padding: var(--s-5) var(--cell); border-top: 1px solid var(--c-line); }
+.o-aboutWork__cell:first-child { border-top: 0; }
+.o-aboutWork__label { margin: 0; font: var(--w-heavy) 2.8rem/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); }
+.o-aboutWork__text { margin: 0; color: var(--c-soft); }
+@media (min-width: 1025px) {
+  .o-aboutWork__cell { grid-template-columns: minmax(0, 786fr) minmax(0, 558fr); gap: 0; padding: 0; }
+  .o-aboutWork__label { align-self: center; padding: var(--s-5) var(--cell); font-size: min(5.6rem, 3.9vw); }
+  .o-aboutWork__text { align-self: stretch; padding: var(--s-5) var(--cell); border-left: 1px solid var(--c-line); }
+}
+
+/* ===== Donate ===== */
+/* FREITAG's take-back order: title cell, full-width statement cell, then 6 + 6 of labelled cells beside one photo tile (spec 2b).
+   Copy.md gives this page no lede, so the h1 takes the banner's measure: the copy column widens, the banner is 400px not 440
+   (spec 2b; less to hold, and the lists come up sooner, critic r1), and the truck sits beside the dresser and bike set apart from its load.
+   Phones: "SOMEONE WANTS IT" is about 9.5em, which would be a 33px h1 under a 39px h2 on one row (critic ruling: no undersized
+   headings at 390), so its two words stack and the size comes off "STILL GOOD?" instead. Two rows from 641 up. */
+.t-donate { --banner-load: .25; --fit: 17cqi; }   /* "STILL GOOD?" is 5.65em: 17cqi fills 96% of the phone column, 54px at 390 */
+.m-truck__setApart { fill: none; stroke: var(--c-chrome); stroke-width: 1.25; stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }   /* the same dash as the load's level line */
+@media (min-width: 641px) {
+  .t-donate { --fit: 10cqi; }
+}
+@media (min-width: 1025px) {
+  .t-donate .m-banner { min-height: 40rem; }
+  .t-donate .m-banner__copy { width: min(108rem, 76vw); }
+  .t-donate .m-banner__art { bottom: 3.2rem; width: min(48rem, 33.3vw); }   /* the truck's own left edge stays clear of "SOMEONE WANTS IT", and the low dresser and bike pass under its row. Bottom was 48px: only 28px between the row and the dashed area (critic r2) */
+}
+/* ---- statement: the first sentence as the section statement, then the rest in mono, split on the sheet's centre rule below it. Light plus heavy caps with no stop: as a large sentence it was the full-stop headline tell (critic r2) ---- */
+.o-donateStatement__head { padding-top: var(--s-6); padding-bottom: var(--s-5); }
+.o-donateStatement__split { display: grid; grid-template-columns: minmax(0, 1fr); padding: var(--s-5) 0 var(--s-6); border-top: 1px solid var(--c-line); }
+.o-donateStatement__text { padding: 0 var(--cell); color: var(--c-ink); }
+.o-donateStatement__text + .o-donateStatement__text { margin-top: var(--s-4); }
+.o-donateStatement__point { display: block; margin-top: var(--s-4); font-weight: var(--w-button); }   /* the payoff, in the body's own face: larger, in display type, it was the second full-stop headline (critic r2) */
+@media (min-width: 1025px) {
+  .o-donateStatement__head { --t-section: min(7.2rem, 6.9cqi); padding-top: var(--s-7); padding-bottom: var(--s-6); }   /* "A LOT OF WHAT WE PICK UP" is the longest row: 6.9cqi holds it on one row from 1025, capped at the other statements' 72px */
+  .o-donateStatement__split { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; }
+  .o-donateStatement__text { padding: var(--s-5) var(--cell); }
+  .o-donateStatement__text + .o-donateStatement__text { margin-top: 0; border-left: 1px solid var(--c-line); }
+}
+/* ---- the sheet: cells, then the photo, then the actions at 390. At 1025 and up the cells sit beside the tile and share its height, so the rules fall evenly and the tile stays square (it stretches only where the text runs taller, 1025 to about 1300) ---- */
+.o-donate { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--c-line); }
+.o-donate__cells { display: grid; grid-auto-rows: 1fr; min-width: 0; }
+.t-donate .m-fact + .m-fact { border-top: 1px solid var(--c-line); }
+.t-donate .m-fact__label { margin-bottom: var(--s-2); color: var(--c-ink); font: var(--w-heavy) 2.4rem/1.1 var(--f-display); letter-spacing: 0; word-spacing: var(--ws-display); }   /* the cell's title, in the headline system: mono labels at 14px left no level between the 42px statement and the body (critic r1) */
+.t-donate .m-fact__label::before { width: .9rem; height: .9rem; }
+.m-fact__label.-no::before { border: 1px solid currentColor; background: transparent; }   /* hollow: the same mark as "We don't take" on Services */
+.t-donate .m-fact__body { max-width: 60ch; color: var(--c-ink); font-size: var(--t-body); line-height: var(--t-bodyLh); }
+.o-donate__media { padding: 1.2rem; border-top: 1px solid var(--c-line); }
+.o-donate__media .b-photo { width: 100%; height: 100%; aspect-ratio: 1; }
+.o-donate__actions { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--c-line); }
+.o-donate__book.m-actions { margin: 0; padding: var(--s-5) var(--cell) 0; }
+.o-donate__call { padding: var(--s-3) var(--cell) var(--s-6); }
+.o-donate__callLink { display: flex; align-items: center; width: fit-content; min-height: 4.4rem; color: var(--c-ink); font-weight: var(--w-button); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .35rem; transition: text-decoration-color var(--d-nudge) var(--e-out); }   /* its own line: inline, its 44px box left a loose gap in the sentence at 390 (critic r1). The plain size on phones and tablets: the call bar is already on screen, and a 24px number made a fourth call to action there (critic r2) */
+@media (max-width: 1024px) {
+  .o-donate__media { order: -1; border-top: 0; }   /* the page's one image, before the cells, not after 1,250px of text at 390 (critic r2) */
+  .o-donate__cells { border-top: 1px solid var(--c-line); }
+}
+.o-donate__callLink:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-donate__callLink:hover { text-decoration-color: transparent; }
+}
+@media (min-width: 1025px) {
+  .o-donate { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-donate__media { border-top: 0; border-left: 1px solid var(--c-line); }
+  .t-donate .m-fact__label { font-size: min(2.8rem, 1.95vw); }
+  .o-donate__actions { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-donate__book.m-actions { padding: var(--s-5) var(--cell); }
+  .o-donate__call { padding: var(--s-3) var(--cell); border-left: 1px solid var(--c-line); }
+  .o-donate__callLink { font: var(--w-heavy) 2.4rem/1 var(--f-display); text-underline-offset: .4rem; }
+}
+
+/* ---- the banner truck under the copy on phones and tablets, as on Service area and Reviews (critic, Service area r1: it was simply gone at 390) ---- */
+@media (max-width: 1024px) {
+  .t-donate .m-banner { display: flex; flex-direction: column; }
+  .t-donate .m-banner__copy { order: -1; }
+  .t-donate .m-banner__art { position: relative; z-index: 1; display: block; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-donate .m-banner__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+
+/* ===== FAQ ===== */
+/* Truewerk's filter rows with a plus, on FREITAG's ruled sheet, questions in Bio Sans 600 caps, answers in mono, native
+   details (spec 2b). At 1025 and up each row is a line of a ledger: the question in the sheet's left half, its answer
+   opposite across the centre rule, so the page reads as the ticket's paper and not a stack of drop-downs. Groups take
+   turns on cream and slate (V7). */
+.t-faq .o-jump__link { align-items: center; min-height: 5.6rem; }   /* four short labels: tighter than Services' eight-up cells, and the chevron level with the word (critic r2) */
+.t-faq { --banner-load: .125; --fit: 17cqi; }   /* "QUESTIONS" is the longest row: 17cqi fills the phone column at 54px, capped at 104px above that */
+.o-faqGroup { scroll-margin-top: -1.6rem; }   /* the jump lands flush under the header, with no scrap of the band before it */
+.o-faqGroup__title { padding-top: var(--s-6); padding-bottom: var(--s-4); }
+/* ---- each group's drawing: one small job told in four, the banner truck's line standing on the sheet's own hairline. Empty cells of halftone read as filler (critic r1) ---- */
+.o-faqGroup__art { padding: 0 var(--cell); }
+.m-lineArt { display: block; width: 100%; height: auto; overflow: visible; }
+.m-lineArt__line { fill: none; stroke: currentColor; stroke-opacity: .75; stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.m-lineArt__wheel { fill: var(--c-cream); }
+.b-band.-slate .m-lineArt__wheel { fill: var(--c-slate); }
+.m-lineArt__fill { fill: currentColor; }
+.m-lineArt__dash { stroke: currentColor; stroke-width: 1.25; stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }   /* the same dash as the load's level line */
+.o-faqGroup__loads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--c-line); }
+.m-faqLoad { display: flex; flex-direction: column; min-width: 0; padding: var(--s-2) var(--s-2) 0; }
+.m-faqLoad + .m-faqLoad { border-left: 1px solid var(--c-line); }
+.m-faqLoad__label { color: var(--c-ink); font-size: 1rem; letter-spacing: .04em; }   /* the 87px phone cell holds "FULL TRUCK" on one row with no bullet */
+.m-faqLoad__label::before { display: none; }
+.m-faqLoad__figure { margin: var(--s-1) 0 var(--s-2); font: var(--w-heavy) 2rem/1 var(--f-display); letter-spacing: -.01em; }
+.m-faqLoad__glyph { display: block; width: 100%; height: auto; margin-top: auto; overflow: visible; }
+/* ---- a row ---- */
+.m-faq { position: relative; border-top: 1px solid var(--c-line); }
+.m-faq__q { display: block; min-height: 5.6rem; padding: 1.6rem calc(var(--cell) + 3.2rem) 1.6rem var(--cell); cursor: pointer; list-style: none; transition: background-color var(--d-ui) var(--e-ui); }
+.m-faq__q::-webkit-details-marker { display: none; }
+.m-faq__q:focus-visible { outline-offset: -4px; }
+.m-faq__title { font: var(--w-semi) 1.6rem/1.35 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-wrap: balance; transform-origin: 0 50%; transition: transform var(--d-ui) var(--e-ui); }
+.m-faq__q:active .m-faq__title { transform: scale(.98); }   /* the title, never the summary: a transform there makes it the mark's containing block, so the mark jumped 677px mid-press and a hand's click never landed (critic r2; build/tmp/run6/click_faq.py) */
+/* the plus sits on the row, not the question, so it holds its place when the question narrows to the left half. 44px box, 14px mark */
+.m-faq__plus { position: absolute; top: .6rem; right: calc(var(--cell) - 1.5rem); width: 4.4rem; height: 4.4rem; }
+.m-faq__plus::before, .m-faq__plus::after { content: ""; position: absolute; top: 50%; left: 1.5rem; width: 1.4rem; height: 1.5px; margin-top: -.75px; background: currentColor; transition: transform var(--d-nudge) var(--e-out); }
+.m-faq__plus::after { transform: rotate(90deg); }
+.m-faq[open] .m-faq__plus::after { transform: rotate(0deg); }
+.m-faq.is-shut .m-faq__plus::after { transform: rotate(90deg); }   /* must sit after [open]: the mark turns as the row starts to close, while it is still open */
+.m-faq__a { padding: 0 var(--cell) var(--s-5); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-faq__q:hover { background: rgba(52, 61, 78, .07); }
+  .b-band.-slate .m-faq__q:hover { background: rgba(213, 212, 211, .08); }
+}
+/* ---- close: the ledger's last line. The number keeps its display size on phones: here it's the row's one action, the answer to the question (critic r1) ---- */
+.o-faqClose { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-faqClose__ask { padding: var(--s-6) var(--cell) var(--s-3); font: var(--w-heavy) 3.2rem/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-wrap: balance; }
+.o-faqClose__call { display: block; padding: 0 var(--cell) var(--s-6); color: var(--c-ink); text-decoration: none; }
+.o-faqClose__lead { display: flex; align-items: center; gap: var(--s-2); color: var(--c-steel); font: var(--w-label) 1.3rem/1.4 var(--f-mono); }
+.o-faqClose__number { display: block; margin: var(--s-1) 0 0; font: var(--w-heavy) 3.2rem/1.2 var(--f-display); letter-spacing: -.01em; text-decoration: underline transparent 2px; text-underline-offset: .15em; transition: text-decoration-color var(--d-nudge) var(--e-out); }
+.o-faqClose__call:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-faqClose__call:hover .o-faqClose__number { text-decoration-color: currentColor; }
+  .o-faqClose__call:hover .a-call__icon { transform: rotate(-12deg); }
+}
+.o-faqClose__call:focus-visible .o-faqClose__number { text-decoration-color: currentColor; }
+@media (min-width: 1025px) {
+  .o-faqGroup__head { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-faqGroup__title { --t-section: min(7.2rem, 12cqi); padding-top: var(--s-7); padding-bottom: var(--s-6); }   /* "WHAT WE TAKE" is about 6.6em: 12cqi leaves room and reaches the other statements' 72px at 1440 */
+  .o-faqGroup__art { display: flex; align-items: flex-end; padding: var(--s-3) var(--cell) 0; border-left: 1px solid var(--c-line); }
+  .o-faqGroup__loads { border-top: 0; border-left: 1px solid var(--c-line); }
+  .m-faqLoad { padding: var(--s-3) var(--s-3) 0; }
+  .m-faqLoad__label { font-size: var(--t-label); }
+  .m-faqLoad__figure { margin: var(--s-2) 0 var(--s-3); font-size: min(3.2rem, 2.25vw); }
+  /* the float keeps the answer's top level with the question's, whatever the question's height, and details can't be a grid in every browser. Shut, the row is all summary, so all of it opens; the question stays in the left half, so it never rewraps */
+  .m-faq { display: flow-root; }
+  .m-faq__q { float: left; width: 100%; padding: 2.2rem calc(50% + var(--cell)) 2.2rem var(--cell); }
+  .m-faq[open] .m-faq__q { width: 50%; padding-right: var(--cell); }
+  .m-faq[open]::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1px solid var(--c-line); }
+  /* the whole left cell is the control: the question's box is shorter than its answer, so this carries the click, the tint and the ring down to the row's rule (critic r2) */
+  .m-faq[open] .m-faq__q::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 50%; }
+  .m-faq[open] .m-faq__q:focus-visible { outline-color: transparent; }
+  .m-faq[open] .m-faq__q:focus-visible::after { outline: 2px solid var(--c-focus); outline-offset: -4px; }
+  .m-faq__a { margin-left: 50%; padding: 2.2rem calc(var(--cell) + 3.2rem) 2.2rem var(--cell); }
+  .m-faq__title { font-size: 2rem; }
+  .m-faq__plus { top: 1.2rem; }
+  .o-faqClose { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-faqClose__ask { align-self: center; padding: var(--s-6) var(--cell); font-size: min(4.4rem, 3.05vw); }   /* "STILL HAVE A QUESTION?" is about 13em: one row in the half sheet from 1025 */
+  .o-faqClose__call { padding: var(--s-5) var(--cell); border-left: 1px solid var(--c-line); }
+  .o-faqClose__number { font-size: min(4.4rem, 3.05vw); }
+}
+@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) {
+  .m-faq[open] .m-faq__q:hover { background: transparent; }   /* must sit after the row's base hover */
+  .m-faq[open] .m-faq__q:hover::after { background: rgba(52, 61, 78, .07); }
+  .b-band.-slate .m-faq[open] .m-faq__q:hover::after { background: rgba(213, 212, 211, .08); }
+}
+/* ---- the banner truck under the lede on phones and tablets, as on Service area and Reviews ---- */
+@media (max-width: 1024px) {
+  .t-faq .m-banner { display: flex; flex-direction: column; }
+  .t-faq .m-banner__copy { order: -1; }
+  .t-faq .m-banner__art { position: relative; z-index: 1; display: block; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-faq .m-banner__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+@media (min-width: 1025px) {
+  .t-faq .o-jump__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .t-faq .o-jump__link { min-height: 7.2rem; padding: var(--s-4) var(--cell); font-size: 1.6rem; }   /* the labels on the rows' left axis (critic r1: 8px off) */
+}
+
+/* ===== Contact ===== */
+/* Spec 2b: a split band, then the quote form in the ticket's ruling, one continuous ruled sheet. The lede says the fastest
+   way to a price is a call, so the number comes first and is the loudest thing after the h1. No banner truck under 1025:
+   the number comes up sooner, and the map carries the page's picture. */
+.t-contact { --banner-load: .375; --fit: 17cqi; --c-chipLine: rgba(52, 61, 78, .6); }   /* "CALL, BOOK" is the longest row: 17cqi fills the phone column at 54px, capped at 104px above that. chipLine is 3.3:1 on cream, as on Book: a form the visitor must find its fields in */
+/* ---- cells ---- */
+.o-contactCells { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.m-contactCell { display: flex; flex-direction: column; justify-content: center; gap: var(--s-3); min-width: 0; padding: var(--s-5) var(--cell); }   /* one label gap in every cell, the spare height shared evenly: pinned to the foot, the gaps ran 134, 96, 73 and 22px (critic r1) */
+.m-contactCell + .m-contactCell { border-top: 1px solid var(--c-line); }
+/* a faint rule at rest, so a link reads as one on touch too; ink on hover. .18em clears the parentheses' tails */
+.m-contactCell__value { display: block; margin: 0; color: var(--c-ink); font: var(--w-heavy) 2.4rem/1.2 var(--f-display); text-wrap: balance; }
+a.m-contactCell__value { display: flex; align-items: center; width: fit-content; min-height: 4.4rem; text-decoration: underline 2px var(--c-ruleSolidLight); text-underline-offset: .18em; transition: text-decoration-color var(--d-nudge) var(--e-out); }
+.m-contactCell__value.-phone { font-size: 4rem; letter-spacing: -.01em; }   /* "(603) 555-0142" is about 7em: 282px in the 316px phone column */
+.m-contactCell__value:active { transform: scale(.97); }
+.m-contactCell__line { margin: var(--s-2) 0 0; color: var(--c-steel); font: var(--w-body) 1.4rem/1.5 var(--f-mono); text-wrap: pretty; }
+@media (hover: hover) and (any-pointer: fine) {
+  a.m-contactCell__value:hover { text-decoration-color: currentColor; }
+}
+a.m-contactCell__value:focus-visible { text-decoration-color: currentColor; }
+/* ---- the form ---- */
+.o-contactForm__title { padding-top: var(--s-6); padding-bottom: var(--s-4); }
+.o-contactForm__art { padding: 0 var(--cell); }
+/* hairlines as borders, as on the bands above and below, so the centre rule lands on the same pixel: 1px gaps sat half a pixel off and looked heavier (critic r2) */
+.o-contactForm__grid { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); }
+.o-contactForm__cell { min-width: 0; padding: var(--s-4) var(--cell) var(--s-5); }
+.o-contactForm__cell + .o-contactForm__cell { border-top: 1px solid var(--c-line); }
+.t-contact .m-field .a-label { font-size: 1.2rem; }   /* spec's 11px, a size up: these name the fields a homeowner has to fill in on a phone (critic r2) */
+.o-contactForm__job { display: flex; flex-direction: column; gap: var(--s-5); }
+.o-contactForm__jobField { display: flex; flex: 1; flex-direction: column; }
+.o-contactForm__jobField .m-field__input { flex: 1; }
+.o-contactForm__send { display: flex; flex-direction: column; gap: var(--s-5); }
+.o-contactForm__chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; clear: both; }
+.o-contactForm__chips .a-choice__face { flex-direction: row; }
+.o-contactForm__foot { display: flex; flex-direction: column; gap: var(--s-3); margin-top: auto; }
+/* ---- states: a ledger line, the word left and the number opposite. :not([hidden]): a display set here would beat the global [hidden] rule ---- */
+.o-contactForm__state:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); padding: var(--s-5) var(--cell) var(--s-6); border-bottom: 1px solid var(--c-line); }
+.o-contactForm__state:focus { outline: 0; }
+.o-contactForm__state[role="status"] { border-top: 1px solid var(--c-line); }   /* success replaces the form, so the head above needs its own rule */
+.o-contactForm__state .m-contactCell__line { margin: 0 0 var(--s-1); }
+.o-contactForm__stateTitle { font: var(--w-heavy) 3.2rem/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-wrap: balance; }
+.o-contactForm__stateLight { font-weight: var(--w-light); }
+/* the one move on the page: the request goes, the truck leaves. Off under reduced motion */
+.m-lineArt__truck { transition: transform var(--d-fill) ease-in, opacity var(--d-fill) ease-in; }
+.is-sent .m-lineArt__truck { opacity: 0; transform: translateX(240px); }
+.m-lineArt__dash { transition: opacity var(--d-fill) ease-in; }
+.is-sent .m-lineArt__dash { opacity: 0; }   /* the line goes with the truck: left behind, it led to nothing (critic r2) */
+/* ---- commercial ---- */
+.o-contactCommercial { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-2); padding: var(--s-5) var(--cell) var(--s-6); }
+.o-contactCommercial { align-items: start; }
+.o-contactCommercial__label { margin: 0 0 var(--s-2); color: var(--c-ink); font: var(--w-heavy) 2.4rem/1.2 var(--f-display); text-wrap: balance; }   /* the cells' value type: a whole audience, under an 11px label it read as a footnote (critic r1, r2). Copy.md's words */
+.o-contactCommercial .a-body { max-width: none; }   /* one row at 1440: at 60ch it left "own form." alone (critic r2) */
+/* the map fills its cell, rule to rule: its own frame inside the cell's made two parallel lines the whole way down (critic r1) */
+.t-contact .o-split__media { padding: 0; }
+.t-contact .m-map { border: 0; }
+@media (max-width: 640px) {
+  .t-contact .m-map__town { font-size: 2.8rem; }   /* 12px in this 348px map, as the hub's are in its 324px one: 3rem left NASHUA 3px off the edge and HAVERHILL on the state line (critic r2) */
+}
+@media (max-width: 1024px) {
+  .t-contact .o-split__media { border-top: 1px solid var(--c-line); }
+}
+@media (min-width: 641px) {
+  .o-contactForm__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-contactForm__cell.-half { grid-column: span 2; }
+  .o-contactForm__cell:nth-child(2) { border-top: 0; }
+  .o-contactForm__cell:nth-child(2n):not(.-half) { border-left: 1px solid var(--c-line); }
+}
+@media (min-width: 1025px) {
+  .t-contact .o-split.-flip { grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* the sheet's one centre rule, the form's below it too: at 786 + 558 the rule jumped 114px between the bands (critic r1). Spec 2b's map frame is 786; here it's 672 */
+  .m-contactCell { padding: var(--cell); }
+  .m-contactCell__value { font-size: min(2.8rem, 1.95vw); }
+  .m-contactCell__value.-phone { font-size: min(6.4rem, 4.45vw); }   /* "(603) 555-0142" is about 7em: fills the 558 column at 1440 and holds down to 1025 */
+  .o-contactForm__head { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-contactForm__title { --t-section: min(7.2rem, 12cqi); padding-top: var(--s-7); padding-bottom: var(--s-6); }
+  .o-contactForm__art { display: flex; align-items: flex-end; padding: var(--s-3) var(--cell) 0; border-left: 1px solid var(--c-line); }
+  .o-contactForm__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .o-contactForm__cell { padding: var(--cell); }
+  .o-contactForm__cell:nth-child(-n + 4) { border-top: 0; }
+  .o-contactForm__cell:nth-child(n + 2):not(.o-contactForm__job) { border-left: 1px solid var(--c-line); }   /* every cell but the row starts: Name and the job */
+  .o-contactForm__state:not([hidden]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; padding: 0; }
+  .o-contactForm__state > * { padding: var(--s-5) var(--cell); }
+  .o-contactForm__state > * + * { border-left: 1px solid var(--c-line); }
+  .o-contactForm__stateTitle { align-self: center; font-size: min(4.4rem, 3.05vw); }
+  .o-contactCommercial { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 0; padding: 0; }
+  .o-contactCommercial__label { font-size: min(2.8rem, 1.95vw); }
+  .o-contactCommercial > div { padding: var(--s-5) var(--cell); }
+  .o-contactCommercial__link { display: flex; align-items: center; border-left: 1px solid var(--c-line); }
+}
+
+/* ===== Commercial, 404, Privacy: the light row's left edge ===== */
+/* A Bio Sans Light stem carries .094em of side bearing (measured: 9.6px at 102px), so L, N and P sat right of the heavy row, the lede and the button (critic, 404 r1). The pull puts them on the line. These three pages only: their light rows open on a stem, and a pull would clip a round or slanted first letter under the row's mask. POLICY's heavy P has its own .058em */
+.t-commercial .a-hero__row.-light .a-hero__line, .t-notFound .a-hero__row.-light .a-hero__line, .t-privacy .a-hero__row.-light .a-hero__line { margin-left: -.094em; }
+.t-privacy .a-hero__line.-second { margin-left: -.058em; }
+
+/* ===== Commercial ===== */
+/* Spec 2b: inner banner, ticket-ruled form. The form takes the place the ticket has on the homepage, directly under the banner's
+   slats. Copy.md gives this page no form heading, so the h1 does the job: across the whole sheet at 1025 and up, with a row of
+   properties beside the lede. All of it is placeholder wording: Shawn hasn't said he does this work (content/placeholders.md). */
+.t-commercial { --fit: 14cqi; --c-chipLine: rgba(52, 61, 78, .6); }   /* phones: each row wraps once and "AND PROPERTY" (7.1em) is the longest line: 14cqi fills the 318px column at 44px, above the estimate band's h2 (39.5px). chipLine is 3.3:1 on cream, as on Book and Contact */
+.t-commercial .m-field .a-label { font-size: 1.2rem; }   /* a size up from the spec's 11px, as on Contact: these name the fields to fill in */
+/* ---- the sheet: Name, Company and You are, then Phone, Email and the property, then the job on the centre rule. One column on phones, two on tablets, four from 1025 ---- */
+.o-enquiry { display: grid; grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid var(--c-line); }
+.o-enquiry__cell { min-width: 0; padding: var(--s-4) var(--cell) var(--s-5); border-top: 1px solid var(--c-line); }
+.o-enquiry__cell:first-child { border-top: 0; }
+.o-enquiry__cell { --i: 1; }   /* the rows rise after the lede, 90ms apart, as the homepage ticket's cells do (spec 5) */
+.o-enquiry__cell:nth-child(n + 4) { --i: 2; }
+.o-enquiry__cell:nth-child(n + 7) { --i: 3; }
+.o-enquiry__cell:nth-child(n + 9) { --i: 4; }
+.o-enquiry__chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; clear: both; }
+.o-enquiry__chips .a-choice__face { flex-direction: row; }   /* the chip's own 4px side padding: five across just fits the 431px half column at 1025, and spare room shares out above that */
+.o-enquiry__chips.-role .a-choice:nth-child(3) { grid-column: 1 / -1; }   /* two columns at 390, like How often, in copy.md's order. The longest word takes the odd row: a full-width Landlord read as the recommended answer (critic r1), a full-width Other as the biggest thing in the group (critic, Book r2), and word-wide chips as a third sizing system (critic r2) */
+.o-enquiry__rhythm { display: flex; flex-direction: column; gap: var(--s-5); }
+.js .o-enquiry__often { display: none; }
+.js .o-enquiry__often.is-open { display: block; }
+.o-enquiry__job { display: flex; flex-direction: column; gap: var(--s-5); }
+.o-enquiry__jobField { display: flex; flex: 1; flex-direction: column; }
+.o-enquiry__jobField .m-field__input { flex: 1; min-height: 9.6rem; }   /* three rows; less room under the chips beside it, and it grows with the cell when How often opens */
+.o-enquiry__photos:not([hidden]) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); }
+.o-enquiry__photos .a-label { width: 100%; }
+.o-enquiry__photos .m-field__note, .o-enquiry__photos .m-upload__files { margin: 0; }
+.o-enquiry__photos .m-field__note:empty { display: none; }
+.o-enquiry__small, .o-enquiry__send { display: flex; align-items: center; }
+.t-commercial .m-field .a-label.-legend { margin-bottom: var(--s-2); }   /* the same gap as a field's label, so a row of chips and a row of boxes start level */
+.t-commercial .m-field__input { scroll-margin-top: 2.6rem; }   /* on top of the page's scroll padding: a field an error sends focus to lands with its 25px label clear of the sticky chrome */
+@media (max-width: 1024px) {
+  /* the banner's drawing under the copy on phones and tablets, as on Service area and Reviews */
+  .t-commercial .m-banner { display: flex; flex-direction: column; }
+  .t-commercial .m-banner__copy { order: -1; }
+  .t-commercial .m-banner__art { position: relative; z-index: 1; display: block; width: 100%; margin: var(--s-5) 0 0; padding-left: var(--cell); }   /* inside the frame line, ground line ending on it: bled off the edge, the truck's nose looked cut by accident (critic r2) */
+  .o-enquiry__send { padding-top: 0; border-top: 0; }   /* the button belongs to the small print above it */
+  .o-enquiry__send .a-button { width: 100%; }
+}
+@media (max-width: 640px) {
+  .t-commercial .m-banner { padding-bottom: 4.8rem; }   /* 72px left the first field at y 699 of 844 (critic r2); the slats are 16px tall here */
+}
+@media (min-width: 641px) {
+  .t-commercial { --fit: 7.9cqi; }   /* two rows from here up: "AND PROPERTY MANAGERS" is 12.47em, so 7.9cqi fills 98.5% of the sheet, 102px at 1440 */
+  .o-enquiry { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .o-enquiry__cell.-half { grid-column: span 2; }
+  .o-enquiry__cell:nth-child(2) { border-top: 0; }
+  .o-enquiry__cell:nth-child(5) { border-left: 1px solid var(--c-line); }   /* Email, beside Phone */
+  .o-enquiry__cell:nth-child(2) { border-left: 1px solid var(--c-line); }   /* Company, beside Name */
+  .o-enquiry__chips.-role { display: flex; }   /* one row from here up: spare room shared out */
+  .o-enquiry__chips.-role .a-choice { flex: 1 1 auto; }
+  .o-enquiry__chips.-four { grid-template-columns: repeat(4, auto); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-commercial .m-banner__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+}
+@media (min-width: 1025px) {
+  .t-commercial .m-banner__copy { width: 100%; }
+  .t-commercial .m-banner__art { bottom: 4rem; width: min(58rem, calc(100vw - 64.3rem)); }   /* 64.3rem: the lede's right edge at 1025 (563px), the right gutter and a 32px gap, so it never reaches the lede. 40px up: at 32px its ground line sat 3px off the slats and read as a mistake */
+  .o-enquiry { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .o-enquiry__cell { padding: var(--cell); }
+  .o-enquiry__cell:nth-child(-n + 3) { border-top: 0; }
+  .o-enquiry__cell:nth-child(3), .o-enquiry__cell:nth-child(6), .o-enquiry__cell:nth-child(8), .o-enquiry__send { border-left: 1px solid var(--c-line); }   /* with 2 and 5 from the step above; the row starts have none */
+  .o-enquiry__cell.o-enquiry__photos { grid-column: 1 / -1; }   /* its own row: two classes, or -half's span wins and small print slides up beside it */
+}
+
+/* ===== 404 ===== */
+/* Spec 2b: inner banner with the empty truck bed and one Book now, then the four ways on in the strip the ticket has on the
+   homepage. No estimate band: spec 2b's one Book now, and Varun's note asks for fewer sections (design/choices.md). */
+.t-notFound { --fit: 14.6cqi; }   /* "TO HAUL HERE" is 6.63em: 14.6cqi fills 97% of the copy column, 46px at 390 and 101px at 1440 */
+.m-banner__nowrap { white-space: nowrap; }   /* balance broke the line at the hyphen, drop- then off, at 1440 */
+.t-notFound .m-actions { --i: 1; margin-top: var(--s-5); }
+.t-notFound .o-jump__list { --i: 2; }
+.t-notFound .o-jump__link { align-items: center; font: var(--w-heavy) 1.8rem/1 var(--f-display); word-spacing: var(--ws-display); }
+.t-notFound .o-jump__link .a-svg { color: inherit; transform: none; }   /* an arrow on to another page, not the chevron down this one */
+/* ---- the load sinks to the bed's floor: 148 is the bed's height, as in the ticket's gauge, and it leaves the heap's peaks showing as crumbs, so the settled drawing still says empty (critic r1: bare, it read as any wireframe truck). That is the resting state with no JS and under reduced motion. Two classes on the truck, so the reduced-motion block's rules lose to it ---- */
+.t-notFound .m-truck .m-truck__load { opacity: 1; transform: translateY(148px); }
+.t-notFound .m-truck__level { opacity: 0; }   /* the dashed level has nothing to mark on the floor */
+@media (prefers-reduced-motion: no-preference) {
+  .js .t-notFound .m-truck .m-truck__load { opacity: 0; }
+  /* the load arrives with the truck (500ms, 900ms, the body's own timing), holds to 1700ms, sinks for 1000ms: critic r1 saw it float alone, and gone before it registered */
+  .is-ready .t-notFound .m-truck .m-truck__load { animation: notFoundDropOff 3000ms linear both; }
+  .is-ready .t-notFound .m-truck__level { animation: notFoundLevel 3000ms linear both; }
+}
+@keyframes notFoundDropOff {
+  0% { opacity: 0; transform: translateY(74px); }
+  16.67% { opacity: 0; transform: translateY(74px); animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+  46.67% { opacity: 1; transform: translateY(74px); }
+  56.67% { opacity: 1; transform: translateY(74px); animation-timing-function: cubic-bezier(.55, 0, .85, .3); }
+  90% { opacity: 1; transform: translateY(148px); }
+  100% { opacity: 1; transform: translateY(148px); }
+}
+@keyframes notFoundLevel {
+  0%, 90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (hover: hover) and (any-pointer: fine) {
+  .t-notFound .o-jump__link:hover .a-svg { transform: translateX(.4rem); }
+}
+@media (max-width: 1024px) {
+  /* the truck under the copy on phones and tablets, as on Service area and Reviews */
+  .t-notFound .m-banner { display: flex; flex-direction: column; }
+  .t-notFound .m-banner__copy { order: -1; }
+  .t-notFound .m-banner__art { position: relative; z-index: 1; display: block; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .t-notFound { --fit: 9.5cqi; }   /* the column runs full width here: 14.6cqi made 104px at 1024, bigger than at 1440, and pushed the links off the first screen (critic r1) */
+  .t-notFound .m-banner__art { width: min(100%, 44rem); margin: var(--s-5) 0 0 auto; }
+}
+@media (min-width: 641px) {
+  .t-notFound .o-jump__link { font-size: 2.2rem; }
+}
+@media (min-width: 1025px) {
+  .t-notFound .m-banner { padding-top: 4.8rem; padding-bottom: 7.2rem; }   /* spec 2b's 440 is for a headline and a lede; with the button too this holds 455 */
+  .t-notFound .m-banner__copy { width: min(74rem, calc(54vw - var(--gutter))); }
+  .t-notFound .o-jump__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .t-notFound .o-jump__link { min-height: 9.6rem; padding: var(--s-4) var(--cell); font-size: 2.8rem; }
+}
+
+/* ===== Privacy ===== */
+/* Spec source map: a plain text header. Plan.md: plain ruled sections, the fine print on the back of the ticket. One column to 1024, then on the sheet's centre rule, in stacked cells, so it never reads as heading left, body right. Quiet on purpose: section titles at 600 like the FAQ's questions (critic r1: 800 caps shouted over one-line answers), and a contact line in the body's own face. */
+.t-privacy { --fit: min(7.2rem, 22cqi); }   /* the other statements' 72px; "PRIVACY" is about 3.6em, so 22cqi holds it in the 318px phone column */
+.t-privacy .m-banner { padding-bottom: 4.8rem; }
+.o-privacy { display: grid; grid-template-columns: minmax(0, 1fr); }
+.m-privacyCell { min-width: 0; padding: var(--s-5) var(--cell) var(--s-6); border-top: 1px solid var(--c-line); }
+.m-privacyCell:first-child { border-top: 0; }
+.m-privacyCell__title { margin: 0 0 var(--s-3); font: var(--w-semi) 2.2rem/1.1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-wrap: balance; }
+.m-privacyCell.-reach { padding-bottom: calc(var(--s-6) - 1rem); }
+.m-privacyCell__reach { display: flex; flex-direction: column; align-items: flex-start; margin-top: -1rem; }   /* the 44px link boxes hold 11px of air above their text: this keeps the title to text gap of every other cell (critic r2) */
+.m-privacyCell__reach .m-contactCell__value { display: flex; align-items: center; min-height: 4.4rem; font: var(--w-body) var(--t-body)/1.4 var(--f-mono); }
+.m-privacyCell__reach a.m-contactCell__value { font-weight: var(--w-button); text-decoration: underline 1px currentColor; text-underline-offset: .35rem; }   /* a plain, visible link at rest: the shared value's faint rule is 1.4:1 and hid it beside the name (critic r1) */
+@media (hover: hover) and (any-pointer: fine) {
+  .m-privacyCell__reach a.m-contactCell__value:hover { text-decoration-color: transparent; }
+}
+@media (min-width: 641px) {
+  .m-privacyCell__reach { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: var(--s-7); }
+}
+@media (min-width: 1025px) {
+  .t-privacy .m-banner { min-height: 0; padding-top: 4rem; padding-bottom: 6.4rem; }
+  .o-privacy { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-privacyCell:nth-child(2) { border-top: 0; }
+  .m-privacyCell:nth-child(2n) { border-left: 1px solid var(--c-line); }
+  .m-privacyCell.-reach { grid-column: 1 / -1; }
+}
+
+/* ===== Reduced motion ===== */
+/* Content shows at once and nothing moves: no row reveals, no rises, no fill, no menu slide, no breathing pills,
+   no tile push-in. Hover changes become instant colour changes. */
+@media (prefers-reduced-motion: reduce) {
+  .js .a-hero__line, .is-ready .a-hero__line, .js .a-reveal, .is-ready .a-reveal, .js .a-inview, .js .a-inview.is-inview { opacity: 1; transform: none; transition: none; }
+  .js .m-truck__body, .is-ready .m-truck__body, .js .m-truck__load, .is-ready .m-truck__load { opacity: 1; transition: none; }
+  .js .m-banner .m-truck { --load: var(--banner-load, .5); }
+  .m-truck__load, .m-menu, .m-menu__panel, .m-actionBar, .m-actionBar.is-shown, .o-homeTicket__option, .m-rail__thumb, .m-compare__knob, .m-compare__tag { transition: none; }
+  .m-menu__item, .m-menu__actions, .m-menu__hours, .m-menu.is-open .m-menu__item, .m-menu.is-open .m-menu__actions, .m-menu.is-open .m-menu__hours { opacity: 1; transform: none; transition: none; }
+  .m-actions .a-button, .o-jump__link, .o-jump__link .a-svg, .m-townRow, .m-townRow__arrow, .m-map__dot, .a-filter,
+  .o-book__progress::before, .o-book__progressBtn, .m-field__input, .m-upload__face,
+  .a-button, .a-button::before, .a-button__arrow, .a-call__icon, .a-call__text, .a-choice__face, .a-link__text, .a-link__arrow, .a-square, .a-socialPill,
+  .m-header__link, .m-header__menuBtn, .m-header__callBtn, .m-header__callBtn .a-svg, .m-topbar__call, .m-menu__link .a-svg,
+  .b-photo__img, .m-townCard, .m-townCard__arrow, .m-footerCol__link, .m-footerCol__plus::before, .m-footerCol__plus::after { transition: none; }
+  .m-serviceTile:hover .b-photo__img { transform: none; }
+  .o-aboutCall__number, .o-donate__callLink, .a-textLink, .o-faqClose__number, .m-faq__q, .m-faq__title, .m-faq__plus::before, .m-faq__plus::after { transition: none; }
+  .o-faqClose__call .a-call__icon, a.m-contactCell__value { transition: none; }
+  .m-lineArt__truck, .is-sent .m-lineArt__truck, .m-lineArt__dash, .is-sent .m-lineArt__dash { opacity: 1; transition: none; transform: none; }
+  html:has(.m-banner) .m-footerCol__link { transition: none; }
+}
+
+/* ===== Print ===== */
+/* A policy gets printed and saved. With nothing to trigger them, the reveals left whole sections blank, and cream type on a slate ground that doesn't print vanished (critic, Privacy r1). The page's own text only, in ink on white. Inner pages only, as the other shared changes this run: the approved homepage waits for Varun's yes */
+@media print {
+  html:has(.m-banner) .a-inview, html:has(.m-banner) .a-reveal, html:has(.m-banner) .a-hero__line { opacity: 1; transform: none; transition: none; }
+  html:has(.m-banner) .m-preview, html:has(.m-banner) .m-topbar, html:has(.m-banner) .m-header, html:has(.m-banner) .m-menu, html:has(.m-banner) .m-actionBar, html:has(.m-banner) .o-estimate, html:has(.m-banner) .a-halftone, html:has(.m-banner) .o-footer, .m-banner__stripe, .m-banner__mark, .m-banner__art, .m-banner__slats { display: none; }
+  .m-banner { min-height: 0; padding: 0 var(--gutter) 2rem; background: none; }
+  .m-banner::before, .m-banner::after, .b-band::before { display: none; }
+  .m-banner .a-hero, .m-banner .a-lede { color: var(--c-ink); }
+}

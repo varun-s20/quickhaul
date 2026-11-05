@@ -1,0 +1,52 @@
+Batch b is finished: Reviews, About and Donate are moved in, and I stopped after Donate as told. All three pass the Critic at 8.1, narrowly, but the fixes made after each last round have not been re-scored.
+
+The killed run had already moved Reviews in and run QA once, and that work held up, so I kept it and carried on from there. No server or browser is left running, no packages were installed, and I ran no git commands that change anything.
+
+| Page | Critic | What changed |
+|---|---|---|
+| **Reviews** | 7.4, then **8.1 PASS** | The grid now has real columns that end level, two card colours, and drawn items on card edges. The before and after pairs are recut to 4:3, so each pair compares better. The old basement photo was a sneaker warehouse with Nike and adidas on every stack, so it's gone. |
+| **About** | 7.8, then **8.1 PASS** | The Chevrolet is out. How we work now sits on a seated card. |
+| **Donate** | **8.1 PASS** on round 1 | The Yes line now leads and the refusals step back. On phones the dresser and bike are bigger and clear of the band's corner. The French skyline is cropped out. |
+
+**About's photo:** my first replacement, a stock truck with its plate painted out, read as Shawn's own truck to the Critic. So the slot now shows a house and driveway with no vehicle or person. It was shot in Wisconsin and is logged as must-replace by Shawn's own photo. The Critic found the page honest, but says the photo could sit on an insurance site.
+
+**Bug found by measuring:** Donate's headline touched the plant on the truck's load on tall windows such as 1280x1024 and 1600x1200. Earlier checks only used widescreen window shapes, so nobody had seen it. It now clears by 44px or more at 23 window sizes, even with a scrollbar. `banner_check.py` gained a `--gutter` option to measure with a scrollbar, and the notes tell the remaining banners to check tall windows too.
+
+**Shared changes:** all are logged in `build/shared-frozen.md`, with Home rechecked first.
+- Book now's hover no longer pushes the phone number.
+- The number now shows once per screen around a call pill.
+- Banner trucks are bigger on landscape tablets.
+- Slider tags fade at the divider.
+- The skip link is cleaner.
+
+**Checks on the final build:**
+- `tools/qa.py` and `check.py` are clean on Home, Reviews, About and Donate.
+- All flow tests pass on the moved-in pages.
+- The five pages not moved in yet still load without errors.
+- Request 014's cleanup script still runs on a scratch copy.
+- Not tested: a real phone, Safari, Firefox or a screen reader.
+
+**Left, in order:**
+1. FAQ
+2. Contact and Commercial
+3. 404 and Privacy
+4. Request 014, the cleanup
+5. Integration review and the whole-site Critic
+6. `site/README.md`, `build/handover.md` and checkpoint 3, with `PREVIEW_LABEL` on or a gate before any deploy-preview
+
+**For Varun to rule on (all logged):**
+- I cut Book now under Reviews' before and after, and the Critic says the band works without it.
+- More brand paint-outs were needed on the stock photos.
+- Each Reviews basement "after" photo got faulted: the unfinished room reads as nearly black and white, and the finished one promises a renovation. I kept the unfinished one as the honest choice.
+- Donate's truck has a high heap, but "piled high" is supposed to be Home's alone.
+- The About banner says "local crew" over a stock street. Should "local" stay before Shawn confirms it?
+
+**Good commit point for Varun:**
+`Move Reviews, About and Donate into the live site (P2 batch b): copy v3, photo swaps, shared header and banner fixes`
+
+Full notes are in `build/progress.md`; start at "State at the end of batch b".
+
+Sources (stock photo pages for the three new photos):
+- [Cellar shelves](https://unsplash.com/photos/messy-cluttered-storage-room-filled-with-various-household-items-NGXcTod3yNI)
+- [Storage room](https://unsplash.com/photos/a-garage-filled-with-lots-of-clutter-and-tools-RL1kwBnUiaA)
+- [Fall house and drive](https://unsplash.com/photos/a-house-with-a-tree-in-front-of-it-y-x76kQ8g9o)

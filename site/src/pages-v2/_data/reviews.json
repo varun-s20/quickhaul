@@ -1,0 +1,16 @@
+{
+  "_note": "Sample cards from content/copy.md, worded so nobody can mistake them for real reviews. No stars, score, count, job tags or links on a sample. Replace with Shawn's chosen Facebook reviews word for word (initials, name, date, post link); never edit these into real-sounding reviews. home feeds the one card on the homepage. reviews_page feeds the Reviews page grid in reading order: a quote item is one card, a photo item is one stock photo (a name from data/image-manifest.json and its alt), never inside a card, and never next to a card about the same job (copy.md). facebook_url is the bare platform address until Shawn sends his page (content/placeholders.md).",
+  "facebook_url": "https://www.facebook.com/",
+  "home": { "quote": "Sample review. A real one from Quick Haul's Facebook page goes here, word for word.", "who": "Sample review", "source": "Facebook", "initials": "SR" },
+  "reviews_page": [
+    { "quote": "Sample review. A real review from Quick Haul's Facebook page goes here, word for word.", "who": "Sample review, Facebook", "initials": "SR" },
+    { "photo": "svc-yard", "alt": "The back of an orange work truck loaded with green garden waste" },
+    { "quote": "Sample review. This card is sized for a short review about a mattress pickup.", "who": "Sample review, Facebook", "initials": "SR" },
+    { "quote": "Sample review. This card is sized for a medium review about a furniture or appliance pickup, around three lines.", "who": "Sample review, Facebook", "initials": "SR" },
+    { "photo": "tile-junk", "alt": "A white pickup truck piled high with black trash bags" },
+    { "quote": "Sample review. This card is sized for a longer review about a yard cleanup, the kind a customer writes after a big job.", "who": "Sample review, Facebook", "initials": "SR" },
+    { "quote": "Sample review. This card is sized for a review about a shed or deck demo.", "who": "Sample review, Facebook", "initials": "SR" },
+    { "photo": "svc-mattress", "alt": "A man walking down a sidewalk with a striped mattress on his head" },
+    { "quote": "Sample review. This card is sized for a short review about an appliance pickup.", "who": "Sample review, Facebook", "initials": "SR" }
+  ]
+}

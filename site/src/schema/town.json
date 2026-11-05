@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{PAGE_URL}}#webpage",
+      "url": "{{PAGE_URL}}",
+      "name": "{{PAGE_TITLE}}",
+      "about": { "@id": "{{SITE_URL}}/#organization" }
+    },
+    {
+      "@type": "Service",
+      "name": "Junk removal in {{TOWN}}, {{ABBR}}",
+      "provider": { "@id": "{{SITE_URL}}/#organization" },
+      "areaServed": { "@type": "City", "name": "{{TOWN}}", "containedInPlace": { "@type": "State", "name": "{{STATE}}" } },
+      "url": "{{PAGE_URL}}"
+    }
+  ]
+}

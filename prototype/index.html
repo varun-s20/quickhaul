@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Haul: junk removal and demo in Massachusetts and New Hampshire</title>
+<meta name="description" content="Design preview with placeholder content. Quick Haul takes junk, clears garages and basements and does demo projects across Massachusetts and New Hampshire. Book a day online or give us a call.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#343D4E">
+<script>document.documentElement.className += ' js';</script>
+<!-- Roboto Mono (Apache 2.0) from Google Fonts for this prototype only. The site build self-hosts it as woff2. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap">
+<link rel="preload" href="assets/fonts/biosans-extrabold.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="assets/global.css">
+<script src="assets/global.js" defer></script>
+</head>
+<body>
+
+<!-- ===== Header partial: sprite, skip link, top bar, header, menu, action bar ===== -->
+<svg class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 16 16"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.4 1.2-1.2 2.1.9 4.4 4.4 7.9 8.8 8.9.9.2 1.8-.3 2.1-1.2l.5-1.8-3.1-1.6-1.4 1.4C7.4 9.4 6.6 8.6 5.9 6.9l1.4-1.4-1.6-3.1-.5-.6Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M1.5 4.5h13M1.5 11.5h13" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+</svg>
+
+<a class="a-skip" href="#main">Skip to content</a>
+
+<div class="m-topbar">
+  <p class="m-topbar__line"><span class="m-topbar__short">Questions?</span><span class="m-topbar__long">Need help booking or have questions?</span> <a class="m-topbar__call" href="tel:+16035550142">Give us a call (603) 555-0142</a></p>
+  <p class="m-topbar__hours">Mon to Sat, 7am to 7pm</p>
+</div>
+
+<header class="m-header">
+  <div class="m-header__left">
+    <button class="m-header__menuBtn" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+      <svg class="m-header__menuIcon" aria-hidden="true"><use href="#i-menu"/></svg>Menu
+    </button>
+    <nav class="m-header__nav" aria-label="Main">
+      <ul class="m-header__navList">
+        <li><a class="m-header__link" href="services.html">Services</a></li>
+        <li><a class="m-header__link" href="services.html#pricing">Pricing</a></li>
+        <li><a class="m-header__link" href="reviews.html">Reviews</a></li>
+        <li><a class="m-header__link" href="donate.html">Donate</a></li>
+        <li><a class="m-header__link" href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </div>
+  <a class="m-header__logo" href="index.html">
+    <img class="m-header__logoImg" src="assets/images/brand/quickhaul-logo.png" width="736" height="1600" alt="Quick Haul home" decoding="async">
+  </a>
+  <div class="m-header__right">
+    <a class="m-header__callBtn" href="tel:+16035550142" aria-label="Call Quick Haul on (603) 555-0142"><svg class="a-svg" aria-hidden="true"><use href="#i-phone"/></svg></a>
+    <a class="a-button m-header__book" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</header>
+
+<div class="m-menu" id="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden data-menu>
+  <div class="m-menu__panel">
+    <div class="m-menu__top">
+      <button class="m-menu__close" type="button" aria-label="Close menu" data-menu-close>
+        <svg class="m-menu__hex" viewBox="0 0 40 44" aria-hidden="true">
+          <path d="M20 1 39 11.75v20.5L20 43 1 32.25v-20.5Z" fill="#0F141C"/>
+          <path d="M14.5 16.5l11 11M25.5 16.5l-11 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+        </svg>
+      </button>
+      <a class="m-header__logo m-menu__logo" href="index.html">
+        <img class="m-header__logoImg" src="assets/images/brand/quickhaul-logo.png" width="736" height="1600" alt="Quick Haul home" decoding="async">
+      </a>
+    </div>
+    <nav aria-label="Menu pages">
+      <ul class="m-menu__list">
+        <li class="m-menu__item"><a class="m-menu__link" href="services.html">Services<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="services.html#pricing">Pricing<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="service-area.html">Service area<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="reviews.html">Reviews<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="donate.html">Donate<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="about.html">About<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="faq.html">FAQ<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+        <li class="m-menu__item"><a class="m-menu__link" href="contact.html">Contact<svg class="a-svg" aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+      </ul>
+    </nav>
+    <div class="m-menu__actions">
+      <a class="a-button m-menu__call" href="tel:+16035550142"><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg>Call us</a>
+      <a class="a-button -slate" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <p class="m-menu__hours">(603) 555-0142, Mon to Sat, 7am to 7pm</p>
+  </div>
+</div>
+
+<div class="m-actionBar" role="region" aria-label="Book or call" data-action-bar>
+  <a class="a-button -ghost" href="tel:+16035550142"><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg>Call us</a>
+  <a class="a-button" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
+<!-- ===== End of header partial ===== -->
+
+<main id="main">
+<div class="t-home">
+
+<!-- ===== Home: hero ===== -->
+<section class="o-homeHero" aria-labelledby="hero-title">
+  <span class="o-homeHero__stripe" aria-hidden="true"></span>
+  <span class="o-homeHero__mark -left" aria-hidden="true"></span>
+  <span class="o-homeHero__mark -right" aria-hidden="true"></span>
+
+  <div class="o-homeHero__copy">
+    <h1 class="a-hero" id="hero-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Junk out</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Space back</span></span>
+    </h1>
+    <p class="a-lede o-homeHero__lede a-reveal">Junk removal, clean outs and demo across Massachusetts and New Hampshire. Pick your town, your load and a day below, or give us a call.</p>
+  </div>
+
+  <div class="o-homeHero__art" aria-hidden="true">
+    <svg class="m-truck" viewBox="0 0 720 330" focusable="false" data-truck>
+      <defs>
+        <pattern id="qh-dots" width="7" height="7" patternUnits="userSpaceOnUse">
+          <circle class="m-truck__dots" cx="1.75" cy="1.75" r="1.45"/>
+          <circle class="m-truck__dots" cx="5.25" cy="5.25" r="1.45"/>
+        </pattern>
+        <clipPath id="qh-bed"><rect x="82" y="20" width="386" height="202"/></clipPath>
+      </defs>
+      <g class="m-truck__body">
+        <path class="m-truck__line -soft" d="M0 316H720"/>
+        <!-- gauge: the loads Quick Haul prices by. The 1/8 tick has no label: it sits 18 units under 1/4 and the chip names it -->
+        <g class="m-truck__gaugeSet">
+          <path class="m-truck__line -soft" d="M52 74V222"/>
+          <path class="m-truck__tick" d="M44 74H60M44 148H60M44 185H60M48 203.5H56"/>
+          <text class="m-truck__gauge" x="36" y="80" text-anchor="end">FULL</text>
+          <text class="m-truck__gauge" x="36" y="154" text-anchor="end">1/2</text>
+          <text class="m-truck__gauge" x="36" y="191" text-anchor="end">1/4</text>
+        </g>
+      </g>
+      <g clip-path="url(#qh-bed)">
+        <g class="m-truck__load">
+          <path class="m-truck__heap" d="M82 222V80L104 72 126 77 150 66 176 74 198 63 226 71 250 60 276 70 300 62 326 72 350 64 378 73 402 61 428 70 450 65 468 72V222Z"/>
+          <path class="m-truck__heapEdge" d="M82 80L104 72 126 77 150 66 176 74 198 63 226 71 250 60 276 70 300 62 326 72 350 64 378 73 402 61 428 70 450 65 468 72"/>
+        </g>
+      </g>
+      <!-- level line: inside the bed always; the stub out to the gauge only shows with the gauge (no orphan dash at tablet and phone) -->
+      <g class="m-truck__load"><path class="m-truck__level" d="M80 74H470"/></g>
+      <g class="m-truck__load m-truck__gaugeSet"><path class="m-truck__level" d="M60 74H80"/></g>
+      <g class="m-truck__body">
+        <!-- dump bed with stakes, rails, headboard and tailgate hinge -->
+        <path class="m-truck__line" d="M80 64H470V232H80Z"/>
+        <path class="m-truck__line" d="M80 72H470M80 224H470"/>
+        <path class="m-truck__line" d="M129 64V232M178 64V232M227 64V232M276 64V232M325 64V232M374 64V232M423 64V232"/>
+        <path class="m-truck__line" d="M466 46H502V54H478V232"/>
+        <circle class="m-truck__line" cx="86" cy="58" r="4"/>
+        <!-- exhaust stack and chassis -->
+        <path class="m-truck__line" d="M484 70V236"/>
+        <path class="m-truck__line" d="M66 238H650M66 250H650M66 238V250"/>
+        <!-- cab, facing right as in the logo -->
+        <path class="m-truck__line" d="M490 250V112H604L642 170 650 178V250"/>
+        <path class="m-truck__line" d="M506 126H594L620 164H506Z"/>
+        <path class="m-truck__line" d="M502 120V244M512 186H528M640 150 656 140V162M640 250H662V262H636M646 196H651V212"/>
+        <!-- wheels and fenders -->
+        <g class="m-truck__line">
+          <circle cx="300" cy="278" r="38" fill="#343D4E"/><circle cx="300" cy="278" r="25"/><circle cx="300" cy="278" r="7"/>
+          <circle cx="392" cy="278" r="38" fill="#343D4E"/><circle cx="392" cy="278" r="25"/><circle cx="392" cy="278" r="7"/>
+          <circle cx="590" cy="278" r="38" fill="#343D4E"/><circle cx="590" cy="278" r="25"/><circle cx="590" cy="278" r="7"/>
+        </g>
+        <path class="m-truck__line" d="M252 250Q260 224 300 224H392Q432 224 440 250M546 250A44 44 0 0 1 634 250"/>
+      </g>
+    </svg>
+  </div>
+
+  <span class="o-homeHero__slats" aria-hidden="true"></span>
+</section>
+
+<!-- ===== Home: ticket (the work order) ===== -->
+<!-- Placeholder facts: towns, prices, hours and phone are listed in content/placeholders.md -->
+<section class="o-homeTicket" aria-labelledby="ticket-title">
+  <h2 class="sr-only" id="ticket-title">Start a booking</h2>
+  <form class="o-homeTicket__form" action="book.html" method="get" data-ticket>
+
+    <div class="o-homeTicket__cell a-reveal">
+      <label class="a-label" for="ticket-town">Your town</label>
+      <div class="o-homeTicket__combo">
+        <input class="o-homeTicket__town" id="ticket-town" name="town" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ticket-towns" autocomplete="off" placeholder="Type your town" aria-describedby="ticket-town-note" data-ticket-town>
+        <ul class="o-homeTicket__options" id="ticket-towns" role="listbox" aria-label="Towns we cover" hidden data-ticket-options>
+        <li class="o-homeTicket__option" id="ticket-town-0" role="option" aria-selected="false">Andover, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-1" role="option" aria-selected="false">Dracut, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-2" role="option" aria-selected="false">Haverhill, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-3" role="option" aria-selected="false">Lawrence, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-4" role="option" aria-selected="false">Lowell, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-5" role="option" aria-selected="false">Methuen, MA</li>
+        <li class="o-homeTicket__option" id="ticket-town-6" role="option" aria-selected="false">Derry, NH</li>
+        <li class="o-homeTicket__option" id="ticket-town-7" role="option" aria-selected="false">Hudson, NH</li>
+        <li class="o-homeTicket__option" id="ticket-town-8" role="option" aria-selected="false">Londonderry, NH</li>
+        <li class="o-homeTicket__option" id="ticket-town-9" role="option" aria-selected="false">Nashua, NH</li>
+        <li class="o-homeTicket__option" id="ticket-town-10" role="option" aria-selected="false">Pelham, NH</li>
+        <li class="o-homeTicket__option" id="ticket-town-11" role="option" aria-selected="false">Salem, NH</li>
+        </ul>
+      </div>
+      <p class="o-homeTicket__note" id="ticket-town-note" aria-live="polite" data-ticket-note>We cover Massachusetts and New Hampshire</p>
+    </div>
+
+    <fieldset class="o-homeTicket__cell a-reveal">
+      <legend class="a-label -legend">How much junk</legend>
+      <div class="o-homeTicket__row">
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="eighth" checked data-load=".125" data-price="149" data-unit="for a 1/8 truck"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="10.5" width="17" height="1.5"/></svg>1/8<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="quarter" data-load=".25" data-price="249" data-unit="for a 1/4 truck"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="9" width="17" height="3"/></svg>1/4<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="half" data-load=".5" data-price="399" data-unit="for a 1/2 truck"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="7" width="17" height="5"/></svg>1/2<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="full" data-load="1" data-price="649" data-unit="for a full truck"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="2.5" width="17" height="9.5"/></svg>Full<span class="sr-only"> truck</span></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="o-homeTicket__cell a-reveal">
+      <legend class="a-label -legend">Pick a day</legend>
+      <div class="o-homeTicket__row" data-ticket-days>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-04"><span class="a-choice__face"><span class="a-choice__dow">Wed</span><span class="a-choice__num">4</span><span class="sr-only"> November</span></span></label>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-05"><span class="a-choice__face"><span class="a-choice__dow">Thu</span><span class="a-choice__num">5</span><span class="sr-only"> November</span></span></label>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-06"><span class="a-choice__face"><span class="a-choice__dow">Fri</span><span class="a-choice__num">6</span><span class="sr-only"> November</span></span></label>
+      </div>
+    </fieldset>
+
+    <div class="o-homeTicket__cell -price a-reveal">
+      <p class="a-label" id="ticket-price-label">Price from</p>
+      <p class="o-homeTicket__price">
+        <output class="o-homeTicket__figure" name="price" aria-live="polite" data-ticket-price>$149</output>
+        <span class="o-homeTicket__unit" data-ticket-unit>for a 1/8 truck</span>
+      </p>
+    </div>
+
+    <div class="o-homeTicket__cell -action a-reveal" data-ticket-action>
+      <button class="a-button -slate -block" type="submit">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <a class="a-call" href="tel:+16035550142"><svg class="a-call__icon" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-call__text">Or call (603) 555-0142</span></a>
+    </div>
+
+  </form>
+</section>
+<div class="a-halftone" aria-hidden="true"></div>
+
+</div>
+</main>
+</body>
+</html>

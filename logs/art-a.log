@@ -1,0 +1,34 @@
+I'm waiting on the Muval deconstruction. The next steps depend on it: Piece of Cake, then updating the donor notes in concepts.md and recapturing the audition shots.
+
+The preview server is up on port 8765. I'm waiting for Piece of Cake before using the browser, because the deconstructor is using it now.
+
+Phase A for Quick Haul is finished. `design/concepts.md` and `prototype/audition.html` are complete and meet the skill, and I stopped at checkpoint 2a for Varun.
+
+**What the killed run left**
+- **concepts.md and audition.html:** both whole, with the three concepts, three type pairings with licence status, and three palettes taken from the logo's pixels, each shown on the logo mockup with contrast ratios.
+- **Step A2 was incomplete:** the Muval and Piece of Cake donor deconstructions had never been written. I ran the deconstructor on each, one at a time. Both are now in `references/deconstruct/`.
+
+**What I fixed or added**
+- **Contrast figures:** two rows measured text against a wall pixel outside the area behind the text. The real figures are 8.91 for cream and 4.56 for the steel blue; the page had printed 4.51 for steel. Steel clears the 4.5 body-text bar by only a hair, so the page now says to use it for large text and labels only.
+- **Missing swatch:** palette 3 uses #B3B5B7 for body text but never listed it. It is a real logo pixel; it now has a swatch and a sample marker.
+- **Pill wrap:** the "BOOK NOW" pill broke onto two lines at 390 in pairing C. Fixed.
+- **Donor notes:** concepts.md now says what each donor actually contributes and which of their flaws we leave out. One example is Muval's chips, which are plain links with no selected state; ours must be real controls because the price changes with the load.
+- **Shots:** all 13 in `prototype/shots/` are recaptured, and I looked at them.
+- **Records:** I started `content/placeholders.md`, which the brief requires and which didn't exist yet. The two deconstructor runs and this run are in review-log.md, and status.md is updated.
+
+**What I could not check or had to guess**
+- **Donor sections:** Varun named the donors but not their sections, so all three were measured on the sections the scout suggested. If he meant other sections, those need a rerun before phase B.
+- **Hero media:** none exists, so the palettes are shown on the logo mockup only. Contrast over his future job photos is untested.
+- **390 shots:** these were taken in desktop Chromium, not touch emulation.
+- **Bio Sans:** a search confirmed it is commercial (MyFonts and Fontspring list it at $29.99 a style). I did not read its web licence terms.
+- **Another project's server:** port 8765 was already serving a different project's site (Harbour Care Group). I saw the top of its homepage before I noticed, then moved to port 8791. I read nothing else from it.
+- **Leftover files:** some deconstructor screenshots and scratch files are still in `references/deconstruct/freitag/` and `muval/`. The agents had no way to delete them.
+
+**For Varun at checkpoint 2a**
+Pick one concept (or write his own), one type pairing and one palette, and confirm the donor sections. My recommendation is concept 1 (the work order), type pairing B (Barlow with Roboto Mono, both taken from Truewerk's own stylesheet) and palette 1 (slate wall). The six conflicts between Truewerk and his V moves are listed in concepts.md.
+
+This is a good checkpoint. Suggested commit message: `quickhaul: finish art direction phase A (donor deconstructions, audition fixes, placeholder register)`
+
+Sources: [MyFonts, Bio Sans](https://www.myfonts.com/collections/bio-sans-font-dharma-type), [Fontspring, Bio Sans Soft](https://www.fontspring.com/fonts/dharma-type/bio-sans-soft)
+
+The preview server on port 8791 has been stopped by its time limit. Nothing else needs it: all the shots were taken before it stopped. If Varun wants to see the audition page in a browser, it can be served again from `projects/quickhaul`. Phase A is still waiting at checkpoint 2a for his picks.

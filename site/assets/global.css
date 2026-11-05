@@ -1,0 +1,1708 @@
+/* =====================================================================
+   Quick Haul: global stylesheet (revision rebuild, 2026-11-05)
+   Loads on every page, first. After it: assets/global.js (deferred). Nothing loads before it.
+   Direction: design/revision.md, casual and image-led, one clear thing per section. The new look is lifted from
+   prototype/revision/assets/global.css. The first :root block is design/tokens.css pasted in; change a token in both.
+   Order: fonts, tokens, reset, type, reveals, atoms, chrome, bands, home sections in page order, estimate band,
+   inner-page pattern, footer, reduced motion, print. Each component carries its own breakpoints under it.
+   ===================================================================== */
+
+/* ===== Fonts ===== */
+/* Bio Sans by Dharma Type, from projects/quickhaul/assets/fonts/biosans. Shipped as .otf on purpose (Varun,
+   2026-11-03 and 2026-11-04: no package installs, no woff2 conversion). Web licence still to be confirmed.
+   Regular is new: Bio Sans takes over body text from Roboto Mono (design/revision.md section 1). */
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+/* Roboto Mono (Google, Apache 2.0), self-hosted variable woff2, one file per subset (weights 100 to 700). One small job now: phone numbers, price units, the review caption. */
+@font-face { font-family: "Roboto Mono"; src: url("fonts/robotomono-latin.woff2") format("woff2"); font-weight: 100 700; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Roboto Mono"; src: url("fonts/robotomono-latin-ext.woff2") format("woff2"); font-weight: 100 700; font-style: normal; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ===== Tokens (pasted from design/tokens.css) ===== */
+:root {
+  /* ---- colour: unchanged. Palette 1, Slate wall, from the logo's pixels. No new UI colour (2b decision 1) ---- */
+  --c-slate: #343D4E;      /* logo wall. Header and dark bands. Cream text on it 9.62:1, chrome text 7.38:1 */
+  --c-ink: #0F141C;        /* logo mark shadow. Footer ground, text on light. On cream 16.28:1, on chrome 12.48:1 */
+  --c-chrome: #D5D4D3;     /* bright chrome. CTA pill on dark, focus ring on dark */
+  --c-chromeMid: #81858C;  /* mid chrome. Borders on dark. Never text (2.95:1 on slate) */
+  --c-cream: #F7EFEC;      /* chrome highlight. Headline on dark, light bands, CTA pill on photos (V9) */
+  --c-steel: #4A5263;      /* slate darkened toward ink. Secondary text on cream 6.91:1 */
+  --c-focus: var(--c-ink);
+  --c-rule: rgba(213, 212, 211, .2);
+  --c-scrim: rgba(15, 20, 28, .55);
+
+  /* ---- type: Bio Sans leads; Roboto Mono keeps one small job, phone numbers and price units ---- */
+  --f-display: "Bio Sans", "Roboto Mono", ui-monospace, monospace;
+  --f-body: "Bio Sans", ui-sans-serif, sans-serif;   /* new: was Roboto Mono */
+  --f-mono: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w-light: 300;
+  --w-body: 400;
+  --w-semi: 600;
+  --w-heavy: 800;
+  --t-heroLh: .92;
+  /* Three heading sizes, set by the kind of band and nothing else (critic r2-1: 88, 68, 64, 56 and 52 with no logic) */
+  --t-section: min(8.8rem, 12.6vw);   /* new: full-width bands. Larger than the built site's, since sections now hold less */
+  --t-sectionSmall: min(6.4rem, 12vw); /* new: slim bands, promo cards, a row of two cards */
+  --t-card: min(5.2rem, 11vw);        /* new: a row of three cards */
+  --t-lede: 1.8rem;                   /* new: the one or two supporting lines under a heading (round 2). 2rem from 1025 */
+  --t-body: 1.8rem;                   /* new: was 1.5 to 1.6rem mono */
+  --t-bodyLh: 1.45;
+  --t-button: 1.5rem;
+  --t-nav: 1.4rem;
+  --tr-display: -.005em;
+  --ws-display: .06em;     /* V1 */
+  --tr-nav: .04em;
+
+  /* ---- spacing ---- */
+  --s-1: .4rem;
+  --s-2: .8rem;
+  --s-3: 1.2rem;
+  --s-4: 1.6rem;
+  --s-5: 2.4rem;
+  --s-6: 3.2rem;
+  --s-7: 4.8rem;
+  --s-8: 6.4rem;
+  --s-9: 9.6rem;
+  --s-10: 12.8rem;
+  --gutter: 2rem;
+  --h-header: 6.4rem;
+  --h-button: 4.4rem;
+  --h-buttonLarge: 5.6rem;  /* new: hero, price and estimate pills */
+
+  /* ---- radii: V8 and V7. Square frames retire (revision.md) ---- */
+  --r-pill: 4.4rem;
+  --r-image: 2.4rem;        /* new: V8 promo card radius */
+  --r-band: 3.2rem;         /* new: V7 rising band */
+
+  /* ---- logo: the sharp ceiling is 108 to 117px on a 2x screen (mark is 234px in the phone screenshot) ---- */
+  --logo: 8.8rem;           /* new */
+  --logoSmall: .68;         /* new: scale once the page has scrolled 32px, so it fits inside the bar. 60px on phones (critic r2: 55px was small) */
+
+  /* ---- motion ---- */
+  --e-out: cubic-bezier(.22, 1, .36, 1);
+  --e-ui: ease-in-out;
+  --e-drop: cubic-bezier(.3, 1.28, .5, 1);  /* new: a load landing, with a little settle */
+  --d-ui: 150ms;
+  --d-nudge: 400ms;
+  --d-breathe: 1000ms;
+  --d-rise: 700ms;
+  --d-reveal: 1100ms;
+  --d-stagger: 90ms;
+  --d-menu: 400ms;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; }
+/* 2px less than the bar: a section lands just under the bar's edge, so a fractional scroll position can never leave a sliver of the band above showing (critic r1, rulings R0 A7) */
+html { font-size: 62.5%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 62px; }
+/* Phones: a focused link never lands under the call bar, which is 60px tall (critic, Services r1; the old build had the same line on inner pages only) */
+@media (max-width: 640px) { html { scroll-padding-bottom: 72px; } }
+@media (min-width: 641px) { html { scroll-padding-top: 70px; } }
+@media (min-width: 1025px) { html { scroll-padding-top: 86px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (min-width: 1441px) { html { font-size: min(.6944vw, 17.78px); } }
+body { margin: 0; background: var(--c-cream); color: var(--c-ink); font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote, fieldset, legend { margin: 0; padding: 0; border: 0; }
+fieldset { min-width: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; }
+picture { display: contents; }
+img { display: block; width: 100%; height: auto; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+/* radius: a sharp rectangle read as a different language from the pills' rings (critic, home v3 r1). Pills, tiles and cards set their own radius later in this file and keep it */
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; border-radius: .4rem; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; margin: -1px !important; padding: 0 !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; border: 0 !important; }
+.qh-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.a-svg { display: block; width: 1.6rem; height: 1.6rem; }
+.a-num { font-family: var(--f-mono); font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.a-nowrap { white-space: nowrap; }
+
+/* ===== Type ===== */
+/* V1: caps, light plus heavy, no full stop, no colour change. */
+.a-hero { font: var(--w-heavy) min(12.8rem, 16.6cqi, 14.6vh)/var(--t-heroLh) var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; color: var(--c-cream); }
+/* 16.6cqi: "SPACE BACK" runs 5.76em, so the longest row just fills its column. */
+.a-hero__row { display: block; padding: .04em 0 .02em; }
+.a-hero__row.-light { font-weight: var(--w-light); }
+.a-hero__line { display: block; }
+.a-section { font: var(--w-heavy) var(--t-section)/.94 var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; }
+.a-section__row { display: block; }
+.a-section__row.-light { font-weight: var(--w-light); }
+.a-section.-small { font-size: var(--t-sectionSmall); }
+.a-section.-card { font-size: var(--t-card); line-height: .96; }
+/* Round 2 (Varun, 4 Nov: "a tad more text all around"). One or two supporting lines under a heading; --c-soft follows the ground: steel on cream 6.91:1, chrome on slate 7.38:1 */
+.a-lede { margin-top: var(--s-4); color: var(--c-soft); font: var(--w-body) var(--t-lede)/1.4 var(--f-body); text-wrap: balance; }
+@media (min-width: 1025px) { :root { --t-lede: 2rem; } }
+
+/* ===== Page scope ===== */
+.t-home, .t-services, .t-book, .t-area, .t-town, .t-reviews, .t-about, .t-donate, .t-faq, .t-contact, .t-commercial, .t-notFound, .t-privacy, .t-pricing { display: block; }
+
+/* ===== Reveal system ===== */
+/* Headline rows rise out of their masks once; everything else fades and rises 15px. No hidden state without the script. */
+@media (prefers-reduced-motion: no-preference) {
+  /* The mask each row rises out of. It comes off once the rise is done (is-risen, global.js), or it clips the headline's soft shadow into a faint rectangle on clear sky */
+  .js .a-hero__row { overflow: hidden; }
+  .js.is-risen .a-hero__row { overflow: visible; }
+  .js .a-hero__line { transform: translateY(110%); transition: transform var(--d-reveal) var(--e-out) 150ms; }
+  .js .a-hero__line.-second { transition-delay: 240ms; }
+  .js.is-loaded .a-hero__line { transform: none; }
+  .js .a-reveal { opacity: 0; transform: translateY(15px); transition: opacity var(--d-rise) var(--e-out) 420ms, transform var(--d-rise) var(--e-out) 420ms; }
+  .js .a-reveal + .a-reveal { transition-delay: 510ms; }
+  .js.is-loaded .a-reveal { opacity: 1; transform: none; }
+  .js .a-inview { opacity: 0; transform: translateY(15px); transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); }
+  .js .a-inview.is-inview { opacity: 1; transform: none; }
+}
+
+/* ===== Atoms ===== */
+.a-skip { position: absolute; top: -10rem; left: var(--gutter); z-index: 300; display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 var(--s-5); border-radius: var(--r-pill); background: var(--c-cream); box-shadow: 0 0 0 .8rem var(--c-slate); color: var(--c-ink); font: var(--w-semi) var(--t-button)/1 var(--f-body); text-decoration: none; }
+.a-skip:focus { top: var(--s-2); }
+
+/* ---- buttons (V9): pills, sentence case, the fill follows the ground ---- */
+.a-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3); min-height: var(--h-button); padding: 0 2.4rem; overflow: hidden; border-radius: var(--r-pill); font: var(--w-semi) var(--t-button)/1.1 var(--f-body); text-decoration: none; white-space: nowrap; cursor: pointer; transition: padding var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-button::before { content: ""; position: absolute; inset: 0 0 50% 0; background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, 0)); opacity: 0; pointer-events: none; transition: opacity var(--d-breathe) var(--e-out); }
+.a-button__arrow { flex: none; width: 1.5rem; height: 1.5rem; transition: transform var(--d-nudge) var(--e-out); }
+/* Primary pill on every dark ground, photos and slate alike. Ink on cream 16.28:1. V6 would put the logo's chrome here, but next to cream a flat chrome pill read as switched off (critic r1); listed in revision.md. */
+.a-button.-cream { background: var(--c-cream); color: var(--c-ink); }
+.a-button.-slate { background: var(--c-slate); color: var(--c-cream); }   /* on cream. 9.62:1 */
+.a-button.-line { box-shadow: inset 0 0 0 1px var(--c-slate); color: var(--c-slate); }
+/* A frosted second pill on photos: V4's menu pill. The ink behind the blur carries the contrast whatever the photo does. */
+.a-button.-glass { box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .4); background: rgba(15, 20, 28, .56); color: var(--c-cream); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.a-button.-large { min-height: var(--h-buttonLarge); padding: 0 3rem; font-size: 1.6rem; }
+.a-button:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .a-button:hover { padding-right: 3.2rem; padding-left: 3.2rem; }
+  .a-button.-large:hover { padding-right: 3.8rem; padding-left: 3.8rem; }
+  .a-button:hover::before { opacity: 1; }
+  .a-button:hover .a-button__arrow:last-child { transform: translateX(.6rem); }
+}
+.a-button:focus-visible::before { opacity: 1; }
+
+/* ---- links ---- */
+.a-link { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); color: inherit; font: var(--w-semi) 1.6rem/1.3 var(--f-body); text-decoration: none; }
+.a-link__text { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.a-link__arrow { flex: none; width: 1.4rem; height: 1.4rem; transition: transform var(--d-nudge) var(--e-out); }
+.a-link:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-link:hover .a-link__text { background-size: 0 1px; background-position: 100% 100%; }
+  .a-link:hover .a-link__arrow { transform: translateX(.6rem); }
+}
+.a-inlineLink { position: relative; font-weight: var(--w-semi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-ui) var(--e-ui); }
+.a-inlineLink::after { content: ""; position: absolute; inset: -1.2rem -.4rem; }   /* 44px target without a taller line */
+@media (hover: hover) and (any-pointer: fine) { .a-inlineLink:hover { text-decoration-color: transparent; } }
+
+/* ---- chips (V3): outlined pills, town names and loads ---- */
+.a-chip { display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 2rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); color: var(--c-cream); font: var(--w-semi) 1.6rem/1 var(--f-body); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-chip:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-chip:hover { background: var(--c-cream); box-shadow: none; color: var(--c-ink); } }
+/* A town chip and its spot on the map light together (the hub only) */
+.a-chip.is-lit { background: var(--c-cream); box-shadow: none; color: var(--c-ink); }
+/* On cream: slate outline, ink text, slate fill on hover */
+.a-chip.-light { box-shadow: inset 0 0 0 1px var(--c-steel); color: var(--c-ink); }
+@media (hover: hover) and (any-pointer: fine) { .a-chip.-light:hover { background: var(--c-slate); box-shadow: none; color: var(--c-cream); } }
+
+/* Fact chips (V3: facts in outlined chips under the copy). Text only, smaller and quieter than a link chip so nobody tries to tap them. Ink on cream and cream on slate stay above 7:1 at this opacity.
+   One row of two or three facts at most on a page: a whole list of them read as a wall of buttons (critic r2-1). Lists of things go in .m-takes */
+.a-factChip { display: inline-flex; align-items: center; min-height: 3.2rem; padding: .4rem 1.4rem; border-radius: 3rem; box-shadow: inset 0 0 0 1px currentColor; font: 500 1.4rem/1.2 var(--f-body); opacity: .8; }
+.m-factChips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+
+/* What a service takes: one plain line, the way Shawn lists them himself ("Take furniture, appliances, mattresses, yard waste") */
+.m-takes { font: var(--w-body) 1.6rem/1.45 var(--f-body); text-wrap: pretty; }
+.m-takes strong { font-weight: var(--w-semi); }
+
+/* What we can't take: a real list with a mark on every row, so a refusal can't be mistaken for an offer */
+.m-notList { display: grid; gap: var(--s-3) var(--s-6); width: fit-content; max-width: 112rem; margin: 0 auto; }
+.m-notList__item { display: flex; align-items: center; gap: var(--s-3); font: var(--w-semi) 1.8rem/1.25 var(--f-body); }
+.m-notList__mark { flex: none; width: 3.2rem; height: 3.2rem; padding: .8rem; border-radius: 50%; background: var(--c-slate); color: var(--c-cream); }
+@media (min-width: 641px) { .m-notList { grid-template-columns: repeat(2, auto); } }
+/* 1fr in a fit-content grid: three columns, each as wide as the longest item, so the gaps between them match (critic, Services r1). From 1241, because three of those need about 991px inside the card; under that it stays at two columns, where nothing wraps */
+@media (min-width: 1241px) { .m-notList { grid-template-columns: repeat(3, 1fr); } }
+
+/* Small facts: a short title and one line. No icons, no cards, no numbers (anti-slop) */
+.m-fact__title { display: block; font: var(--w-semi) 1.8rem/1.25 var(--f-body); }
+.m-fact__text { display: block; margin-top: .2rem; color: var(--c-soft); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: pretty; }
+/* A rule of its own so check.py finds the class: the title and text carry the type */
+.m-fact { min-width: 0; }
+/* Small facts in a row, on the page's one axis. The same two or three facts Home keeps in its estimate band */
+.m-factRow { display: grid; gap: var(--s-4); max-width: 112rem; margin: 0 auto; text-align: center; }
+@media (min-width: 641px) {
+  .m-factRow.-three { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
+  .m-factRow.-two { grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+}
+
+/* A centred heading and its line, the opening of most bands (V7: one axis) */
+.m-head { max-width: 92rem; margin: 0 auto var(--s-6); text-align: center; }
+@media (min-width: 1025px) { .m-head { margin-bottom: var(--s-7); } }
+/* The closing action of a band: one pill and at most one link */
+.m-rowActions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-2) var(--s-5); margin-top: var(--s-6); }
+
+/* A real radio behind each load pill: keyboard and screen reader get the native group */
+.a-choice { position: relative; display: block; cursor: pointer; }
+.a-choice__input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.a-choice__face { display: flex; align-items: center; justify-content: center; min-width: 6.8rem; min-height: var(--h-buttonLarge); padding: 0 2rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); color: var(--c-cream); font: var(--w-semi) 1.7rem/1 var(--f-body); transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+/* Picked load: a heavier cream ring and a light wash, so the cream Book pill stays the only filled thing and the loudest (critic r1: two cream fills competed; critic r2: a chrome fill looked washed out). Cream on the wash about 7:1 */
+.a-choice__input:checked + .a-choice__face { background: rgba(247, 239, 236, .16); box-shadow: inset 0 0 0 2px var(--c-cream); }
+.a-choice__input:focus-visible + .a-choice__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.a-choice:active .a-choice__face { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-choice:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: inset 0 0 0 1px var(--c-cream); } }
+/* A chip on cream: steel outline and ink text, like a link chip. The picked one fills with slate. The same real radio underneath */
+.a-choice.-light .a-choice__face { box-shadow: inset 0 0 0 1px var(--c-steel); color: var(--c-ink); }
+.a-choice.-light .a-choice__input:checked + .a-choice__face { background: var(--c-slate); box-shadow: none; color: var(--c-cream); }
+@media (hover: hover) and (any-pointer: fine) { .a-choice.-light:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: inset 0 0 0 2px var(--c-slate); } }
+
+/* The load control (Varun, 5 Nov: the chips were "too big", "much smaller and lighter, same function"). Four real radios in one thin pill, 296px wide where it used to run edge to edge at 64px tall. The band around it keeps its full width.
+   36px to the eye, 44px to the thumb: each label runs 4px past the pill above and below, and its radio fills the label (conventions: 44px targets).
+   It reads as one scale from a little to a lot: the picked stop's ring slides along it. The ring is a transform, so tapping quickly through the stops retargets instead of restarting. Without the script there's no ring to slide and each checked face draws its own. */
+.m-loadPicker { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 29.6rem; max-width: 100%; min-width: 0; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); }
+.m-loadPicker__thumb { display: none; }
+.js .m-loadPicker__thumb { position: absolute; top: 0; left: 0; display: block; width: 25%; height: 100%; border-radius: var(--r-pill); background: rgba(247, 239, 236, .16); box-shadow: inset 0 0 0 2px var(--c-cream); pointer-events: none; transition: transform 320ms var(--e-out); }
+.m-loadPicker[data-level="2"] .m-loadPicker__thumb { transform: translateX(100%); }
+.m-loadPicker[data-level="3"] .m-loadPicker__thumb { transform: translateX(200%); }
+.m-loadPicker[data-level="4"] .m-loadPicker__thumb { transform: translateX(300%); }
+.m-loadPicker .a-choice { margin: -.4rem 0; padding: .4rem 0; }
+/* Lighter until picked: Regular in chrome, then Semibold in cream with the ring, so the picked stop shows in weight as well as colour. Chrome on slate 7.38:1 */
+.m-loadPicker .a-choice__face { min-width: 0; min-height: 3.6rem; padding: 0; box-shadow: none; color: var(--c-chrome); font: var(--w-body) 1.4rem/1 var(--f-body); white-space: nowrap; }
+.m-loadPicker .a-choice__input:checked + .a-choice__face { color: var(--c-cream); font-weight: var(--w-semi); }
+.m-loadPicker .a-choice__input:focus-visible + .a-choice__face { outline-offset: 2px; }
+.js .m-loadPicker .a-choice__input:checked + .a-choice__face { background: none; box-shadow: none; }
+@media (hover: hover) and (any-pointer: fine) { .m-loadPicker .a-choice:hover .a-choice__input:not(:checked) + .a-choice__face { color: var(--c-cream); } }
+/* The word "truck" stays for screen readers (1/8 truck) and for Book's summary; on screen the chip says 1/8 and the readout below it says the long form (copy v3) */
+.a-choice__unit { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Book's picker, on cream: the same small pill and the same sliding ring, in slate. Level 0 is nothing picked, or "Not sure", which sits outside the pill. Steel on cream 6.91:1 */
+.m-loadPicker.-light { box-shadow: inset 0 0 0 1px var(--c-steel); }
+.m-loadPicker.-light .a-choice__face { color: var(--c-steel); }
+.m-loadPicker.-light .a-choice__input:checked + .a-choice__face { background: rgba(52, 61, 78, .1); box-shadow: inset 0 0 0 2px var(--c-slate); color: var(--c-ink); }
+.js .m-loadPicker.-light .a-choice__input:checked + .a-choice__face { background: none; box-shadow: none; }
+.js .m-loadPicker.-light .m-loadPicker__thumb { background: rgba(52, 61, 78, .1); box-shadow: inset 0 0 0 2px var(--c-slate); }
+.m-loadPicker[data-level="0"] .m-loadPicker__thumb { opacity: 0; }
+@media (hover: hover) and (any-pointer: fine) { .m-loadPicker.-light .a-choice:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: inset 0 0 0 1px var(--c-slate); color: var(--c-ink); } }
+
+.a-socialPill { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.2rem; border-radius: 5rem; box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .2); color: var(--c-cream); font: var(--w-semi) 1.4rem/1 var(--f-body); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.a-socialPill__icon { flex: none; width: 1.6rem; height: 1.6rem; fill: currentColor; }
+.a-socialPill__icon.-facebook { fill: #0866FF; }    /* V10: a brand's own colour on its own badge. 3.9:1 on ink, non-text */
+.a-socialPill__icon.-instagram { fill: #FF0069; }   /* 4.7:1 on ink, non-text */
+.a-socialPill__icon.-tiktok { fill: currentColor; } /* single-colour mark: cream on ink, ink on the cream hover fill */
+.a-socialPill:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-socialPill:hover { background: var(--c-cream); color: var(--c-ink); } }
+
+/* ===== Chrome: preview label ===== */
+/* Off for now (Varun, 4 Nov). Must come back, or be gated, before any deploy-preview (brief; choices.md): tools/build.py PREVIEW_LABEL */
+.m-preview { position: relative; z-index: 51; margin: 0; padding: .6rem var(--gutter); background: var(--c-chrome); color: var(--c-ink); font: var(--w-body) 1.3rem/1.4 var(--f-body); text-align: center; text-wrap: balance; }
+
+/* ===== Chrome: header ===== */
+/* A slate bar with the logo as its main thing. The bar is 88px, under the 90px cap, at every scroll position. The logo hangs below it as a round badge at the top of the page
+   (108px wide, the largest that stays sharp on 2x), then settles to 84px inside the bar so it stays the main thing all the way down but can never sit on a heading (critic r1: 65px was too small).
+   --logoSettled runs 0 to 1 over the first 32px of scroll, set by the script from the scroll position itself (critic r2-2). */
+.m-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; display: grid; grid-template-columns: 1fr 1fr; align-items: center; height: var(--h-header); padding: 0 var(--gutter); background: var(--c-slate); box-shadow: 0 1px 0 rgba(15, 20, 28, .4), 0 .8rem 2.4rem rgba(15, 20, 28, .14); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.m-header__left { display: flex; align-items: center; }
+.m-header__right { display: flex; align-items: center; justify-content: flex-end; gap: var(--s-4); }
+.m-header__nav { display: none; }
+.m-header__navList { display: flex; gap: 3rem; }
+.m-header__link { display: inline-flex; align-items: center; min-height: var(--h-button); font: var(--w-semi) var(--t-nav)/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1.1rem) / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__link:hover { background-size: 100% 1px; } }
+/* [aria-current] of any value: a town page marks Towns as "true", being inside it rather than on it */
+.m-header__link:focus-visible, .m-header__link[aria-current] { background-size: 100% 1px; }
+.m-header__menuBtn { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.4rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-chromeMid); font: var(--w-semi) 1.4rem/1 var(--f-body); transition: box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.m-header__menuIcon { width: 1.6rem; height: 1.6rem; }
+.m-header__menuBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__menuBtn:hover { box-shadow: inset 0 0 0 1px var(--c-cream); } }
+
+/* The disc is the bar's own slate, so the mark sits on the bar with no tile edge and only its lower curve shows, over the photo */
+.m-header__logo { position: absolute; top: 2px; left: 50%; display: block; width: var(--logo); height: var(--logo); margin-left: calc(var(--logo) / -2); border-radius: 50%; background: var(--c-slate); transform: scale(calc(1 - (1 - var(--logoSmall)) * var(--logoSettled, 0))); transform-origin: 50% 0; }
+.m-header__logo::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 .8rem 2rem rgba(15, 20, 28, .32); clip-path: inset(62% -3rem -3rem -3rem); pointer-events: none; opacity: calc(1 - var(--logoSettled, 0)); }
+.m-header__mark { position: relative; z-index: 1; width: 100%; height: 100%; transition: transform var(--d-menu) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) { .m-header__logo:hover .m-header__mark { transform: scale(1.03); } }
+.m-header__logo:active .m-header__mark { transform: scale(.97); }
+
+.m-header__call { display: none; flex-direction: column; align-items: flex-end; justify-content: center; gap: .4rem; min-height: var(--h-button); text-decoration: none; transition: opacity var(--d-menu) var(--e-out), visibility var(--d-menu); }
+.m-header__callLine { color: var(--c-chrome); font: var(--w-body) 1.3rem/1 var(--f-body); }
+.m-header__callNumber { font: 600 1.5rem/1 var(--f-mono); letter-spacing: -.01em; }
+@media (hover: hover) and (any-pointer: fine) { .m-header__call:hover .m-header__callNumber { text-decoration: underline; text-underline-offset: .3rem; text-decoration-thickness: 1px; } }
+.m-header__book .a-button__arrow { display: none; }
+
+/* State. is-callElsewhere: the hero's pill or the footer has the number on screen. Without the script neither state is set, so the number stays visible. */
+.m-header.is-callElsewhere .m-header__call { visibility: hidden; opacity: 0; }
+/* Hidden until the script has decided, because it runs after first paint: the number used to show, then fade, on every load of a page whose first screen has its own pill (restart check, 5 Nov; Varun: the number shows once per screen). Pages with no pill fade it in as the script runs. */
+.js .m-header:not(.is-callReady) .m-header__call { visibility: hidden; opacity: 0; }
+
+@media (max-width: 379px) {
+  :root { --logo: 7.6rem; }
+  .m-header__menuBtn { padding: 0 1.2rem; }
+  .m-header__book { padding: 0 1.4rem; }
+}
+@media (min-width: 641px) {
+  /* Tablets have the room for a bigger bar and logo than phones (critic r2) */
+  :root { --gutter: 3.2rem; --h-header: 72px; --logo: 96px; --logoSmall: .7; }
+  .m-header__call { display: flex; }
+  .m-header__book .a-button__arrow { display: block; }
+}
+/* 641 to 820: the logo sits on the bar's centre and the right half has to hold the number and the pill. "Questions? Give us a call" goes first, as it does at 1025 to 1240. With it, the number's block ran under the logo from 767 down (critic, Services r1: 48px over the number at 650, rulings R0 A1). 820, not 767, so it clears with room at the iPad widths, not by 1px */
+@media (min-width: 641px) and (max-width: 820px) {
+  .m-header__callLine { display: none; }
+}
+/* 641 to 767: the number alone still reached it, so the logo takes the phone's size, the pill loses its arrow and tightens. Measured clear from 641 up: build/tmp/p2/header_check.py */
+@media (min-width: 641px) and (max-width: 767px) {
+  :root { --logo: 88px; }
+  .m-header__right { gap: var(--s-3); }
+  .m-header__callNumber { font-size: 1.4rem; }
+  .m-header__book { padding: 0 2rem; }
+  .m-header__book .a-button__arrow { display: none; }
+}
+/* The label's breathing on hover pushes the number left, and here it would push it into the logo. Must follow .a-button's own hover */
+@media (min-width: 641px) and (max-width: 767px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-header__book:hover { padding: 0 2rem; } }
+@media (min-width: 768px) and (max-width: 820px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-header__book:hover { padding: 0 2.4rem; } }
+@media (min-width: 1025px) {
+  /* Capped in pixels: the root grows past 1440, but the logo file doesn't (critic r1: 144px at 1920 would go soft, and the bar broke its cap) */
+  :root { --gutter: 4.8rem; --h-header: 88px; --logo: 108px; --logoSmall: .78; }
+  .m-header__nav { display: block; }
+  .m-header__menuBtn { display: none; }
+  .m-header__logo { top: 3px; }
+}
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .m-header__navList { gap: 2rem; }
+  .m-header__link { font-size: 1.3rem; }
+  .m-header__callLine { display: none; }
+}
+/* Past 1440 the root grows but this bar doesn't, so what's in it stays at its 1440 size and the logo stays the main thing (critic r2: at 2560 the pill nearly filled the bar) */
+@media (min-width: 1441px) {
+  .m-header__navList { gap: 30px; }
+  .m-header__link { font-size: 14px; background-position: 0 calc(50% + 11px); }
+  .m-header__call { gap: 4px; min-height: 44px; }
+  .m-header__callLine { font-size: 13px; }
+  .m-header__callNumber { font-size: 15px; }
+  .m-header__right { gap: 16px; }
+  .m-header__book { gap: 12px; min-height: 44px; padding: 0 24px; font-size: 15px; }
+  .m-header__book .a-button__arrow { width: 15px; height: 15px; }
+}
+@media (min-width: 1441px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-header__book:hover { padding: 0 32px; }
+}
+/* Book now breathes from its middle and keeps its slot: margins take back what the padding adds, so the number beside it stays still (critic, Donate r1: it pushed the number 16px left). 641 to 820 turn the breathing off, above */
+.m-header__book { transition: padding var(--d-breathe) var(--e-out), margin var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+@media (min-width: 821px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-header__book:hover { margin: 0 -.8rem; } }
+@media (min-width: 1441px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-header__book:hover { margin: 0 -8px; } }
+
+/* The ring keeps clear of the number at both ends (critic, Commercial r1) */
+.m-header__call:focus-visible { outline-offset: .6rem; }
+/* ---- menu (phones and tablets): an opaque panel that wipes down, a real dialog ---- */
+.m-menu { position: fixed; inset: 0; z-index: 200; background: var(--c-scrim); --c-focus: var(--c-ink); }
+.m-menu[hidden] { display: none; }
+.m-menu__panel { position: absolute; inset: .8rem; display: flex; flex-direction: column; padding: var(--s-3) var(--s-5) var(--s-5); overflow-y: auto; border-radius: var(--r-image); background: var(--c-cream); color: var(--c-ink); }
+/* Tablets: a sheet down the side the Menu pill is on, not a phone menu stretched to 1008px (critic r1) */
+@media (min-width: 641px) { .m-menu__panel { right: auto; width: 44rem; max-width: calc(100vw - 1.6rem); } }
+@media (prefers-reduced-motion: no-preference) {
+  .m-menu__panel { animation: menu-in var(--d-menu) var(--e-out); }
+  @keyframes menu-in { from { clip-path: inset(0 0 100% 0 round var(--r-image)); } to { clip-path: inset(0 0 0 0 round var(--r-image)); } }
+}
+.m-menu__top { display: flex; justify-content: flex-end; }
+.m-menu__close { display: grid; place-items: center; width: 4.4rem; height: 4.4rem; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--c-slate); transition: transform 160ms var(--e-out); }
+.m-menu__close:active { transform: scale(.97); }
+.m-menu__list { margin-top: var(--s-3); }
+.m-menu__link { display: flex; align-items: center; width: fit-content; min-height: 5.6rem; font: var(--w-heavy) 2.8rem/1 var(--f-display); text-transform: uppercase; text-decoration: none; }
+.m-menu__link[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .5rem; }
+.m-menu__actions { display: flex; flex-direction: column; gap: var(--s-2); margin-top: auto; padding-top: var(--s-5); }
+
+/* ---- call-only bar on phones ---- */
+/* visibility as well as the slide: parked off screen it must not take keyboard focus, or paint in a full-page capture */
+.m-actionBar { position: fixed; right: 0; bottom: 0; left: 0; z-index: 40; display: flex; padding: var(--s-2) var(--s-3) calc(var(--s-2) + env(safe-area-inset-bottom)); background: var(--c-ink); --c-focus: var(--c-chrome); visibility: hidden; transform: translateY(110%); transition: transform var(--d-menu) var(--e-out), visibility var(--d-menu); }
+.m-actionBar .a-button { width: 100%; }
+.m-actionBar.is-shown { visibility: visible; transform: none; }
+@media (min-width: 641px) { .m-actionBar { display: none; } }
+
+/* ===== Bands ===== */
+.b-band { position: relative; padding: var(--s-9) var(--gutter); --c-focus: var(--c-ink); --c-soft: var(--c-steel); }
+.b-band.-slate { background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+/* V7: a light band rises over the hero with round top corners. The truck parks on its edge. */
+.b-band.-rise { z-index: 2; margin-top: calc(var(--r-band) * -1); border-radius: var(--r-band) var(--r-band) 0 0; background: var(--c-cream); }
+@media (min-width: 1025px) { .b-band { padding: var(--s-10) var(--gutter); } }
+
+/* ===== Home: hero ===== */
+/* Fills the first screen and leaves a sliver of the next band in view, so the truck has something to stand on and the page visibly carries on.
+   Round 2 (Varun, 4 Nov: "come down a bit and sit closer to the centre of the hero"). The words are centred on the hero's height and set in from the left by --heroInset; the truck stays bottom right. V5 centres the headline on the page's axis too, but a stack on that axis leaves no room for the truck under 900px tall (revision.md, conflicts).
+   Inner page banners share this recipe: photo, scrim, words, truck parked on the fold. */
+.t-page { padding-top: var(--h-header); }
+/* overflow-x clip: the truck waits off to the right before it backs in, and the page must not get wider while it does. Vertical stays open so its wheels can land on the next band. */
+.o-homeHero, .o-pageBanner { position: relative; display: flex; flex-direction: column; justify-content: center; overflow-x: clip; color: var(--c-cream); --c-focus: var(--c-cream); --truckW: calc(100% - 1.6rem); --heroInset: var(--gutter); }
+.o-homeHero { min-height: max(58rem, calc(100svh - var(--h-header) - 1.6rem)); }
+.o-homeHero__media, .o-pageBanner__media { position: absolute; inset: 0; overflow: hidden; background: var(--c-slate); }
+.o-homeHero__img, .o-pageBanner__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.o-homeHero__img { object-position: 50% 42%; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .o-homeHero__img { transform: scale(1.05); transition: transform 2400ms var(--e-out); }
+  .js.is-loaded .o-homeHero__img { transform: none; }
+}
+/* Sampled, not guessed: see the contrast table in revision.md. Dark only where the words sit, so the rest of the photo keeps its colour. */
+/* Phones: as light as the words allow, so the yard keeps its colour (Varun, 4 Nov: "full colour"; critic, home r1: dusk blue with an abrupt edge at the grass). Lightest over the headline, which needs 3:1; darkest behind the sentence, which needs 4.5:1. Sampled: build/qa-report.md */
+.o-homeHero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 20, 28, .36) 0%, rgba(15, 20, 28, .42) 16%, rgba(15, 20, 28, .58) 28%, rgba(15, 20, 28, .58) 46%, rgba(15, 20, 28, .3) 58%, rgba(15, 20, 28, .08) 68%, rgba(15, 20, 28, 0) 78%); }
+/* z-index 4: above the truck, so the words win at any size where the two ever meet.
+   The bottom padding keeps the words above the truck on phones and portrait tablets, whatever the sentence's row count: .5244 is the drawing's height over its width (558 of 1064). Then the hero's flex centring sits them in the space that's left. */
+.o-homeHero__copy, .o-pageBanner__copy { position: relative; z-index: 4; width: 100%; padding: calc(var(--logo) - var(--h-header) + var(--s-5)) var(--gutter) calc(var(--truckW) * .5244 + var(--r-band) + var(--s-3)) var(--heroInset); container-type: inline-size; }
+.o-homeHero .a-hero, .o-pageBanner .a-hero { text-shadow: 0 .2rem 2.8rem rgba(15, 20, 28, .4); }
+/* The letters' side bearing, about 4px at 104px, set the headline's left edge inside the sentence's (critic, Reviews r1 and r2) */
+.o-pageBanner .a-hero { margin-left: -.03em; }
+.o-homeHero__line, .o-pageBanner__line { max-width: 36ch; margin-top: var(--s-4); font: var(--w-body) 1.9rem/1.35 var(--f-body); text-shadow: 0 .1rem 1.4rem rgba(15, 20, 28, .6); text-wrap: balance; }   /* balance, not pretty: the nowrap phrase and New Hampshire's nbsp left a short row at 320 and 1024 (critic, home r2) */
+/* Own width, not stretched: two 350px bars outweighed the sentence and covered the photo (critic, home r1) */
+.o-homeHero__actions, .o-pageBanner__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); margin-top: var(--s-5); }
+/* Very narrow phones: less padding, because the label and number together ran 23px past the pill at 320 and were clipped */
+@media (max-width: 379px) { .o-homeHero__actions .a-button { gap: var(--s-2); padding: 0 1.4rem; font-size: 1.5rem; } }
+/* Landscape tablets and small laptops: phone icon and number only, the pill's accessible name keeps the words. The shorter pill keeps clear of the truck's load at short window heights (critic r2: 1033px of overlap at 1025x700). Portrait has the room, so the words stay (critic, home r1) */
+@media (min-width: 641px) and (max-width: 1240px) and (orientation: landscape) { .o-homeHero__callLabel, .o-pageBanner__callLabel { display: none; } }
+.o-homeHero__truck, .o-pageBanner__truck { position: absolute; right: .8rem; bottom: calc(var(--r-band) - .6rem); z-index: 3; width: var(--truckW); pointer-events: none; }
+/* 3.58%: the drawing's ground line sits that far up from the bottom of its viewBox (20 of 558 units). So the tyres land .6rem inside the band at any size. On the svg, not the holder, because the holder carries the roll-in's transform. */
+.o-homeHero__truck .m-truck, .o-pageBanner__truck .m-truck { transform: translateY(3.58%); }
+.m-truck { display: block; width: 100%; height: auto; overflow: visible; }
+.js .o-homeHero__truck { visibility: hidden; }
+.js.is-loaded .o-homeHero__truck { visibility: visible; }
+.m-truck__spin { transform-box: fill-box; transform-origin: center; }
+.m-truck__body { transform-box: view-box; transform-origin: 360px 540px; transition: transform var(--d-rise) var(--e-out); }
+
+@media (min-width: 641px) {
+  .o-homeHero { --truckW: min(88vw, 64vh); }
+  .o-pageBanner { --truckW: min(70vw, 40vh); }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 40ch; font-size: 2.2rem; }
+  .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+  /* V5: darken only where the words sit. An ellipse round the copy; the lawn, the fence and the house keep their colour. */
+  .o-homeHero__scrim { background: radial-gradient(ellipse 70% 58% at 22% 42%, rgba(15, 20, 28, .66) 0%, rgba(15, 20, 28, .6) 50%, rgba(15, 20, 28, .3) 76%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Portrait tablets: the headline runs nearly the full width, out over the bright sky, so the scrim goes back to the phone's top-down wash (measured 2.52:1 with the ellipse) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .o-homeHero__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .42) 0%, rgba(15, 20, 28, .46) 22%, rgba(15, 20, 28, .62) 36%, rgba(15, 20, 28, .62) 48%, rgba(15, 20, 28, .26) 60%, rgba(15, 20, 28, .06) 68%, rgba(15, 20, 28, 0) 76%); }
+}
+/* Landscape tablets and up: the truck stands beside the lower half of the words, not under them, so the padding only lifts the block to the hero's optical centre. */
+@media (min-width: 641px) and (orientation: landscape) {
+  .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: calc(var(--r-band) + 5vh); }
+  .o-homeHero { --heroInset: max(var(--gutter), 5vw); }
+  .o-pageBanner { --heroInset: max(var(--gutter), 5vw); }
+}
+/* The sentence stops short of the truck beside it (measured 32px of overlap at 1024x768 before this) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .o-homeHero__line, .o-pageBanner__line { max-width: 42vw; }
+}
+/* Landscape tablets: the truck was 307px at 1024x768, smaller than at 768 wide and half its size one pixel wider (critic, Reviews r2, About r1 and r2). Measured with build/tmp/p2/banner_check.py. Short phones on their side keep their own rule, below */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) {
+  .o-pageBanner { --truckW: min(38vw, 50vh); }
+}
+@media (min-width: 1025px) {
+  /* 78vh and 46vw keep the truck's load clear of the lower words: measured at 1025x700 up to 2560x1300, see revision.md */
+  .o-homeHero { --truckW: min(46vw, 78vh); --heroInset: 5.5vw; }
+  .o-pageBanner { --truckW: min(42vw, 70vh); --heroInset: 5.5vw; }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__copy, .o-pageBanner__copy { width: min(68vw, 96rem); }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 44ch; }
+  /* The same two-part wash, the main ellipse over the words and the small one behind the sentence, which needs 4.5:1 where the headline needs 3:1.
+     Anchored in rem from the hero's middle, because the words are centred there and are a fixed height: as a % of the hero's height it slid off JUNK OUT on short windows once the line grew to three rows (2.5:1 at 1280x720, 1.9:1 at 1026x700). Sampled at 14 window sizes: build/qa-report.md */
+  /* The first ellipse is new: JUNK OUT's last letters sit over sky through leaves, and the light weight is the fragile part (critic, home v3 r1: 1.86:1 at the T's worst pixel). Small and faint, so the sky above and to the right keeps its colour */
+  .o-homeHero__scrim { background: radial-gradient(ellipse 14% 9rem at 44% calc(50% - 16.5rem), rgba(15, 20, 28, .2) 0%, rgba(15, 20, 28, .15) 55%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 30% 11rem at 25% calc(50% + 7rem), rgba(15, 20, 28, .42) 0%, rgba(15, 20, 28, .34) 55%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 32rem at 30% calc(50% - 1.6rem), rgba(15, 20, 28, .52) 0%, rgba(15, 20, 28, .49) 66%, rgba(15, 20, 28, .22) 86%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Small laptops: a shorter measure keeps the sentence clear of the truck */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .o-homeHero__line, .o-pageBanner__line { max-width: min(40ch, 42vw); }
+}
+@media (min-width: 1241px) {
+  .o-homeHero { --truckW: min(52vw, 78vh, 100rem); --heroInset: 8.33vw; }
+  .o-pageBanner { --truckW: min(46vw, 70vh, 88rem); --heroInset: 8.33vw; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .o-homeHero, .o-pageBanner { --truckW: 42vw; min-height: 46rem; }
+  .o-homeHero__truck, .o-pageBanner__truck { right: 1.6rem; }
+  .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: var(--r-band); }
+  .o-homeHero__line, .o-pageBanner__line { max-width: 44vw; font-size: 1.7rem; }
+  .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* ===== Home: what we haul ===== */
+.o-homeHaul { padding-top: var(--s-10); }
+.o-homeHaul__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-5) 1rem; }
+.m-tile { position: relative; }
+/* Phones: one wide, four in two rows, two wide. No tile ever sits alone beside a gap. */
+.m-tile.-seven, .m-tile.-five:nth-child(6) { grid-column: span 2; }
+.m-tile__link { position: relative; display: block; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); text-decoration: none; --c-focus: var(--c-cream); }
+/* Round 2: one line under each photo, on the cream, so the photo stays clean */
+.m-tile__line { margin-top: var(--s-2); padding: 0 .4rem; color: var(--c-soft); font: var(--w-body) 1.5rem/1.35 var(--f-body); text-wrap: pretty; }
+/* The ring has to sit above the photo, or the photo paints over it (critic r1: focus changed 19 pixels). Cream with an ink edge so it shows on any picture. */
+.m-tile__link:focus-visible { outline: none; }
+.m-tile__link:focus-visible::after { content: ""; position: absolute; inset: .6rem; z-index: 2; border-radius: calc(var(--r-image) - .6rem); box-shadow: 0 0 0 3px var(--c-cream), 0 0 0 5px var(--c-ink); pointer-events: none; }
+.m-tile__img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.m-tile.-seven .m-tile__img, .m-tile.-five:nth-child(6) .m-tile__img { aspect-ratio: 16 / 10; }
+.m-tile__img.-right { object-position: 66% 50%; }
+.m-tile__label { position: absolute; bottom: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: var(--s-2); min-height: 4rem; max-width: calc(100% - 2rem); padding: .8rem 1.4rem; border-radius: 2rem; background: var(--c-cream); color: var(--c-ink); font: var(--w-semi) 1.5rem/1.15 var(--f-body); }
+.m-tile__arrow { display: none; flex: none; width: 1.4rem; height: 1.4rem; transition: transform var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-tile__img { transition: transform 1500ms var(--e-out); }
+  .m-tile__link:hover .m-tile__img { transform: scale(1.04); }
+  .m-tile__link:hover .m-tile__arrow { transform: translateX(.5rem); }
+}
+@media (min-width: 641px) {
+  .o-homeHaul__grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6) 1.6rem; }
+  .m-tile.-seven { grid-column: span 7; }
+  .m-tile.-five, .m-tile.-five:nth-child(6) { grid-column: span 5; }
+  .m-tile.-four { grid-column: span 4; }
+  .m-tile.-seven .m-tile__img, .m-tile.-five .m-tile__img, .m-tile.-five:nth-child(6) .m-tile__img { position: absolute; inset: 0; aspect-ratio: auto; }
+  .m-tile.-seven .m-tile__link, .m-tile.-five .m-tile__link { min-height: 34rem; }
+  .m-tile__label { bottom: 1.6rem; left: 1.6rem; max-width: calc(100% - 3.2rem); min-height: var(--h-button); padding: .8rem 1.8rem; font-size: 1.6rem; border-radius: 2.2rem; }
+  .m-tile__arrow { display: block; }
+  .m-tile__line { font-size: 1.6rem; }
+}
+@media (min-width: 1025px) {
+  .o-homeHaul { padding-top: 16rem; }
+  .m-tile.-seven .m-tile__link, .m-tile.-five .m-tile__link { min-height: 44rem; }
+}
+
+/* ===== Home: priced by the load ===== */
+/* The one place the work order's load cell survives on Home. One truck, one picker, one price.
+   Round 2 (Varun, 4 Nov: "the text is cramped at the left end... must span the full width"). Heading, line and the small load control on the axis (Varun, 5 Nov), then price on the left, truck in the middle, small facts on the right.
+   Everything is visible at once, so you can watch the truck fill as you pick. The truck parks on the next band's edge, the same move as the hero. */
+.o-homePrice { padding-bottom: calc(var(--s-7) + var(--r-band)); text-align: center; --gaugeW: calc(100vw - 1.6rem); }
+.o-homePrice__stage { display: flex; flex-direction: column; gap: var(--s-5); }
+/* Phones: pick a load and watch the truck fill right under your thumb, then the price and the pill, with the small print last (critic r2-1: the caveats came before any price, and the truck below the pill) */
+.o-homePrice__loads { order: 1; display: flex; align-items: center; justify-content: center; gap: var(--s-3); }
+.o-homePrice__loadsLabel { flex: none; color: var(--c-chrome); font: var(--w-semi) 1.4rem/1 var(--f-body); white-space: nowrap; }
+.o-homePrice__truck { position: relative; z-index: 3; order: 2; align-self: center; width: var(--gaugeW); }
+.o-homePrice__readout { order: 3; display: flex; flex-direction: column; align-items: center; gap: var(--s-4); }
+.o-homePrice__facts { order: 4; display: grid; gap: var(--s-3); }
+/* Tablets up: the truck parks on the next band's edge, as in the hero */
+@media (min-width: 641px) {
+  .o-homePrice { padding-bottom: 0; }
+  .o-homePrice__truck { margin-bottom: calc(var(--r-band) - .6rem - var(--gaugeW) * .01877); }
+}
+.m-truck.-gauge { width: 100%; }
+.m-truck__item { transition: transform 620ms var(--e-drop), opacity 200ms linear; }
+/* Exits are quick and go first: heavier loads land slowly, one piece at a time (stagger set by the script). */
+.m-truck__item.-off { opacity: 0; transform: translateY(-48px); transition: transform 200ms var(--e-out), opacity 140ms linear; }
+.m-truck[data-level="2"] .m-truck__body { transform: translateY(1.2px); }
+.m-truck[data-level="3"] .m-truck__body { transform: translateY(2.4px); }
+.m-truck[data-level="4"] .m-truck__body { transform: translateY(4px); }
+.o-homePrice__price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 var(--s-3); }
+.o-homePrice__figure { font: var(--w-heavy) 6.4rem/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.o-homePrice__unit { font: 500 1.5rem/1.2 var(--f-mono); color: var(--c-chrome); }
+/* Room for two rows, so the band doesn't jump when the note changes length */
+.o-homePrice__note { min-height: 2.9em; margin-top: var(--s-2); color: var(--c-chrome); font-size: 1.7rem; line-height: 1.45; text-wrap: balance; }
+/* Tablets: heading on one row, the three facts spread across the top, then price beside the truck, so picker and whole truck fit on one screen at 1024x768 (critic r1) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .o-homePrice { padding-top: var(--s-8); --gaugeW: min(58vw, 54vh); }
+  .o-homePrice__title { font-size: min(6.4rem, 8.4vw); }
+  .o-homePrice__title .a-section__row { display: inline; }
+  .o-homePrice__stage { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto; gap: var(--s-5) var(--s-5); text-align: left; }
+  .o-homePrice__facts { grid-column: 1 / -1; grid-row: 2; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+  .o-homePrice__loads { grid-column: 1 / -1; grid-row: 1; }
+  .o-homePrice__readout { grid-column: 1; grid-row: 3; align-items: flex-start; align-self: start; padding-bottom: var(--s-7); }
+  .o-homePrice__price { justify-content: flex-start; }
+  .o-homePrice__truck { grid-column: 2; grid-row: 3; align-self: end; margin-right: calc(var(--gutter) * -.5); }
+}
+/* Laptops up: three columns under the picker. The truck takes the middle half and overhangs its column a little, because the drawing carries its own margin. The side columns stop above the fold. */
+@media (min-width: 1025px) {
+  .o-homePrice { padding-top: var(--s-9); --gaugeW: min(50vw, 78vh, 96rem); }
+  .o-homePrice__title .a-section__row { display: inline; }
+  .o-homePrice__stage { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr); grid-template-rows: auto auto; gap: var(--s-6); text-align: left; }
+  .o-homePrice__loads { grid-column: 1 / -1; grid-row: 1; }
+  .o-homePrice__readout { grid-column: 1; grid-row: 2; align-items: flex-start; align-self: start; gap: var(--s-5); padding-bottom: var(--s-8); }
+  .o-homePrice__price { justify-content: flex-start; }
+  .o-homePrice__figure { font-size: 8.8rem; }
+  /* 28rem: all four notes wrap to two rows. At 1/2 the one-row note ran to 24px from the truck's rear (critic, home v3 r1) */
+  .o-homePrice__note { max-width: 28rem; }
+  .o-homePrice__unit { flex-basis: 100%; margin-top: var(--s-2); }
+  /* A little left of centre: the words on the left stop well short of it, and the cab's mirror sat 29px from the facts on the right (critic r2-1) */
+  .o-homePrice__truck { grid-column: 2; grid-row: 2; justify-self: center; align-self: end; transform: translateX(-1.6rem); }
+  .o-homePrice__facts { grid-column: 3; grid-row: 2; align-self: start; gap: var(--s-4); padding-bottom: var(--s-8); }
+}
+/* Short laptops: less air above the heading, so the band still fits one screen with the bar on top */
+@media (min-width: 641px) and (max-height: 820px) { .o-homePrice { padding-top: var(--s-7); } }
+
+/* ===== Home: before and after ===== */
+/* 112rem, not the band's full 134.4: the after photo's crop is only 1500 wide, and as the page's largest image it looked soft next to the before (conventions: show it smaller; critic, home r1).
+   1500px is that crop's width: the root grows past 1440, and 112rem reached 1991px at 2560, stretching the photo (restart check, 5 Nov). Goes when Shawn's real pair arrives */
+.o-homeProof__stage { max-width: min(112rem, 1500px); margin: 0 auto; }
+/* Both layers shift alike, so their floors stay level: a little more wall, a little less of the after side's flaking floor */
+.o-homeProof .m-compare__img { object-position: 50% 30%; }
+/* pan-y: the page scrolls as normal; only a sideways drag moves the divider (critic r1: a vertical swipe made it jump). The script handles the pointer; the range input stays for keyboard and screen readers. */
+.m-compare { position: relative; aspect-ratio: 4 / 3.4; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); cursor: ew-resize; --pos: 50%; touch-action: pan-y; }
+.m-compare__layer { position: absolute; inset: 0; }
+.m-compare__layer.-after { clip-path: inset(0 0 0 var(--pos)); }
+.m-compare__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-compare__tag { position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; min-height: 3.6rem; padding: 0 1.4rem; border-radius: 2rem; background: var(--c-cream); color: var(--c-ink); font: var(--w-semi) 1.4rem/1 var(--f-body); pointer-events: none; }
+.m-compare__tag.-after { right: 1rem; left: auto; }
+/* A tag fades as the divider reaches it, or the clip cuts it mid-word while it's being dragged (critic, Reviews r1). global.js sets the class */
+.m-compare__tag { transition: opacity var(--d-ui) var(--e-ui); }
+.m-compare__tag.is-covered { opacity: 0; }
+.m-compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--c-cream); pointer-events: none; }
+/* clamped so the knob and its focus ring are never clipped at either end (rulings: R0 B3; critic r1) */
+.m-compare__knob { position: absolute; top: 50%; left: clamp(3.4rem, var(--pos), calc(100% - 3.4rem)); display: flex; align-items: center; justify-content: center; width: 5.6rem; height: 5.6rem; margin: -2.8rem 0 0 -2.8rem; border-radius: 50%; background: var(--c-cream); color: var(--c-ink); box-shadow: 0 .6rem 2rem rgba(15, 20, 28, .3); pointer-events: none; transition: transform 160ms var(--e-out); }
+.m-compare__chev { width: 1.4rem; height: 1.4rem; transition: transform 160ms var(--e-out); }
+.m-compare__chev.-left { transform: scaleX(-1); }
+.m-compare__range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
+.m-compare__range:focus-visible ~ .m-compare__knob { outline: 2px solid var(--c-ink); outline-offset: 3px; }
+/* Taken with the mouse, the input still has focus: no ring until a key is pressed (critic, Reviews r1) */
+.m-compare.is-pointer .m-compare__range:focus-visible ~ .m-compare__knob { outline: none; }
+.m-compare.is-dragging .m-compare__knob { transform: scale(.94); }
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) { .m-compare:hover .m-compare__knob { transform: scale(1.06); } .m-compare.is-dragging:hover .m-compare__knob { transform: scale(.94); } .m-compare:hover .m-compare__chev { transform: translateX(.2rem); } .m-compare:hover .m-compare__chev.-left { transform: scaleX(-1) translateX(.2rem); } }
+.o-homeProof { padding-bottom: var(--s-8); }
+/* Copy v3 (Varun, 5 Nov: "a bit more"): one plain line under the slider, on the band's axis */
+/* balance: pretty left "What" alone at the end of the first row, away from the rest of its sentence */
+.o-homeProof__takes { max-width: 76rem; margin: var(--s-5) auto 0; text-align: center; text-wrap: balance; }
+@media (min-width: 1025px) { .o-homeProof__takes { font-size: 1.8rem; } }
+@media (min-width: 641px) { .m-compare { aspect-ratio: 16 / 9; } }
+@media (min-width: 1025px) {
+  .m-compare { aspect-ratio: 1.9; }
+  .m-compare__tag { top: 2rem; left: 2rem; min-height: var(--h-button); padding: 0 1.8rem; font-size: 1.6rem; border-radius: 2.2rem; }
+  .m-compare__tag.-after { right: 2rem; left: auto; }
+  .o-homeProof { padding-bottom: var(--s-9); }
+}
+
+/* ===== Home: reviews ===== */
+/* Its own band, so before and after holds one idea (critic r2). Five sample cards shaped like what will fill them: a Facebook review, with who wrote it and when (V8: testimonial card with an initials avatar).
+   No stock job photo beside them, because a review shouldn't borrow a job that isn't the writer's. The picture is the load's own sofa and chair, set down on one card's edge, the same move as the truck on the fold (anti-slop: a custom illustration when real media is missing). A real job photo can take their place. */
+/* Some air of its own above the heading, so it doesn't read as the tail of before and after (critic, home r1) */
+.o-homeReview { padding-top: var(--s-6); padding-bottom: var(--s-8); }
+.o-homeReview .m-head { margin-bottom: 0; text-align: center; }
+/* The seated card: a soft card with a few drawn things set down on its top edge. For a band with no photo to carry it (reviews on Home, "can't take" on Services, and FAQ or Contact groups later). Slate at 8% on cream: no new colour */
+.m-seatCard { position: relative; max-width: 96rem; margin: 12.8rem auto 0; padding: var(--s-6) var(--s-5) var(--s-5); border-radius: var(--r-image); background: rgba(52, 61, 78, .08); }
+.m-seatCard__art { position: absolute; right: var(--s-5); bottom: calc(100% - .5rem); display: flex; align-items: flex-end; gap: .4rem; pointer-events: none; }
+.m-quote__sofa { width: 15rem; }
+.m-quote__chair { width: 8rem; }
+.m-quote__text { font: var(--w-light) 2.4rem/1.3 var(--f-body); text-wrap: pretty; }
+.m-quote__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); margin-top: var(--s-5); }
+.m-quote__who { display: flex; align-items: center; gap: var(--s-3); }
+.m-quote__avatar { display: grid; flex: none; place-items: center; width: 4.4rem; height: 4.4rem; border-radius: 50%; background: var(--c-slate); color: var(--c-cream); font: var(--w-semi) 1.4rem/1 var(--f-body); }
+.m-quote__name { display: block; font: var(--w-semi) 1.6rem/1.25 var(--f-body); }
+.m-quote__source { display: block; color: var(--c-steel); font: 500 1.3rem/1.3 var(--f-mono); }
+/* A review card: slate, with nothing on its edge unless it is also .m-seatCard. Was the seated card's pale ground, which barely separated from the cream and left the band the flattest on the page, in a long run of cream (critic, home v3 r1). Slate is the palette's own; no new colour. A column, so the who line sits at the foot however long the review runs; no fixed height, because real reviews will run longer than these samples */
+.m-quote.-card { display: flex; flex-direction: column; min-width: 0; padding: var(--s-5); border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.m-quote.-card .m-quote__avatar { background: var(--c-cream); color: var(--c-ink); }
+.m-quote.-card .m-quote__source { color: var(--c-chrome); }
+.m-quote.-card .m-quote__text { font-size: 2.2rem; }
+.m-quote.-card .m-quote__foot { margin-top: auto; padding-top: var(--s-4); }
+/* Five cards. Stacked on phones, 2 + 1 + 2 on tablets, 3 + 2 from laptops up (the two wider cards hold the longer samples). The seated card's art needs the room above its edge: that's the margin on it, or from laptops up on the whole grid, because it stands in the top row */
+.o-homeReview__grid { display: grid; gap: var(--s-3); max-width: 134.4rem; margin: var(--s-6) auto 0; }
+.o-homeReview__grid .m-seatCard { max-width: none; margin: 8.8rem 0 0; padding: var(--s-5); }
+.o-homeReview .m-rowActions { margin-top: var(--s-4); }
+@media (min-width: 641px) {
+  .m-seatCard { padding: var(--s-7) var(--s-7) var(--s-6); }
+  .m-seatCard__art { right: var(--s-7); }
+  .m-quote__sofa { width: 19rem; }
+  .m-quote__chair { width: 10rem; }
+  .o-homeReview__grid .m-seatCard__art { right: var(--s-5); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .o-homeReview__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
+  .o-homeReview__grid .m-seatCard { grid-column: 1 / -1; margin-top: 10.4rem; padding: var(--s-6); }
+}
+@media (min-width: 1025px) {
+  .m-quote__text { font-size: 3.2rem; }
+  .o-homeReview { padding-top: var(--s-8); padding-bottom: var(--s-9); }
+  .o-homeReview__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); margin-top: 12.8rem; }
+  .o-homeReview__grid .m-quote { grid-column: span 2; padding: var(--s-6); }
+  .o-homeReview__grid .m-quote:nth-child(n + 4) { grid-column: span 3; }
+  .o-homeReview__grid .m-seatCard { margin: 0; }
+  .o-homeReview__grid .m-seatCard__art { right: var(--s-6); }
+  .m-quote.-card .m-quote__text { font-size: 2.6rem; }
+  .o-homeReview .m-rowActions { margin-top: var(--s-5); }
+}
+/* Small laptops: the top row's cards are narrower than the sofa and chair at their tablet size */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .o-homeReview__grid .m-quote__sofa { width: 15rem; }
+  .o-homeReview__grid .m-quote__chair { width: 8rem; }
+}
+
+/* ===== Home: towns (V8 promo card: one photo, a heading, the names) ===== */
+.o-homeTowns { padding-top: 0; }
+/* Two rows at every width, so sized off its column (conventions). DO YOU COME and TO MY TOWN?, the longest rows, are about 6.45em wide and 15.3cqi fits them. On 12vw alone they broke to three or four rows under 384 (restart check, 5 Nov) */
+.o-homeTowns .m-promo__copy { container-type: inline-size; }
+.o-homeTowns .a-section { font-size: min(var(--t-sectionSmall), 15.3cqi); }
+.m-promo { display: flex; flex-direction: column; max-width: 134.4rem; margin: 0 auto; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+.m-promo__copy { padding: var(--s-7) var(--s-5); }
+.m-promo__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); }
+.m-promo__line { margin-top: var(--s-5); color: var(--c-chrome); }
+.m-promo__line .a-inlineLink { color: var(--c-cream); }
+.m-promo__media { position: relative; aspect-ratio: 4 / 3; }
+.m-promo__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+@media (min-width: 641px) and (max-width: 1024px) { .m-promo__media { aspect-ratio: 16 / 7; } }
+/* Stacked: the picture leads, like every other band, so a promo never opens as a block of text (critic r2-2) */
+@media (max-width: 1024px) { .m-promo__media { order: -1; } }
+@media (min-width: 1025px) {
+  .m-promo { display: grid; grid-template-columns: 7fr 5fr; }
+  .m-promo__copy { align-self: center; padding: var(--s-8); }
+  .m-promo__media { aspect-ratio: auto; min-height: 52rem; }
+}
+/* State labels over the town chips (the hub) */
+.m-promo__group { margin-top: var(--s-5); }
+.m-promo__label { color: var(--c-chrome); font: var(--w-semi) 1.6rem/1.2 var(--f-body); }
+.m-promo__group .m-promo__chips { margin-top: var(--s-2); }
+
+/* The drawn map in the picture's slot (hub and Contact). Our own drawing, placeholder towns at public map positions. Cream under it, so the labels read as they did. It fills the slot from 1025 up and letterboxes itself. Hangs off .-map so the old pages keep their own map until they move */
+/* The ground is a touch darker than the band, slate at 3%, so the drawing reads as a panel: on the band's own cream, only a hairline held that side of the card (critic, hub) */
+.m-promo__media.-map { aspect-ratio: 8 / 7; background: linear-gradient(rgba(52, 61, 78, .02), rgba(52, 61, 78, .02)), var(--c-cream); }
+.m-promo__media.-map .m-map { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+/* The hub: the drawing gets half the card, because it's this band's picture, and at 5 of 12 columns it read thin beside the slate and its labels ran small (critic, hub). Stacked, the words and chips come first, because under 1025 the map isn't a link and the chips are how you get to a town: first, it filled the screen at 1024 and looked tappable with no title */
+@media (min-width: 1025px) {
+  .t-area .m-promo { grid-template-columns: 1fr 1fr; }
+  /* They flow, as on phones, but stop short of the column so the row breaks at four or three: at the full width one town was left alone on its row, and as a grid the columns nearly lined up (critic, hub and towns r1) */
+  .t-area .m-promo__chips { max-width: 46rem; }
+}
+/* A hairline round the drawing: cream on the cream band, the card's edge dissolved into the page on its map side. On ::after, because the drawing paints over an inset shadow on the slot itself */
+.m-promo__media.-map { border-radius: var(--r-image) var(--r-image) 0 0; }
+.m-promo__media.-map::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(52, 61, 78, .16); pointer-events: none; }
+@media (min-width: 1025px) { .m-promo__media.-map { border-radius: 0 var(--r-image) var(--r-image) 0; } }
+@media (max-width: 1024px) {
+  .t-area .m-promo__media.-map { order: 1; border-radius: 0 0 var(--r-image) var(--r-image); }
+}
+/* The card's slate moves onto the words: under the map's cream its round corners showed a dark fringe */
+.m-promo:has(.m-promo__media.-map) { background: none; }
+.m-promo:has(.m-promo__media.-map) .m-promo__copy { background: var(--c-slate); }
+/* Wider apart than the seated card's 8%, so the two states read as two places. The river is a soft band in the drawing's own units, not a hairline that could be a road (critic, hub and towns r1) */
+.m-promo__media.-map .m-map__north { fill: rgba(52, 61, 78, .11); stroke: none; }
+.m-promo__media.-map .m-map__river { fill: none; stroke: var(--c-chromeMid); stroke-width: 9; stroke-linecap: round; opacity: .32; }
+.m-promo__media.-map .m-map__border { fill: none; stroke: var(--c-slate); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+/* Round, with a cream edge: a square read as a bullet, and square bullets retired with the old look (critic, hub and towns r1; revision.md section 1). rx is in tools/build.py */
+.m-promo__media.-map .m-map__dot { fill: var(--c-slate); stroke: var(--c-cream); stroke-width: 2px; transform: scale(1.5); transform-box: fill-box; transform-origin: center; transition: transform var(--d-ui) var(--e-ui); }
+/* Sizes in px on purpose: inside the SVG a px is one of the drawing's units, so a label keeps its place against the lines at any width. In rem they grew with the root past 1440 while the map's spacing didn't, and HAVERHILL reached the state line at 1920. 26 units on phones, 22 on tablets, 20 from 1025: measured clear of each other, the lines and the edge at 14 widths, build/tmp/p2/map_measure.py */
+.m-promo__media.-map .m-map__town { fill: var(--c-ink); font: var(--w-semi) 26px/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; stroke: var(--c-cream); stroke-width: 6px; stroke-linejoin: round; paint-order: stroke; transition: fill var(--d-ui) var(--e-ui), stroke var(--d-ui) var(--e-ui), stroke-width var(--d-ui) var(--e-ui); }
+.m-promo__media.-map .m-map__state { fill: var(--c-steel); font: var(--w-semi) 24px/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
+.m-promo__media.-map .m-map__link { pointer-events: none; }
+.m-promo__media.-map .m-map__hit { fill: transparent; }
+.m-promo__media.-map .m-map__place.is-lit .m-map__dot { transform: scale(1.8); }
+/* Lit: the name's own outline thickens into a slate tag with cream words, the same look as a lit chip's opposite. Bold alone was easy to miss, 500px from the chip that lit it (critic, hub and towns r1) */
+.m-promo__media.-map .m-map__place.is-lit .m-map__town { fill: var(--c-cream); stroke: var(--c-slate); stroke-width: 16px; }
+/* Under 1025: close neighbours pulled apart by a few units, so each pair reads as two names (critic, hub) */
+@media (max-width: 1024px) {
+  .m-promo__media.-map .m-map__town.-drop { transform: translateY(6px); }
+  .m-promo__media.-map .m-map__town.-lift { transform: translateY(-6px); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .m-promo__media.-map { aspect-ratio: 4 / 3; }
+  .m-promo__media.-map .m-map__town { font-size: 22px; }
+  .m-promo__media.-map .m-map__state { font-size: 20px; }
+}
+@media (min-width: 1025px) {
+  .m-promo__media.-map { aspect-ratio: auto; }
+  .m-promo:has(.m-promo__media.-map) .m-promo__copy { display: flex; flex-direction: column; justify-content: center; align-self: stretch; }
+  .m-promo__media.-map .m-map__dot { transform: none; }
+  /* The lit dot grows away from nothing: at 1.8 it nearly touched its name (critic, hub) */
+  .m-promo__media.-map .m-map__place.is-lit .m-map__dot { transform: scale(1.4); }
+  .m-promo__media.-map .m-map__town { font-size: 20px; }
+  .m-promo__media.-map .m-map__state { font-size: 18px; }
+}
+@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) { .m-promo__media.-map .m-map__link { cursor: pointer; pointer-events: auto; } }
+
+/* ===== Estimate band (V10) ===== */
+/* Round 2: on Home, How it works lands here as three small facts (agreed scope, three steps). Inner pages show the same band without the list. No call line: the footer's number sits right below (critic r1). */
+.o-estimate { overflow: hidden; text-align: center; }
+/* -40deg: unturned, the ring's tail ended in a hard cut on the page's centre line, at the band's foot, and read as an accident (critic, home v3 r1). Turned, the three arrowheads sit round the words and the foot of the ring is a clean curve */
+.o-estimate__glyph { position: absolute; top: 50%; left: 50%; width: 76rem; max-width: 170vw; color: var(--c-cream); opacity: .07; transform: translate(-50%, -50%) rotate(-40deg); pointer-events: none; }
+.o-estimate__inner { position: relative; display: flex; flex-direction: column; align-items: center; }
+.o-estimate__steps { display: grid; gap: var(--s-4); max-width: 112rem; margin-top: var(--s-6); }
+/* Phones and tablets: the band is shorter than the ring, so the turn that suits 1440 cut an arrowhead on the band's top edge, a small notch (critic, hub and towns r1). At -30deg the edges cross the ring's plain curve */
+@media (max-width: 1024px) { .o-estimate__glyph { transform: translate(-50%, -50%) rotate(-30deg); } }
+/* Phones: the ring whole inside the band, because at 170vw it cropped into arcs nobody could read as the logo's arrows (critic, FAQ r1, Contact r1) */
+@media (max-width: 640px) { .o-estimate__glyph { max-width: 96vw; } }
+@media (min-width: 641px) { .o-estimate__steps { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); } }
+.o-estimate .a-button { margin-top: var(--s-6); }
+
+/* ===== Inner pages: the pattern every inner page follows (design/revision.md, inner-page pattern) ===== */
+/* ---- banner: the hero's recipe, shorter. Photo, words, truck parked on the fold. Shared rules sit with the hero above ---- */
+/* 520px at 1440, inside V5's 440 to 580: heading and one line, no pills, so the next band is in view on the first screen and it doesn't read as a second homepage hero (critic r2-1, r2-2). Phones let the words and the truck set the height. */
+.o-pageBanner__img { object-position: 50% 62%; }
+/* The foot of the crop from 1025 up: the brick walk and the road show under the truck, so it has ground to stand on (revision.md section 7; critic, Services r1: "barely shows somewhere a truck could park") */
+@media (min-width: 1025px) { .o-pageBanner__img { object-position: 50% 100%; } }
+.a-hero.-banner { font-size: min(10.4rem, 15.4cqi, 13.4vh); }   /* 15.4cqi: "SERVICES" and the longer titles keep to two rows inside the column */
+/* The long rows: SOMEONE WANTS IT runs about 9.2em, the longest of them. It fits at 10.4cqi and keeps the title to two rows (conventions) */
+.a-hero.-long { font-size: min(8.4rem, 10.4cqi, 12vh); }
+/* Phones: stops above the truck, and as light as the words allow, so the street keeps its colour (critic r2-2). Lightest over the headline, which needs 3:1; darkest behind the sentence, which needs 4.5:1. Sampled: revision.md.
+   The dark part starts at 24%, was 33%: the pages with a long title set it smaller, so their sentence sits higher, about 26% down, and read 3.7:1 (build/tmp/v3/banner_check.py, 5 Nov) */
+.o-pageBanner__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 20, 28, .46) 0%, rgba(15, 20, 28, .5) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
+@media (min-width: 641px) {
+  /* Stops well short of the truck and the far houses, so the street keeps its evening sun. Sampled: revision.md */
+  .o-pageBanner__scrim { background: radial-gradient(ellipse 30% 15% at 28% 59%, rgba(15, 20, 28, .25) 0%, rgba(15, 20, 28, .19) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .62) 0%, rgba(15, 20, 28, .6) 58%, rgba(15, 20, 28, .1) 76%, rgba(15, 20, 28, 0) 86%); }
+}
+/* Landscape tablets: a shorter banner, so the sentence sits lower and the small wash follows it (measured 4.44:1 without this) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .2) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (min-width: 1025px) {
+  .o-pageBanner { min-height: min(52rem, calc(100svh - var(--h-header) - 8rem)); }
+  .o-pageBanner__copy { padding-top: var(--s-6); padding-bottom: calc(var(--r-band) + var(--s-5)); }
+}
+/* Short banner: utility pages (Book, FAQ, Contact, Commercial), about 440px at 1440x900 (revision.md section 5). Phones let the words and the truck set the height, as the full banner does */
+@media (min-width: 1025px) {
+  .o-pageBanner.-short { min-height: min(44rem, calc(100svh - var(--h-header) - 8rem)); --truckW: min(38vw, 58vh, 72rem); }
+  .o-pageBanner.-short .o-pageBanner__copy { padding-top: var(--s-5); padding-bottom: calc(var(--r-band) + var(--s-4)); }
+}
+/* Book: no truck (revision.md, Book), so the room the words keep for one goes too. Must follow .-short, which sets the same value */
+.o-pageBanner.-noTruck { --truckW: 0rem; }
+/* And no street to keep clear for a truck: the words run down to the fold, so on phones and portrait tablets the scrim does too. It faded out behind the sentence, 1.23:1 at 768x1024 and 1.96:1 at 390x844 */
+@media (max-width: 640px), (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .o-pageBanner.-noTruck .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .46) 0%, rgba(15, 20, 28, .62) 40%, rgba(15, 20, 28, .62) 100%); }
+}
+/* Donate's drawing is 1464 units wide to the truck's 1064, with the dresser and bike at the curb. Its box grows by that ratio, so the truck stays the size it is on other banners. Phones: the whole drawing fits the width and the truck goes smaller */
+.o-pageBanner__truck.-wide { width: calc(var(--truckW) * 1.376); }
+@media (max-width: 640px) { .o-pageBanner__truck.-wide { width: var(--truckW); } }
+
+/* ---- form parts: every form on the site. Bio Sans, round corners, 56px fields. "Optional" is written into the label (copy.md) ---- */
+.a-button.-block { width: 100%; }
+.m-field { min-width: 0; }
+.m-field__input { display: block; width: 100%; min-height: var(--h-buttonLarge); padding: 0 var(--s-4); border: 0; border-radius: 1.2rem; background: transparent; box-shadow: inset 0 0 0 1px var(--c-steel); color: var(--c-ink); font: var(--w-body) 1.7rem/1.4 var(--f-body); transition: box-shadow var(--d-ui) var(--e-ui); }
+.m-field__input::placeholder { color: var(--c-steel); font-size: 1.5rem; opacity: 1; }
+.m-field__input:focus-visible { outline-offset: 2px; }
+/* field-sizing: it grows with what's typed, where the browser can. No resize grip: it crossed the rounded corner (critic, Commercial r1) */
+.m-field__input.-area { min-height: 11.2rem; padding: var(--s-3) var(--s-4); resize: none; field-sizing: content; }
+.m-field__input[aria-invalid="true"], .m-field__input.is-also { box-shadow: inset 0 0 0 2px var(--c-ink); }
+.m-field.-wide { grid-column: 1 / -1; }
+.m-field__note { margin-top: var(--s-2); color: var(--c-steel); font: var(--w-body) 1.5rem/1.4 var(--f-body); text-wrap: pretty; }
+.m-field__note.is-error { color: var(--c-ink); font-weight: var(--w-semi); }
+/* Book's town: with its error up, "Start typing to check we come to you" only repeats it */
+.t-book .m-field__error:not([hidden]) + .m-field__note { display: none; }
+/* Two rows' room, so the verdict appearing doesn't push the chips under it 22px. "Call" stays with its number, here and on the done state (critic, Book r2) */
+.o-book__townNote { min-height: 4.4rem; }
+.o-book__townNote .a-inlineLink, .o-book__stateFoot .a-inlineLink { white-space: nowrap; }
+/* A round mark before the words: thicker outlines and words in the label's own ink were the only signal someone scanning a phone got (critic, Contact r1). No new colour: the palette has none to give (tokens.css, 2b decision 1). The mark is empty to a screen reader */
+.m-field__error { position: relative; margin-top: var(--s-2); padding-left: 2.6rem; color: var(--c-ink); font: var(--w-semi) 1.5rem/1.4 var(--f-body); }
+.m-field__error::before { content: "!"; content: "!" / ""; position: absolute; top: .1rem; left: 0; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--c-ink); color: var(--c-cream); font: var(--w-heavy) 1.3rem/1 var(--f-body); }
+.m-field__small { color: var(--c-steel); font: var(--w-body) 1.4rem/1.45 var(--f-body); }
+/* A send on its way: the button steps back and can't be pressed again (global.js, sendForm). No new words: copy.md has no sending line */
+[aria-busy="true"] .a-button { opacity: .55; pointer-events: none; }
+.m-check { position: relative; display: flex; gap: var(--s-3); min-height: 4.4rem; cursor: pointer; }
+.m-check__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.m-check__box { position: relative; flex: none; width: 2.4rem; height: 2.4rem; border-radius: .6rem; box-shadow: inset 0 0 0 1px var(--c-slate); }
+.m-check__input:checked + .m-check__box { background: var(--c-slate); }
+.m-check__input:checked + .m-check__box::after { content: ""; position: absolute; top: .4rem; left: .75rem; width: .7rem; height: 1.2rem; border: solid var(--c-cream); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.m-check__input:focus-visible + .m-check__box { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.m-check__text { color: var(--c-steel); font: var(--w-body) 1.4rem/1.45 var(--f-body); text-wrap: pretty; }
+.m-upload { position: relative; display: inline-block; cursor: pointer; }
+.m-upload__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.m-upload__face { display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 2.4rem; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-slate); color: var(--c-slate); font: var(--w-semi) var(--t-button)/1 var(--f-body); transition: background-color var(--d-ui) var(--e-ui); }
+.m-upload__input:focus-visible + .m-upload__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.m-upload__files { margin-top: var(--s-2); color: var(--c-ink); font: var(--w-body) 1.5rem/1.4 var(--f-body); overflow-wrap: anywhere; }
+/* Remove directly beside its file at every width: at the ends of a long row, or capped mid-card, it lined up with nothing (critic, Contact r2, Commercial r1) */
+.m-upload__file { display: flex; align-items: center; justify-content: flex-start; gap: var(--s-4); }
+/* Beside its file name, 44px tall so a thumb can hit it */
+.m-upload__remove { flex: none; min-height: var(--h-button); padding: 0 var(--s-2); font-weight: var(--w-semi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3rem; }
+.m-upload__remove:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-upload:hover .m-upload__face { background: rgba(52, 61, 78, .06); }
+  .m-upload__remove:hover { text-decoration-color: transparent; }
+}
+
+/* ---- Book: the work order's one home (revision.md section 1). The hairlines and mono labels stay here, and only here, inside one round frame ---- */
+.t-book { --c-line: rgba(15, 20, 28, .16); --cell: 1.6rem; }
+.t-book .a-label { display: block; color: var(--c-steel); font: 500 1.2rem/1.4 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; }
+.t-book .m-field .a-label { margin-bottom: var(--s-2); }
+.t-book .a-label.-legend { float: left; width: 100%; margin-bottom: var(--s-3); }
+.o-bookBand { padding-top: var(--s-8); }
+/* Phones: the form comes up sooner. The facts took about 200px before it, on a page that says it takes a couple of minutes (critic, Book r2) */
+@media (max-width: 640px) {
+  .o-bookBand { padding-top: var(--s-7); }
+  .o-bookBand .m-factRow { gap: var(--s-3); }
+  .o-bookBand .o-book { margin-top: var(--s-5); }
+}
+/* overflow clip, not hidden: hidden would make this box the sticky call line's scroller */
+.o-book { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 134.4rem; margin: var(--s-7) auto 0; overflow: clip; border-radius: var(--r-image); box-shadow: inset 0 0 0 1px var(--c-line); }
+.o-book__main { display: flex; flex-direction: column; min-width: 0; }
+.o-book__form:not([hidden]) { display: flex; flex: 1; flex-direction: column; }
+.o-book__step:not([hidden]) { display: flex; flex: 1; flex-direction: column; }
+.o-book__progress { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--c-line); --done: .25; }
+.o-book__progress::before { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 3px; background: var(--c-slate); transform: scaleX(var(--done)); transform-origin: 0 0; transition: transform var(--d-nudge) var(--e-out); }
+.o-book__progressItem { display: flex; border-left: 1px solid var(--c-line); }
+.o-book__progressItem:first-child { border-left: 0; }
+.o-book__progressBtn { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: .2rem; width: 100%; min-height: 6.4rem; padding: var(--s-2); color: var(--c-steel); font: var(--w-semi) 1.2rem/1.2 var(--f-display); letter-spacing: var(--tr-nav); text-align: left; text-transform: uppercase; transition: background-color var(--d-ui) var(--e-ui); }
+/* The visitor's own answer under each step, the way a work order fills in, so a day picked in another month or a load that came with a link still shows (critic, Book r2) */
+.o-book__progressAnswer { max-width: 100%; color: var(--c-ink); font: var(--w-body) 1.2rem/1.2 var(--f-body); letter-spacing: 0; overflow-wrap: anywhere; text-transform: none; }
+.o-book__progressBtn[aria-current="step"] { color: var(--c-ink); font-weight: var(--w-heavy); }
+.o-book__progressBtn:disabled { font-weight: var(--w-light); cursor: default; }
+.o-book__progressBtn:focus-visible { outline-offset: -4px; }
+.o-book__step [data-book-heading]:focus { outline: 0; }
+.o-book__cells { display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); }
+.o-book__cell { min-width: 0; padding: var(--s-5) var(--cell) var(--s-6); border-top: 1px solid var(--c-line); }
+.o-book__cells .o-book__cell:first-child { border-top: 0; }
+.o-book__cell.-column { display: flex; flex-direction: column; gap: var(--s-5); }
+.o-book__cell.-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); align-content: start; }
+.o-book__group { min-width: 0; }
+.o-book__group .m-loadPicker { clear: both; }
+/* Own width, wrapping from the left, 44px, Regular: stretched across the cell at 56px in Semibold, these optional questions outweighed the load control and the step's own button (critic, Book r1). The time windows stay a stack: they're required, and three short lines stack cleanly */
+.o-book__chips { display: flex; flex-wrap: wrap; gap: .6rem; clear: both; }
+.o-book__chips.-stack { display: grid; grid-template-columns: minmax(0, 1fr); }
+.o-book__chips .a-choice__face { min-width: 0; min-height: var(--h-button); padding: 0 var(--s-4); font: var(--w-body) 1.5rem/1.2 var(--f-body); text-align: center; }
+/* "Not sure" sits outside the pill: the pill is one scale, and this isn't on it. Same 36px to the eye and 44px target as the pill, beside it where the cell has the room (the pill is small since Varun's note, 5 Nov) */
+.o-book__group .m-loadPicker { display: inline-grid; vertical-align: middle; }
+.o-book__unsure { display: inline-block; margin: 0 0 0 var(--s-2); padding: .4rem 0; vertical-align: middle; }
+.o-book__unsure .a-choice__face { min-height: 3.6rem; padding: 0 1.6rem; font: var(--w-body) 1.4rem/1 var(--f-body); }
+.o-book__unsure .a-choice__input:checked + .a-choice__face { font-weight: var(--w-semi); }
+@media (max-width: 400px) { .o-book__unsure { display: block; width: fit-content; margin: var(--s-1) 0 0; } }
+/* The drawing carries its own margin, so it overhangs its cell a little. It stands on its own contact shadow here, with no fold to park on */
+.o-book__truck { margin-top: var(--s-4); }
+/* The price and its note keep their room, so what's below doesn't jump 12px when a size is picked (critic, Book r1). Phones and tablets: the price can run two rows and the note two */
+/* flow-root: the price's and the note's top margins differ, and collapsing through this box they moved it 4px when the price appeared */
+.o-book__readout { display: flow-root; min-height: 13rem; }
+@media (max-width: 379px) { .o-book__readout { min-height: 15.6rem; } }
+/* Tablets up: truck beside the price, so picker, truck and price share a screen. Across the cell the truck ran 900px wide at 1024, with the price under the fold (critic, Book r1) */
+@media (min-width: 641px) {
+  .o-book__cell.-load { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--s-5); align-items: center; }
+  .o-book__cell.-load > .o-book__group { grid-column: 1 / -1; }
+  /* This step's Next at its own width: across the form it's a 960px bar */
+  .o-book__cells.-single .o-book__foot { display: flex; justify-content: flex-end; }
+  .o-book__cells.-single .a-button.-block { width: auto; }
+}
+@media (min-width: 1025px) { .o-book__readout { min-height: 8rem; } }
+/* Pick a day and a time: beside what's missing, wherever that is. The script moves it there. The script scrolls to the whole group, so its label stays clear of the bar: parked on the line itself, PICK A DAY sat cut under the header at 390 to 1024 (critic, Book r2, the craft cap) */
+.o-book__dayError { clear: both; margin: 0 0 var(--s-3); }
+.o-book__cell, .o-book__group { scroll-margin-top: var(--s-5); }
+.o-book__price { margin-top: var(--s-3); font: var(--w-heavy) 2.8rem/1.1 var(--f-display); text-wrap: balance; }
+.o-book__price[hidden] { display: none; }
+.o-book__foot { margin-top: auto; padding-top: var(--s-3); }
+.o-book__foot .m-field__error { margin: 0 0 var(--s-3); }
+.m-calendar__native { display: block; clear: both; width: 100%; min-height: var(--h-buttonLarge); padding: 0 var(--s-4); border: 0; border-radius: 1.2rem; background: transparent; box-shadow: inset 0 0 0 1px var(--c-steel); font: var(--w-body) 1.7rem/1 var(--f-body); }
+.js .m-calendar__native { display: none; }
+.m-calendar { display: none; clear: both; }
+.js .m-calendar { display: block; }
+.m-calendar__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-bottom: var(--s-3); }
+.m-calendar__title { font: var(--w-heavy) 2.2rem/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; }
+.m-calendar__arrows { display: flex; gap: var(--s-1); }
+/* Was .a-square. Round now: square frames retire (revision.md section 1) */
+.m-calendar__arrow { display: grid; place-items: center; width: 4.4rem; height: 4.4rem; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--c-slate); transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
+.m-calendar__arrow.-prev .a-svg { transform: scaleX(-1); }
+.m-calendar__arrow:disabled { opacity: .3; cursor: default; }
+.m-calendar__arrow:active:not(:disabled) { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .m-calendar__arrow:hover:not(:disabled) { background: var(--c-slate); color: var(--c-cream); } }
+.m-calendar__dows { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; margin-bottom: var(--s-1); color: var(--c-steel); font: 500 1.1rem/1.4 var(--f-mono); letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+.m-calendar__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; }
+/* 44px circles, centred in their columns, with a lighter ring, so a month scans as dates: stretched to the column they made a wall of ovals at 1440 and 768 (critic, Book r1). The radio still fills the whole column. The ring must come before the closed day's rule, which takes it off */
+.a-choice.-cal .a-choice__face { width: min(4.4rem, 100%); min-width: 0; min-height: 4.4rem; margin: 0 auto; padding: 0; font: var(--w-semi) 1.6rem/1 var(--f-body); }
+.a-choice.-light.-cal .a-choice__face { box-shadow: inset 0 0 0 1px rgba(52, 61, 78, .4); }
+.a-choice.-light.-off { cursor: default; }
+.a-choice.-light.-off .a-choice__face { box-shadow: none; color: var(--c-steel); opacity: .45; }
+.a-choice.-off:active .a-choice__face { transform: none; }
+@media (hover: hover) and (any-pointer: fine) { .a-choice.-light.-off:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: none; } }
+.m-calendar__empty { margin-top: var(--s-3); }
+/* The end states: the rail goes, because each carries the number in its own words, and its empty column read as a spec sheet at the payoff (critic, Book r2). The done state parks their truck beside what they booked */
+.o-book.is-finished { grid-template-columns: minmax(0, 1fr); }
+.o-book.is-finished .o-book__aside { display: none; }
+.o-book.is-finished .o-book__main { border-right: 0; }
+.o-book__doneBody { display: grid; gap: var(--s-5); align-items: center; max-width: 112rem; margin: var(--s-5) auto 0; }
+.o-book__doneTruck { min-width: 0; }
+.o-book__stateFoot { max-width: 112rem; margin-right: auto; margin-left: auto; }
+@media (min-width: 1025px) { .o-book__doneBody { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); } }
+.o-book__state { padding: var(--s-7) var(--cell) var(--s-8); }
+.o-book__state:focus { outline: 0; }
+.o-book__summary { border-top: 1px solid var(--c-line); }
+.o-book__summaryRow { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--c-line); }
+/* A size is optional, so with none picked its row goes rather than showing a label with nothing beside it. The grid outranks hidden */
+.o-book__summaryRow[hidden] { display: none; }
+.o-book__stateFoot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3) var(--s-5); margin-top: var(--s-5); }
+/* On the axis under its centred heading; at the left edge it read as dropped (critic, Book r1) */
+@media (max-width: 640px) { .o-book__stateFoot { flex-direction: column; text-align: center; } }
+.o-book__aside { border-top: 1px solid var(--c-line); }
+.o-book__call { padding: var(--s-5) var(--cell) var(--s-6); }
+.o-book__callLine { max-width: 28ch; color: var(--c-steel); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: balance; }
+.o-book__callNumber { display: inline-flex; align-items: center; min-height: 4.4rem; margin: var(--s-2) 0; color: var(--c-ink); font: 600 2.4rem/1 var(--f-mono); letter-spacing: -.01em; text-underline-offset: .4rem; text-decoration-thickness: 1px; white-space: nowrap; }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-book__progressBtn:not(:disabled):hover { background: rgba(52, 61, 78, .06); }
+  .o-book__callNumber:hover { text-decoration-color: transparent; }
+}
+@media (min-width: 641px) {
+  .o-book__progressBtn { padding: var(--s-3) var(--cell); font-size: 1.3rem; }
+  .o-book__cell.-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Three across on tablets: stacked at the cell's width they were 920px ovals, and cost the step its one screen (critic, Book r2). From 1025 the cell is narrow and they stack again */
+  .o-book__chips.-stack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .t-book { --cell: 2rem; }
+}
+@media (min-width: 1025px) {
+  .t-book { --cell: 2.4rem; }
+  /* No fixed height: 56rem left the details step and both end states with ruled boxes half empty (critic, Book r1) */
+  .o-book { grid-template-columns: minmax(0, 9fr) minmax(0, 3fr); }
+  .o-book__main { border-right: 1px solid var(--c-line); }
+  .o-book__cells { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .o-book__cell { padding: var(--s-6) var(--cell); border-top: 0; }
+  .o-book__cell + .o-book__cell { border-left: 1px solid var(--c-line); }
+  /* The load step stays one column: truck and price side by side, then the job chips, then Next. In two columns the job column stood empty for 234px between the chips and Next, and the widest screen had the weakest layout of the page's best idea (critic, Book r2) */
+  .o-book__cells.-single { grid-template-columns: minmax(0, 1fr); }
+  .o-book__cells.-single .o-book__cell + .o-book__cell { border-top: 1px solid var(--c-line); border-left: 0; }
+  .o-book__aside { border-top: 0; }
+  .o-book__call { position: sticky; top: calc(var(--h-header) + 1.6rem); padding: var(--s-6) var(--cell); }
+  .o-book__callNumber { font-size: clamp(1.9rem, 1.7vw, 2.4rem); }
+  .o-book__state { padding: var(--s-8) var(--cell); }
+  .o-book__chips.-stack { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Reviews: quotes and photos in loose columns. Columns, not a grid: cards of different lengths and photos of different shapes settle with no row of gaps, and real reviews of any length will too. Reading order is the data's, down each column ---- */
+.o-reviewGrid { padding-top: var(--s-8); }
+.o-reviewGrid__cols { max-width: 134.4rem; margin: 0 auto; column-gap: var(--s-4); }
+.o-reviewGrid__cols .m-quote, .o-reviewGrid__photo { margin-bottom: var(--s-4); break-inside: avoid; }
+/* Wrappers only from 1025 up. Under that, the cards flow straight through them, in reading order */
+.o-reviewGrid__col { display: contents; }
+/* Two grounds, so the grid isn't a wall of one block (critic, Reviews r1). Soft is the seated card's. Slate stays on two, for weight */
+.m-quote.-card.-soft { background: rgba(52, 61, 78, .08); color: var(--c-ink); --c-focus: var(--c-ink); }
+.m-quote.-card.-soft .m-quote__avatar { background: var(--c-slate); color: var(--c-cream); }
+.m-quote.-card.-soft .m-quote__source { color: var(--c-steel); }
+/* A drawn item from the load on a card's edge, as on Home. The card's top margin is the room it stands in */
+.o-reviewGrid__cols .m-seatCard { max-width: none; margin: 9.6rem 0 var(--s-4); padding: var(--s-5); }
+.m-quote__item { display: block; height: auto; }
+.m-quote__item.-item-boxes { width: 10.6rem; }
+.m-quote__item.-item-bags { width: 15rem; }
+.o-reviewGrid__photo { overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); }
+.o-reviewGrid__img { display: block; width: 100%; height: auto; }
+.o-reviewGrid { padding-bottom: var(--s-7); }
+.o-reviewGrid__end { margin-top: var(--s-6); text-align: center; }
+.o-reviewGrid__end .a-lede { margin-top: 0; }
+.o-reviewGrid__end .m-rowActions { margin-top: var(--s-2); }
+/* Tablets: each group is two cards beside one photo that runs their height, photo side alternating, so no group leaves a hole however long a real review runs (critic, Reviews r2: 264px at 1024, and the drawn items gone, which CSS columns had forced) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .o-reviewGrid__cols { display: grid; gap: var(--s-4); }
+  .o-reviewGrid__col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
+  .o-reviewGrid__cols .m-quote, .o-reviewGrid__photo { margin-bottom: 0; }
+  .o-reviewGrid__cols .m-seatCard { margin: 9.6rem 0 0; }
+  .o-reviewGrid__photo { position: relative; grid-row: 1 / span 2; grid-column: 2; }
+  .o-reviewGrid__img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
+  .o-reviewGrid__col.-flip .m-quote { grid-column: 2; }
+  .o-reviewGrid__col.-flip .o-reviewGrid__photo { grid-column: 1; }
+}
+@media (min-width: 1025px) {
+  /* Real columns: each photo takes up what its column's cards leave, so the columns end level over the centred line, however long a real review runs (critic, Reviews r1: holes of 155 and 179px at 1440). A lead photo goes to the top, so the first row mixes cards and a photo */
+  .o-reviewGrid__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); columns: auto; }
+  .o-reviewGrid__col { display: flex; flex-direction: column; gap: var(--s-4); }
+  .o-reviewGrid__cols .m-quote, .o-reviewGrid__photo { margin-bottom: 0; }
+  .o-reviewGrid__cols .m-quote { padding: var(--s-6); }
+  .o-reviewGrid__cols .m-seatCard { margin: 9.6rem 0 0; }
+  .o-reviewGrid__cols .m-seatCard__art { display: flex; right: var(--s-6); }
+  .o-reviewGrid__photo { position: relative; flex: 1 1 auto; min-height: 34rem; }
+  .o-reviewGrid__img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
+  .o-reviewGrid__photo.-lead { order: -1; }
+}
+
+/* ---- Reviews: the pairs. A row of two needs a taller frame than Home's one wide slider ---- */
+/* On the seated card's soft ground and rising with rounded corners, so the page's two main bands don't run together as one long cream (critic, Reviews r2: 2,830px of one colour at 1440) */
+.o-reviewPanel, .o-softBand { padding-top: var(--s-8); scroll-margin-top: var(--s-6); border-radius: var(--r-band) var(--r-band) 0 0; background: rgba(52, 61, 78, .08); }
+.o-reviewPairs { display: grid; gap: var(--s-6) var(--s-4); max-width: 134.4rem; margin: 0 auto; }
+.o-reviewPairs__pair { min-width: 0; }
+.o-reviewPairs .m-compare { aspect-ratio: 4 / 3; }
+.o-reviewPairs__caption { margin-top: var(--s-3); font: var(--w-semi) 1.8rem/1.25 var(--f-body); text-align: center; }
+/* Copy v3's line under the pairs, on the axis with the band's heading */
+.o-reviewPairs__end { max-width: 92rem; margin: var(--s-6) auto 0; text-align: center; }
+@media (min-width: 641px) { .o-reviewPairs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---- About: the call pill. Its label and number run about 300px at the large pill's padding, and the promo's words are 302px wide at 390. Tighter on phones; number and icon alone under 380, the aria-label still says "Call Shawn" ---- */
+.m-promo__callLabel { display: inline; }
+/* These two sentences run three and four rows at 1366 and up, so their last rows fall below the shared small wash: 4.34:1 at 1440 on About, 4.47 on Reviews at 1400x1050. A taller, lower one, for these pages only (build/tmp/p2/banner_check.py) */
+@media (min-width: 1025px) {
+  .t-about .o-pageBanner__scrim, .t-reviews .o-pageBanner__scrim, .t-pricing .o-pageBanner__scrim, .t-services .o-pageBanner__scrim { background: radial-gradient(ellipse 32% 22% at 27% 66%, rgba(15, 20, 28, .22) 0%, rgba(15, 20, 28, .17) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (max-width: 640px) { .t-about .m-promo__action { padding: 0 1.6rem; font-size: 1.5rem; } }
+@media (max-width: 379px) { .m-promo__callLabel { display: none; } }
+
+/* ---- A band of small facts on a seated card (About, Pricing, Services, Reviews, Donate). The drawn items stand on the card's top edge, on the band's axis, as on Services' can't-take band. Was .o-aboutWork, About's only ---- */
+.o-seatBand .m-head { margin-bottom: 0; }
+.o-seatBand .m-seatCard { max-width: 112rem; margin-top: 12rem; }
+.o-seatBand .m-seatCard__art { right: 50%; gap: var(--s-2); transform: translateX(50%); }
+.o-seatBand__item.-dresser { width: 8.8rem; height: auto; }
+.o-seatBand__item.-boxes { width: 9.6rem; height: auto; }
+.o-seatBand .m-fact__title { font-size: 2.2rem; }
+.o-seatBand .m-fact__text { text-wrap: balance; }
+/* Stacked, the shared 16 by 7 slot left a shrub and a road (critic, About r2) */
+@media (min-width: 641px) and (max-width: 1024px) { .t-about .m-promo__media { aspect-ratio: 16 / 9; } }
+@media (min-width: 1025px) {
+  .o-seatBand .m-seatCard { margin-top: 15.2rem; }
+  .o-seatBand__item.-dresser { width: 11.6rem; }
+  .o-seatBand__item.-boxes { width: 12.6rem; }
+}
+
+/* ---- Donate: the one band. A big photo beside the words. Heading on the axis above, so it's not a heading-left, body-right band. Photo first when stacked ---- */
+.o-donateBand { display: grid; gap: var(--s-6); max-width: 134.4rem; margin: 0 auto; }
+.o-donateBand__media { overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); }
+.o-donateBand__img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.o-donateBand__words { display: grid; gap: var(--s-5); align-content: center; }
+/* Yes leads and the refusals step back: a page asking for donations read as a list of refusals, with the marked list three times the height and the strongest thing beside the photo (critic, Donate r1). The marks stay, so a refusal still can't be read as an offer */
+.o-donateBand .m-takes { font-size: 2rem; line-height: 1.4; }
+.o-donateBand__not .m-fact__title { margin-bottom: var(--s-2); }
+.o-donateBand__facts { display: grid; gap: var(--s-4); }
+/* One column, flush left: its two and three columns are for Services' wide card */
+.t-donate .m-notList { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); width: auto; margin: 0; }
+.t-donate .m-notList__item { gap: var(--s-2); font-size: 1.6rem; font-weight: var(--w-body); }
+.t-donate .m-notList__mark { width: 2.4rem; height: 2.4rem; padding: .6rem; background: rgba(52, 61, 78, .12); color: var(--c-slate); }
+@media (min-width: 1025px) {
+  .o-donateBand { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-8); }
+  .o-donateBand .m-takes { font-size: 2.4rem; line-height: 1.35; }
+  /* The photo fills what the words take, so no column leaves a hole under it at small laptops, where the words run taller than a square (sizes on the page: 800px file at 1026, where it's 433 by about 800) */
+  .o-donateBand__media { position: relative; }
+  .o-donateBand__img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; object-position: 50% 62%; }
+}
+/* Tablets: 3 by 2 holds the whole dresser and its feet. Yes beside the list, the facts in a row: two columns of an odd five read as an accident (critic, Donate r1) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .o-donateBand__img { aspect-ratio: 3 / 2; object-position: 50% 54%; }
+  .o-donateBand__words { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); }
+  .o-donateBand__facts { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* The drawing is 1.376 times the truck's width (request 002), and the words run long here, so the truck comes down a little to keep clear of them. Measured from 1026x700 up with a 15px scrollbar too (build/tmp/p2/banner_check.py --gutter 15), because the words hang off the left and the truck off the right: at 57vh the plant came 16px from IT at 1440x900 with one showing (critic, Donate r1), and at 38vw it touched on tall windows, 1280x1024 and 1600x1200 among them. 33vw and 54vh held about 48px at every shape, tall ones too. Since the lighter load (Studio Lead's ruling, 5 Nov) the plant's gone and the same window reads 64px or more, so the width stayed: nothing needed it bigger */
+@media (min-width: 1025px) { .t-donate .o-pageBanner { --truckW: min(33vw, 54vh, 72rem); } }
+/* Its drawing is wider than any other banner's, so it stays at the old size on landscape tablets: 14px clear at 1024x768 */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) { .t-donate .o-pageBanner { --truckW: min(70vw, 40vh); } }
+/* Phones: the page's idea is the dresser and bike set apart, and at this size they were 37 and 48px beside a 280px truck (critic, Donate r1). So the truck comes down, the pair goes up and off the band's rounded corner, and they stand on one ground line. In the drawing's own units */
+.m-truck__rig, .m-truck__curb { transform-box: view-box; }
+@media (max-width: 640px) {
+  .t-donate .m-truck__rig { transform: scale(.8); transform-origin: 1064px 600px; }
+  .t-donate .m-truck__curb { transform: translateX(118px) scale(1.2); transform-origin: -392px 600px; }
+}
+/* The H1 is the page's biggest line, as on the town pages, and a clear step above the bands under it: its long row can't reach the usual heading size. 82 and 64px at 1440, 36 and 30px at 390 (revision.md's 64px slim band; critic, Donate r1: 82 against 72 read as two headlines) */
+.t-donate { --t-section: min(5.6rem, 7.8vw); }
+@media (min-width: 1025px) { .t-donate { --t-section: min(6.4rem, 4.45vw); } }
+@media (max-width: 640px) { .t-donate { --t-section: min(5rem, 7.7vw); } }
+/* Phones on their side: the H1 is sized off the height there, so the band headings follow it */
+@media (orientation: landscape) and (max-height: 500px) { .t-donate { --t-section: 9.4vh; } }
+/* Landscape tablets: the long row ran over the load, 14px clear of the plant at 1024x768 */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) {
+  .t-donate .a-hero.-long { font-size: min(7.4rem, 10.4cqi, 12vh); }
+  /* The truck is parked on the fold, so more room under the words lifts them off the load */
+  .t-donate .o-pageBanner__copy { padding-bottom: calc(var(--r-band) + 5vh + 3.2rem); }
+}
+
+/* ---- FAQ: four groups in three bands. revision.md asks for one list with small labels, and offers a seated card a group if it reads flat. Built that way it read as four identical grey cards with captions for headings (critic, FAQ r1, 7.75): group names now wear the headline system, and the middle band is slate, with the load lined up on the fold, the move the truck makes on every banner. Reading order is still copy.md's ---- */
+/* 39px at 390, a clear step under the 54px H1, and 64px at 1440, revision.md's size for a slim band. Phones on their side: the H1 goes by the height, so these do too */
+.t-faq { --t-sectionSmall: min(6.4rem, 10vw); }
+@media (orientation: landscape) and (max-height: 500px) { .t-faq { --t-sectionSmall: 9.4vh; } }
+/* The sentence sits lower here than on a full banner, 66 to 79% down, so it fell under the shared small wash and read 3.74:1 at 1440 on the sunlit shingles. A wash where it actually is, from 1025 up, where the crop runs to the foot of the photo (build/tmp/p2/banner_check.py) */
+@media (min-width: 1025px) {
+  .t-faq .o-pageBanner__scrim { background: radial-gradient(ellipse 34% 24% at 20% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .21) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Landscape tablets: the two big rows fill the crop's bright top, a window and sunlit shingle under QUESTIONS, 2.59:1 at its worst pixel at 1024x768 (critic, FAQ r1) */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .t-faq .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .2) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 54% 80% at 21% 42%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+/* Phones: the light word sits on sky and roof, 3.24:1 at its worst pixel at 390 (critic, FAQ r2). The shared stops, a touch deeper at the top */
+@media (max-width: 640px) {
+  .t-faq .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .54) 0%, rgba(15, 20, 28, .58) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
+}
+.o-faqBand .m-head { margin-bottom: var(--s-5); }
+/* A card holds its rows and nothing else, so the first row needs no line above it */
+.o-faqSet__card { max-width: 84rem; margin: 0 auto; padding: var(--s-2) var(--s-5); }
+.o-faqSet__card > .m-faq:first-of-type { border-top: 0; }
+/* The boxes stand on the card's corner, in the row beside PRICING, so the heading stays with its card at every width (critic, FAQ r2: it floated 88px above it on phones). 18vw and the 12px inset keep them 7px clear of the word at 320, 17px at 390 */
+.o-faqSet__card .m-seatCard__art { right: var(--s-3); }
+.o-faqSet__item.-boxes { width: min(9.6rem, 18vw); height: auto; }
+.o-faqSet__item.-bags { width: 12rem; height: auto; }
+/* What's left when the rows end: the bags stand on the floor of Paying's short card */
+.o-faqSet__floor { display: flex; justify-content: flex-end; padding: var(--s-1) 0 var(--s-3); }
+/* The slate band: rows straight on the slate, on two columns from laptops, then the load on the fold. The line follows the ground */
+.o-faqBand.-load { padding-bottom: 0; --c-rowLine: rgba(247, 239, 236, .24); }
+.o-faqBand.-load .a-inlineLink { color: var(--c-cream); }
+.o-faqRows { display: grid; max-width: 120rem; margin: 0 auto; }
+.o-faqRows__col:first-child > .m-faq:first-child { border-top: 0; }
+/* Each drawing grows by its own drawn width, so the row fills its column at one scale at every window: nothing has to be sized by hand and the sofa stays bigger than the armchair. Feet on the fold: its top edge is one radius up from the band's foot, and each file has 5 or 6px of air under the feet at this size. z-index over the rising band, as the price row's trucks. Phones and tablets show fewer things, not smaller ones */
+.o-faqLoad { position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: center; gap: var(--s-2); max-width: 134.4rem; margin: var(--s-7) auto calc(var(--r-band) - .6rem); }
+.o-faqLoad__item { flex: 1 1 0; min-width: 0; height: auto; }
+.o-faqLoad__item.-branches { flex-grow: 136; }
+/* -2.4rem: its top corner meets the fridge it leans on, and the fridge, later in the row, stands in front */
+.o-faqLoad__item.-mattress { flex-grow: 316; margin-right: -2.4rem; }
+.o-faqLoad__item.-fridge { flex-grow: 98; }
+.o-faqLoad__item.-sofa { flex-grow: 248; }
+.o-faqLoad__item.-armchair { flex-grow: 124; }
+.o-faqLoad__item.-dresser-tv { flex-grow: 152; }
+.o-faqLoad__item.-boxes { flex-grow: 190; }
+.o-faqLoad__item.-bike { flex-grow: 200; }
+@media (max-width: 1024px) { .o-faqLoad__item.-branches, .o-faqLoad__item.-bike { display: none; } }
+@media (max-width: 640px) { .o-faqLoad__item.-mattress, .o-faqLoad__item.-dresser-tv { display: none; } }
+/* A little less air above than a plain band: the load's feet already mark its edge */
+.o-faqBand.-pair { padding-top: var(--s-8); }
+/* 120rem: the slate band's rows and the banner's words start at the same 120px at 1440 */
+.o-faqPair { display: grid; gap: var(--s-7); max-width: 120rem; margin: 0 auto; }
+.o-faqPair .o-faqSet { scroll-margin-top: var(--s-5); }
+@media (min-width: 641px) {
+  .o-faqSet__card { padding: var(--s-3) var(--s-7); }
+  .o-faqSet__card .m-seatCard__art { right: var(--s-7); }
+  .o-faqSet__item.-bags { width: 17rem; }
+}
+@media (min-width: 768px) {
+  .o-faqSet__item.-boxes { width: 12rem; }
+}
+@media (min-width: 900px) {
+  .o-faqRows { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--s-8); align-items: start; }
+  .o-faqRows__col > .m-faq:first-child { border-top: 0; }
+}
+@media (min-width: 1025px) {
+  /* start: each card keeps its own height. Stretched to Booking's, Paying's opened 332px of nothing as Booking's rows opened (critic, FAQ r2) */
+  .o-faqPair { grid-template-columns: 7fr 5fr; gap: var(--s-5); align-items: start; }
+  .o-faqSet { min-width: 0; }
+  .o-faqPair .o-faqSet__card { max-width: none; padding-right: var(--s-6); padding-left: var(--s-6); }
+}
+/* A question and its answer stack, with a soft line between rows. The ledger's hairlines and side-by-side columns are retired (revision.md section 1). Sentence case, like the small facts */
+/* scroll-margin: the browser parks a focused row flush with the window's foot, its ring cut and its answer out of sight (critic, FAQ r1) */
+.m-faq { position: relative; border-top: 1px solid var(--c-rowLine, rgba(52, 61, 78, .2)); }
+/* The margin and padding on its sides: the ring sat 2px from the question's first letter (critic, FAQ r2). The text stays on the row's edge */
+.m-faq__q { display: block; min-height: var(--h-buttonLarge); margin: 0 -1.2rem; padding: 1.6rem 6rem 1.6rem 1.2rem; list-style: none; cursor: pointer; scroll-margin-bottom: 12rem; }
+.m-faq__q::-webkit-details-marker { display: none; }
+/* inline-block: as a block its hover underline ran the whole row, 816px under a 229px question */
+.m-faq__title { display: inline-block; max-width: 100%; font: var(--w-semi) 1.8rem/1.3 var(--f-body); text-wrap: balance; }
+.m-faq__q:active .m-faq__title { transform: scale(.98); transform-origin: 0 50%; }
+.m-faq__plus { position: absolute; top: .6rem; right: -.8rem; width: 4.4rem; height: 4.4rem; }
+/* 2px and a whole-pixel margin: at 1.5px each row's fractional position rounded its strokes to a different weight (critic, FAQ r2) */
+.m-faq__plus::before, .m-faq__plus::after { content: ""; position: absolute; top: 50%; left: 1.5rem; width: 1.4rem; height: 2px; margin-top: -1px; background: currentColor; transition: transform var(--d-nudge) var(--e-out); }
+.m-faq__plus::after { transform: rotate(90deg); }
+.m-faq[open] .m-faq__plus::after { transform: rotate(0deg); }
+.m-faq.is-shut .m-faq__plus::after { transform: rotate(90deg); }
+/* Only the question has the plus beside it, so the answer takes the row on phones. Capped at about 65 characters at every width, because 816px ran 107 at 1440 and 120 on the slate band at 1024 (critic, FAQ r1, r2) */
+.m-faq__a { padding: 0 0 var(--s-4) 0; }
+.m-faq__text { max-width: 56rem; color: var(--c-soft); font: var(--w-body) 1.7rem/1.45 var(--f-body); text-wrap: pretty; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-faq__title { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out); }
+  .m-faq__q:hover .m-faq__title { background-size: 100% 1px; }
+}
+@media (min-width: 1025px) {
+  .m-faq__title { font-size: 2rem; }
+  /* .7rem: its middle on the 20px title's first line, 29px down. At 1rem it sat 3px low (critic, FAQ r2) */
+  .m-faq__plus { top: .7rem; }
+  .m-faq__a { padding-right: 4.8rem; }
+  .m-faq__text { font-size: 1.8rem; line-height: 1.5; }
+}
+
+/* ---- request forms (Contact and Commercial): the same field parts as Book, with no ruling. Plain labels, two columns from tablets, one axis with the heading ---- */
+.m-field__label { display: block; margin-bottom: var(--s-2); font: var(--w-semi) 1.6rem/1.3 var(--f-body); }
+.m-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); max-width: 96rem; margin: 0 auto; }
+/* The grid above outranks the browser's own [hidden], and without this the form stayed on screen under "Got it" after a send */
+.m-form[hidden] { display: none; }
+.m-form__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.m-form__chips .a-choice__face { min-height: var(--h-button); padding: 0 var(--s-4); font-size: 1.5rem; }
+.m-form__help { grid-column: 1 / -1; margin-top: calc(var(--s-3) * -1); }
+.m-form__foot { display: flex; flex-direction: column; gap: var(--s-4); grid-column: 1 / -1; }
+.m-form__foot .a-button { width: 100%; }
+/* What follows a send, on the same axis. In the form on failure, so what was typed stays above it; under it on success, when the form has gone */
+/* scroll-margin: "Got it" is scrolled to the top on success, and it landed 2px under the logo with only html's scroll-padding */
+.m-formState { grid-column: 1 / -1; max-width: 96rem; margin: 0 auto; text-align: center; scroll-margin-top: var(--s-7); }
+.m-formState:focus { outline: 0; }
+@media (min-width: 641px) {
+  .m-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-form__foot { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--s-5); }
+  .m-form__foot .a-button { flex: none; width: auto; }
+}
+
+/* On a seated card the fields are wells of the page's cream, because see-through ones left the form the flattest thing on the page (critic, Contact r2). No new colour */
+.m-form.m-seatCard .m-field__input { background: var(--c-cream); }
+.m-form.m-seatCard .a-choice.-light .a-choice__input:not(:checked) + .a-choice__face { background: var(--c-cream); }
+/* One message speaks for phone and email, so it runs under both from tablets, where they sit side by side (critic, Contact r2: under one column it wrapped, with "you" alone on a line). Email's own error can't show with it */
+@media (min-width: 641px) { .m-field:has([data-either]) .m-field__error { width: calc(200% + var(--s-5)); } }
+/* The photo field: the helper under its label, because under a list of files it had lost its job (critic, Contact r2) */
+.m-field.-photos .m-field__note { margin: 0 0 var(--s-3); }
+/* The failed state, inside the form above Send: part of the form, on its left edge, one size down from a band's heading. As a section title under the button it was louder than the problem and read after the retry (critic, Commercial r1) */
+.m-form .m-formState { max-width: none; margin: 0; text-align: left; }
+.m-form .m-formState .a-section.-card { font-size: min(3.6rem, 9vw); }
+.m-form .m-formState .a-lede { margin-top: var(--s-2); font-size: 1.7rem; }
+/* One message is enough: the helper steps aside while the error says the same thing (critic, Commercial r1) */
+.m-field:has([data-either][aria-invalid="true"]) ~ .m-form__help { display: none; }
+
+/* One job or regular, and How often under it. A flex column with a gap: the script takes the gap back as How often closes (global.js, "How often shows only for regular pickups") */
+.m-form__rhythm { display: flex; flex-direction: column; gap: var(--s-5); grid-column: 1 / -1; }
+.js .m-form__often { display: none; }
+.js .m-form__often.is-open { display: block; }
+
+/* ---- Contact ---- */
+/* The light word over sunlit shingle and a window: 3.21:1 at the 99.5th percentile and 2.4 at its worst pixel at 1024x768, 2.8 at 1440. The shared washes, a little deeper over the headline (build/tmp/p2/banner_check.py, as on FAQ) */
+@media (min-width: 1025px) {
+  .t-contact .o-pageBanner__scrim { background: radial-gradient(ellipse 30% 15% at 28% 59%, rgba(15, 20, 28, .1) 0%, rgba(15, 20, 28, .08) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .t-contact .o-pageBanner__scrim, .t-commercial .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .3) 0%, rgba(15, 20, 28, .24) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 54% 80% at 21% 42%, rgba(15, 20, 28, .58) 0%, rgba(15, 20, 28, .54) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+@media (max-width: 640px) {
+  .t-contact .o-pageBanner__scrim, .t-commercial .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .54) 0%, rgba(15, 20, 28, .58) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
+}
+/* Headline, sentence and pill filled the 440px short banner, 42px under the bar and 21px over the fold at 1440. 480 gives the pill its room */
+@media (min-width: 1025px) { .t-contact .o-pageBanner.-short { min-height: min(48rem, calc(100svh - var(--h-header) - 8rem)); } }
+/* Under 380 the pill's 326px ran out of the window, cut at the phone number at 320 (build/tmp/p2/sweep.py). Icon and number alone, as on About; its aria-label still says all of it */
+@media (max-width: 379px) { .o-pageBanner__callLabel { display: none; } }
+/* Landscape tablets drop the pill's label for short windows, where the load comes near. This page's load is small and its pill is the lead action, so it keeps the words where there's height (critic, Contact r1) */
+@media (min-width: 900px) and (max-width: 1240px) and (orientation: landscape) and (min-height: 600px) { .t-contact .o-pageBanner__callLabel { display: block; } }
+/* The form band. On a seated card, because it's long and has no picture, with items out of its own hint, "one old fridge in the basement": they stand on the card's corner in the row with the heading, so no gap is left just to hold them. The fridge alone under 1025, because the sentence runs close; nothing at 320, where it would touch */
+.t-contact .a-section { scroll-margin-top: var(--s-5); }
+.t-contact .m-seatCard__art { right: var(--s-5); }
+.m-form__item { display: block; height: auto; }
+/* 3.2rem and the card's 24px inset: its right edge stops where the corner's curve starts, and it stands 13px off the sentence at 390, was 7 (critic, Contact r1, r2) */
+.m-form__item.-fridge { width: 3.2rem; }
+.m-form__item.-boxes { display: none; width: 10rem; }
+@media (max-width: 379px) { .t-contact .m-seatCard__art { display: none; } }
+/* The sentence on two rows, to clear the fridge at the narrow end of tablets */
+@media (min-width: 641px) and (max-width: 767px) { .t-contact .m-head .a-lede { max-width: 40rem; margin-right: auto; margin-left: auto; } }
+/* Tablets: phone and email side by side, because one message speaks for both (critic, Contact r1: they sat on a diagonal) */
+@media (min-width: 641px) and (max-width: 899px) { .t-contact .m-field.-name, .t-contact .m-field.-town { grid-column: 1 / -1; } }
+@media (min-width: 641px) {
+  .m-form__item.-fridge { width: 5rem; }
+}
+/* From 900: three across, which keeps phone and email together and shortens the form. Town and the chips stack in the first column and the job runs their height, so no cell stands empty (critic, Contact r2) */
+@media (min-width: 900px) {
+  .t-contact .m-form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .t-contact .m-field.-job { display: flex; flex-direction: column; grid-column: 2 / -1; grid-row: span 2; }
+  .t-contact .m-field.-job .m-field__input.-area { flex: 1; }
+  .t-contact .m-field.-reply { grid-column: 1; }
+}
+/* 120rem is the banner's left edge, 120px at 1440 */
+@media (min-width: 1025px) {
+  .t-contact .m-form { max-width: 120rem; }
+  .t-contact .m-seatCard__art { right: var(--s-7); }
+  .m-form__item.-boxes { display: block; }
+}
+/* What follows a send: the heading and the form go, because "Ask for a price" over "Got it" says the wrong thing, and so does the estimate band under it, a sales pitch to someone who's just asked, with a second GOT (critic, Contact r1) */
+.o-contactAsk:has(.m-formState.is-sent) > .m-head { display: none; }
+body:has(.m-formState.is-sent) .o-estimate { display: none; }
+/* Short enough to be one row */
+.a-section.-oneRow .a-section__row { display: inline; }
+.o-contactMore { max-width: 72rem; margin: var(--s-7) auto 0; text-align: center; }
+.o-contactMore .m-takes { color: var(--c-soft); text-wrap: balance; }
+/* Less air under it than a band usually keeps: 128px left the line floating (critic, Contact r2) */
+@media (min-width: 1025px) { .o-contactAsk { padding-bottom: var(--s-8); } }
+/* The map band: the drawing is the band's own ground, full width, and the hours sit on a slate card. overflow visible on the drawing: its state and line run on past its square, so they fill the band to both edges and up behind the card. The band clips them. Phones and tablets: card, then map */
+.o-contactMap { overflow: hidden; padding: var(--s-7) var(--gutter) 0; background: linear-gradient(rgba(52, 61, 78, .02), rgba(52, 61, 78, .02)), var(--c-cream); }
+.o-contactMap__card { position: relative; z-index: 1; padding: var(--s-6) var(--s-5); border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+.o-contactMap__map.m-promo__media.-map { margin: var(--s-3) calc(var(--gutter) * -1) 0; border-radius: 0; background: none; }
+.o-contactMap__map.m-promo__media.-map::after { display: none; }
+.o-contactMap .m-map { overflow: visible; }
+.o-contactFacts { display: grid; gap: var(--s-6); }
+.o-contactFacts .m-fact__title { font-size: 2.4rem; }
+.o-contactFacts .m-fact__text { margin-top: var(--s-1); font-size: 1.8rem; }
+.o-contactFacts .a-link { margin-top: var(--s-2); }
+/* Stacked on tablets: the two facts share the row */
+@media (min-width: 641px) and (max-width: 899px) {
+  .o-contactFacts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }
+  .o-contactMap__map.m-promo__media.-map { aspect-ratio: 16 / 11; }
+}
+/* From 900: the card floats over the map's empty west, and the drawing's own square sits to its right, so the towns stay clear of it. 38%: Nashua, the westernmost name, stays clear of the card, 150px at 1440 and 19px at 900, the narrowest (build/tmp/p2/m_contact_map.js). Its left edge is the banner's words', 120px at 1440 */
+@media (min-width: 900px) {
+  .o-contactMap { display: flex; align-items: center; min-height: 56rem; padding-top: var(--s-7); padding-bottom: var(--s-7); }
+  .o-contactMap__card { width: min(44rem, 38%); margin-left: max(0rem, calc((100% - 120rem) / 2)); padding: var(--s-7) var(--s-6); }
+  .o-contactMap__map.m-promo__media.-map { position: absolute; top: 0; right: 0; bottom: 0; left: 38%; min-height: 0; margin: 0; aspect-ratio: auto; }
+}
+
+/* ---- Commercial ---- */
+/* A three-row sentence under a long headline, 62 to 84% down: 4.13:1 at 1440 under the shared washes. A wider wash where it is, and a deeper base that runs further right, because COMMERCIAL AND's long row reaches past the other banners' (critic, Commercial r1: 3.2:1 near x=771). Landscape tablets and phones share Contact's rules above */
+@media (min-width: 1025px) {
+  .t-commercial .o-pageBanner__scrim { background: radial-gradient(ellipse 38% 28% at 24% 73%, rgba(15, 20, 28, .12) 0%, rgba(15, 20, 28, .1) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 58% 74% at 24% 44%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
+}
+/* The form on a seated card, as on Contact, with what's in its own hint, "tenant left furniture and a full basement". There's no heading above this form and copy.md gives none, so the load is the band's opening: it stands in the band's top padding, on the corner away from the truck, and the strip is cut to its height (critic, Commercial r1: 128px of strip with an empty right side). The card is 120rem, the banner's left edge, 120px at 1440, so the band ties to it */
+.t-commercial .b-band.-rise { padding-top: 8rem; }
+.t-commercial .m-seatCard__art { right: auto; left: var(--s-5); gap: var(--s-1); }
+.m-form__item.-sofa { width: 11rem; }
+.m-form__item.-armchair { width: 5.6rem; }
+.t-commercial .m-form__item.-boxes, .m-form__item.-bags { display: none; }
+@media (min-width: 641px) {
+  .t-commercial .b-band.-rise { padding-top: 9.6rem; }
+  .t-commercial .m-seatCard__art { left: var(--s-7); }
+  .m-form__item.-sofa { width: 15rem; }
+  .m-form__item.-armchair { width: 7.6rem; }
+  .t-commercial .m-form__item.-boxes { display: block; width: 10.4rem; }
+}
+@media (min-width: 1025px) {
+  .t-commercial .b-band.-rise { padding-top: 10.4rem; }
+  .t-commercial .m-form { max-width: 120rem; }
+  .m-form__item.-bags { display: block; width: 12.8rem; }
+}
+
+/* ---- Privacy: a reading column on the page's one axis, with the body's own type. No reveals: text to read shows at once ---- */
+.o-privacy { max-width: 76rem; margin: 0 auto; box-sizing: content-box; }
+.o-privacy__item { margin-top: var(--s-6); }
+.o-privacy__title { font: var(--w-semi) 2rem/1.25 var(--f-body); }
+.o-privacy__text { margin-top: var(--s-2); text-wrap: pretty; }
+
+/* ---- jump chips: a long page gets an index to its sections (critic, built Services r1). Only pages with more than four sections get them ---- */
+.m-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2); }
+/* Phones: one row you can swipe, running off the edge so the cut-off chip says there's more. Four wrapped rows put the first service a screen and a bit down the page (critic r2-1) */
+@media (max-width: 640px) {
+  .m-jump { flex-wrap: nowrap; justify-content: flex-start; margin: 0 calc(var(--gutter) * -1); padding: .6rem var(--gutter); overflow-x: auto; scrollbar-width: none; }
+  .m-jump::-webkit-scrollbar { display: none; }
+  .m-jump > li { flex: none; }
+}
+/* 404: three chips, so no swipe row. They run 297px at the usual padding and a 320 phone has 280 inside its gutters, so the third stood 3px from the glass and the row scrolled 17px (request 012) */
+@media (max-width: 379px) { .t-notFound .a-chip { padding: 0 1.6rem; } }
+
+/* ---- services page rhythm: centred lead, slate promo, three cards, two cards, slate price row, slim light band ---- */
+.o-svcIndex { padding-top: var(--s-7); padding-bottom: var(--s-7); }
+/* scroll-margin: a jump from the chips lands with air under the bar */
+.o-svcBand { padding-top: 0; scroll-margin-top: var(--s-6); }
+.m-promo__action { margin-top: var(--s-5); }
+.o-svcBand__media { position: relative; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 4 / 3; }
+.o-svcBand__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.o-svcBand__foot { display: flex; flex-direction: column; align-items: center; gap: var(--s-4); margin-top: var(--s-5); text-align: center; }
+.m-promo .m-takes { margin-top: var(--s-4); }
+/* A shorter picture on phones: after its chip at 390x844, the band's pill stood half behind the call bar with its label hidden, at 4/3 (critic, Services r2, the craft cap) */
+@media (max-width: 640px) { .t-services .m-promo__media { aspect-ratio: 1.65; } }
+/* GARAGE AND BASEMENT runs 11.2em, 717px at the band's 64px, so a wider words column holds copy.md's two rows from about 1400 up (critic, Services r1 and r2). Under that it keeps its 64px and takes three rows, because a one-off smaller heading was the worse fault */
+@media (min-width: 1367px) {
+  .t-services .m-promo { grid-template-columns: 7.5fr 4.5fr; }
+  .t-services .m-promo__copy { padding-right: var(--s-6); }
+}
+@media (min-width: 641px) {
+  .o-svcBand__media { aspect-ratio: 2.1; }
+  /* One row, as Pricing does: with the photo below, heading, photo and pill fit one 900px screen (critic, Services r1: the band ran 1,133px and its pill came a scroll later) */
+  .t-services .o-svcBand > .m-head .a-section__row { display: inline; }
+}
+@media (min-width: 1025px) {
+  .o-svcBand__media { aspect-ratio: 2.85; }   /* 472px tall at 1440: the pill stays above the fold after its chip on a 900px screen (critic, Services r2) */
+  .o-svcBand__foot { flex-direction: row; justify-content: space-between; gap: var(--s-7); text-align: left; }
+  .o-svcBand__foot .m-takes { max-width: 78rem; font-size: 1.8rem; }
+  .o-svcBand__foot .a-button { flex: none; }
+  .o-svcIndex { padding-top: var(--s-8); padding-bottom: var(--s-8); }
+}
+
+/* ---- service card: one photo, a two-row heading, a line, what it takes, an action ---- */
+.m-svcCards { display: grid; gap: var(--s-7); }
+/* Flex column: the cards in a row share a height, so margin-top auto lines their Book pills up */
+.m-svcCard { display: flex; flex-direction: column; min-width: 0; scroll-margin-top: var(--s-6); }
+/* Portrait crops: a fridge, a chair and a man under a mattress all stand upright (critic r2-1: a landscape crop left the fridge a pale slab). A little wider on phones, or three of them run the page long */
+.m-svcCard__media { position: relative; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 1.05; }
+.m-svcCard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-svcCard__title { margin-top: var(--s-4); }
+.m-svcCard__line { margin-top: var(--s-3); color: var(--c-soft); font: var(--w-body) 1.7rem/1.45 var(--f-body); text-wrap: pretty; }
+.m-svcCard .m-takes { margin-top: var(--s-3); margin-bottom: var(--s-4); }
+/* Three cards share a row, so a jump to any of them lands in the same place. An underline fades in on the one you asked for (critic, Services r1) */
+.m-svcCard__title .a-section__row:first-child { text-decoration: underline transparent .05em; text-underline-offset: .12em; transition: text-decoration-color var(--d-rise) var(--e-out) 250ms; }
+.m-svcCard:target .m-svcCard__title .a-section__row:first-child { text-decoration-color: currentColor; }
+/* A plain link that names the job, not a row of five identical pills: Book now on every service as the brief asks, without the hard sell (critic r2-2) */
+.m-svcCard__book { align-self: flex-start; margin-top: auto; }
+.m-svcCards.-two .m-svcCard__media { aspect-ratio: 1.5; }
+/* Tablets: three narrow cards would break the headings, so each card sits as a row: photo beside words */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .m-svcCards.-three .m-svcCard { display: grid; grid-template-columns: 5fr 7fr; column-gap: var(--s-5); align-items: start; }
+  .m-svcCards.-three .m-svcCard__media { grid-row: 1 / span 6; aspect-ratio: .86; }
+  .m-svcCards.-three .m-svcCard__title { grid-column: 2; margin-top: 0; }
+  .m-svcCards.-three .m-svcCard__line, .m-svcCards.-three .m-takes, .m-svcCards.-three .m-svcCard__book { grid-column: 2; justify-self: start; }
+  .m-svcCards.-two { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+  /* YARD WASTE is about 5.7em and the column can be 276px wide at 641: at the full size it broke to a third row beside DEMO's two (P2 sweep, 5 Nov) */
+  .m-svcCards.-two .a-section.-card { font-size: min(var(--t-card), 6.4vw); }
+}
+/* The words of a card whose photo can move (the two-card band). A column, so its link still sits at the foot */
+.m-svcCard__words { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+@media (min-width: 1025px) {
+  .m-svcCard__line, .m-svcCard .m-takes { padding-right: var(--s-5); }
+  /* Shared rows: each card's picture, heading, line, list and pill take a row of the band's grid, so they line up across the cards however each one wraps, with no room held for a line nobody wrote */
+  .m-svcCards.-three, .m-svcCards.-two { grid-template-rows: repeat(6, auto); gap: 0 var(--s-4); }
+  .m-svcCards.-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* A checkerboard, so it doesn't read as the row of three again with one card fewer (critic, Services r1 and r2; revision.md section 5: never the same recipe twice in a row). Yard waste has its photo over its words, Demo its words over its photo. Unequal, with the room going to Demo, which shares this band but which the brief wants to stand on its own. Home's tiles run on the same 5 and 7 */
+  .m-svcCards.-two { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto; gap: 0 var(--s-6); }
+  .m-svcCards.-two .m-svcCard { grid-row: span 2; row-gap: var(--s-5); }
+  .m-svcCards.-two .m-svcCard__title { margin-top: 0; }
+  .m-svcCards.-two .m-svcCard__words { flex: none; }
+  /* Demo's line ran 723px at 17px (critic, Services r2) */
+  .m-svcCards.-two .m-svcCard__line, .m-svcCards.-two .m-takes { max-width: 58rem; padding-right: 0; }
+  .m-svcCards.-two .m-svcCard:last-child .m-svcCard__media { grid-row: 2; aspect-ratio: 2; }
+  .m-svcCards.-two .m-svcCard:last-child .m-svcCard__words { grid-row: 1; align-self: end; }
+  .m-svcCard { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
+  /* The photos can sit close, the words can't: at the gap's 16px the text of one service ran on into the next (critic, Services r1). Must come before the two-card band's rules, which take this off */
+  .m-svcCard__book { justify-self: start; }
+  .m-svcCards.-three .m-svcCard__media { aspect-ratio: .86; }
+  .m-svcCards.-two .a-section.-card { font-size: var(--t-sectionSmall); }
+}
+
+/* ---- price row: the truck set, one load each, all parked on the fold (the band under this one rises over their tyres' edge) ---- */
+/* Heading on one row from tablets up, the same as Home's price band, so prices and all four trucks fit one screen at 1440x900 */
+/* Phones keep room below the last row, because the trucks there stand on their own prices rather than on the fold */
+.o-svcPrice { padding-bottom: calc(var(--s-7) + var(--r-band)); text-align: center; scroll-margin-top: 0; }
+@media (min-width: 641px) {
+  .o-svcPrice { padding-bottom: 0; }
+  .o-svcPrice .a-section__row { display: inline; }
+}
+/* Tablets: the same size as Home's price heading, so it holds one row and never leaves "LOAD" alone on the second */
+@media (min-width: 641px) and (max-width: 1024px) { .o-svcPrice .a-section { font-size: min(6.4rem, 8.4vw); } }
+@media (min-width: 1025px) { .o-svcPrice { padding-top: var(--s-9); } }
+.o-svcPrice .m-factChips { justify-content: center; margin-top: var(--s-4); }
+/* Phones: three stacked pills looked like filters, so the facts become plain small lines, as in Home's price band (critic r2-2) */
+@media (max-width: 640px) {
+  .o-svcPrice .m-factChips { flex-direction: column; gap: .2rem; }
+  .o-svcPrice .a-factChip { display: block; min-height: 0; padding: 0; box-shadow: none; color: var(--c-soft); font-size: 1.5rem; font-weight: var(--w-body); opacity: 1; }
+}
+.o-svcPrice__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7) var(--s-2); margin-top: var(--s-6); }
+.m-load { display: flex; flex-direction: column; min-width: 0; }
+.m-load__label { font: var(--w-semi) 1.7rem/1.2 var(--f-body); }
+.m-load__figure { margin-top: var(--s-1); font: var(--w-heavy) 4.8rem/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.m-load__note { margin-top: var(--s-2); margin-bottom: var(--s-1); color: var(--c-soft); font: var(--w-body) 1.5rem/1.35 var(--f-body); text-wrap: balance; }
+/* flex 1 and an auto margin: the links line up across a row however long each note runs */
+.m-load__copy { display: flex; flex: 1 0 auto; flex-direction: column; }
+.m-load__link { align-self: center; margin-top: auto; }
+/* Phones: two to a row, so each truck stands directly on its own price and can't read as belonging to the row below (critic r2-1). DOM order stays words first; the drawing is only a picture of them.
+   Tablets up: margin-top auto, the drawing sits at the foot of the column however long the note runs. The % margin is of the column, the same width as the truck: 1.877% is the ground line's height in the drawing, as on Home */
+.m-load__truck { position: relative; z-index: 3; order: -1; margin-bottom: var(--s-2); }
+@media (min-width: 641px) {
+  .o-svcPrice__row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-3); }
+  .m-load .m-load__truck { order: 0; margin-top: auto; margin-bottom: calc(var(--r-band) - .6rem - 1.877%); padding-top: var(--s-3); }
+}
+@media (min-width: 1025px) {
+  .m-load__figure { font-size: 6.4rem; }
+  .m-load__note { font-size: 1.6rem; }
+  .o-svcPrice__row { gap: var(--s-4); }
+}
+
+/* ---- town pages: the strip the row of four parks on. o-svcIndex is the same slim rising band; its link needs no gap above it ---- */
+.t-town .o-svcIndex .m-rowActions { margin-top: 0; }
+/* Two rows for every town at every width, so sized off its column (conventions). IN LONDONDERRY, the longest, is 8.04em; on 12.6vw it broke to three rows up to 768 wide, and WHAT WE HAUL broke at 320 (P2 sweep) */
+.t-town .o-homeHaul .m-head { container-type: inline-size; }
+.t-town .o-homeHaul .a-section { font-size: min(var(--t-section), 12.3cqi); }
+/* The line naming the town is the page's biggest words, on a page people land on from search. These rows are long, so the H1 can't reach the usual sizes (40px at 390, 84 at 1440): 11.2cqi is the most LONDONDERRY, NH holds at, 8.6em. So the headings under it step down: 38px at 390, 72 at 1440, were 49 and 88 (critic, hub and towns r1) */
+.t-town { --t-section: min(7.2rem, 9.8vw); }
+.t-town .a-hero.-long { font-size: min(8.4rem, 11.2cqi, 12vh); }
+/* Small laptops and phones on their side: the H1 runs smaller still there, 66px at 1026 and 47 at 844x390, so the headings follow it down */
+@media (min-width: 1025px) { .t-town { --t-section: min(7.2rem, 5.6vw); } }
+@media (orientation: landscape) and (max-height: 500px) {
+  .t-town { --t-section: 4.4rem; }
+  .t-town .o-svcPrice .a-section { font-size: var(--t-section); }
+}
+
+/* ---- the slim light band that closes the price row: a heading, a line, the list in a seated card, with three of the things that can't go on the truck set down on its edge (critic r2-2: it was the one band with no picture) ---- */
+.o-svcNot { padding-top: var(--s-10); }
+.o-svcNot .m-head { margin-bottom: 0; }
+/* 112rem: wide enough that no item in the three equal columns wraps at 1440 */
+.o-svcNot .m-seatCard { max-width: 112rem; margin-top: 14.4rem; }
+/* On the band's one axis, like the heading and the card under it. Set to one side as on Home's review card, it read as drifted here (critic, Services r1) */
+.o-svcNot .m-seatCard__art { right: 50%; transform: translateX(50%); }
+.o-svcNot__paint { width: 6.4rem; }
+.o-svcNot__tank { width: 6.1rem; }
+.o-svcNot__battery { width: 8.3rem; }
+@media (min-width: 641px) {
+  .o-svcNot .m-seatCard { margin-top: 17.6rem; }
+  .o-svcNot__paint { width: 8.4rem; }
+  .o-svcNot__tank { width: 8rem; }
+  .o-svcNot__battery { width: 10.9rem; }
+}
+
+/* ==== BATCH D (Varun, 5 Nov: "the pages are too small, with too little information"). The pages grow by adding bands of the kinds already here, never by making a band longer, so one idea per section stands ==== */
+/* ---- menu: the second, smaller group (copy.md, Menu) ---- */
+.m-menu__more { display: flex; flex-wrap: wrap; gap: 0 var(--s-4); margin-top: var(--s-3); }
+.m-menu__moreLink { display: flex; align-items: center; min-height: 4.4rem; font: var(--w-semi) 1.8rem/1 var(--f-body); text-decoration: underline transparent; text-underline-offset: .4rem; }
+.m-menu__moreLink[aria-current] { text-decoration-color: currentColor; }
+/* ---- small facts, one band: a bigger title than the estimate band's, because here they are the band ---- */
+.o-factBand .m-fact__title { font-size: 2.2rem; }
+.o-factBand .m-fact__text { text-wrap: balance; }
+.o-factBand .m-head { margin-bottom: var(--s-6); }
+.o-svcBand__facts { margin-top: var(--s-6); }
+.m-factRow.-two { row-gap: var(--s-5); }
+.m-factRow.-four { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 641px) { .m-factRow.-four { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); } }
+@media (min-width: 1025px) { .m-factRow.-four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); } }
+/* ---- drawn items on a seated card: one scale. The card's top margin (.o-seatBand) clears the tallest, the fridge ---- */
+.o-seatBand__item { height: auto; }
+.o-seatBand__item.-sofa { width: 13rem; }
+.o-seatBand__item.-armchair { width: 7rem; }
+.o-seatBand__item.-fridge { width: 4.8rem; }
+.o-seatBand__item.-bags { width: 11rem; }
+.o-seatBand__item.-bike { width: 10rem; }
+.o-seatBand__item.-branches { width: 7rem; }
+@media (min-width: 1025px) {
+  .o-seatBand__item.-sofa { width: 17rem; }
+  .o-seatBand__item.-armchair { width: 9rem; }
+  .o-seatBand__item.-fridge { width: 6.2rem; }
+  .o-seatBand__item.-bags { width: 14rem; }
+  .o-seatBand__item.-bike { width: 13rem; }
+  .o-seatBand__item.-branches { width: 9rem; }
+}
+/* ---- slim band: one heading, one line, one link, on a soft panel (Home's who, the hub's price list, Donate's charities) ---- */
+.o-slim__card { max-width: 112rem; margin: 0 auto; padding: var(--s-7) var(--s-5); border-radius: var(--r-image); background: rgba(52, 61, 78, .08); text-align: center; }
+.o-slim .a-lede { max-width: 72rem; margin-right: auto; margin-left: auto; }
+.o-slim .m-rowActions { margin-top: var(--s-3); }
+/* ---- a short list on a promo's slate ---- */
+.m-promo__facts { display: grid; gap: var(--s-4); margin-top: var(--s-5); }
+.m-promo__facts .m-fact__title { font-size: 2rem; }
+@media (min-width: 641px) { .m-promo__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-5); } }
+/* ---- a link in a band's head, for the row of trucks, whose foot belongs to the trucks ---- */
+.m-head .a-link { margin-top: var(--s-2); }
+/* ---- Home: the link beside Book this load, the plain line under the tiles ---- */
+.o-homePrice__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-2) var(--s-4); }
+@media (min-width: 641px) { .o-homePrice__actions { justify-content: flex-start; } }
+.o-homeHaul__takes { max-width: 76rem; margin: var(--s-6) auto 0; text-align: center; text-wrap: balance; }
+.o-homeHaul__takes + .m-rowActions { margin-top: var(--s-4); }
+@media (min-width: 1025px) { .o-homeHaul__takes { font-size: 1.8rem; } }
+.m-promo__copy > .a-link { margin-top: var(--s-2); }
+/* ---- About: the map promo. Half the card from 1025 and words first when stacked, as on the hub, because the map is the band's picture ---- */
+@media (min-width: 641px) and (max-width: 1024px) { .t-about .m-promo__media.-map { aspect-ratio: 4 / 3; } }
+@media (max-width: 1024px) { .t-about .m-promo__media.-map { order: 1; border-radius: 0 0 var(--r-image) var(--r-image); } }
+@media (min-width: 1025px) { .t-about .m-promo:has(.m-promo__media.-map) { grid-template-columns: 1fr 1fr; } }
+/* ---- Services ---- */
+.o-svcBand__takes { display: grid; gap: var(--s-2); }
+.m-svcCard .m-takes + .m-takes { margin-top: 0; }
+.o-svcNot__where { max-width: 76rem; margin: var(--s-5) auto 0; color: var(--c-soft); text-align: center; text-wrap: pretty; }
+/* ---- Book: the link under the load's readout ---- */
+.o-book__loadsLink { margin-top: var(--s-1); }
+/* ---- Reviews: what a job like this usually takes, under each pair's caption ---- */
+.o-reviewPairs__note { display: block; margin-top: .2rem; color: var(--c-soft); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: balance; }
+/* ---- Donate: the plain line under the refusals, a step quieter than Yes to ---- */
+.o-donateBand__know.m-takes { font-size: 1.6rem; line-height: 1.45; }
+/* ---- Contact and Commercial ---- */
+.o-contactAsk__help { max-width: 72rem; margin: var(--s-2) auto 0; color: var(--c-soft); text-wrap: balance; }
+/* The form's drawn items stand into the gap above it, and the fridge touched the help line at 390 to 768 and the boxes at 1025 (build/tmp/p2/d/m_art.py) */
+.o-contactAsk > .m-head { margin-bottom: var(--s-8); }
+@media (min-width: 641px) and (max-width: 1279px) { .o-contactAsk__help { max-width: 40rem; } }
+/* PRICING AND is a longer row than Pricing was: the boxes ran 5px into it at 768 (flow_faq.py) */
+@media (min-width: 641px) and (max-width: 1024px) { .o-faqSet__item.-boxes { width: 8rem; } }
+.m-form__intro { grid-column: 1 / -1; color: var(--c-soft); text-wrap: pretty; }
+/* ---- town pages: the strip the row of four parks on now names the three nearest towns ---- */
+.o-townNear { gap: var(--s-2) var(--s-4); }
+.o-townNear__label { font: var(--w-semi) 1.6rem/1.3 var(--f-body); }
+.o-townNear__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2); }
+/* ---- Pricing ---- */
+.m-load__size { display: block; margin-bottom: .2rem; color: var(--c-cream); font-weight: var(--w-semi); }
+.t-pricing .m-load__note { text-wrap: pretty; }
+@media (min-width: 1025px) { .t-pricing .o-svcBand > .m-head .a-section__row { display: inline; } }
+/* FOUR LOADS, FOUR PRICES ran past the column on one row at 88px, and broke as FOUR LOADS, FOUR / PRICES (look at 1440) */
+.t-pricing .o-svcPrice .a-section__row { display: block; }
+/* Phones: KNOW YOUR LOAD? (7.9em) and GOT SOMETHING are the longest estimate headings. Each took three rows on the band's own size at 390 */
+@media (max-width: 640px) { .t-pricing .o-estimate .a-section, .t-about .o-estimate .a-section { font-size: 11vw; } }
+/* ---- the two worked sums: a label and a figure a row, the total stronger. A sum needs its one rule; the hairlines otherwise stay on Book ---- */
+.o-sums { display: grid; gap: var(--s-5); max-width: 120rem; margin: 0 auto; }
+.m-sumCard { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border-radius: var(--r-image); background: var(--c-cream); }
+.m-sumCard__media { position: relative; aspect-ratio: 1.7; background: var(--c-slate); }
+.m-sumCard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-sumCard__words { display: flex; flex: 1; flex-direction: column; padding: var(--s-5); container-type: inline-size; }
+/* Two rows on every card, so sized off its column (conventions). A BASEMENT AND, the longest row, is about 8.2em and 11.6cqi fits it */
+.m-sumCard .a-section { font-size: min(var(--t-card), 11.6cqi); }
+.m-sum { margin-top: var(--s-4); }
+.m-sum__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4); padding: var(--s-1) 0; font: var(--w-body) 1.7rem/1.3 var(--f-body); }
+.m-sum__row.-total { align-items: flex-end; margin-top: var(--s-2); padding-top: var(--s-3); border-top: 1px solid var(--c-slate); font-weight: var(--w-semi); }
+.m-sum__row.-total dd { font: var(--w-heavy) 4.8rem/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.m-sumCard__note { margin-top: var(--s-3); color: var(--c-soft); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: pretty; }
+@media (min-width: 641px) { .o-sums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1025px) { .m-sumCard__words { padding: var(--s-6); } .m-sum__row.-total dd { font-size: 6.4rem; } }
+
+/* ===== Footer (V10) ===== */
+/* margin-top -1px: overlaps the slate band, so a fractional boundary can't show the page's cream through as a light line (critic r1, rulings R0 A7). No room kept for the call bar: it hides while the footer is on screen. */
+.o-footer { position: relative; margin-top: -1px; padding: var(--s-8) var(--gutter) var(--s-5); overflow: hidden; background: var(--c-ink); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.o-footer::before { content: ""; position: absolute; inset: 0; background: url("fx/footer-joists-1400.webp") 50% 50% / cover no-repeat; opacity: .14; pointer-events: none; }
+.o-footer__inner { position: relative; display: grid; gap: var(--s-7); }
+/* grid children may shrink, so a long email or link can never widen the page at 320 */
+.o-footer__contact, .m-footerCol { min-width: 0; }
+/* offset in em, under the brackets at either size; no skip-ink, or the brackets break the line into pieces (critic, home r1) */
+.o-footer__phone { display: inline-flex; align-items: center; min-height: 4.4rem; font: 700 3.2rem/1 var(--f-mono); letter-spacing: -.02em; text-underline-offset: .3em; text-decoration-thickness: 2px; text-decoration-skip-ink: none; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
+.o-footer__hours { margin-top: var(--s-3); color: var(--c-chrome); font-size: 1.6rem; }
+.o-footer__email { display: inline-flex; align-items: center; min-height: 4.4rem; font: 600 1.8rem/1 var(--f-body); text-underline-offset: .3rem; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
+@media (hover: hover) and (any-pointer: fine) { .o-footer__phone:hover, .o-footer__email:hover { color: var(--c-chrome); text-decoration-color: transparent; } }
+.o-footer__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-5); }
+/* Phones: three lists in two columns left the last one alone with an empty half beside it (critic, home v3 r1). It takes the row, its links on the same two columns */
+@media (max-width: 640px) {
+  .m-footerCol.-wide { grid-column: 1 / -1; }
+  .m-footerCol.-wide .m-footerCol__list { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-5); }
+}
+.m-footerCol__title { font: var(--w-heavy) 1.4rem/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; }
+.m-footerCol__list { margin-top: var(--s-2); }
+.m-footerCol__link { display: inline-flex; align-items: center; min-height: var(--h-button); color: var(--c-chrome); font-size: 1.5rem; line-height: 1.2; text-decoration: underline transparent 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-nudge) var(--e-out), color var(--d-ui) var(--e-ui); }
+.m-footerCol__link:focus-visible { text-decoration-color: currentColor; }
+@media (hover: hover) and (any-pointer: fine) { .m-footerCol__link:hover { color: var(--c-cream); text-decoration-color: currentColor; } }
+.o-footer__base { display: grid; gap: var(--s-4); padding-top: var(--s-5); border-top: 1px solid var(--c-rule); }
+.o-footer__social { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.o-footer__fact { color: var(--c-chrome); font-size: 1.5rem; }
+.o-footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); font-size: 1.4rem; }
+.o-footer__credit { color: var(--c-chrome); }
+@media (min-width: 641px) {
+  .o-footer { padding-bottom: var(--s-5); }
+  .o-footer__cols { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1025px) {
+  .o-footer__inner { grid-template-columns: 5fr 7fr; }
+  .o-footer__phone { font-size: 4.4rem; }
+  .o-footer__hours { margin-top: var(--s-4); }
+  .o-footer__base { grid-column: 1 / -1; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s-6); }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .js .o-homeHero__truck { visibility: visible; }
+  .m-compare__tag, .m-compare__chev, .a-button, .a-chip, .a-choice__face, .m-header__mark, .m-truck__item, .m-truck__body, .m-actionBar, .js .m-loadPicker__thumb, .o-book__progress::before, .m-calendar__arrow, .m-field__input, .m-upload__face, .m-faq__plus::before, .m-faq__plus::after, .m-faq__title { transition-duration: 1ms; }
+}
+
+/* ===== Print ===== */
+/* Chrome stays off paper */
+@media print {
+  .m-preview, .m-header, .m-menu, .m-actionBar, .o-estimate, .o-footer { display: none; }
+  .t-page { padding-top: 0; }
+}

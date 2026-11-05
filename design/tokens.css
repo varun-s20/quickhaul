@@ -1,0 +1,81 @@
+/* ===== Quick Haul design tokens (phase B, 2026-11-03; revised 2026-11-05 for design/revision.md) =====
+   Source of truth for colour, type, spacing, radii, easings and durations.
+   Pasted into the first :root block of site/assets/global.css. If a value changes there, change it here too.
+   Palette: Varun's pick 1, Slate wall, sampled from assets/logo.png (design/choices.md). Colours are unchanged in the revision.
+   Type: Varun's pick A, Bio Sans with Roboto Mono; in the revision Bio Sans Regular takes over body text and the mono keeps one small job.
+   Root is 62.5%, so 1rem = 10px at 1440; past 1440 the root grows with the viewport, capped at the 2560 size.
+   Breakpoint steps of these tokens (--t-lede, --gutter, --h-header, --logo, --logoSmall) sit with their rules in global.css.
+   Tokens the revision retired (--t-hero, --t-price, --t-label, --cell, --h-bar and others) live on until the old inner pages are rebuilt,
+   set on .t-legacy at the end of global.css; the old values are in build/site-v1-backup/assets/global.css.
+   Added in the revision and marked "new" below; --heroInset is set per section, --c-soft per band, --logoSettled by global.js. */
+:root {
+  /* ---- colour: unchanged. Palette 1, Slate wall, from the logo's pixels. No new UI colour (2b decision 1) ---- */
+  --c-slate: #343D4E;      /* logo wall. Header and dark bands. Cream text on it 9.62:1, chrome text 7.38:1 */
+  --c-ink: #0F141C;        /* logo mark shadow. Footer ground, text on light. On cream 16.28:1, on chrome 12.48:1 */
+  --c-chrome: #D5D4D3;     /* bright chrome. CTA pill on dark, focus ring on dark */
+  --c-chromeMid: #81858C;  /* mid chrome. Borders on dark. Never text (2.95:1 on slate) */
+  --c-cream: #F7EFEC;      /* chrome highlight. Headline on dark, light bands, CTA pill on photos (V9) */
+  --c-steel: #4A5263;      /* slate darkened toward ink. Secondary text on cream 6.91:1 */
+  --c-focus: var(--c-ink);
+  --c-rule: rgba(213, 212, 211, .2);
+  --c-scrim: rgba(15, 20, 28, .55);
+
+  /* ---- type: Bio Sans leads; Roboto Mono keeps one small job, phone numbers and price units ---- */
+  --f-display: "Bio Sans", "Roboto Mono", ui-monospace, monospace;
+  --f-body: "Bio Sans", ui-sans-serif, sans-serif;   /* new: was Roboto Mono */
+  --f-mono: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w-light: 300;
+  --w-body: 400;
+  --w-semi: 600;
+  --w-heavy: 800;
+  --t-heroLh: .92;
+  /* Three heading sizes, set by the kind of band and nothing else (critic r2-1: 88, 68, 64, 56 and 52 with no logic) */
+  --t-section: min(8.8rem, 12.6vw);   /* new: full-width bands. Larger than the built site's, since sections now hold less */
+  --t-sectionSmall: min(6.4rem, 12vw); /* new: slim bands, promo cards, a row of two cards */
+  --t-card: min(5.2rem, 11vw);        /* new: a row of three cards */
+  --t-lede: 1.8rem;                   /* new: the one or two supporting lines under a heading (round 2). 2rem from 1025 */
+  --t-body: 1.8rem;                   /* new: was 1.5 to 1.6rem mono */
+  --t-bodyLh: 1.45;
+  --t-button: 1.5rem;
+  --t-nav: 1.4rem;
+  --tr-display: -.005em;
+  --ws-display: .06em;     /* V1 */
+  --tr-nav: .04em;
+
+  /* ---- spacing ---- */
+  --s-1: .4rem;
+  --s-2: .8rem;
+  --s-3: 1.2rem;
+  --s-4: 1.6rem;
+  --s-5: 2.4rem;
+  --s-6: 3.2rem;
+  --s-7: 4.8rem;
+  --s-8: 6.4rem;
+  --s-9: 9.6rem;
+  --s-10: 12.8rem;
+  --gutter: 2rem;
+  --h-header: 6.4rem;
+  --h-button: 4.4rem;
+  --h-buttonLarge: 5.6rem;  /* new: hero, price and estimate pills */
+
+  /* ---- radii: V8 and V7. Square frames retire (revision.md) ---- */
+  --r-pill: 4.4rem;
+  --r-image: 2.4rem;        /* new: V8 promo card radius */
+  --r-band: 3.2rem;         /* new: V7 rising band */
+
+  /* ---- logo: the sharp ceiling is 108 to 117px on a 2x screen (mark is 234px in the phone screenshot) ---- */
+  --logo: 8.8rem;           /* new */
+  --logoSmall: .68;         /* new: scale once the page has scrolled 32px, so it fits inside the bar. 60px on phones (critic r2: 55px was small) */
+
+  /* ---- motion ---- */
+  --e-out: cubic-bezier(.22, 1, .36, 1);
+  --e-ui: ease-in-out;
+  --e-drop: cubic-bezier(.3, 1.28, .5, 1);  /* new: a load landing, with a little settle */
+  --d-ui: 150ms;
+  --d-nudge: 400ms;
+  --d-breathe: 1000ms;
+  --d-rise: 700ms;
+  --d-reveal: 1100ms;
+  --d-stagger: 90ms;
+  --d-menu: 400ms;
+}

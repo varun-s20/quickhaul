@@ -1,0 +1,32 @@
+Batch 6 is still running in the background. I'm keeping the browser free until it finishes, because the screener uses the same browser.
+
+The Quick Haul scout run is done, but the field is thin. Only 6 of 38 sites passed screening, short of the 8 to 10 the procedure asks for. I didn't move any killed site up to fill the gap. No junk removal site passed: almost every one outside MA and NH is a franchise or page-builder template with two or more of the anti-slop tells.
+
+**Primary candidates**
+1. **FREITAG** (freitag.ch, bags made from old truck tarps). It's the only site with a design system worth rebuilding from: a grid ruled with thin lines, oversized capitals, small mono fact labels and pill buttons with arrows. The design is carried by type, so Shawn's phone photos would look finished inside its frames. The logo-in-the-centre header and the pill buttons already match your own moves. The catch: it's a shop with no booking, phone or price up top, so that structure has to come from donors. Its fonts (Akkurat) are commercial.
+2. **Muval** (muval.com.au, a moving marketplace). It has the closest structure to "where, roughly what cost, how to book": the phone sits next to "Get instant quotes", a "What are you moving?" selector leads to prices, and there are per-city price cards. The design is generic and every image is stock.
+3. **Piece of Cake Moving** (NYC). Its hero has "Get quote" beside "Or get a call from us", which is almost exactly Shawn's ask, plus the phone with hours and a review-score row. Below the first screen it's a WordPress theme with several tells.
+
+**Section donors:** Muval (a "How much junk?" truck-load selector and a town price list), Piece of Cake (the quote-plus-call block), Truewerk (a halftone divider band and a hazard-stripe edge), Furniture Bank (a Toronto charity removal service, as the Donate page model) and Stuf Storage (a one-colour hero with a town search).
+
+If none of these is a site you'd actually rebuild from, the gap needs your eye. Clip haulers or trades sites you like into the inbox, or name one and I'll screen it.
+
+**What I couldn't check**
+- Three long-list sites were never screened: Bellhop timed out twice, and Kaiyo and Second Use sit behind Cloudflare walls. I didn't try to get around them.
+- I skipped Land-book because its terms ban bots, and Godly because its robots file blocks AI crawlers. Two roundup articles returned 403. All 15 gallery pages produced only three usable sites, so galleries are well under a third of the long list.
+- I didn't test the moodboard in a browser, because Playwright blocks local files and I can't run a local server. I checked the code by reading it.
+- For the finalists I only saw the homepage: no inner pages, no booking flows past the first step, no forms submitted.
+- The 390 views were a narrow desktop browser, not a phone emulator.
+- Font licences come from what I know of the foundries; I didn't check the foundry sites. BioSans, Truewerk's font, is unknown.
+- Some hovers are missing: none captured for Truewerk, none visible on FREITAG, and only the hover state (no default) for Piece of Cake. I couldn't open Stuf's mobile menu.
+
+**Stray files to delete:** `.playwright-mcp/einstein-scroll-check.png`, the screeners' `qh3-*.png` captures in `AppData\Local\Temp`, and the Playwright snapshot and console logs in `.playwright-mcp/`. I can't delete them with my tools.
+
+Every agent run is logged in `review-log.md`. This is checkpoint 1b, so it's a good point to commit. Suggested message: `quickhaul: scout references (long list, 6 cards, shortlist, moodboard)`
+
+Files are in `projects/quickhaul/references/`:
+- shortlist.md
+- cards.md
+- longlist.md
+- moodboard.html
+- screens/

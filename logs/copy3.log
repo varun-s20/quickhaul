@@ -1,0 +1,48 @@
+The copy update is done, and nothing in `site/` has been changed, so the Developer applies it next. Home is now 481 words in main content, and there are five sample review cards on Home and six on Reviews. These are hand counts, nothing has been seen in a browser, and the Developer's browser count is the real one.
+
+| Page | v2 words | v3 words | Change |
+|---|---|---|---|
+| Home | 359 | 481 | Asked for about 450 to 500 |
+| Reviews | 200 | 222 | Up 11% (82 to 118 without the sample cards) |
+| Donate | 145 | 164 | Up 13% |
+| About | 153 | 175 | Up 14% |
+
+The decorative "SR" avatars will add 5 words on Home and 6 on Reviews to a browser count.
+
+**What changed**
+- **Home:** five of the six bands got more text. The hero stayed as it was, because its words already sit about 16px from the truck on short laptops.
+- **Load control:** the label is now "How full?" and the chips read 1/8, 1/4, 1/2 and Full. Screen readers still hear "1/8 truck". Book uses the same short labels.
+- **Reviews:** the "plenty" lines on Home and the Reviews page are gone, along with "Read them on Facebook" and "Read them all on Facebook". Each card is logged in `placeholders.md` as must-replace by Shawn's real reviews.
+- **Donate:** one new small fact on what happens to items that can't be donated.
+- **About:** a new line under "How we work", plus "Say no and that's fine."
+- **Claims:** no trust claims were added, there are no em dashes, and `copy-v1.md` is untouched.
+
+**For the Developer**
+- **Reviews data:** `home` in `reviews.json` becomes a list of five, and `block_review_home` has to print that list. Request 006 still says that entry is unchanged, so it's out of date.
+- **Hand-typed price:** "so that's $149" is one more place a price is typed by hand.
+
+**My calls, listed in `copy-changes.md` for Varun to overrule**
+- Home shows the first five of the same six cards as Reviews, so there is one list to replace.
+- Sample cards have no "Facebook" source line, because those words didn't come from Facebook.
+- The Home and Reviews lines say "samples" out loud. That's right for a preview, and the launch wording is held in `copy.md`.
+- 65 of Home's 122 new words are sample review text, so real reviews will change the count.
+- "If it can't be donated" and "Say no and that's fine" are new placeholder claims Shawn needs to confirm. The other new lines are short forms of what's already on the site.
+
+**Left out because Shawn's material doesn't cover it**
+- Real review text and names
+- When he started, who is on the crew and why he does this
+- Which charities he uses, and whether donating changes the price
+
+**Limits of this run**
+- **v2 snapshot:** I wrote `copy-v2.md` out by hand because this role has no shell. Its line and pattern counts matched `copy.md` before I edited it, but I didn't compare it byte for byte.
+- **Proposal PDF:** it still won't open because poppler isn't installed, so its terms come from the quotes in `brief.md`.
+
+This is a good checkpoint for Varun to commit. Suggested message: `Quick Haul copy v3: more homepage text, sample review cards, short load labels`
+
+Everything is in `projects/quickhaul/content/`; start with `copy-changes.md`:
+- `copy.md`
+- `copy-v2.md`
+- `copy-changes.md`
+- `placeholders.md`
+
+The run is also logged in `projects/quickhaul/review-log.md`.

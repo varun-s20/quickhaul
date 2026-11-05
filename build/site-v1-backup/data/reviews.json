@@ -1,0 +1,18 @@
+{
+  "_note": "Sample cards from content/copy.md, worded so nobody can mistake them for real reviews. Replace with Shawn's chosen Facebook reviews word for word (name, date, post link); never edit these into real-sounding reviews. reviews feeds the homepage row, reviews_page the Reviews page grid; job must match a filter button's data-filter there. facebook_url is the bare platform address until Shawn sends his page (content/placeholders.md).",
+  "facebook_url": "https://www.facebook.com/",
+  "reviews": [
+    { "quote": "Sample review. A real review from Quick Haul's Facebook page goes here, word for word, once Shawn picks which ones to use.", "who": "Sample review, Facebook" },
+    { "quote": "Sample review. This card is sized for a two or three line review about a garage or basement clean out.", "who": "Sample review, Facebook" },
+    { "quote": "Sample review. This card is sized for a short review about a single item pickup, like a couch or a mattress.", "who": "Sample review, Facebook" },
+    { "quote": "Sample review. This card is sized for a longer review about a yard clean-up or a demo job, the kind that runs to four or five lines on a phone.", "who": "Sample review, Facebook" }
+  ],
+  "reviews_page": [
+    { "quote": "Sample review. A real review from Quick Haul's Facebook page goes here, word for word.", "who": "Sample review, Facebook", "job": "Clean outs" },
+    { "quote": "Sample review. This card is sized for a short review about a mattress pickup.", "who": "Sample review, Facebook", "job": "Mattresses" },
+    { "quote": "Sample review. This card is sized for a medium review about a furniture or appliance pickup, around three lines.", "who": "Sample review, Facebook", "job": "Furniture" },
+    { "quote": "Sample review. This card is sized for a longer review about a yard clean-up, the kind a customer writes after a big job.", "who": "Sample review, Facebook", "job": "Yard waste" },
+    { "quote": "Sample review. This card is sized for a review about a shed or deck demo.", "who": "Sample review, Facebook", "job": "Demo" },
+    { "quote": "Sample review. This card is sized for a short review about an appliance pickup.", "who": "Sample review, Facebook", "job": "Appliances" }
+  ]
+}

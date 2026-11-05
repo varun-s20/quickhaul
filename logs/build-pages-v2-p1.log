@@ -1,0 +1,41 @@
+Phase P1 is finished: all 11 pages plus the town template are staged in `site/src/pages-v2/`, built from `copy.md` on the inner-page pattern. **None of it has been built or opened in a browser**, as P1 requires. The Python and JS in the requests have never run, and their CSS values are unmeasured.
+
+I only ran read-only text checks on my own files:
+- **Copy:** every visible string, alt, label and error compared with `copy.md` in both directions. Nothing is missing, and the only non-copy strings are "More pages" (from the conventions) and the calendar's day labels (from the old page).
+- **Structure:** classes, blocks, image names, ids and anchors. No em dashes, inline styles or AI attribution.
+- **Fixes:** this caught an accessible name I'd invented on FAQ, now removed, and two classes with no rule. One of them, `.m-fact`, is also used on Home and would have failed `check.py` once the old CSS is deleted.
+
+## What's staged
+- **Pages:** one `.body.html` per page, with the town template in `_templates/` so it can't build as a `town.html` page.
+- **Data:** new `faq.json` and `reviews.json` in `_data/`. No schema file needed changing.
+- **Requests:** 14 in `build/requests/`, with exact changes and the checks to rerun.
+- **Notes:** `build/progress-pages-v2.md`, `content/placeholders-add-pages.md` and `logs/review-pages-v2.md`.
+
+## What P2 needs
+1. The homepage session must finish and declare the shared parts frozen. Only one session builds at a time; the pages session uses port 8841.
+2. Apply the requests in number order. 003 and 006 also change Home's code (reset, price picker, slider), so Home's QA has to rerun after each.
+3. Run `tools/build_trucks.py` after request 002, before any page that uses a new banner truck.
+4. Move pages in batches and take each off `LEGACY_PAGES`, running the build, QA and Critic per page:
+   1. Services
+   2. Book
+   3. Hub and town template
+   4. Reviews
+   5. About and Donate
+   6. FAQ
+   7. Contact and Commercial
+   8. 404 and Privacy
+   9. Cleanup (request 014)
+5. Measure what only a browser can show: the scrim on each banner, words against the truck (Donate and Londonderry, NH first), word counts, and crops in their new slots.
+6. Have the shared-parts owner merge my placeholder and log files, and add the form field names to the README.
+
+## Decisions for you
+None of these block P2; each has a default already in the staged pages.
+1. **Should About's photo be replaced?** The pickup shows Chevrolet badges that can't be cropped out, and it was shot in Arizona on a page that says "local". I used it because `copy.md` names it. You can replace it, paint the badges out, or wait for Shawn's photo.
+2. **Is one street photo on every banner OK?** `copy.md` asks for it, including on 12 town pages that aren't that street. More photos means more downloads and a new scrim for each.
+3. **Do you want drawn items on the FAQ?** I put one on each group's card without seeing the page flat, though your answer named only the review and can't-take bands. Removing them is one line in the block.
+4. **Keep the slim strip on town pages?** It holds "See other towns" and gives the trucks an edge to park on. Without it they stand on slate with no fold.
+5. **Should Commercial's banner truck carry a full load?** `revision.md` says both ways; I followed its truck table and `copy.md`, so it's the only inner page with a piled-high truck.
+6. **Are my two Book choices OK?** I used the short banner, which `revision.md` doesn't list for Book, and put "Not sure" beside the long pill instead of as a fifth stop.
+7. **Which truck goes on the hub banner?** `copy.md` has no label for it, so I reused the town pages' quarter load and wording.
+
+This is a good checkpoint. Since another session is working in the same tree, commit only these paths: `site/src/pages-v2/`, `build/requests/`, `build/progress-pages-v2.md`, `content/placeholders-add-pages.md` and `logs/review-pages-v2.md`. Suggested message: `Stage inner pages for the revised design (P1): sources, data and shared-change requests`

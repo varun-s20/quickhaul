@@ -1,0 +1,187 @@
+<!-- meta
+title: Junk Removal Pricing: What Each Load Costs | Quick Haul
+description: What each truck load holds and costs, from $149 to $649, what's in the price, what can cost more and how booking works. Junk removal in MA and NH.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: pricing.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-pricing">
+<!-- Every price, load size and rule here is a placeholder (data/prices.json, content/placeholders.md); every photo is logged stock, must-replace. Words: content/copy.md, Pricing. -->
+
+<!-- ===== Pricing: page banner. Heading and one line, the truck parked on the fold with half a load ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">What it</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">costs</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">You pay for how much of the truck your junk fills. What each load holds, what's in the price and what can change it.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner}}</div>
+</section>
+
+<!-- ===== Pricing: jump chips ===== -->
+<nav class="b-band -rise o-svcIndex" aria-label="On this page">
+  <ul class="m-jump a-inview">
+    <li><a class="a-chip -light" href="#load-sizes">Load sizes</a></li>
+    <li><a class="a-chip -light" href="#which-load">Which load</a></li>
+    <li><a class="a-chip -light" href="#what-changes">What changes it</a></li>
+    <li><a class="a-chip -light" href="#included">What's included</a></li>
+    <li><a class="a-chip -light" href="#cost-more">What costs more</a></li>
+    <li><a class="a-chip -light" href="#examples">Examples</a></li>
+    <li><a class="a-chip -light" href="#booking">Booking</a></li>
+  </ul>
+</nav>
+
+<!-- ===== Pricing: four loads, the slate row, four trucks parked on the fold. Longer than Services' row: pickup beds and what each load holds. Each link sends ?load= to Book ===== -->
+<section class="b-band -slate o-svcPrice" id="load-sizes" aria-labelledby="loads-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="loads-title"><span class="a-section__row -light">Four loads,</span> <span class="a-section__row">four prices</span></h2>
+    <p class="a-lede">Every price covers the loading, the hauling and the drop-off. Find the one closest to your pile.</p>
+  </div>
+  <ul class="o-svcPrice__row">
+{{> price-row-long}}
+  </ul>
+</section>
+
+<!-- ===== Pricing: which load is mine. A seated card rising over the row of trucks ===== -->
+<section class="b-band -rise o-seatBand" id="which-load" aria-labelledby="which-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="which-title"><span class="a-section__row -light">Which load</span> <span class="a-section__row">is mine?</span></h2>
+    <p class="a-lede">You don't need to measure anything. A rough guess is fine, because we confirm it before we come.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -sofa" src="assets/trucks/item-sofa.svg" width="248" height="142" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -boxes" src="assets/trucks/item-boxes.svg" width="190" height="158" alt="" loading="lazy" decoding="async"></div>
+  <ul class="m-factRow -three">
+    <li class="m-fact"><strong class="m-fact__title">Picture a pickup</strong> <span class="m-fact__text">Stand in front of your pile and count how many pickup beds it would fill.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Count the big stuff</strong> <span class="m-fact__text">Couches, fridges and mattresses take up the most room.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Still not sure?</strong> <span class="m-fact__text">Pick "Not sure" when you book and add a few photos. We'll tell you which load fits.</span></li>
+  </ul>
+  </div>
+</section>
+
+<!-- ===== Pricing: what changes the price. The lead recipe: centred heading, one wide photo, the three things under it ===== -->
+<section class="b-band o-svcBand o-factBand" id="what-changes" aria-labelledby="changes-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="changes-title"><span class="a-section__row -light">What changes</span> <span class="a-section__row">the price</span></h2>
+    <p class="a-lede">Mostly it's how much room your junk takes up. Your town doesn't change it: the prices are the same <a class="a-inlineLink" href="service-area.html">everywhere we go</a>.</p>
+  </div>
+  <div class="o-svcBand__media a-inview">
+    {{picture name="compare-before" class="o-svcBand__img" alt="A garage crowded with a ride-on mower, a workbench, shelving and gas cans" sizes="(min-width: 641px) 100vw, 150vw"}}
+  </div>
+  <ul class="m-factRow -three o-svcBand__facts a-inview">
+    <li class="m-fact"><strong class="m-fact__title">How much</strong> <span class="m-fact__text">More room on the truck means a bigger load. That's most of the price.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">How heavy</strong> <span class="m-fact__text">A truck can only carry so much, and heavy loads cost more to drop off.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">How hard to reach</strong> <span class="m-fact__text">Stairs, tight turns and long walks to the truck take more time.</span></li>
+  </ul>
+</section>
+
+<!-- ===== Pricing: what's in the price, the slate promo. Photo first when stacked ===== -->
+<section class="b-band o-svcBand" id="included" aria-labelledby="included-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="included-title"><span class="a-section__row -light">What's in</span> <span class="a-section__row">the price</span></h2>
+      <p class="a-lede">On an everyday load, the price covers the whole job, start to finish.</p>
+      <ul class="m-promo__facts">
+        <li class="m-fact"><strong class="m-fact__title">Loading</strong> <span class="m-fact__text">We do the lifting and carrying, from wherever it is.</span></li>
+        <li class="m-fact"><strong class="m-fact__title">Hauling</strong> <span class="m-fact__text">The truck, the gas and the trip.</span></li>
+        <li class="m-fact"><strong class="m-fact__title">The drop-off</strong> <span class="m-fact__text">The dump fees on everyday junk.</span></li>
+        <li class="m-fact"><strong class="m-fact__title">Sweeping up</strong> <span class="m-fact__text">We sweep the spot when we're done.</span></li>
+      </ul>
+    </div>
+    <div class="m-promo__media">{{picture name="pricing-basement" class="m-promo__img" alt="An empty basement with white walls, square pillars and a clear wood floor" sizes="(min-width: 1025px) max(42vw, 660px), 100vw"}}</div>
+  </div>
+</section>
+
+<!-- ===== Pricing: what can cost more. A seated card, a list with no crosses, because these aren't refusals ===== -->
+<section class="b-band o-svcBand o-seatBand" id="cost-more" aria-labelledby="more-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="more-title"><span class="a-section__row -light">What can</span> <span class="a-section__row">cost more</span></h2>
+    <p class="a-lede">Most everyday loads don't run into any of this. If yours does, you'll hear it before we load anything.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -fridge" src="assets/trucks/item-fridge.svg" width="98" height="208" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -boxes" src="assets/trucks/item-boxes.svg" width="190" height="158" alt="" loading="lazy" decoding="async"></div>
+  <ul class="m-factRow -two">
+    <li class="m-fact"><strong class="m-fact__title">Heavy material</strong> <span class="m-fact__text">Concrete, dirt, brick and shingles weigh more and cost more to drop off.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Fridges, freezers and AC units</strong> <span class="m-fact__text">Federal rules say the refrigerant has to come out before they're scrapped. That adds {{> fridge-fee}} each.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Hard carries</strong> <span class="m-fact__text">Several flights of stairs or a long walk to the truck. Tell us when you book.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">More than we agreed</strong> <span class="m-fact__text">Extra items on the day can move you up a load. You'll see the new price first.</span></li>
+  </ul>
+  </div>
+</section>
+
+<!-- ===== Pricing: two jobs, added up. The only sums on the site, read from data/prices.json. On the soft panel, so three cream bands don't run together. The photos carry an alt and no caption, and nothing says they are real jobs ===== -->
+<section class="b-band o-softBand" id="examples" aria-labelledby="examples-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="examples-title"><span class="a-section__row -light">Two jobs,</span> <span class="a-section__row">added up</span></h2>
+    <p class="a-lede">Two everyday jobs with the numbers filled in. They're examples, not quotes.</p>
+  </div>
+  <div class="o-sums">
+    <article class="m-sumCard a-inview" aria-labelledby="sum-one-title">
+      <div class="m-sumCard__media">{{picture name="pricing-sofa" class="m-sumCard__img" alt="A cream armchair and a small sofa set out by the door of a brick building" sizes="(min-width: 641px) 50vw, 100vw"}}</div>
+      <div class="m-sumCard__words">
+        <h3 class="a-section -card" id="sum-one-title"><span class="a-section__row -light">A couch</span> <span class="a-section__row">and a chair</span></h3>
+        {{> sum-couch}}
+        <p class="m-sumCard__note">Ground floor, nothing heavy. Everything's in the load price.</p>
+      </div>
+    </article>
+    <article class="m-sumCard a-inview" aria-labelledby="sum-two-title">
+      <div class="m-sumCard__media">{{picture name="pricing-fridge" class="m-sumCard__img" alt="A pale green retro fridge freezer against a brick wall" sizes="(min-width: 641px) 50vw, 100vw"}}</div>
+      <div class="m-sumCard__words">
+        <h3 class="a-section -card" id="sum-two-title"><span class="a-section__row -light">A basement and</span> <span class="a-section__row">an old fridge</span></h3>
+        {{> sum-basement}}
+        <p class="m-sumCard__note">A small basement clean out, with one fridge that needs its refrigerant taken care of.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== Pricing: not quite a load. Three small facts on cream, rising over the panel ===== -->
+<section class="b-band -rise o-factBand" aria-labelledby="quite-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="quite-title"><span class="a-section__row -light">Not quite</span> <span class="a-section__row">a load?</span></h2>
+    <p class="a-lede">Some jobs don't fit the four sizes, so they're priced a little differently.</p>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">Just one item</strong> <span class="m-fact__text">It's priced as a 1/8 load, so that's {{> price-from}}. A fridge or freezer adds its {{> fridge-fee}}.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Demo</strong> <span class="m-fact__text">Every job is different, so it's priced per job. Send photos or call and we'll price it with you.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Regular pickups</strong> <span class="m-fact__text">Landlord, realtor or property manager? Tell us what you need on our <a class="a-inlineLink" href="commercial.html">commercial page</a>.</span></li>
+  </ul>
+</section>
+
+<!-- ===== Pricing: from estimate to booked. A seated card, so the last band before the slate estimate band isn't a third plain row ===== -->
+<section class="b-band o-svcBand o-seatBand" id="booking" aria-labelledby="booked-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="booked-title"><span class="a-section__row -light">From estimate</span> <span class="a-section__row">to booked</span></h2>
+    <p class="a-lede">Picking a load gets you an estimate. The price is set once Shawn has looked it over and confirmed it with you.</p>
+  </div>
+  <div class="m-seatCard a-inview">
+    <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -bags" src="assets/trucks/item-bags.svg" width="216" height="110" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -bike" src="assets/trucks/item-bike.svg" width="200" height="112" alt="" loading="lazy" decoding="async"></div>
+  <ul class="m-factRow -three">
+    <li class="m-fact"><strong class="m-fact__title">You pick</strong> <span class="m-fact__text">Choose a load and a day online, and add photos if you can. Or call and do it by phone.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Shawn confirms</strong> <span class="m-fact__text">He checks the job and gets back to you with the time and the price.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">We haul, you pay</strong> <span class="m-fact__text">We load it and leave the space clear. You pay when the job's done.</span></li>
+  </ul>
+  </div>
+</section>
+
+<!-- ===== Pricing: estimate band, in its own words, with Shawn's agreed call line. The meta above turns the footer's band off ===== -->
+<section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
+  {{> estimate-ring}}
+  <div class="o-estimate__inner a-inview">
+    <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Know your load?</span> <span class="a-section__row">Book it</span></h2>
+    <p class="a-lede">Pick a day online in a couple of minutes. Need help booking or have questions? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a></p>
+    <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</div>

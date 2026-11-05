@@ -1,0 +1,118 @@
+<!-- meta
+title: Contact Quick Haul | Junk Removal Quotes in MA and NH
+description: Call, email or send us a quick request for a junk removal or demo price. Quick Haul works towns across Massachusetts and New Hampshire, Mon to Sat.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: contact.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-contact">
+<!-- Phone, hours, Closed Sundays, towns and the commercial line are placeholders (content/placeholders.md); the photo is logged stock, must-replace. Words: content/copy.md, Contact. -->
+
+<!-- ===== Contact: short banner, with the one pill besides the town pages': the call, because the lede says it's the fastest way to a price. data-call-here hides the header's number and the phone's bar while it's on screen ===== -->
+<section class="o-pageBanner -short" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Call, book</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">or ask</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">The fastest way to a price is a call. Rather write it down? Send us a request.</p>
+    <div class="o-pageBanner__actions a-reveal" data-call-here>
+      <a class="a-button -glass -large" href="tel:+16035550142" aria-label="Give us a call at (603) 555-0142"><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="o-pageBanner__callLabel">Give us a call</span> <span class="a-num">(603) 555-0142</span></a>
+    </div>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-eighth}}</div>
+</section>
+
+<!-- ===== Contact: map and hours. The promo card with the drawn map in the picture's place. The map is our own drawing of placeholder towns: the brief's Google Map waits for the real base town (content/placeholders.md) ===== -->
+<section class="b-band -rise" aria-label="Map and hours">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <ul class="o-contactFacts">
+        <li class="m-fact"><strong class="m-fact__title">Hours</strong> <span class="m-fact__text">Mon to Sat, 7am to 7pm. Closed Sundays.</span></li>
+        <li class="m-fact"><strong class="m-fact__title">Where we go</strong> <span class="m-fact__text">Towns across Massachusetts and New Hampshire.</span> <a class="a-link" href="service-area.html"><span class="a-link__text">See the full list</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      </ul>
+    </div>
+    <div class="m-promo__media -map">{{> town-map}}</div>
+  </div>
+</section>
+
+<!-- ===== Contact: ask for a price, the short form, then the commercial line. Field names are listed in site/README.md. With no endpoint a send shows the failed state and keeps what was typed: a form never reports success unless the endpoint answered OK ===== -->
+<section class="b-band o-svcBand" aria-labelledby="ask-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="ask-title"><span class="a-section__row -light">Ask for</span> <span class="a-section__row">a price</span></h2>
+    <p class="a-lede">Phone or email is enough, and we'll get back to you.</p>
+  </div>
+
+  <form class="m-form a-inview" action="#" method="post" novalidate data-request>
+    <div class="m-field">
+      <label class="m-field__label" for="contact-name">Your name</label>
+      <input class="m-field__input" id="contact-name" name="name" type="text" autocomplete="name" aria-describedby="contact-name-error" data-required data-error="Add your name">
+      <p class="m-field__error" id="contact-name-error" hidden></p>
+    </div>
+    <div class="m-field">
+      <label class="m-field__label" for="contact-phone">Phone</label>
+      <input class="m-field__input" id="contact-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="contact-phone-error" data-either="contact-email" data-error="Add a phone number or email so we can reach you">
+      <p class="m-field__error" id="contact-phone-error" hidden></p>
+    </div>
+    <div class="m-field">
+      <label class="m-field__label" for="contact-email">Email</label>
+      <input class="m-field__input" id="contact-email" name="email" type="email" autocomplete="email" aria-describedby="contact-email-error" data-email data-error="That email doesn't look right">
+      <p class="m-field__error" id="contact-email-error" hidden></p>
+    </div>
+    <div class="m-field">
+      <label class="m-field__label" for="contact-town">Your town (optional)</label>
+      <input class="m-field__input" id="contact-town" name="town" type="text" autocomplete="address-level2">
+    </div>
+    <div class="m-field -wide">
+      <label class="m-field__label" for="contact-job">What do you need gone</label>
+      <textarea class="m-field__input -area" id="contact-job" name="job" rows="4" placeholder="For example: clearing out a two-car garage, or one old fridge in the basement" aria-describedby="contact-job-error" data-required data-error="Tell us a little about the job"></textarea>
+      <p class="m-field__error" id="contact-job-error" hidden></p>
+    </div>
+    <!-- photos only with a backend: no file input without one (conventions) -->
+    <div class="m-field -wide" hidden data-needs-endpoint>
+      <p class="m-field__label" id="contact-photos-label">Add photos (optional)</p>
+      <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="contact-photos-label" aria-describedby="contact-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+      <ul class="m-upload__files" aria-live="polite" hidden data-upload-files data-remove="Remove"></ul>
+      <p class="m-field__note" id="contact-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo.">Photos help us give you a real price instead of a guess.</p>
+    </div>
+    <fieldset class="m-field -wide">
+      <legend class="m-field__label">How should we get back to you</legend>
+      <div class="m-form__chips">
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="reply" value="Call"><span class="a-choice__face">Call</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="reply" value="Text"><span class="a-choice__face">Text</span></label>
+        <label class="a-choice -light"><input class="a-choice__input" type="radio" name="reply" value="Email"><span class="a-choice__face">Email</span></label>
+      </div>
+    </fieldset>
+    <div class="m-form__foot">
+      <p class="m-field__small">We only use your details to answer your request. <a class="a-inlineLink" href="privacy.html">Read our privacy policy.</a></p>
+      <button class="a-button -slate -large" type="submit" data-bar-clear>Send my request<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    </div>
+
+    <!-- no endpoint, or it failed: the form stays filled and the phone is offered -->
+    <div class="m-formState" tabindex="-1" role="alert" hidden data-request-failed>
+      <h3 class="a-section -card"><span class="a-section__row -light">Something</span> <span class="a-section__row">went wrong</span></h3>
+      <p class="a-lede">Your request didn't go through, and that's on our end. What you typed is still in the form, so try again, or give us a call at <a class="a-inlineLink" href="tel:+16035550142"><span class="a-num">(603) 555-0142</span></a></p>
+    </div>
+  </form>
+
+  <div class="m-formState" tabindex="-1" role="status" hidden data-request-done data-request-head>
+    <h3 class="a-section -card"><span class="a-section__row -light">Got</span> <span class="a-section__row">it</span></h3>
+    <p class="a-lede">We'll get back to you with a price soon. Need it faster? <a class="a-inlineLink" href="tel:+16035550142">Call <span class="a-num">(603) 555-0142</span></a></p>
+  </div>
+
+  <!-- ---- commercial: one line and a link under the form ---- -->
+  <div class="o-contactMore a-inview">
+    <p class="m-takes">Landlord, realtor or property manager? Turnovers, move-outs and regular pickups have their own form.</p>
+    <a class="a-link" href="commercial.html"><span class="a-link__text">Ask about commercial work</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</div>

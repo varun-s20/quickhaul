@@ -1,0 +1,106 @@
+<!-- meta
+title: Customer Reviews | Quick Haul Junk Removal
+description: Read what customers say about Quick Haul on Facebook, and see before and after photos of garage, basement and yard clean outs.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-reviews">
+<!-- Sample cards from data/reviews.json, replaced and never edited into real-sounding reviews (content/placeholders.md). No stars, score or count (proposal term 05). Every photo is logged stock, must-replace. Words: content/copy.md, Reviews. -->
+
+<!-- ===== Reviews: page banner. Heading and one line, the truck parked on the fold with a quarter of a load ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Customer</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">reviews</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Our Facebook page has plenty of them. The ones we bring over here stay word for word.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
+</section>
+
+<!-- ===== Reviews: quotes mixed with photos in a loose grid. No filter column (revision.md: dead with few reviews). A photo never sits inside a quote card, so no photo reads as the job a review is about (copy.md) ===== -->
+<section class="b-band -rise o-reviewGrid" aria-label="Reviews">
+  <div class="o-reviewGrid__cols">
+{{> review-grid}}
+  </div>
+  <!-- the end of the grid: a line and two links. Both go to the bare platform address until Shawn sends his page (data/reviews.json, content/placeholders.md) -->
+  <div class="o-reviewGrid__end a-inview">
+    <p class="a-lede">Used us already? Tell the next person what it was like.</p>
+    <div class="m-rowActions">
+      <a class="a-link" href="{{> facebook-url}}" target="_blank" rel="noopener"><span class="a-link__text">Leave a review on Facebook</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="a-link" href="{{> facebook-url}}" target="_blank" rel="noopener"><span class="a-link__text">Read them all on Facebook</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Reviews: before and after. Heading, one line, the pairs. The button sits with the heading, not after the pairs: under them it read as a leftover right above the estimate band's own Book now (critic, built Reviews r1) ===== -->
+<!-- Every pair is stock from two different places, must-replace with Shawn's own pairs from one spot (content/placeholders.md). So no alt says "the same", and the "own jobs" line stays HOLD. -->
+<section class="b-band o-svcBand" id="before-after" aria-labelledby="pairs-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="pairs-title"><span class="a-section__row -light">Before</span> <span class="a-section__row">and after</span></h2>
+    <p class="a-lede">Drag each line across to see the difference. Garages, basements, yards and demo jobs, cleared and ready to use.</p>
+    <div class="m-rowActions">
+      <a class="a-button -slate -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="o-reviewPairs">
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <!-- each tag lives inside its own photo's layer, so it can only ever show over that photo -->
+        <div class="m-compare__layer">{{picture name="compare-before" class="m-compare__img" alt="Before: a garage crowded with a ride-on mower, a workbench, shelving and stacked gear" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="compare-after" class="m-compare__img" alt="After: a garage with a clear concrete floor and tools hung tidily on the wall" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the garage clean out" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Garage clean out</figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="basement-boxes-before" class="m-compare__img" alt="Before: a small room stacked to the ceiling with cardboard boxes" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="basement-empty-after" class="m-compare__img" alt="After: an empty unfinished basement with exposed joists, steel poles and stairs" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the basement clean out" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Basement clean out</figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="yard-branches-before" class="m-compare__img" alt="Before: a heap of cut branches and brush on grass" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="yard-lawn-after" class="m-compare__img" alt="After: a fenced back yard with clear lawn, a concrete patio and a large tree" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the yard cleanup" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Yard cleanup</figcaption>
+    </figure>
+
+    <figure class="o-reviewPairs__pair a-inview">
+      <div class="m-compare" data-compare>
+        <div class="m-compare__layer">{{picture name="shed-old-before" class="m-compare__img" alt="Before: a weathered wooden garden shed with glazed double doors" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+        <div class="m-compare__layer -after">{{picture name="shed-gone-after" class="m-compare__img" alt="After: a grassy back yard with a wooden fence and a gray house with a small deck" sizes="(min-width: 641px) 47vw, 100vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+        <span class="m-compare__line" aria-hidden="true"></span>
+        <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare the shed demo" aria-valuetext="Half before, half after" data-compare-range>
+        <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+      </div>
+      <figcaption class="o-reviewPairs__caption">Shed demo</figcaption>
+    </figure>
+
+  </div>
+</section>
+
+</div>

@@ -1,0 +1,21 @@
+I've written the Quick Haul brief to `projects/quickhaul/brief.md`. All 12 sections are filled in, and every point is marked [stated] or [inferred] with where it came from. I also added a line to `review-log.md`. I didn't search Quick Haul's name. The project isn't sealed, but nothing needed it.
+
+**What matters most:**
+- **Both sites Shawn named are rivals in his own market.** EasyScrap is based in Windham NH and covers Southern NH and towns north of Boston. Junk Teens is based in Norwood MA. I've excluded both as primary references. What Shawn likes about EasyScrap is its layout, so I wrote down its page structure in section 7 to use as a guide.
+- **The logo isn't here.** `assets/` is empty, and the two logo PNGs Shawn sent are still in the Fiverr thread. The proposal promises colours and type drawn from the logo, so art direction can't start until it arrives.
+- **We promised more than the price covers.** The $1,850 offer lists the features of the $2,200 plan: instant estimate, SMS alerts, review requests and service-area pages.
+- **The revision count disagrees with itself.** The offer text says two revisions, the package line says one, and an earlier offer said three. Someone needs to settle which before review rounds start.
+- **Booking needs a decision.** Shawn worries that slots customers book entirely on their own are "less solid" leads, and he wants calling to stay prominent. A booking he confirms himself might suit him better than instant confirmation.
+- **Some trust claims aren't confirmed.** The agreed scope includes "licensed, insured, satisfaction guaranteed" sections, but Shawn never said any of those are true. The brief says not to publish them until he does.
+- **Two client documents are missing.** The Welcome & Discovery Packet and the Project Operating Agreement we sent on 2 Nov aren't in `prd/`.
+
+**Open questions (section 11), most important first:**
+1. Which towns does he cover, what's his base town, and what are his phone number and hours?
+2. Will prices go on the site, and what are his price bands?
+3. Should a booked slot wait for his confirmation, and is there a deposit? The offer lists "Payment Integration".
+4. When do we get the logo file, his job photos, the Facebook page and which reviews to use, and his TikTok and Instagram handles?
+5. Which trust and story facts are true: licensed, insured, a guarantee? Where do donated items go, how big are his demo jobs, and does he really do commercial or repeat work?
+
+I left `status.md` alone, so stage 1 still needs ticking at checkpoint 1a.
+
+Industry sources: [1-800-GOT-JUNK pricing](https://www.1800gotjunk.com/us_en/blog/pricing), [Startcosts MA](https://startcosts.com/junk-removal/massachusetts), [Startcosts NH](https://startcosts.com/junk-removal/new-hampshire), [LawnStarter](https://www.lawnstarter.com/blog/cost/junk-removal-price/), [College Hunks FAQ](https://collegehunkshaulingjunk.com/why-us/faq/where-does-junk-go-after-it-leaves-my-house), [Weston Owl](https://westonowl.com/2024/09/06/small-business-review-junk-teens), [Fun 107](https://fun107.com/cape-cod-junkteens-junk-removal-business), and EasyScrap's own homepage for its structure.

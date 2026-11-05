@@ -1,0 +1,185 @@
+<!-- meta
+title: Junk Removal and Demo in MA and NH | Quick Haul
+description: Junk removal, clean outs and demo work across Massachusetts and New Hampshire. Loads start at $149. Book a day online or give us a call.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: index.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: hero-yard hero-yard-phone
+estimate: steps
+-->
+<div class="t-home">
+<!-- Every fact on this page is a placeholder from content/placeholders.md; every photo is logged stock, must-replace. Words: content/copy.md, Home. -->
+
+<!-- ===== Home: hero. One photo, one headline, one line, one action, and the truck parked on the fold. The words sit lower and nearer the centre (Varun, 4 Nov) ===== -->
+<!-- Stock, must-replace: the slot wants Shawn's own photo of the truck at a job. -->
+<section class="o-homeHero" aria-labelledby="hero-title" data-hero>
+  <div class="o-homeHero__media">
+    {{picture name="hero-yard" phone="hero-yard-phone" class="o-homeHero__img" alt="A sunny back yard with a wide lawn, a wooden fence and a gray house" sizes="100vw" eager}}
+    <span class="o-homeHero__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-homeHero__copy">
+    <h1 class="a-hero" id="hero-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Junk out</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Space back</span></span>
+    </h1>
+    <p class="o-homeHero__line a-reveal">Junk removal, clean outs and demo work across Massachusetts and New&nbsp;Hampshire. Loads start at&nbsp;$149. <span class="a-nowrap">You point, we carry.</span></p>
+    <div class="o-homeHero__actions a-reveal" data-call-here>
+      <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="a-button -glass -large" href="tel:+16035550142" aria-label="Give us a call at (603) 555-0142"><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="o-homeHero__callLabel">Give us a call</span> <span class="a-num">(603) 555-0142</span></a>
+    </div>
+  </div>
+
+  <div class="o-homeHero__truck">{{> truck-hero}}</div>
+</section>
+
+<!-- ===== Home: what we haul. Photos first; a heading, a line, and one line under each photo ===== -->
+<!-- Stock, must-replace. Alts describe the stock photo actually shown (checkpoint 2c). Crops keep plates and badges out (placeholders.md). -->
+<section class="b-band -rise o-homeHaul" aria-labelledby="haul-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="haul-title"><span class="a-section__row -light">What we</span> <span class="a-section__row">haul away</span></h2>
+    <p class="a-lede">Most of what's in a house, a garage or a yard can go on the truck. If it's heavy, awkward or just in the way, ask us.</p>
+  </div>
+  <ul class="o-homeHaul__grid">
+    <li class="m-tile -seven a-inview">
+      <a class="m-tile__link" href="services.html#junk-removal">
+        {{picture name="tile-junk" class="m-tile__img" alt="A white pickup truck piled high with black trash bags" sizes="(min-width: 1025px) 56vw, 100vw"}}
+        <span class="m-tile__label">Junk removal<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Anything from one couch to a full truck, loaded by us.</p>
+    </li>
+    <li class="m-tile -five a-inview">
+      <a class="m-tile__link" href="services.html#mattresses">
+        {{picture name="tile-mattress" class="m-tile__img -right" alt="A man walking down a sidewalk with a striped mattress on his head" sizes="(min-width: 1025px) max(40vw, 580px), 50vw"}}
+        <span class="m-tile__label">Mattresses<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Twin to king, plus the box spring and bed frame.</p>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#furniture">
+        {{picture name="tile-sofa" class="m-tile__img" alt="A cream armchair and a small sofa set out by the door of a brick building" sizes="(min-width: 1025px) 32vw, 50vw"}}
+        <span class="m-tile__label">Furniture<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Couches, dressers, desks and dining sets, even from upstairs.</p>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#appliances">
+        {{picture name="tile-fridge" class="m-tile__img" alt="A pale green retro fridge freezer against a brick wall" sizes="(min-width: 1025px) 32vw, 50vw"}}
+        <span class="m-tile__label">Appliances<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Fridges, washers, dryers and stoves, working or not.</p>
+    </li>
+    <li class="m-tile -four a-inview">
+      <a class="m-tile__link" href="services.html#yard-waste">
+        {{picture name="tile-yard" class="m-tile__img" alt="The back of an orange work truck loaded with green garden waste" sizes="(min-width: 1025px) 32vw, 50vw"}}
+        <span class="m-tile__label">Yard waste<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Brush, branches, bagged leaves and whatever the last storm brought down.</p>
+    </li>
+    <li class="m-tile -five a-inview">
+      <a class="m-tile__link" href="services.html#clean-outs">
+        {{picture name="tile-garage" class="m-tile__img" alt="An empty basement with white walls, square pillars and a clear wood floor" sizes="(min-width: 1025px) max(40vw, 580px), 100vw"}}
+        <span class="m-tile__label">Garage and basement clean outs<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Clear the floor and get the room back.</p>
+    </li>
+    <li class="m-tile -seven a-inview">
+      <a class="m-tile__link" href="services.html#demo">
+        {{picture name="tile-demo" class="m-tile__img" alt="A weathered wooden garden shed with glazed double doors" sizes="(min-width: 1025px) 56vw, 100vw"}}
+        <span class="m-tile__label">Demo projects<svg class="m-tile__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>
+      <p class="m-tile__line">Sheds, decks and tear-outs taken down and hauled off.</p>
+    </li>
+  </ul>
+  <p class="m-takes o-homeHaul__takes a-inview"><strong>We can't take</strong> paint, oil and chemicals, propane tanks or asbestos.</p>
+  <div class="m-rowActions a-inview">
+    <a class="a-button -slate -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a class="a-link" href="services.html"><span class="a-link__text">See everything we take</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ===== Home: priced by the load. What the work order's load cell becomes: one truck, one picker, one price. Spread across the whole width (Varun, 4 Nov) ===== -->
+<!-- Prices and what fits are placeholders (data/prices.json, content/placeholders.md). Sends ?load= to Book, which reads it. -->
+<section class="b-band -slate o-homePrice" id="price" aria-labelledby="price-title" data-gauge>
+  <div class="m-head a-inview">
+    <h2 class="a-section o-homePrice__title" id="price-title"><span class="a-section__row -light">Priced by</span> <span class="a-section__row">the load</span></h2>
+    <p class="a-lede">You pay for how much of the truck your junk fills. Not sure how much that is? Add a few photos when you book and we confirm the price before we show up.</p>
+  </div>
+  <form class="o-homePrice__stage" action="book.html" method="get">
+    <div class="o-homePrice__truck">{{> truck-gauge}}</div>
+{{> load-picker}}
+    <ul class="o-homePrice__facts">
+      <li class="m-fact"><strong class="m-fact__title">In the price</strong> <span class="m-fact__text">The loading, the hauling and the drop-off.</span></li>
+      <li class="m-fact"><strong class="m-fact__title">Just one item?</strong> <span class="m-fact__text">It's priced as a 1/8 load, so that's {{> price-from}}.</span></li>
+      <li class="m-fact"><strong class="m-fact__title">Heavy stuff or demo?</strong> <span class="m-fact__text">Concrete, dirt and shingles can cost more. Demo is priced per job.</span></li>
+    </ul>
+  </form>
+</section>
+
+<!-- ===== Home: before and after. One heading, one line, the slider, one action ===== -->
+<!-- Stock pair: two different rooms, must-replace with Shawn's real pair from one spot (placeholders.md). -->
+<section class="b-band -rise o-homeProof" aria-labelledby="proof-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section" id="proof-title"><span class="a-section__row -light">Before</span> <span class="a-section__row">and after</span></h2>
+    <p class="a-lede">Drag the line across to see what a clean out does. The junk goes, the floor comes back and the room is yours again.</p>
+  </div>
+  <div class="o-homeProof__stage">
+    <div class="m-compare a-inview" data-compare>
+      <!-- each tag lives inside its own photo's layer, so it can only ever show over that photo -->
+      <div class="m-compare__layer">{{picture name="compare-before" class="m-compare__img" alt="Before: a garage crowded with a ride-on mower, a workbench, shelving and stacked gear" sizes="(min-width: 1441px) min(78vw, 1500px), (min-width: 1025px) min(1120px, calc(100vw - 96px)), (min-width: 641px) 100vw, 130vw"}}<span class="m-compare__tag" aria-hidden="true">Before</span></div>
+      <div class="m-compare__layer -after">{{picture name="compare-after" class="m-compare__img" alt="After: a garage with a clear concrete floor and tools hung tidily on the wall" sizes="(min-width: 1441px) min(78vw, 1500px), (min-width: 1025px) min(1120px, calc(100vw - 96px)), (min-width: 641px) 100vw, 130vw"}}<span class="m-compare__tag -after" aria-hidden="true">After</span></div>
+      <span class="m-compare__line" aria-hidden="true"></span>
+      <input class="m-compare__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after" aria-valuetext="Half before, half after" data-compare-range>
+      <span class="m-compare__knob" aria-hidden="true"><svg class="m-compare__chev -left" aria-hidden="true"><use href="#i-chevron"/></svg><svg class="m-compare__chev" aria-hidden="true"><use href="#i-chevron"/></svg></span>
+    </div>
+  </div>
+  <p class="m-takes o-homeProof__takes a-inview"><strong>We clear</strong> boxes and bins, shelving, old furniture, tools nobody uses, carpet and rugs. What stays is up to you.</p>
+  <div class="m-rowActions a-inview">
+    <a class="a-button -slate -large" href="book.html?job=clean-out">Book a clean out<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a class="a-link" href="reviews.html"><span class="a-link__text">See more before and afters</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ===== Home: reviews. Five sample cards in a band of their own, with the drawn sofa and chair on one card's edge (Varun, 5 Nov) ===== -->
+<!-- All samples, each must-replace by one of Shawn's real Facebook reviews (data/reviews.json, placeholders.md). No stars, score or count (proposal term 05). -->
+<section class="b-band o-homeReview" aria-labelledby="review-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="review-title"><span class="a-section__row -light">Read the</span> <span class="a-section__row">reviews</span></h2>
+    <p class="a-lede">These cards are samples for now. Real reviews from our Facebook page take their place, word for word.</p>
+  </div>
+  <div class="o-homeReview__grid">
+{{> review-home}}
+  </div>
+  <div class="m-rowActions a-inview">
+    <a class="a-link" href="{{> facebook-url}}" target="_blank" rel="noopener"><span class="a-link__text">Read the real ones on Facebook</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ===== Home: who's showing up, a slim band. Home said nothing about who comes to the house. Droppable if the page feels long (copy-v4-changes.md, call 2) ===== -->
+<section class="b-band o-svcBand o-slim" aria-labelledby="who-title">
+  <div class="o-slim__card a-inview">
+    <h2 class="a-section -small" id="who-title"><span class="a-section__row -light">Who's</span> <span class="a-section__row">showing up</span></h2>
+    <p class="a-lede">Shawn and a small local crew. He still answers the phone himself, so the person you talk to knows your job before the truck rolls.</p>
+    <div class="m-rowActions"><a class="a-link" href="about.html"><span class="a-link__text">More about Quick Haul</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ===== Home: towns. Names only; no cards, no carousel, no price on any town ===== -->
+<!-- Town list is a placeholder (data/towns.json, content/placeholders.md). -->
+<section class="b-band o-homeTowns" id="towns" aria-labelledby="towns-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="towns-title"><span class="a-section__row -light">Do you come</span> <span class="a-section__row">to my town?</span></h2>
+      <p class="a-lede">Probably. We cover towns on both sides of the Massachusetts and New&nbsp;Hampshire line, and the prices are the same in every one. Pick yours to see what we haul there.</p>
+      <ul class="m-promo__chips">
+{{> town-chips}}
+      </ul>
+      <p class="m-promo__line">Can't see your town? It may just not be on the list yet. <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a></p>
+      <a class="a-link" href="service-area.html"><span class="a-link__text">See the full service area</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="m-promo__media">{{picture name="towns-street" class="m-promo__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="(min-width: 1025px) max(40vw, 720px), 100vw"}}</div>
+  </div>
+</section>
+
+</div>

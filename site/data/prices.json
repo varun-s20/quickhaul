@@ -1,0 +1,10 @@
+{
+  "_note": "Placeholder prices and what fits in each load (content/placeholders.md). Feeds the picker on Home and Book, the row of four on Services and the town pages, and Pricing's longer row (size, holds) and its two worked sums (tools/build.py). value is the form value Book reads (?load=), level the truck's load, unit and load_label the wording the picker swaps in. fridge_fee is what a fridge, freezer or AC unit adds. Typed by hand elsewhere, so change them too: the FAQ's first answer in data/faq.json, Home's hero line, and the meta descriptions of Home, Pricing and the town pages.",
+  "fridge_fee": 30,
+  "cards": [
+    {"label": "1/8 truck", "value": "eighth", "level": 1, "price": 149, "fits": "A couple of big items, like a couch and a chair.", "unit": "for a 1/8 truck", "load_label": "an eighth of a load", "size": "About one pickup bed.", "holds": "A couch and a chair, a mattress set and a dresser, or one big item."},
+    {"label": "1/4 truck", "value": "quarter", "level": 2, "price": 249, "fits": "A room's worth, or a pile of boxes and bags.", "unit": "for a 1/4 truck", "load_label": "a quarter of a load", "size": "About two pickup beds.", "holds": "A room's worth, a bedroom set, or a pile of boxes and bags."},
+    {"label": "1/2 truck", "value": "half", "level": 3, "price": 399, "fits": "A small garage or basement clean out.", "unit": "for a 1/2 truck", "load_label": "half a load", "size": "About four pickup beds.", "holds": "A small garage or basement clean out, or what's left after a move."},
+    {"label": "Full truck", "value": "full", "level": 4, "price": 649, "fits": "A packed garage, a full basement or a whole move-out.", "unit": "for a full truck", "load_label": "a full load, piled high", "size": "About eight pickup beds.", "holds": "A packed garage, a full basement or a whole move-out."}
+  ]
+}

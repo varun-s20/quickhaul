@@ -1,0 +1,56 @@
+<!-- meta
+title: About Quick Haul | Local Junk Removal in MA and NH
+description: Quick Haul is Shawn and a small local crew, clearing garages, basements and yards across Massachusetts and New Hampshire. Give him a call.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-about">
+<!-- Crew, phone habits, hours and donation practice are placeholders (content/placeholders.md). Photos are logged stock, must-replace. Words: content/copy.md, About. -->
+
+<!-- ===== About: page banner. Heading and one line, which does the old statement's job; the truck parked on the fold with a small load ===== -->
+<section class="o-pageBanner" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">About</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Quick Haul</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">Shawn and a small local crew, clearing garages, basements and yards across Massachusetts and New&nbsp;Hampshire, and taking down the old sheds and decks too.</p>
+  </div>
+
+  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-eighth}}</div>
+</section>
+
+<!-- ===== About: pick up the phone, the slate promo (V8). A short story and one action, the call. data-call-here hides the header's number while this pill is on screen, so the number shows once per screen (copy-changes.md) ===== -->
+<!-- Stock, must-replace with Shawn's own photo (alt then: "Shawn, owner of Quick Haul, beside the truck"). Never captioned or described as Shawn until then (choices.md, stage 6). -->
+<section class="b-band -rise" aria-labelledby="phone-title">
+  <div class="m-promo a-inview">
+    <div class="m-promo__copy">
+      <h2 class="a-section -small" id="phone-title"><span class="a-section__row -light">Pick up</span> <span class="a-section__row">the phone</span></h2>
+      <p class="a-lede">Shawn still answers the phone himself, and that's on purpose. A quick call tells him what's in the garage, how close the truck can get and what to bring. It tells you who's showing up and what it costs. You can book online any time, but if you'd rather talk it through first, call. That's what the number is for.</p>
+      <a class="a-button -cream -large m-promo__action" href="tel:+16035550142" aria-label="Call Shawn at (603) 555-0142" data-call-here><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="m-promo__callLabel">Call Shawn</span> <span class="a-num">(603) 555-0142</span></a>
+    </div>
+    <div class="m-promo__media">{{picture name="old-pickup-driveway" class="m-promo__img" alt="An old pickup truck parked on a gravel driveway beside a stucco house" sizes="(min-width: 1025px) 42vw, 100vw"}}</div>
+  </div>
+</section>
+
+<!-- ===== About: how we work. A heading and three small facts in the same light band as the promo above, so the page stays three bands with the estimate band ===== -->
+<section class="b-band o-svcBand" aria-labelledby="work-title">
+  <div class="m-head a-inview">
+    <h2 class="a-section -small" id="work-title"><span class="a-section__row -light">How we</span> <span class="a-section__row">work</span></h2>
+  </div>
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">Easy to reach</strong> <span class="m-fact__text">A real number with a real person on the end of it, Mon to Sat, 7am to 7pm.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">No sales pitch</strong> <span class="m-fact__text">Tell us what's going and we'll tell you straight what it costs.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">Less in the dump</strong> <span class="m-fact__text">Anything still good goes to donation where we can, not straight on the pile.</span></li>
+  </ul>
+</section>
+
+</div>

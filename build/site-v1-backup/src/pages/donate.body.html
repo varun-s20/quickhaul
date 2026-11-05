@@ -1,0 +1,68 @@
+<!-- meta
+title: Donate Your Old Furniture and Household Items | Quick Haul
+description: Some of what we haul still has plenty of life in it. Tell us what's still good when you book and we set it aside for donation instead of the dump.
+og_image: assets/images/donate/dresser-on-street.jpg
+og_image_alt: A small wooden dresser set out on an empty street, in front of a wooden fence and rooftops
+schema: page.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-donate">
+
+<!-- ===== Donate: title cell. FREITAG's take-back order; copy.md gives this page no lede, so the headline takes the banner's measure. The truck carries this page's own idea: the good stuff set apart from the load ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art-donate}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Still good?</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">Someone wants it</span></span>
+    </h1>
+  </div>
+</section>
+
+<section class="b-band -flush" aria-labelledby="donate-statement">
+
+  <!-- ===== Donate: statement cell. copy.md's five sentences in their order. All 74 words at 42px read as a wall (critic r1); a large sentence with a full stop read as a headline, the tell (critic r2). So the first sentence is the section statement, light plus heavy caps with no stop, and the other four are the site's mono across the sheet's centre rule. Spec change logged in build/progress.md ===== -->
+  <div class="b-band__inner">
+    <div class="m-sectionHead o-donateStatement__head a-inview">
+      <h2 class="a-section" id="donate-statement"><span class="a-section__row -light">A lot of what we pick up</span> <span class="a-section__row">still works</span></h2>
+    </div>
+    <div class="o-donateStatement__split" data-stagger>
+      <p class="a-body o-donateStatement__text a-inview">The dresser that doesn't fit the new place, the kids' bikes, the spare couch from the basement. Throwing that in the dump makes no sense when someone nearby could use it.</p>
+      <p class="a-body o-donateStatement__text a-inview">So when we haul your junk, we sort out the good stuff and take it to local charities and reuse stores instead. <strong class="o-donateStatement__point">You get the space back and the stuff gets a second life.</strong></p>
+    </div>
+  </div>
+
+  <!-- ===== Donate: 6 + 6. A stack of labelled cells beside one square photo tile, FREITAG's take-back sheet with square frames, then the actions on the same centre rule. Stock photo, must-replace (content/placeholders.md). Source order is copy.md's reading order. Below 1025 the photo moves up to sit before the cells, so phones don't read the whole page before its one image (critic r2) ===== -->
+  <div class="b-band__inner o-donate">
+    <div class="o-donate__cells" data-stagger>
+      <div class="m-fact a-inview">
+        <h2 class="a-label m-fact__label">What we can donate</h2>
+        <p class="m-fact__body">Furniture in good shape, working appliances, kitchenware, clothes and shoes, books, toys, bikes, tools and sports gear. If you'd use it, someone else probably will too.</p>
+      </div>
+      <div class="m-fact a-inview">
+        <h2 class="a-label m-fact__label -no">What we can't</h2>
+        <p class="m-fact__body">Anything broken, stained or missing parts, mattresses that have been slept on for years, car seats, recalled cribs and anything that's been in a flood or a fire.</p>
+      </div>
+      <div class="m-fact a-inview">
+        <h2 class="a-label m-fact__label">Where it goes</h2>
+        <p class="m-fact__body">Local charities and reuse stores in Massachusetts and New Hampshire that take household goods. What they accept changes, so we check before every drop-off.</p>
+      </div>
+      <div class="m-fact a-inview">
+        <h2 class="a-label m-fact__label">How to ask</h2>
+        <p class="m-fact__body">When you book, add a note saying which items are still good, or tell us on the day. We'll load them separately so they don't end up on the pile.</p>
+      </div>
+    </div>
+    <div class="o-donate__media a-inview">
+      <div class="b-photo">{{picture name="dresser-on-street" alt="A small wooden dresser set out on an empty street, in front of a wooden fence and rooftops" sizes="(min-width: 1025px) calc(50vw - 73px), calc(100vw - 66px)"}}</div>
+    </div>
+    <div class="o-donate__actions a-inview">
+      <div class="m-actions o-donate__book">
+        <a class="a-button -slate" href="book.html">Book a pickup<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <p class="a-callLine o-donate__call">Want to check an item first? <a class="o-donate__callLink" href="tel:+16035550142">Call (603) 555-0142</a></p>
+    </div>
+  </div>
+
+</section>
+
+</div>

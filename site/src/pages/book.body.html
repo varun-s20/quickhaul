@@ -1,0 +1,261 @@
+<!-- meta
+title: Book a Junk Pickup | Quick Haul
+description: Pick a day, tell us what's going and add photos. We confirm your time and price before we come. Junk removal and demo across Massachusetts and New Hampshire.
+og_image: assets/images/home/og-home.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: page.json
+estimate: no
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
+preload_picture: page-street page-street-phone
+-->
+<div class="t-book">
+<!-- Every fact on this page is a placeholder from content/placeholders.md; the photo is logged stock, must-replace. Words: content/copy.md, Book. The hairlines and mono labels stay on this page and only here (design/revision.md section 4). -->
+
+<!-- ===== Book: short banner. Heading and one line, no truck: the load step's truck does that job (revision.md, Book), and a utility page gets to its form quickly ===== -->
+<section class="o-pageBanner -short -noTruck" aria-labelledby="page-title">
+  <div class="o-pageBanner__media">
+    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    <span class="o-pageBanner__scrim" aria-hidden="true"></span>
+  </div>
+
+  <div class="o-pageBanner__copy">
+    <h1 class="a-hero -banner" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Book a</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">pickup</span></span>
+    </h1>
+    <p class="o-pageBanner__line a-reveal">It takes a couple of minutes.</p>
+  </div>
+</section>
+
+<!-- ===== Book: the band rising over the banner. The three steps as three small facts, then the form ===== -->
+<!-- Booking wording is a request Shawn confirms (choices.md, stage 6). No estimate band on this page. -->
+<section class="b-band -rise o-bookBand" aria-label="Booking form">
+  <ul class="m-factRow -three a-inview">
+    <li class="m-fact"><strong class="m-fact__title">You book</strong> <span class="m-fact__text">Pick a day and your load.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">We confirm</strong> <span class="m-fact__text">Shawn checks the job, the time and the price.</span></li>
+    <li class="m-fact"><strong class="m-fact__title">We haul</strong> <span class="m-fact__text">We load it and leave the space clear.</span></li>
+  </ul>
+
+  <div class="o-book">
+    <div class="o-book__main">
+      <form class="o-book__form" action="#" method="post" novalidate data-book>
+
+        <ol class="o-book__progress" data-book-progress>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="0">Day<span class="o-book__progressAnswer" hidden data-book-answer="day"></span></button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="1">Load<span class="o-book__progressAnswer" hidden data-book-answer="load"></span></button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="2">Address<span class="o-book__progressAnswer" hidden data-book-answer="address"></span></button></li>
+          <li class="o-book__progressItem"><button class="o-book__progressBtn" type="button" data-book-go="3">Your details</button></li>
+        </ol>
+
+        <!-- ---- step: day ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Day</h2>
+          <div class="o-book__cells">
+            <fieldset class="o-book__cell">
+              <legend class="a-label -legend">Pick a day</legend>
+              <input class="m-calendar__native" type="date" name="day" aria-label="Pick a day" data-cal-native>
+              <div class="m-calendar" role="group" aria-label="Available days" data-cal>
+                <div class="m-calendar__head">
+                  <p class="m-calendar__title" aria-live="polite" data-cal-title></p>
+                  <div class="m-calendar__arrows">
+                    <button class="m-calendar__arrow -prev" type="button" aria-label="Previous month" data-cal-prev><svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                    <button class="m-calendar__arrow" type="button" aria-label="Next month" data-cal-next><svg class="a-svg" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                  </div>
+                </div>
+                <div class="m-calendar__dows" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+                <div class="m-calendar__grid" data-cal-grid></div>
+                <p class="m-field__note m-calendar__empty" hidden data-cal-empty>No open slots that week. Try the next week, or call us and we'll find a time.</p>
+              </div>
+            </fieldset>
+            <div class="o-book__cell -column">
+              <fieldset class="o-book__group">
+                <legend class="a-label -legend">Pick a time</legend>
+                <div class="o-book__chips -stack">
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="time" value="8am to 11am" aria-describedby="book-time-note"><span class="a-choice__face">8am to 11am</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="time" value="11am to 2pm" aria-describedby="book-time-note"><span class="a-choice__face">11am to 2pm</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="time" value="2pm to 5pm" aria-describedby="book-time-note"><span class="a-choice__face">2pm to 5pm</span></label>
+                </div>
+                <p class="m-field__note" id="book-time-note">Arrival windows. We'll confirm yours before we come.</p>
+              </fieldset>
+              <div class="o-book__foot">
+                <p class="m-field__error o-book__dayError" role="alert" hidden data-book-dayerror>Pick a day and a time to keep going</p>
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: your load<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: load. The filling truck and Home's small load control. "Not sure" sits apart from the pill, because the pill is one scale from a little to a lot and "Not sure" isn't on it. Nothing starts picked unless ?load= came from a link (copy.md: three states with no price, all in the HTML below) ---- -->
+        <div class="o-book__step" data-book-step data-gauge>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Load</h2>
+          <div class="o-book__cells -single">
+            <div class="o-book__cell -load">
+              <fieldset class="o-book__group">
+                <legend class="a-label -legend">How much junk</legend>
+                <div class="m-loadPicker -light" data-load-picker data-level="0">
+                  <span class="m-loadPicker__thumb" aria-hidden="true"></span>
+{{> load-radios}}
+                </div>
+                <label class="a-choice -light o-book__unsure"><input class="a-choice__input" type="radio" name="load" value="notsure" data-level="0" data-note="No problem. We'll price it from your photos or a quick call."><span class="a-choice__face">Not sure</span></label>
+              </fieldset>
+              <div class="o-book__truck">{{> truck-gauge}}</div>
+              <div class="o-book__readout" aria-live="polite">
+                <p class="o-book__price" hidden data-gauge-line>From <output name="price" data-gauge-price></output> <span data-gauge-unit></span></p>
+                <p class="m-field__note" data-gauge-note data-empty="Pick a size to see the price." data-demo="Demo is priced per job. We'll price it with you from your photos or a quick call.">Pick a size to see the price.</p>
+              </div>
+              <a class="a-link o-book__loadsLink" href="pricing.html#load-sizes" target="_blank" rel="noopener"><span class="a-link__text">See what each load holds</span><span class="sr-only"> (opens in a new tab)</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="o-book__cell -column">
+              <fieldset class="o-book__group">
+                <legend class="a-label -legend">What kind of job (optional)</legend>
+                <div class="o-book__chips">
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="junk-removal"><span class="a-choice__face">Junk removal</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="clean-out"><span class="a-choice__face">Clean out</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="furniture"><span class="a-choice__face">Furniture</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="appliances"><span class="a-choice__face">Appliances</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="mattresses"><span class="a-choice__face">Mattresses</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="yard-waste"><span class="a-choice__face">Yard waste</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="job" value="demo"><span class="a-choice__face">Demo</span></label>
+                </div>
+              </fieldset>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: your address<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: address ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Address</h2>
+          <div class="o-book__cells">
+            <div class="o-book__cell -fields">
+              <div class="m-field -wide">
+                <label class="a-label" for="book-street">Street address</label>
+                <input class="m-field__input" id="book-street" name="street" type="text" autocomplete="street-address" aria-describedby="book-street-error" data-required data-error="Add the street address for the pickup">
+                <p class="m-field__error" id="book-street-error" hidden></p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-town">Town</label>
+                <input class="m-field__input" id="book-town" name="town" type="text" autocomplete="address-level2" aria-describedby="book-town-error" data-required data-error="Type your town so we can check we cover it" data-towns="{{> town-names}}" data-book-town>
+                <p class="m-field__error" id="book-town-error" hidden></p>
+                <p class="m-field__note o-book__townNote" aria-live="polite" data-book-town-note data-default="Start typing to check we come to you">Start typing to check we come to you</p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-zip">ZIP code (optional)</label>
+                <input class="m-field__input" id="book-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code">
+              </div>
+              <fieldset class="m-field -wide">
+                <legend class="a-label -legend">Where's the junk (optional)</legend>
+                <div class="o-book__chips">
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="where" value="curb"><span class="a-choice__face">Curb or driveway</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="where" value="garage"><span class="a-choice__face">Garage</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="where" value="basement"><span class="a-choice__face">Basement</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="where" value="inside"><span class="a-choice__face">Inside the house</span></label>
+                  <label class="a-choice -light"><input class="a-choice__input" type="radio" name="where" value="yard"><span class="a-choice__face">Yard</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="o-book__cell -column">
+              <div class="m-field">
+                <label class="a-label" for="book-going">What's going</label>
+                <textarea class="m-field__input -area" id="book-going" name="going" rows="4" placeholder="For example: old couch, two mattresses, a pile of boxes in the basement" aria-describedby="book-going-error" data-required data-error="Tell us a little about the job"></textarea>
+                <p class="m-field__error" id="book-going-error" hidden></p>
+              </div>
+              <!-- No file input without a backend (conventions): shown only when window.SITE_FORM_ENDPOINT is set. -->
+              <div class="m-field" hidden data-needs-endpoint>
+                <p class="a-label" id="book-photos-label">Add photos (optional)</p>
+                <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="book-photos-label" aria-describedby="book-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+                <ul class="m-upload__files" aria-live="polite" hidden data-upload-files data-remove="Remove"></ul>
+                <p class="m-field__note" id="book-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo.">Photos help us confirm your price and bring the right gear.</p>
+              </div>
+              <div class="m-field">
+                <label class="a-label" for="book-know">Anything we should know (optional)</label>
+                <textarea class="m-field__input -area" id="book-know" name="notes" rows="3" placeholder="Gate code, parking, stairs, items you'd like donated"></textarea>
+              </div>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="button" data-book-next data-bar-clear>Next: your details<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- step: your details ---- -->
+        <div class="o-book__step" data-book-step>
+          <h2 class="sr-only" tabindex="-1" data-book-heading>Your details</h2>
+          <div class="o-book__cells">
+            <div class="o-book__cell -fields">
+              <div class="m-field -wide">
+                <label class="a-label" for="book-name">Your name</label>
+                <input class="m-field__input" id="book-name" name="name" type="text" autocomplete="name" aria-describedby="book-name-error" data-required data-error="Add your name">
+                <p class="m-field__error" id="book-name-error" hidden></p>
+              </div>
+              <div class="m-field -wide">
+                <label class="a-label" for="book-phone">Phone</label>
+                <input class="m-field__input" id="book-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="book-phone-error" data-required data-phone data-error="Add a phone number we can reach you at">
+                <p class="m-field__error" id="book-phone-error" hidden></p>
+              </div>
+              <div class="m-field -wide">
+                <label class="a-label" for="book-email">Email</label>
+                <input class="m-field__input" id="book-email" name="email" type="email" autocomplete="email" aria-describedby="book-email-error" data-required data-email data-error="Add your email" data-error-format="That email doesn't look right">
+                <p class="m-field__error" id="book-email-error" hidden></p>
+              </div>
+            </div>
+            <div class="o-book__cell -column">
+              <label class="m-check"><input class="m-check__input" type="checkbox" name="sms" value="yes"><span class="m-check__box" aria-hidden="true"></span><span class="m-check__text">Text me booking updates and a reminder the day before. Message and data rates may apply. Reply STOP to opt out.</span></label>
+              <p class="m-field__small">We only use your details for this booking. <a class="a-inlineLink" href="privacy.html">Read our privacy policy.</a></p>
+              <div class="o-book__foot">
+                <button class="a-button -slate -block" type="submit" data-bar-clear>Send booking request<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- ---- confirmation state. Only shown when the endpoint answered OK (conventions: no fake success) ---- -->
+      <div class="o-book__state" tabindex="-1" hidden data-book-done>
+        <div class="m-head">
+          <h2 class="a-section -small"><span class="a-section__row -light">Request</span> <span class="a-section__row">sent</span></h2>
+          <p class="a-lede">Thanks, your booking request is in. Shawn will look it over and get back to you to confirm your time and price. A copy is on its way to your email.</p>
+        </div>
+        <div class="o-book__doneBody">
+        <div class="o-book__doneTruck" data-book-done-truck></div>
+        <dl class="o-book__summary">
+          <div class="o-book__summaryRow"><dt class="a-label">Day</dt><dd data-book-sum="day"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Time</dt><dd data-book-sum="time"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Load</dt><dd data-book-sum="load"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Price from</dt><dd data-book-sum="price" data-none="We'll confirm it with you"></dd></div>
+          <div class="o-book__summaryRow"><dt class="a-label">Address</dt><dd data-book-sum="address"></dd></div>
+        </dl>
+        </div>
+        <div class="o-book__stateFoot">
+          <p class="m-field__small">Need to change something? <a class="a-inlineLink" href="tel:+16035550142" data-call-here>Call <span class="a-num">(603) 555-0142</span></a></p>
+          <a class="a-button -slate" href="index.html">Back to home<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <!-- ---- error state. Also what the preview shows on submit: there is no endpoint yet, and a form never reports success without one. Try again brings the filled form back ---- -->
+      <div class="o-book__state" tabindex="-1" role="alert" hidden data-book-failed>
+        <div class="m-head">
+          <h2 class="a-section -small"><span class="a-section__row -light">Something</span> <span class="a-section__row">went wrong</span></h2>
+          <p class="a-lede">Your booking didn't go through, and that's on our end. Your details are still here, so try again, or give us a call at <a class="a-inlineLink" href="tel:+16035550142" data-call-here><span class="a-num">(603) 555-0142</span></a> and we'll book it with you on the phone.</p>
+        </div>
+        <div class="m-rowActions">
+          <button class="a-button -slate" type="button" data-book-retry>Try again<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- call line: Shawn's agreed words, word for word. Beside every step from 1025 up, under every step on phones ---- -->
+    <aside class="o-book__aside" aria-label="Call Quick Haul">
+      <div class="o-book__call">
+        <p class="o-book__callLine">Need help booking or have questions? Give us a call</p>
+        <!-- data-call-here: while this number is on screen the header's and the phone bar's step back, so it shows once per screen (revision.md section 7; critic, Book r1). On the number, not the block, or the header's left before this one had come into view (critic, Book r2). The two end states mark theirs too -->
+        <a class="o-book__callNumber" href="tel:+16035550142" data-call-here>(603) 555-0142</a>
+        <p class="a-label">Mon to Sat, 7am to 7pm</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+</div>

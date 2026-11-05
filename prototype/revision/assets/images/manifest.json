@@ -1,0 +1,536 @@
+{
+ "hero-yard": {
+  "src": "backyard-lawn-deck.jpg",
+  "crop": [
+   2400,
+   1350
+  ],
+  "files": [
+   [
+    1000,
+    562
+   ],
+   [
+    1600,
+    900
+   ],
+   [
+    2200,
+    1238
+   ]
+  ],
+  "fallback": [
+   1600,
+   900
+  ]
+ },
+ "hero-yard-phone": {
+  "src": "backyard-lawn-deck.jpg",
+  "crop": [
+   996,
+   1607
+  ],
+  "files": [
+   [
+    500,
+    807
+   ],
+   [
+    800,
+    1291
+   ]
+  ],
+  "fallback": [
+   800,
+   1291
+  ]
+ },
+ "tile-junk": {
+  "src": "pickup-trash-bags.jpg",
+  "crop": [
+   2084,
+   1302
+  ],
+  "files": [
+   [
+    500,
+    312
+   ],
+   [
+    900,
+    562
+   ],
+   [
+    1500,
+    937
+   ]
+  ],
+  "fallback": [
+   900,
+   562
+  ]
+ },
+ "tile-mattress": {
+  "src": "man-carrying-mattress.jpg",
+  "crop": [
+   2068,
+   1591
+  ],
+  "files": [
+   [
+    500,
+    385
+   ],
+   [
+    800,
+    615
+   ],
+   [
+    1100,
+    846
+   ]
+  ],
+  "fallback": [
+   800,
+   615
+  ]
+ },
+ "tile-sofa": {
+  "src": "sofa-by-door.jpg",
+  "crop": [
+   2400,
+   2400
+  ],
+  "files": [
+   [
+    400,
+    400
+   ],
+   [
+    700,
+    700
+   ],
+   [
+    900,
+    900
+   ]
+  ],
+  "fallback": [
+   700,
+   700
+  ]
+ },
+ "tile-fridge": {
+  "src": "fridge-in-room.jpg",
+  "crop": [
+   2400,
+   2400
+  ],
+  "files": [
+   [
+    400,
+    400
+   ],
+   [
+    700,
+    700
+   ],
+   [
+    900,
+    900
+   ]
+  ],
+  "fallback": [
+   700,
+   700
+  ]
+ },
+ "tile-yard": {
+  "src": "yard-waste-truck.jpg",
+  "crop": [
+   1600,
+   1600
+  ],
+  "files": [
+   [
+    400,
+    400
+   ],
+   [
+    700,
+    700
+   ],
+   [
+    900,
+    900
+   ]
+  ],
+  "fallback": [
+   700,
+   700
+  ]
+ },
+ "tile-garage": {
+  "src": "basement-cleared.jpg",
+  "crop": [
+   2600,
+   2000
+  ],
+  "files": [
+   [
+    500,
+    385
+   ],
+   [
+    800,
+    615
+   ],
+   [
+    1100,
+    846
+   ]
+  ],
+  "fallback": [
+   800,
+   615
+  ]
+ },
+ "tile-demo": {
+  "src": "shed-weathered.jpg",
+  "crop": [
+   2400,
+   1412
+  ],
+  "files": [
+   [
+    500,
+    294
+   ],
+   [
+    900,
+    530
+   ],
+   [
+    1500,
+    882
+   ]
+  ],
+  "fallback": [
+   900,
+   530
+  ]
+ },
+ "compare-before": {
+  "src": "garage-clutter-before.jpg",
+  "crop": [
+   2182,
+   1364
+  ],
+  "files": [
+   [
+    700,
+    438
+   ],
+   [
+    1300,
+    813
+   ],
+   [
+    2000,
+    1250
+   ]
+  ],
+  "fallback": [
+   1300,
+   813
+  ]
+ },
+ "compare-after": {
+  "src": "garage-after.jpg",
+  "crop": [
+   1500,
+   938
+  ],
+  "files": [
+   [
+    700,
+    438
+   ],
+   [
+    1300,
+    813
+   ],
+   [
+    1500,
+    938
+   ]
+  ],
+  "fallback": [
+   1300,
+   813
+  ]
+ },
+ "footer-joists": {
+  "src": "basement-unfinished.jpg",
+  "crop": [
+   2400,
+   1000
+  ],
+  "files": [
+   [
+    1400,
+    583
+   ]
+  ],
+  "fallback": [
+   1400,
+   583
+  ]
+ },
+ "page-street": {
+  "src": "portsmouth-street.jpg",
+  "crop": [
+   2400,
+   1043
+  ],
+  "files": [
+   [
+    1000,
+    435
+   ],
+   [
+    1600,
+    695
+   ],
+   [
+    2200,
+    956
+   ]
+  ],
+  "fallback": [
+   1600,
+   695
+  ]
+ },
+ "page-street-phone": {
+  "src": "portsmouth-street.jpg",
+  "crop": [
+   1176,
+   1590
+  ],
+  "files": [
+   [
+    500,
+    676
+   ],
+   [
+    800,
+    1082
+   ]
+  ],
+  "fallback": [
+   800,
+   1082
+  ]
+ },
+ "svc-junk": {
+  "src": "pickup-trash-bags.jpg",
+  "crop": [
+   2380,
+   1134
+  ],
+  "files": [
+   [
+    700,
+    334
+   ],
+   [
+    1300,
+    619
+   ],
+   [
+    2000,
+    953
+   ]
+  ],
+  "fallback": [
+   1300,
+   619
+  ]
+ },
+ "svc-garage": {
+  "src": "garage-clutter-before.jpg",
+  "crop": [
+   1361,
+   1194
+  ],
+  "files": [
+   [
+    500,
+    439
+   ],
+   [
+    800,
+    702
+   ],
+   [
+    1100,
+    965
+   ]
+  ],
+  "fallback": [
+   800,
+   702
+  ]
+ },
+ "svc-sofa": {
+  "src": "sofa-by-door.jpg",
+  "crop": [
+   2400,
+   2791
+  ],
+  "files": [
+   [
+    400,
+    465
+   ],
+   [
+    700,
+    814
+   ],
+   [
+    900,
+    1047
+   ]
+  ],
+  "fallback": [
+   700,
+   814
+  ]
+ },
+ "svc-fridge": {
+  "src": "fridge-in-room.jpg",
+  "crop": [
+   2400,
+   2790
+  ],
+  "files": [
+   [
+    400,
+    465
+   ],
+   [
+    700,
+    814
+   ],
+   [
+    900,
+    1046
+   ]
+  ],
+  "fallback": [
+   700,
+   814
+  ]
+ },
+ "svc-mattress": {
+  "src": "man-carrying-mattress.jpg",
+  "crop": [
+   1368,
+   1591
+  ],
+  "files": [
+   [
+    400,
+    465
+   ],
+   [
+    700,
+    814
+   ],
+   [
+    900,
+    1047
+   ]
+  ],
+  "fallback": [
+   700,
+   814
+  ]
+ },
+ "svc-yard": {
+  "src": "yard-waste-truck.jpg",
+  "crop": [
+   2400,
+   1600
+  ],
+  "files": [
+   [
+    500,
+    333
+   ],
+   [
+    800,
+    533
+   ],
+   [
+    1200,
+    800
+   ]
+  ],
+  "fallback": [
+   800,
+   533
+  ]
+ },
+ "svc-shed": {
+  "src": "shed-weathered.jpg",
+  "crop": [
+   2400,
+   1600
+  ],
+  "files": [
+   [
+    500,
+    333
+   ],
+   [
+    800,
+    533
+   ],
+   [
+    1200,
+    800
+   ]
+  ],
+  "fallback": [
+   800,
+   533
+  ]
+ },
+ "towns-street": {
+  "src": "portsmouth-street.jpg",
+  "crop": [
+   1670,
+   1590
+  ],
+  "files": [
+   [
+    500,
+    476
+   ],
+   [
+    800,
+    762
+   ],
+   [
+    1100,
+    1047
+   ]
+  ],
+  "fallback": [
+   800,
+   762
+  ]
+ }
+}

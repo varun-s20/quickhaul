@@ -1,0 +1,54 @@
+<!-- ===== Home: ticket (the work order) ===== -->
+<!-- Placeholder facts: towns, prices, hours and phone are listed in content/placeholders.md -->
+<section class="o-homeTicket" aria-labelledby="ticket-title">
+  <h2 class="sr-only" id="ticket-title">Start a booking</h2>
+  <form class="o-homeTicket__form" action="book.html" method="get" data-ticket>
+
+    <div class="o-homeTicket__cell a-reveal">
+      <label class="a-label" for="ticket-town">Your town</label>
+      <div class="o-homeTicket__combo">
+        <input class="o-homeTicket__town" id="ticket-town" name="town" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ticket-towns" autocomplete="off" placeholder="Type your town" aria-describedby="ticket-town-note" data-ticket-town>
+        <ul class="o-homeTicket__options" id="ticket-towns" role="listbox" aria-label="Towns we cover" hidden data-ticket-options>
+{{> town-options}}
+        </ul>
+      </div>
+      <p class="o-homeTicket__note" id="ticket-town-note" aria-live="polite" data-ticket-note data-error="Type your town so we can check we cover it">Start typing to check we come to you</p>
+    </div>
+
+    <fieldset class="o-homeTicket__cell a-reveal">
+      <legend class="a-label -legend">How much junk</legend>
+      <div class="o-homeTicket__row">
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="eighth" checked data-load=".125" data-price="149" data-unit="for a 1/8 truck" aria-describedby="ticket-load-note"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="10.5" width="17" height="1.5"/></svg>1/8<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="quarter" data-load=".25" data-price="249" data-unit="for a 1/4 truck" aria-describedby="ticket-load-note"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="9" width="17" height="3"/></svg>1/4<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="half" data-load=".5" data-price="399" data-unit="for a 1/2 truck" aria-describedby="ticket-load-note"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="7" width="17" height="5"/></svg>1/2<span class="sr-only"> truck</span></span></label>
+        <label class="a-choice"><input class="a-choice__input" type="radio" name="load" value="full" data-load="1" data-price="649" data-unit="for a full truck" aria-describedby="ticket-load-note"><span class="a-choice__face"><svg class="a-choice__glyph" viewBox="0 0 22 14" aria-hidden="true"><rect x=".75" y=".75" width="20.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.5" y="2.5" width="17" height="9.5"/></svg>Full<span class="sr-only"> truck</span></span></label>
+      </div>
+      <p class="o-homeTicket__note" id="ticket-load-note">1/8 is a couple of big items. Full is a packed garage.</p>
+    </fieldset>
+
+    <fieldset class="o-homeTicket__cell a-reveal" data-ticket-day-cell>
+      <legend class="a-label -legend">Pick a day</legend>
+      <div class="o-homeTicket__row" data-ticket-days>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-05" aria-describedby="ticket-day-note"><span class="a-choice__face"><span class="a-choice__dow">Thu</span><span class="a-choice__num">5</span><span class="sr-only"> November</span></span></label>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-06" aria-describedby="ticket-day-note"><span class="a-choice__face"><span class="a-choice__dow">Fri</span><span class="a-choice__num">6</span><span class="sr-only"> November</span></span></label>
+        <label class="a-choice -day"><input class="a-choice__input" type="radio" name="day" value="2026-11-07" aria-describedby="ticket-day-note"><span class="a-choice__face"><span class="a-choice__dow">Sat</span><span class="a-choice__num">7</span><span class="sr-only"> November</span></span></label>
+      </div>
+      <p class="o-homeTicket__note" id="ticket-day-note" aria-live="polite" data-ticket-day-note data-error="Pick a day, or call us to find one" data-empty="No open days showing. Call us and we'll find one."></p>
+    </fieldset>
+
+    <div class="o-homeTicket__cell -price a-reveal">
+      <p class="a-label" id="ticket-price-label">Price from</p>
+      <p class="o-homeTicket__price">
+        <output class="o-homeTicket__figure" name="price" aria-live="polite" aria-labelledby="ticket-price-label" data-ticket-price>$149</output>
+        <span class="o-homeTicket__unit" data-ticket-unit>for a 1/8 truck</span>
+      </p>
+    </div>
+
+    <div class="o-homeTicket__cell -action a-reveal" data-ticket-action>
+      <button class="a-button -slate -block" type="submit">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <a class="a-call" href="tel:+16035550142"><svg class="a-call__icon" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-call__text">Or call (603) 555-0142</span></a>
+    </div>
+
+  </form>
+</section>
+<div class="a-halftone" aria-hidden="true"></div>

@@ -1,0 +1,24 @@
+{
+  "_note": "Placeholder towns and price (content/placeholders.md). Feeds the ticket's town listbox, the homepage town cards, the service area list and map, and one page per town at service-area/<slug>.html (tools/build.py). lat and lon place the town on the drawn map; they are public map positions, not client facts.",
+  "from_price": 149,
+  "from_unit": "1/8 truck",
+  "towns": [
+    { "name": "Lowell", "state": "Massachusetts", "abbr": "MA", "slug": "lowell-ma", "lat": 42.6334, "lon": -71.3162 },
+    { "name": "Andover", "state": "Massachusetts", "abbr": "MA", "slug": "andover-ma", "lat": 42.6583, "lon": -71.1368 },
+    { "name": "Dracut", "state": "Massachusetts", "abbr": "MA", "slug": "dracut-ma", "lat": 42.6704, "lon": -71.302 },
+    { "name": "Haverhill", "state": "Massachusetts", "abbr": "MA", "slug": "haverhill-ma", "lat": 42.7762, "lon": -71.0773 },
+    { "name": "Lawrence", "state": "Massachusetts", "abbr": "MA", "slug": "lawrence-ma", "lat": 42.707, "lon": -71.1631 },
+    { "name": "Methuen", "state": "Massachusetts", "abbr": "MA", "slug": "methuen-ma", "lat": 42.7262, "lon": -71.1909 },
+    { "name": "Derry", "state": "New Hampshire", "abbr": "NH", "slug": "derry-nh", "lat": 42.8806, "lon": -71.3273 },
+    { "name": "Hudson", "state": "New Hampshire", "abbr": "NH", "slug": "hudson-nh", "lat": 42.7648, "lon": -71.4398 },
+    { "name": "Londonderry", "state": "New Hampshire", "abbr": "NH", "slug": "londonderry-nh", "lat": 42.8651, "lon": -71.374 },
+    { "name": "Nashua", "state": "New Hampshire", "abbr": "NH", "slug": "nashua-nh", "lat": 42.7654, "lon": -71.4676 },
+    { "name": "Pelham", "state": "New Hampshire", "abbr": "NH", "slug": "pelham-nh", "lat": 42.7345, "lon": -71.3245 },
+    { "name": "Salem", "state": "New Hampshire", "abbr": "NH", "slug": "salem-nh", "lat": 42.7885, "lon": -71.2009 }
+  ],
+  "closing_card": {
+    "title": "Can't see your town?",
+    "body": "Call us. If we can get to you, we'll tell you the price on the phone.",
+    "link": "Call (603) 555-0142"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{PAGE_URL}}#webpage",
+      "url": "{{PAGE_URL}}",
+      "name": "{{PAGE_TITLE}}",
+      "about": { "@id": "{{SITE_URL}}/#organization" }
+    },
+    { "@type": "Service", "name": "Junk removal", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#junk-removal" },
+    { "@type": "Service", "name": "Garage and basement clean outs", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#clean-outs" },
+    { "@type": "Service", "name": "Furniture removal", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#furniture" },
+    { "@type": "Service", "name": "Appliance removal", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#appliances" },
+    { "@type": "Service", "name": "Mattress removal", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#mattresses" },
+    { "@type": "Service", "name": "Yard waste removal", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#yard-waste" },
+    { "@type": "Service", "name": "Demo projects", "provider": { "@id": "{{SITE_URL}}/#organization" }, "url": "{{PAGE_URL}}#demo" }
+  ]
+}

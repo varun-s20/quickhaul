@@ -1,0 +1,37 @@
+The homepage and shared parts are finished and frozen, and I've stopped for your one look, but the homepage hasn't passed the Critic. Its last score was **7.9, a fail by 0.1**, capped by one defect (the Isuzu badge showing on hover). That's now fixed, but the two rounds are used, so nobody has scored the page as it stands. The earlier 8.1 doesn't count: the Critic said many of its images hadn't loaded.
+
+To see it, run this and open http://127.0.0.1:8820/index.html. I closed my server to free memory.
+`cd projects/quickhaul/site && python -m http.server 8820 --bind 127.0.0.1`
+
+## What this run did
+The killed run's work was all on disk, so I redid nothing. Only `build/shared-frozen.md` was missing, and it's now written with the file list. I also rechecked everything at widths the earlier QA hadn't covered and fixed what it had missed:
+- **Phone number flash:** the header number flashed on every homepage load, against your "once per screen" rule.
+- **Stretched photos at 2560:** the before and after photo was stretched 33% and is now fixed. The hero was 16% over and is now 7%, because the original is only 2400 wide.
+- **Towns heading:** it broke past two rows on phones under 384 wide, including 360 and 375. It now holds two rows at every width tested.
+- **Footer:** "New Hampshire" no longer splits across two lines.
+- **Old files:** I removed three leftover mono-graded images that nothing used; the backup still has them.
+
+After these fixes, QA and the homepage flow tests are clean, and the old inner pages pass a basic smoke test. The inner-page requests, `pages-v2` and the backup weren't touched, and no packages were installed.
+
+**Not tested:** a real phone, Safari, Firefox, a screen reader or a slow connection. I only checked the motion as still frames, so please watch the truck back in.
+
+## What to look at
+1. **Amount of text:** this is the main reason for your look, at 360 words in the main content. Notes here get applied once, before the other pages are rebuilt.
+2. **Sample review:** "We've got plenty" sits right above a card saying no real review is here yet. If you count that as a visible placeholder, originality caps at 5 and the page fails.
+3. **Before and after:** still the weakest band, with two different rooms and flaking paint on the "after" floor. Only Shawn's real pair fixes it.
+4. **Defaults you can overrule:**
+   - the hero position (middle of the height, 120px in, not the true centre)
+   - the drawn sofa and chair on the review card
+   - Facebook and Instagram icons in brand colours (the prototype had them white)
+   - brand marks I painted out of the stock photos, beyond the one retouch the revision allowed
+5. **Smaller things:** the hero looks a little dusky at tablet width, and the lower half of the page stays on cream for a long stretch.
+
+## What's left
+1. Apply your notes to the homepage. They may change shared parts, and any change gets logged in the freeze file.
+2. Rebuild the other 11 pages and the town template, which are written but not yet built or seen in a browser. All 14 requests are still open, and old pages look mixed until then.
+3. Do the final pass: whole-site Critic, README and handover. The preview line has to go back on, or the preview be gated, before Shawn sees anything.
+
+The freeze technically allows the page rebuild to start now, but I'd wait for your look so text notes aren't applied 14 times. That's your call and the Studio Lead's.
+
+## Commit point
+This is a good place to commit. Suggested message: `Quick Haul: rebuild shared parts and homepage in the revised design`

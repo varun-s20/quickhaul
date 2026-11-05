@@ -1,0 +1,45 @@
+All three pages (Commercial, 404, Privacy) are built, so **no pages are left**. Commercial still hasn't passed the critic. I didn't start the final whole-site pass, and `build/progress.md` was updated after each page.
+
+| Page | Critic scores (pass mark 8.0) | Result |
+|---|---|---|
+| Commercial | 7.88, then 7.85 | Failed |
+| 404 | 8.0 | Passed, with no margin |
+| Privacy | 7.35, then 8.2 | Passed |
+
+None of the pages had AI tells.
+- **Commercial:** round 2 was held down by one fault: the sticky header covered field labels when focus landed on them. That's fixed and tests confirm it, but the two-round limit means it wasn't re-scored. The critic guessed about 8.1 without that fault.
+- **Later fixes:** the 404's fixes after its one round, and a small spacing fix on Privacy, weren't scored either.
+
+**Checks:** `tools/check.py` passes on all 24 pages, and the homepage file is byte-identical. I installed no packages and ran no git commands that change anything. I stopped the local server and closed every browser.
+
+**Revision round:** you added items 1 to 6 to `choices.md` during this run. I applied none of them, because that file's plan puts them after this batch.
+
+## Decisions for you
+1. **Should Commercial keep its banner drawing?** It shows a block, a house and a row of units with the truck. Round 1 said it breaks your "no line drawings" decision; round 2 said it belongs. I kept it because I read that decision as being about image slots.
+2. **Are you happy with the estimate band off Commercial and the 404?** `copy.md` says every page except Book. On Commercial it talks to homeowners right after the form, and the spec gives the 404 one Book now. If you agree, `copy.md` needs updating.
+3. **Do you want these footer and layout bugs fixed?** I held them because the fixes touch the approved homepage:
+   - **New:** nothing scales above 1440 on any page, because a later CSS rule overrides the scaling. Moving one rule fixes it.
+   - **New:** the footer social pills don't wrap, so the page scrolls sideways at 320.
+   - **New:** the phone number splits across two lines in the footer's Help column at 390.
+   - **Already open:** Back to top stops short from 641 up, and closing the menu at 390 jumps the page.
+
+## For the Copywriter
+- Commercial's failure message doesn't say the enquiry wasn't sent.
+- Commercial marks only Company as optional, though other fields are optional too.
+- Privacy describes analytics and uploads that aren't connected yet, and it needs a qualified review before launch.
+
+## Shared code changes
+- **What changed:**
+  - Wrapped error lines now hang under their words on Book, Contact and Commercial.
+  - The banner stripes at the foot of every inner banner sit 1px lower, which removes a faint line.
+  - Contact and Commercial got the header focus fix.
+  - Inner pages got print rules.
+- **Retested:** Contact and the homepage came back clean, and Book's tests ran without script errors.
+- **Not rerun:** Services, Reviews, About, Donate, FAQ, Service area and the town pages.
+- **Not tested at all:** real phones, Safari, Firefox, a real form backend, and a real host serving the 404.
+
+An early shell command was refused, probably because of a PowerShell memory check bundled into it. I dropped the check, and nothing else depended on it.
+
+This is a good commit point. Suggested message:
+
+`Quick Haul: build Commercial, 404 and Privacy pages; shared form focus fix, inner-page print rules`

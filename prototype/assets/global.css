@@ -1,0 +1,447 @@
+/* =====================================================================
+   Quick Haul: global stylesheet (hero prototype, phase B, 2026-11-03)
+   Loads on every page. Before it: nothing but the Roboto Mono stylesheet link
+   (temporary, see the note in index.html). After it: assets/global.js (deferred).
+   The first :root block is design/tokens.css pasted in. Change a token in both places.
+   Built from: design/design-spec.md. Primary reference technique: Truewerk
+   (references/deconstruct/truewerk.md). Donors: FREITAG header and ruling,
+   Muval selector chips, Piece of Cake quote-plus-call pairing.
+   ===================================================================== */
+
+/* ===== Fonts ===== */
+/* Bio Sans by Dharma Type, from projects/quickhaul/assets/fonts/biosans. Loaded as .otf on purpose:
+   no package installs approved for woff2 conversion yet (Varun, 2026-11-03). Web licence still to be confirmed. */
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bio Sans"; src: url("fonts/biosans-extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* ===== Tokens (pasted from design/tokens.css) ===== */
+:root {
+  --c-slate: #343D4E;
+  --c-ink: #0F141C;
+  --c-chrome: #D5D4D3;
+  --c-chromeMid: #81858C;
+  --c-cream: #F7EFEC;
+  --c-steel: #4A5263;
+  --c-text: var(--c-cream);
+  --c-focus: var(--c-chrome);
+  --c-rule: rgba(213, 212, 211, .2);
+  --c-ruleLight: rgba(15, 20, 28, .16);
+  --c-chipLine: rgba(52, 61, 78, .4);
+  --c-scrim: rgba(15, 20, 28, .55);
+  --f-display: "Bio Sans", "Roboto Mono", ui-monospace, monospace;
+  --f-mono: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w-light: 300;
+  --w-semi: 600;
+  --w-heavy: 800;
+  --w-body: 400;
+  --w-label: 500;
+  --w-button: 600;
+  --t-hero: min(12rem, 17cqi);
+  --t-heroLh: .9;
+  --t-section: min(7.2rem, 11cqi);
+  --t-price: 4rem;
+  --t-day: 2.2rem;
+  --t-menu: 2.4rem;
+  --t-nav: 1.3rem;
+  --t-body: 1.5rem;
+  --t-bodyLh: 1.6;
+  --t-button: 1.4rem;
+  --t-label: 1.1rem;
+  --t-bar: 1.1rem;
+  --tr-display: -.005em;
+  --ws-display: .06em;
+  --tr-label: .08em;
+  --tr-bar: .03em;
+  --tr-nav: .04em;
+  --s-1: .4rem;
+  --s-2: .8rem;
+  --s-3: 1.2rem;
+  --s-4: 1.6rem;
+  --s-5: 2.4rem;
+  --s-6: 3.2rem;
+  --s-7: 4.8rem;
+  --s-8: 6.4rem;
+  --s-9: 9.6rem;
+  --s-10: 12.8rem;
+  --gutter: 2rem;
+  --cell: 1.6rem;
+  --h-bar: 3.2rem;
+  --h-header: 5.6rem;
+  --h-control: 5.6rem;
+  --h-button: 4.4rem;
+  --h-halftone: 2rem;
+  --r-pill: 4.4rem;
+  --r-chip: 3rem;
+  --r-frame: 0;
+  --e-out: cubic-bezier(.22, 1, .36, 1);
+  --e-ui: ease-in-out;
+  --d-ui: 150ms;
+  --d-nudge: 400ms;
+  --d-breathe: 1000ms;
+  --d-rise: 700ms;
+  --d-reveal: 1100ms;
+  --d-stagger: 90ms;
+  --d-fill: 1200ms;
+  --d-menu: 500ms;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 62.5%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--c-cream); color: var(--c-ink); font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-mono); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, ul, ol, fieldset, legend, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+fieldset { min-width: 0; border: 0; }
+picture { display: contents; }
+img { display: block; width: 100%; height: auto; }
+svg { display: block; }
+a { color: inherit; }
+button, input { margin: 0; font: inherit; color: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none; }
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; margin: -1px !important; padding: 0 !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; border: 0 !important; }
+
+/* ===== Type classes ===== */
+/* Hero headline: V1 light plus heavy caps in one headline, sized off its column (cqi).
+   Longest row "SPACE BACK" is 5.76em in Bio Sans 800, so 17cqi fills about 98% of the column. */
+.a-hero { font: var(--w-heavy) var(--t-hero)/var(--t-heroLh) var(--f-display); letter-spacing: var(--tr-display); word-spacing: var(--ws-display); text-transform: uppercase; color: var(--c-cream); }
+.a-hero__row { display: block; overflow: hidden; padding: .04em 0 .02em; }  /* the mask each row rises out of */
+.a-hero__row.-light { font-weight: var(--w-light); }
+.a-hero__line { display: block; }
+.a-hero__line.-second { --i: 1; }
+.a-lede { max-width: 52ch; font: var(--w-body) var(--t-body)/var(--t-bodyLh) var(--f-mono); color: var(--c-chrome); text-wrap: balance; }   /* balance, not pretty: pretty left "a call." alone at 1100 and 390 */
+/* Mono caps label with FREITAG's square bullet. Used for field names only, never as a section eyebrow. */
+.a-label { display: flex; align-items: center; gap: var(--s-2); font: var(--w-label) var(--t-label)/1.4 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-steel); }
+.a-label::before { content: ""; flex: none; width: .6rem; height: .6rem; background: currentColor; }
+
+/* ===== Container ===== */
+.a-skip { position: absolute; top: -10rem; left: var(--gutter); z-index: 300; display: inline-flex; align-items: center; min-height: var(--h-button); padding: 0 var(--s-5); border-radius: var(--r-pill); background: var(--c-chrome); color: var(--c-ink); font: var(--w-button) var(--t-button)/1 var(--f-mono); text-decoration: none; --c-focus: var(--c-ink); }
+.a-skip:focus { top: var(--s-2); }
+
+/* ===== Reveal system ===== */
+/* Start states exist only when JS runs (.js on html); .is-ready is added once fonts are in, or after 700ms. */
+.js .a-hero__line { transform: translateY(108%); }
+.js .a-reveal { opacity: 0; transform: translateY(1.5rem); }
+.is-ready .a-hero__line { transform: none; transition: transform var(--d-reveal) var(--e-out); transition-delay: calc(150ms + var(--i, 0) * var(--d-stagger)); }
+.is-ready .a-reveal { opacity: 1; transform: none; transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); transition-delay: calc(350ms + var(--i, 0) * var(--d-stagger)); }
+
+/* ===== Atoms: buttons ===== */
+/* V9: pills only, sentence case 14px/600, a small arrow. Fill follows the ground. Hover: the label breathes
+   8px wider each side (1s), the arrow nudges 8px (.4s), a faint top sheen slides in (1s). Press .97. */
+.a-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 2.5rem; overflow: hidden; border: 0; border-radius: var(--r-pill); background: var(--c-chrome); color: var(--c-ink); font: var(--w-button) var(--t-button)/1 var(--f-mono); text-decoration: none; white-space: nowrap; transition: padding var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-button::before { content: ""; position: absolute; inset: 0 0 50% 0; background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, 0)); opacity: 0; pointer-events: none; transition: opacity var(--d-breathe) var(--e-out); }
+.a-button__arrow { width: 1.4rem; height: 1.4rem; flex: none; transition: transform var(--d-nudge) var(--e-out); }
+.a-button.-slate { background: var(--c-slate); color: var(--c-cream); }   /* on cream: cream on slate 9.62:1 */
+.a-button.-ghost { box-shadow: inset 0 0 0 1px var(--c-chromeMid); background: transparent; color: var(--c-cream); }
+.a-button.-block { width: 100%; }
+.a-button:active { transform: scale(.97); }
+/* the breathing label is motion, so it only exists when motion is allowed; pills that fill a fixed slot don't breathe */
+@media (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .a-button:hover { padding: 0 3.3rem; }
+  .a-button.-block:hover, .m-menu__actions .a-button:hover, .m-actionBar .a-button:hover { padding: 0 1.2rem; }
+}
+@media (hover: hover) and (any-pointer: fine) {
+  .a-button:hover::before { opacity: 1; }
+  .a-button:hover .a-button__arrow { transform: translateX(.8rem); }
+}
+.a-button:focus-visible::before { opacity: 1; }
+.a-button:focus-visible .a-button__arrow { transform: translateX(.8rem); }
+
+/* ---- call link: Piece of Cake's text-only secondary, a phone glyph plus words, no fill ---- */
+.a-call { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 4.4rem; color: inherit; font: var(--w-label) 1.3rem/1.3 var(--f-mono); text-decoration: none; }
+.a-call__icon { width: 1.6rem; height: 1.6rem; flex: none; transition: transform var(--d-nudge) var(--e-out); }
+.a-call__text { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.a-call:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-call:hover .a-call__icon { transform: rotate(-12deg); }
+  .a-call:hover .a-call__text { background-size: 0 1px; background-position: 100% 100%; }
+}
+.a-call:focus-visible .a-call__icon { transform: rotate(-12deg); }
+
+/* ---- choice chips: real radios with a visible checked and focus state (Muval's chips had neither) ---- */
+.a-choice { position: relative; display: block; flex: 1 1 0; min-width: 0; cursor: pointer; }
+.a-choice__input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; }
+.a-choice__face { display: flex; align-items: center; justify-content: center; gap: .6rem; height: var(--h-control); padding: 0 .8rem; border: 1px solid var(--c-chipLine); border-radius: var(--r-chip); background: transparent; color: var(--c-slate); font: var(--w-label) 1.3rem/1 var(--f-mono); white-space: nowrap; transition: background-color var(--d-ui) var(--e-ui), border-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.a-choice__glyph { width: 2.2rem; height: 1.4rem; flex: none; }
+.a-choice__glyph rect + rect { fill: currentColor; opacity: .55; }
+.a-choice.-day .a-choice__face { flex-direction: column; gap: .3rem; padding: 0 .4rem; }
+/* phones: four load chips share about 300px at 360, so the glyph sits above the label instead of beside it */
+@media (max-width: 640px) {
+  .a-choice__face { flex-direction: column; gap: .5rem; padding: 0 .4rem; }
+}
+.a-choice__dow { font: var(--w-label) 1rem/1 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; }
+.a-choice__num { font: var(--w-heavy) var(--t-day)/.9 var(--f-display); }
+.a-choice__input:checked + .a-choice__face { border-color: var(--c-slate); background: var(--c-slate); color: var(--c-cream); }
+.a-choice__input:checked + .a-choice__face .a-choice__glyph rect + rect { opacity: 1; }
+.a-choice__input:focus-visible + .a-choice__face { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.a-choice:active .a-choice__face { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .a-choice:hover .a-choice__face { border-color: var(--c-slate); background: rgba(52, 61, 78, .06); }
+  .a-choice:hover .a-choice__input:checked + .a-choice__face { background: var(--c-slate); }
+}
+
+/* ===== Chrome: top bar ===== */
+/* Truewerk's dark mono announcement bar, kept slim. Carries Shawn's own line and the number on every page. */
+.m-topbar { position: relative; z-index: 60; display: flex; align-items: center; justify-content: center; gap: var(--s-5); height: var(--h-bar); padding: 0 var(--gutter); background: var(--c-ink); color: var(--c-chrome); font: var(--w-label) var(--t-bar)/1 var(--f-mono); letter-spacing: var(--tr-bar); text-transform: uppercase; }
+/* Phones: the top bar scrolls away and only the header sticks, so fixed chrome stays near 56px plus the action bar
+   (critic r1: 149 of 844px with all three). The 1px shadow covers the seam a fractional scroll leaves above a sticky bar. */
+.m-topbar__line { margin: 0; white-space: nowrap; }
+.m-topbar__long, .m-topbar__hours { display: none; }
+/* The bar is 32px; the link's hit area reaches 44px with an invisible extension (conventions: 44px targets). */
+.m-topbar__call { position: relative; color: var(--c-cream); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: .2rem; transition: background-size var(--d-nudge) var(--e-out); }
+.m-topbar__call::after { content: ""; position: absolute; inset: -1.4rem -.6rem; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-topbar__call:hover { background-size: 0 1px; background-position: 100% 100%; }
+}
+
+/* ===== Chrome: header ===== */
+/* Truewerk's sticky header, slimmed to 64px. FREITAG's boxed logo cell in the centre, framed by hairlines. */
+.m-header { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--h-header); padding: 0 var(--gutter); border-bottom: 1px solid var(--c-rule); background: var(--c-slate); box-shadow: 0 -1px 0 var(--c-slate); color: var(--c-cream); }
+.m-header__left { display: flex; align-items: center; justify-self: start; }
+.m-header__right { display: flex; align-items: center; gap: var(--s-2); justify-self: end; }
+.m-header__nav { display: none; }
+.m-header__navList { display: flex; gap: 3.2rem; }
+.m-header__link { display: inline-flex; align-items: center; min-height: 4.4rem; font: var(--w-semi) var(--t-nav)/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; text-decoration: none; color: var(--c-cream); background: linear-gradient(currentColor, currentColor) 0 calc(50% + 1.1rem) / 0 1px no-repeat; transition: background-size var(--d-nudge) var(--e-out); }
+.m-header__link[aria-current="page"] { background-size: 100% 1px; }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__link:hover { background-size: 100% 1px; }
+}
+.m-header__link:focus-visible { background-size: 100% 1px; }
+/* Logo: the client's real file, unchanged (assets/images/brand/quickhaul-logo.png, a 736x1600 phone screenshot
+   of a wall mockup). The mark sits at x 259-485, y 682-915 of it (design/scripts/measure_b.py). The tile shows
+   only the mark: --mark is the mark's on-screen height, the ratios below place its centre (372, 798.5) in the
+   tile. Kept to a quarter of native pixels or less so it stays sharp on 2x screens. */
+.m-header__logo { position: relative; display: block; width: 6.4rem; height: var(--h-header); overflow: hidden; border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); --mark: 5rem; }
+.m-header__logoImg { position: absolute; top: calc(50% - var(--mark) * 3.4124); left: calc(50% - var(--mark) * 1.5897); width: calc(var(--mark) * 3.1453); max-width: none; height: auto; -webkit-mask: radial-gradient(circle at 50.54% 49.91%, #000 calc(var(--mark) * .5), transparent calc(var(--mark) * .5 + 1px)); mask: radial-gradient(circle at 50.54% 49.91%, #000 calc(var(--mark) * .5), transparent calc(var(--mark) * .5 + 1px)); }
+.m-header__menuBtn { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.4rem; border: 1px solid var(--c-chromeMid); border-radius: var(--r-pill); background: transparent; color: var(--c-cream); font: var(--w-button) 1.3rem/1 var(--f-mono); transition: border-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__menuIcon { width: 1.6rem; height: 1.6rem; }
+.m-header__menuBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__menuBtn:hover { border-color: var(--c-cream); }
+}
+/* FREITAG icon circle for the call, shown from 641px */
+.m-header__callBtn { display: none; place-items: center; width: 4.4rem; height: 4.4rem; border: 1px solid var(--c-chromeMid); border-radius: 50%; color: var(--c-cream); transition: border-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__callBtn .a-svg { width: 1.6rem; height: 1.6rem; transition: transform var(--d-nudge) var(--e-out); }
+.m-header__callBtn:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-header__callBtn:hover { border-color: var(--c-cream); }
+  .m-header__callBtn:hover .a-svg { transform: rotate(-12deg); }
+}
+/* All three header pieces are 44px. On desktop the pill keeps a fixed width so its hover never pushes the call
+   circle (critic r1); V9's breathing happens inside the box as a wider gap between label and arrow. */
+.m-header__book { min-height: var(--h-button); padding: 0 1.6rem; transition: opacity var(--d-ui) var(--e-ui), visibility 0s, background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+.m-header__book .a-button__arrow { display: none; }
+
+/* ---- menu (phones and tablets) ---- */
+/* Truewerk's mobile menu: a panel inset 8px, big caps rows on hairlines, the nut-shaped (hexagon) close button.
+   Ends with Piece of Cake's two closing pills and the hours. */
+/* The panel is always opaque and wipes down from the top (a clip, not a fade), so the hero never shows through
+   the links (critic r1). The links rise in once it has mostly landed. */
+.m-menu { position: fixed; inset: 0; z-index: 200; background: rgba(15, 20, 28, 0); transition: background-color var(--d-menu) var(--e-out); }
+.m-menu.is-open { background: var(--c-scrim); }
+.m-menu__panel { position: absolute; inset: .8rem; display: flex; flex-direction: column; overflow-y: auto; padding: var(--s-4) var(--s-5) var(--s-6); background: var(--c-cream); color: var(--c-ink); clip-path: inset(0 0 100% 0); transition: clip-path var(--d-menu) var(--e-out); --c-focus: var(--c-ink); overscroll-behavior: contain; }
+.m-menu.is-open .m-menu__panel { clip-path: inset(0 0 0 0); }
+.m-menu__item, .m-menu__actions, .m-menu__hours { opacity: 0; transform: translateY(.8rem); transition: opacity var(--d-rise) var(--e-out), transform var(--d-rise) var(--e-out); }
+.m-menu.is-open .m-menu__item, .m-menu.is-open .m-menu__actions, .m-menu.is-open .m-menu__hours { opacity: 1; transform: none; transition-delay: calc(220ms + var(--i, 0) * 35ms); }
+.m-menu__item:nth-child(2) { --i: 1; }
+.m-menu__item:nth-child(3) { --i: 2; }
+.m-menu__item:nth-child(4) { --i: 3; }
+.m-menu__item:nth-child(5) { --i: 4; }
+.m-menu__item:nth-child(6) { --i: 5; }
+.m-menu__item:nth-child(7) { --i: 6; }
+.m-menu__item:nth-child(8) { --i: 7; }
+.m-menu__actions { --i: 8; }
+.m-menu__hours { --i: 9; }
+.m-menu__top { display: flex; align-items: center; justify-content: space-between; min-height: 5.6rem; margin: 0 0 var(--s-4); }
+.m-menu__close { display: grid; place-items: center; width: 4.4rem; height: 4.8rem; padding: 0; border: 0; background: transparent; color: var(--c-cream); transition: transform var(--d-ui) var(--e-ui); }
+.m-menu__hex { width: 4rem; height: 4.4rem; }
+.m-menu__close:active { transform: scale(.97); }
+/* the real mark in its own slate cell, the header logo cell at phone size, in place of a text title */
+.m-menu__logo { width: 6.4rem; height: 5.6rem; border: 0; --mark: 5rem; --c-focus: var(--c-ink); }
+.m-menu__list { border-top: 1px solid var(--c-ruleLight); }
+.m-menu__item { border-bottom: 1px solid var(--c-ruleLight); }
+.m-menu__link { display: flex; align-items: center; justify-content: space-between; min-height: 5.7rem; font: var(--w-heavy) var(--t-menu)/1 var(--f-display); text-transform: uppercase; word-spacing: var(--ws-display); text-decoration: none; color: var(--c-ink); }
+.m-menu__link .a-svg { width: 1.8rem; height: 1.8rem; color: var(--c-steel); transition: transform var(--d-nudge) var(--e-out); }
+@media (hover: hover) and (any-pointer: fine) {
+  .m-menu__link:hover .a-svg { transform: translateX(.6rem); }
+}
+.m-menu__link:focus-visible .a-svg { transform: translateX(.6rem); }
+.m-menu__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); margin: var(--s-6) 0 0; }
+.m-menu__actions .a-button { padding: 0 1.2rem; }
+.m-menu__call { box-shadow: inset 0 0 0 1px var(--c-slate); background: transparent; color: var(--c-slate); }
+.m-menu__hours { margin: var(--s-3) 0 0; font: var(--w-label) var(--t-label)/1.5 var(--f-mono); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-steel); }
+
+/* ---- action bar (phones): Book and Call in thumb reach once the hero ticket has scrolled away ---- */
+.m-actionBar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--s-2); padding: var(--s-2) var(--gutter) calc(var(--s-2) + env(safe-area-inset-bottom)); border-top: 1px solid var(--c-rule); background: var(--c-ink); transform: translateY(100%); visibility: hidden; transition: transform var(--d-menu) var(--e-out), visibility 0s linear var(--d-menu); }
+.m-actionBar.is-shown { transform: none; visibility: visible; transition: transform var(--d-menu) var(--e-out), visibility 0s; }
+.m-actionBar .a-button { padding: 0 1.2rem; }
+
+/* ===== Home: hero ===== */
+/* Truewerk's banner, rebuilt live: slate field, speck grain, chrome hazard edge, registration hairlines, and
+   off-white slats cut into the bottom edge in the colour of the ticket below. On Truewerk all of it is one image. */
+.o-homeHero { position: relative; isolation: isolate; overflow: hidden; padding: var(--s-7) var(--gutter) var(--s-8); background: var(--c-slate); color: var(--c-cream); }
+/* speck grain (assets/fx/grain.svg), fading toward the bottom as Truewerk's does */
+.o-homeHero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("fx/grain.svg") 0 0 / 26rem 26rem; opacity: .45; -webkit-mask: linear-gradient(#000, rgba(0, 0, 0, .35)); mask: linear-gradient(#000, rgba(0, 0, 0, .35)); pointer-events: none; }
+/* FREITAG frame lines at the page margins, continuing the ticket's outer rules up to the header */
+.o-homeHero::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter); z-index: -1; border-left: 1px solid var(--c-rule); border-right: 1px solid var(--c-rule); pointer-events: none; }
+.o-homeHero__stripe { display: none; }
+.o-homeHero__mark { position: absolute; top: -.6rem; width: 1.3rem; height: 1.3rem; pointer-events: none; }
+.o-homeHero__mark::before, .o-homeHero__mark::after { content: ""; position: absolute; background: var(--c-chromeMid); }
+.o-homeHero__mark::before { left: .6rem; top: 0; width: 1px; height: 100%; }
+.o-homeHero__mark::after { top: .6rem; left: 0; width: 100%; height: 1px; }
+.o-homeHero__mark.-left { left: calc(var(--gutter) - .6rem); }
+.o-homeHero__mark.-right { right: calc(var(--gutter) - .7rem); }
+.o-homeHero__copy { position: relative; z-index: 2; container-type: inline-size; padding: 0 var(--cell); }
+.o-homeHero__lede { margin: var(--s-5) 0 0; }
+.o-homeHero__art { position: relative; z-index: 1; width: calc(100% + var(--gutter)); margin: var(--s-6) calc(var(--gutter) * -1) 0 0; padding-left: var(--cell); }
+/* slats: Truewerk 390 values (16px tall, 56 wide, pitch 72, from 28% across, 28-29 degree lean), in vw */
+.o-homeHero__slats { position: absolute; left: 28%; right: -20vw; bottom: 0; height: 4.1vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 14.36vw, transparent 14.36vw 18.46vw); transform: skewX(29deg); transform-origin: 0 100%; pointer-events: none; }
+
+/* ---- truck bed drawing: a custom illustration from the logo's own loaded truck, in place of footage ---- */
+/* The load inside the bed rises to the size picked in the ticket. 148 is the bed's inner height in SVG units. */
+/* Strokes in bright chrome at 75% (about 5:1 on slate) rather than mid chrome (2.95:1): critic r1 found the drawing
+   too faint to share the hero with the headline. Hairlines and the ground line stay at --c-rule. */
+.m-truck { display: block; width: 100%; height: auto; overflow: visible; color: var(--c-chrome); --load: .125; }
+.m-truck__line { fill: none; stroke: currentColor; stroke-opacity: .75; stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.m-truck__line.-soft { stroke: var(--c-rule); }
+.m-truck__heap { fill: url(#qh-dots); }
+.m-truck__heapEdge { fill: none; stroke: var(--c-chrome); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.m-truck__dots { fill: var(--c-chrome); }
+.m-truck__load { transform: translateY(calc((1 - var(--load)) * 148px)); transition: transform var(--d-fill) var(--e-out); }
+.m-truck__level { stroke: var(--c-chrome); stroke-width: 1.25; stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }
+/* 17 SVG units: about 14px at 1440 (drawing 600 wide) and 11px at 1100 (462 wide), never under the 11px label size */
+.m-truck__gauge { font: var(--w-label) 17px/1 var(--f-mono); letter-spacing: .04em; fill: var(--c-chrome); }
+.m-truck__tick { stroke: var(--c-chrome); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.js .m-truck { --load: 0; }
+.js .m-truck__body, .js .m-truck__load { opacity: 0; }
+.is-ready .m-truck__body { opacity: 1; transition: opacity 900ms var(--e-out) 500ms; }
+.is-ready .m-truck__load { opacity: 1; transition: opacity 900ms var(--e-out) 500ms, transform var(--d-fill) var(--e-out); }
+
+/* ===== Home: ticket ===== */
+/* The work order: four facts and the booking, as one ruled strip on cream (FREITAG's 0.8px ruled sheet).
+   It grows out of Truewerk's strip under the hero; the slats above bite into the hero from it. */
+.o-homeTicket { position: relative; padding: 0 var(--gutter); background: var(--c-cream); color: var(--c-ink); --c-focus: var(--c-ink); }
+.o-homeTicket__form { display: grid; grid-template-columns: 1fr; border-left: 1px solid var(--c-ruleLight); border-right: 1px solid var(--c-ruleLight); }
+.o-homeTicket__cell { min-width: 0; padding: var(--cell); border-bottom: 1px solid var(--c-ruleLight); }
+.o-homeTicket__cell .a-label { margin: 0 0 var(--s-3); }
+.o-homeTicket__cell .a-label.-legend { float: left; width: 100%; }   /* a floated legend sits inside the cell like the town label, not on its border */
+.o-homeTicket__row { display: flex; gap: .6rem; clear: both; }
+/* town field: an underline field set in the display face, like writing on the ticket */
+.o-homeTicket__town { display: block; width: 100%; height: var(--h-control); padding: 0; border: 0; border-bottom: 1px solid var(--c-slate); border-radius: 0; background: transparent; color: var(--c-ink); font: var(--w-semi) 2.2rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .01em; transition: border-color var(--d-ui) var(--e-ui); }
+.o-homeTicket__town::placeholder { color: var(--c-steel); font-weight: var(--w-light); opacity: 1; }   /* light, so the hint never reads as an entered town */
+.o-homeTicket__town:focus-visible { outline-offset: 4px; }
+/* town suggestions: our own listbox in the ticket's ruling, replacing the browser's datalist popup (critic r1) */
+.o-homeTicket__combo { position: relative; }
+.o-homeTicket__options { position: absolute; top: 100%; left: 0; right: 0; z-index: 20; max-height: 26.4rem; overflow-y: auto; border: 1px solid var(--c-slate); border-top: 0; background: var(--c-cream); overscroll-behavior: contain; }
+.o-homeTicket__option { display: flex; align-items: center; min-height: 4.4rem; padding: 0 var(--s-4); border-bottom: 1px solid var(--c-ruleLight); color: var(--c-ink); font: var(--w-semi) 1.5rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em; cursor: pointer; transition: background-color var(--d-ui) var(--e-ui); }
+.o-homeTicket__option[hidden] { display: none; }   /* must beat the display: flex above; the global [hidden] rule ties and loses on order */
+.o-homeTicket__option:last-child { border-bottom: 0; }
+.o-homeTicket__option[aria-selected="true"] { background: var(--c-slate); color: var(--c-cream); }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-homeTicket__option:hover { background: rgba(52, 61, 78, .08); }
+  .o-homeTicket__option[aria-selected="true"]:hover { background: var(--c-slate); }
+}
+.o-homeTicket__note { min-height: 3.6rem; text-wrap: balance; margin: var(--s-2) 0 0; font: var(--w-body) 1.2rem/1.5 var(--f-mono); color: var(--c-steel); }
+.o-homeTicket__note a { color: var(--c-ink); font-weight: var(--w-button); }
+.o-homeTicket__more { display: inline-flex; align-items: center; min-height: 4.4rem; margin: 0; font: var(--w-label) 1.2rem/1 var(--f-mono); color: var(--c-steel); text-decoration: underline; text-underline-offset: .3rem; }
+.o-homeTicket__price { display: flex; align-items: baseline; gap: var(--s-3); }
+.o-homeTicket__figure { font: var(--w-heavy) var(--t-price)/1 var(--f-display); letter-spacing: -.01em; color: var(--c-ink); }
+.o-homeTicket__unit { font: var(--w-body) 1.2rem/1.4 var(--f-mono); color: var(--c-steel); text-wrap: balance; }
+.o-homeTicket__cell.-price { display: grid; grid-template-columns: auto 1fr; align-items: end; align-content: start; gap: 0 var(--s-4); }
+.o-homeTicket__cell.-price .a-label { grid-column: 1 / -1; }
+.o-homeTicket__cell.-action { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: var(--s-1); }
+.o-homeTicket__cell.-action .a-call { color: var(--c-ink); }
+.o-homeTicket__cell:nth-child(1) { --i: 2; }
+.o-homeTicket__cell:nth-child(2) { --i: 3; }
+.o-homeTicket__cell:nth-child(3) { --i: 4; }
+.o-homeTicket__cell:nth-child(4) { --i: 5; }
+.o-homeTicket__cell:nth-child(5) { --i: 6; }
+.m-truck__gaugeSet { display: none; }   /* below 1025 the labels would be under 9px, so the whole gauge goes with them */
+
+/* halftone: Truewerk's band, rebuilt as two offset dot grids (5.5px pitch) that thin downward */
+.a-halftone { height: var(--h-halftone); background: radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 0 0 / 5.5px 5.6px, radial-gradient(circle, var(--c-ink) 0 1.4px, transparent 1.7px) 2.75px 2.8px / 5.5px 5.6px, var(--c-cream); -webkit-mask: linear-gradient(#000, rgba(0, 0, 0, .55)); mask: linear-gradient(#000, rgba(0, 0, 0, .55)); }
+
+/* ===== Breakpoint: 641px (large phones and tablets) ===== */
+@media (min-width: 641px) {
+  :root { --gutter: 3.2rem; --cell: 2rem; --t-hero: min(9.6rem, 17cqi); }   /* capped: at 1024 the full-width column made it 115px, above the 104px at 1440 */
+  .m-topbar { position: sticky; top: 0; justify-content: space-between; box-shadow: 0 -1px 0 var(--c-ink); }
+  .m-header { top: var(--h-bar); }
+  .m-topbar__short { display: none; }
+  .m-topbar__long, .m-topbar__hours { display: inline; }
+  .m-header__callBtn { display: grid; }
+  .m-header__book .a-button__arrow { display: block; }
+  .m-header__logo { width: 7.6rem; }
+  .o-homeHero__stripe { position: absolute; top: 0; left: 0; display: block; width: max(1.2rem, 1.75vw); height: 52%; background: repeating-linear-gradient(151deg, var(--c-chrome) 0 3.26vw, transparent 3.26vw 4.17vw); }
+  .o-homeHero__art { width: min(100%, 60rem); margin-left: auto; margin-right: 0; }
+  .o-homeTicket__form { grid-template-columns: 1fr 1fr; }
+  .o-homeTicket__cell { border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell:nth-child(2n) { border-right: 0; }
+  .o-homeTicket__cell.-action { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: flex-start; gap: var(--s-5); border-right: 0; }
+  .o-homeTicket__cell.-action .a-button { flex: 0 1 26rem; }
+  .m-actionBar { display: none; }
+}
+
+/* ===== Breakpoint: 1025px (desktop, designed at 1440) ===== */
+@media (min-width: 1025px) {
+  :root { --t-hero: min(12rem, 17cqi); --gutter: 4.8rem; --cell: 2.4rem; --h-header: 6rem; --t-body: 1.6rem; --t-bodyLh: 1.625; --t-bar: 1.2rem; --t-price: 4.8rem; --h-halftone: 4rem; }
+  .m-header__nav { display: block; }
+  .m-header__menuBtn { display: none; }
+  .m-header__logo { width: 8.8rem; --mark: 5.6rem; }
+  .m-header__book { width: 15.6rem; padding: 0; transition: gap var(--d-breathe) var(--e-out), background-color var(--d-ui) var(--e-ui), transform var(--d-ui) var(--e-ui); }
+  /* Hero at 1440: a 480px banner (Truewerk 515), copy left, drawing right on the same ground line */
+  .o-homeHero { min-height: 48rem; padding: 7.2rem var(--gutter) 9.6rem; }
+  /* The copy column stops short of the drawing's left edge at every desktop width: the drawing starts at
+     58vw - 48px, so half the viewport keeps a clear gap from 1025 up (it collided below 1303 at a fixed 660). */
+  .o-homeHero__copy { width: min(66rem, calc(50vw - var(--gutter))); }
+  .o-homeHero__art { position: absolute; right: var(--gutter); bottom: 4.8rem; width: min(60rem, 42vw); margin: 0; padding: 0; }
+  /* slats: Truewerk 1440 values (29px tall, 164 wide, pitch 210.6, from 43% across) */
+  .o-homeHero__slats { left: 43%; height: 2.01vw; background: repeating-linear-gradient(90deg, var(--c-cream) 0 11.39vw, transparent 11.39vw 14.63vw); }
+  /* The work order is one ruled row of five cells at every desktop width, so the price and Book now stay on the
+     first screen at 1366x768 and 1100x800 (critic r2; the earlier 3 + 2 split pushed them below the fold). */
+  .o-homeTicket__form { grid-template-columns: 1.15fr 1.6fr 1fr .8fr 1.05fr; }
+  .o-homeTicket__cell { border-bottom: 0; border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell:nth-child(2n) { border-right: 1px solid var(--c-ruleLight); }
+  .o-homeTicket__cell.-action { grid-column: auto; flex-direction: column; align-items: stretch; justify-content: center; gap: var(--s-1); border-right: 0; }
+  .o-homeTicket__cell.-action .a-button { flex: none; }
+  .o-homeTicket__cell.-price { display: block; }
+  .o-homeTicket__price { flex-direction: column; gap: var(--s-1); }
+  .m-truck__gaugeSet { display: inline; }
+}
+/* 1025 to 1366: the same row, tightened. Cells drop to 16px padding, load chips stack the glyph over the label
+   (as on phones), the figure steps down to 40px, the call line to 12px and the town field to 20px.
+   Fitted at 1100: load chips 51px wide, call line 182px in a 191px cell. Written as a min-width step with the
+   1440 values restored at 1367, because a max-width: 1366px query missed a 1366 window with a fractional width. */
+@media (min-width: 1025px) {
+  :root { --cell: 1.6rem; --t-price: 4rem; }
+  .o-homeTicket__form { grid-template-columns: 1fr 1.45fr .95fr .8fr 1.2fr; }
+  .o-homeTicket__cell .a-choice__face { flex-direction: column; gap: .5rem; padding: 0 .4rem; }
+  .o-homeTicket__town { font-size: 2rem; }
+  .o-homeTicket__cell.-action .a-call { font-size: 1.2rem; }
+}
+@media (min-width: 1367px) {
+  :root { --cell: 2.4rem; --t-price: 4.8rem; }
+  .o-homeTicket__form { grid-template-columns: 1.15fr 1.6fr 1fr .8fr 1.05fr; }
+  .o-homeTicket__cell .a-choice__face { flex-direction: row; gap: .6rem; padding: 0 .8rem; }
+  .o-homeTicket__cell .a-choice.-day .a-choice__face { flex-direction: column; gap: .3rem; padding: 0 .4rem; }
+  .o-homeTicket__town { font-size: 2.2rem; }
+  .o-homeTicket__cell.-action .a-call { font-size: 1.3rem; }
+}
+@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .m-header__book:hover { gap: 1.6rem; padding: 0; }
+}
+@media (min-width: 1441px) {
+  html { font-size: min(.6944vw, 13.33px); }   /* the 1440 layout scales evenly up to 1920 wide, then holds */
+}
+
+/* ===== Reduced motion ===== */
+/* Content shows at once and nothing moves: no row reveals, no rises, no fill, no menu slide, no breathing pills. */
+@media (prefers-reduced-motion: reduce) {
+  .js .a-hero__line, .is-ready .a-hero__line, .js .a-reveal, .is-ready .a-reveal { opacity: 1; transform: none; transition: none; }
+  .js .m-truck__body, .is-ready .m-truck__body, .js .m-truck__load, .is-ready .m-truck__load { opacity: 1; transition: none; }
+  .m-truck__load, .m-menu, .m-menu__panel, .m-actionBar, .m-actionBar.is-shown, .o-homeTicket__option { transition: none; }
+  .m-menu__item, .m-menu__actions, .m-menu__hours, .m-menu.is-open .m-menu__item, .m-menu.is-open .m-menu__actions, .m-menu.is-open .m-menu__hours { opacity: 1; transform: none; transition: none; }
+  .a-button, .a-button::before, .a-button__arrow, .a-call__icon, .a-call__text, .a-choice__face,
+  .m-header__link, .m-header__menuBtn, .m-header__callBtn, .m-header__callBtn .a-svg, .m-topbar__call, .m-menu__link .a-svg { transition: none; }
+}

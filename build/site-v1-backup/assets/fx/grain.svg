@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 260 260">
+  <!-- Quick Haul: speck grain for flat slate grounds. Live rebuild of the printed-speck texture measured on
+       Truewerk's hero (references/deconstruct/truewerk.md, technique 4). Only the brightest noise survives the
+       alpha threshold, so it reads as scattered specks, not a grey wash. -->
+  <filter id="speck" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".78" numOctaves="2" seed="7" stitchTiles="stitch"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  7 0 0 0 -4.55"/>
+  </filter>
+  <rect width="260" height="260" filter="url(#speck)"/>
+</svg>

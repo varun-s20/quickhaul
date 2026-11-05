@@ -1,0 +1,158 @@
+<!-- meta
+title: Contact Quick Haul | Junk Removal Quotes in MA and NH
+description: Call, email or send us a quick request for a junk removal or demo price. Quick Haul works towns across Massachusetts and New Hampshire, Mon to Sat.
+og_image: assets/images/services/pickup-trash-bags.jpg
+og_image_alt: A white pickup truck piled high with black trash bags
+schema: contact.json
+preload: assets/fonts/biosans-extrabold.otf, assets/fonts/robotomono-latin.woff2
+-->
+<div class="t-contact">
+
+<!-- ===== Contact: inner banner ===== -->
+<section class="m-banner" aria-labelledby="page-title">
+  {{> banner-art}}
+  <div class="m-banner__copy">
+    <h1 class="a-hero" id="page-title">
+      <span class="a-hero__row -light"><span class="a-hero__line">Call, book</span></span>
+      <span class="a-hero__row"><span class="a-hero__line -second">or ask</span></span>
+    </h1>
+    <p class="a-lede m-banner__lede a-reveal">The fastest way to a price is a call. If you'd rather write it down, send us a request and we'll get back to you.</p>
+  </div>
+</section>
+
+<!-- ===== Contact: the split band. The cells first, because the lede says the fastest way to a price is a call: the number is the loudest thing after the h1, and at 390 it comes before the map. The map is our own drawing of placeholder towns: the brief's Google Map waits for the real base town (content/placeholders.md) ===== -->
+<section class="b-band -flush" aria-label="How to reach us">
+  <div class="b-band__inner o-split -flip">
+    <div class="o-contactCells" data-stagger>
+      <div class="m-contactCell a-inview">
+        <h2 class="a-label">Phone</h2>
+        <div>
+          <a class="m-contactCell__value -phone" href="tel:+16035550142">(603) 555-0142</a>
+          <p class="m-contactCell__line">Need help booking or have questions? Give us a call.</p>
+        </div>
+      </div>
+      <div class="m-contactCell a-inview">
+        <h2 class="a-label">Email</h2>
+        <div>
+          <a class="m-contactCell__value" href="mailto:quickhaul@example.com">quickhaul@example.com</a>
+        </div>
+      </div>
+      <div class="m-contactCell a-inview">
+        <h2 class="a-label">Hours</h2>
+        <div>
+          <p class="m-contactCell__value">Mon to Sat, 7am to 7pm</p>
+          <p class="m-contactCell__line">Closed Sundays.</p>
+        </div>
+      </div>
+      <div class="m-contactCell a-inview">
+        <h2 class="a-label">Where we go</h2>
+        <div>
+          <p class="m-contactCell__value">Towns across Massachusetts and New Hampshire</p>
+          <a class="a-link" href="service-area.html"><span class="a-link__text">See the full list</span><svg class="a-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="o-split__media a-inview">
+    {{> town-map}}
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact: the quote request, in the ticket's ruling. Four fields in a row like the homepage ticket's cells, then the job and the way back on the sheet's centre rule. Field names are listed in site/README.md ===== -->
+<section class="b-band -flush -ruled" aria-labelledby="ask-title">
+  <div class="b-band__inner">
+    <div class="o-contactForm__head a-inview" data-request-head>
+      <div class="m-sectionHead o-contactForm__title"><h2 class="a-section" id="ask-title"><span class="a-section__row -light">Ask for</span> <span class="a-section__row">a price</span></h2></div>
+      <div class="o-contactForm__art">
+        {{> contact-art}}
+      </div>
+    </div>
+
+    <form action="#" method="post" novalidate data-request>
+      <div class="o-contactForm__grid a-inview">
+
+        <div class="m-field o-contactForm__cell">
+          <label class="a-label" for="contact-name">Your name</label>
+          <input class="m-field__input" id="contact-name" name="name" type="text" autocomplete="name" aria-describedby="contact-name-error" data-required data-error="Add your name">
+          <p class="m-field__error" id="contact-name-error" hidden></p>
+        </div>
+        <div class="m-field o-contactForm__cell">
+          <label class="a-label" for="contact-phone">Phone</label>
+          <input class="m-field__input" id="contact-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="contact-phone-error" data-either="contact-email" data-error="Add a phone number or email so we can reach you">
+          <p class="m-field__error" id="contact-phone-error" hidden></p>
+        </div>
+        <div class="m-field o-contactForm__cell">
+          <label class="a-label" for="contact-email">Email</label>
+          <input class="m-field__input" id="contact-email" name="email" type="email" autocomplete="email" aria-describedby="contact-email-error" data-email data-error="That email doesn't look right">
+          <p class="m-field__error" id="contact-email-error" hidden></p>
+        </div>
+        <div class="m-field o-contactForm__cell">
+          <label class="a-label" for="contact-town">Your town</label>
+          <input class="m-field__input" id="contact-town" name="town" type="text" autocomplete="address-level2">
+        </div>
+
+        <div class="o-contactForm__cell -half o-contactForm__job">
+          <div class="m-field o-contactForm__jobField">
+            <label class="a-label" for="contact-job">What do you need gone</label>
+            <textarea class="m-field__input -area" id="contact-job" name="job" rows="5" placeholder="For example: clearing out a two-car garage, or one old fridge in the basement" aria-describedby="contact-job-error" data-required data-error="Tell us a little about the job"></textarea>
+            <p class="m-field__error" id="contact-job-error" hidden></p>
+          </div>
+          <!-- photos only with a backend: no file input without one (conventions). The button and error words are Book's approved ones; copy.md gives Contact only the label and helper -->
+          <div class="m-field" hidden data-needs-endpoint>
+            <span class="a-label" id="contact-photos-label">Add photos (optional)</span>
+            <label class="m-upload"><input class="m-upload__input" type="file" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="contact-photos-label" aria-describedby="contact-photos-note" data-upload><span class="m-upload__face">Choose photos</span></label>
+            <ul class="m-upload__files" aria-live="polite" hidden data-upload-files></ul>
+            <p class="m-field__note" id="contact-photos-note" data-upload-note data-error="That file didn't upload. Try a JPG or PNG photo.">Photos help us give you a real price instead of a guess.</p>
+          </div>
+        </div>
+
+        <div class="o-contactForm__cell -half o-contactForm__send">
+          <fieldset class="m-field">
+            <legend class="a-label -legend">How should we get back to you</legend>
+            <div class="o-contactForm__chips">
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="reply" value="Call"><span class="a-choice__face">Call</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="reply" value="Text"><span class="a-choice__face">Text</span></label>
+              <label class="a-choice"><input class="a-choice__input" type="radio" name="reply" value="Email"><span class="a-choice__face">Email</span></label>
+            </div>
+          </fieldset>
+          <div class="o-contactForm__foot">
+            <p class="m-field__small">We only use your details to answer your request. <a class="a-textLink" href="privacy.html">Read our privacy policy.</a></p>
+            <button class="a-button -slate -block" type="submit" data-bar-clear>Send my request<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- no endpoint, or it failed: the form stays filled and the phone is offered, set as the way out, not the headline (critic r1). copy.md gives Contact no failure copy, so this reuses Book's approved headline and the global call line -->
+      <div class="o-contactForm__state" tabindex="-1" role="alert" hidden data-request-failed>
+        <h3 class="o-contactForm__stateTitle"><span class="o-contactForm__stateLight">Something</span> went wrong</h3>
+        <div>
+          <p class="m-contactCell__line">Need help booking or have questions? Give us a call</p>
+          <a class="m-contactCell__value -phone" href="tel:+16035550142">(603) 555-0142</a>
+        </div>
+      </div>
+    </form>
+
+    <!-- copy.md's words in its order; "Got it" takes the headline's place without its full stop, and the number closes the row -->
+    <div class="o-contactForm__state" tabindex="-1" role="status" hidden data-request-done>
+      <h3 class="o-contactForm__stateTitle"><span class="o-contactForm__stateLight">Got</span> it</h3>
+      <div>
+        <p class="m-contactCell__line">We'll get back to you with a price soon. Need it faster? Call</p>
+        <a class="m-contactCell__value -phone" href="tel:+16035550142">(603) 555-0142</a>
+      </div>
+    </div>
+
+    <!-- ---- commercial: a ruled cell under the form ---- -->
+    <div class="o-contactCommercial a-inview">
+      <div>
+        <h2 class="o-contactCommercial__label">Landlords, realtors and property managers</h2>
+        <p class="a-body">Turnovers, move-outs and regular pickups have their own form.</p>
+      </div>
+      <div class="o-contactCommercial__link">
+        <a class="a-button -line" href="commercial.html">Send a commercial enquiry<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>

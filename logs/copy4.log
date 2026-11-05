@@ -1,0 +1,59 @@
+The expansion copy is written and staged in `content/copy-v4.md`, with the per-page change list in `content/copy-v4-changes.md`. It covers every page, the new Pricing page, the nav, the footer and the phone menu. `content/copy.md` and `site/` weren't edited, so batch c isn't affected. New values are logged in `content/placeholders.md`, and `review-log.md` has its line.
+
+| Page | v3 words | v4 words | Change |
+|---|---|---|---|
+| Home | 481 | 533 | +11% |
+| Services | 512 | 873 | +71% |
+| Pricing (new) | 113 as a Services section | 673 | new page |
+| Reviews | 222 | 367 | +65% |
+| Donate | 164 | 275 | +68% |
+| About | 175 | 530 | 3 sections to 8 |
+| FAQ | 354 | 557 | 17 questions |
+| Contact | 120 | 196 | +63% |
+| Service area hub | 74 | 127 | +72% |
+| Town pages | 132 | 217 | +64% |
+| Commercial | 88 | 144 | +64% |
+
+Book gains one link and is otherwise unchanged, since it wasn't on the list. 404 and Privacy have small additions. Counts are by hand, so the Developer's browser count is the real one.
+
+**My calls, for Varun to overrule** (all ten are in the changes file):
+- **About heading:** the banner now reads "Hi, we're Quick Haul", so "About Quick Haul" isn't said twice in a row. The undo is written in the file.
+- **Home:** it gets one new slim section, "Who's showing up". It can be dropped, which leaves Home at 501 words.
+- **Phone menu:** the five nav links, then a smaller group of Service area, FAQ and Contact. With Towns gone from the header, a phone visitor would otherwise have to scroll to the footer to check their town.
+- **Over target:** Services and the hub run slightly past +70%, and FAQ has 17 questions rather than 16.
+- **Invented numbers:** the $30 fridge fee and the pickup-bed sizes (one, two, four and eight beds) are placeholders I made up for the worked examples.
+- **Invented story:** the About origin line, "It started with a truck, a phone and people who needed something gone", is a guess at his story. It has no year or place in it and is logged as must-confirm.
+
+**Left out because Shawn's material doesn't cover it:**
+- **His story and crew:** no start year, background, crew names or headcount.
+- **Donations:** no named charities, and nothing on whether donating changes the price.
+- **Trust and speed:** licensed, insured and guarantee stay on hold, and there are no real reviews, ratings or response-time promises.
+- **Pricing and policy:** no change or cancel rules, no truck dimensions, and no dollar figure for heavy loads or hard carries.
+- **Demo and disposal:** nothing on who handles demo permits or where junk goes after the drop-off.
+- **Town pages:** no local detail on any of them.
+
+**Not checked:**
+- **Proposal PDF:** still unreadable here (no poppler, and the viewer refused the local file). Its terms come from the quotes in `brief.md`.
+- **Browser:** nothing has been seen in one, so the longer banner lines need rechecking against the trucks.
+- **General facts:** the disposal and demo rules come from search results, not full source pages. Check New Hampshire's yard waste wording first. I found nothing on New Hampshire demo rules, so that line stays general.
+
+This is a good checkpoint. Suggested commit message: `quickhaul: stage copy v4 with Pricing page and expanded inner pages`
+
+Sources:
+- [MassDEP waste ban release](https://www.mass.gov/news/new-waste-disposal-ban-regulations-take-effect-today)
+- [Somerville on the mattress and textile ban](https://somervillema.gov/news/massachusetts-expands-waste-disposal-ban-include-mattresses-textiles)
+- [NH RSA 149-M:27](https://gc.nh.gov/rsa/html/X/149-M/149-M-27.htm)
+- [NHDES on leaf and yard waste](https://des.nh.gov/blog/september-2021-leave-your-leaves-and-let-them-feed-your-soil)
+- [MassDEP waste bans](https://mass.gov/eea/agencies/massdep/recycle/solid/massachusetts-waste-disposal-bans.html)
+- [EPA appliance disposal](https://www.epa.gov/section608/appliance-disposal)
+- [Somersworth NH hazardous waste](https://www.somersworthnh.gov/node/86791)
+- [Dunstable MA hazardous waste day](https://www.dunstable-ma.gov/home/events/50141)
+- [Dedham MA hazardous waste](https://www.dedhamma.gov/town-departments/health/household-hazardous-waste)
+- [Danvers bulky pickup](https://www.danversma.gov/379/Bulky-Item-Pickup)
+- [Wakefield bulky items](https://www.wakefieldma.gov/428/Bulky-Items-TVs-White-Goods)
+- [Merrimac bulk items](https://townofmerrimac.com/273/Bulk-Items)
+- [Lowell curbside collection](https://lowellma.gov/1358/Curbside-Collection)
+- [MassDEP asbestos survey guide](https://www.mass.gov/doc/asbestos-survey-requirements-prior-to-demolition-or-renovation-information-guide/download)
+- [Westford MA demolition permits](https://westfordma.gov/216/Building-Demolition-Permit-Requirements)
+- [1-800-GOT-JUNK pricing](https://www.1800gotjunk.com/us_en/pricing)
+- [LawnStarter cost guide](https://www.lawnstarter.com/blog/cost/junk-removal-price/)

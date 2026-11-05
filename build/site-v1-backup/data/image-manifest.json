@@ -1,0 +1,754 @@
+{
+ "pickup-trash-bags": {
+  "folder": "services",
+  "crop": [
+   1452,
+   1452
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/pickup-trash-bags-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-700.webp",
+    "w": 700,
+    "h": 700
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-1000.webp",
+    "w": 1000,
+    "h": 1000
+   },
+   {
+    "file": "assets/images/services/pickup-trash-bags-1300.webp",
+    "w": 1300,
+    "h": 1300
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/pickup-trash-bags.jpg",
+   "w": 1000,
+   "h": 1000
+  }
+ },
+ "basement-cleared": {
+  "folder": "services",
+  "crop": [
+   3000,
+   1442
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/basement-cleared-400.webp",
+    "w": 400,
+    "h": 192
+   },
+   {
+    "file": "assets/images/services/basement-cleared-700.webp",
+    "w": 700,
+    "h": 336
+   },
+   {
+    "file": "assets/images/services/basement-cleared-1000.webp",
+    "w": 1000,
+    "h": 481
+   },
+   {
+    "file": "assets/images/services/basement-cleared-1300.webp",
+    "w": 1300,
+    "h": 625
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/basement-cleared.jpg",
+   "w": 1000,
+   "h": 481
+  }
+ },
+ "renovation-tearout": {
+  "folder": "services",
+  "crop": [
+   2143,
+   1030
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/renovation-tearout-400.webp",
+    "w": 400,
+    "h": 192
+   },
+   {
+    "file": "assets/images/services/renovation-tearout-700.webp",
+    "w": 700,
+    "h": 336
+   },
+   {
+    "file": "assets/images/services/renovation-tearout-1000.webp",
+    "w": 1000,
+    "h": 481
+   },
+   {
+    "file": "assets/images/services/renovation-tearout-1300.webp",
+    "w": 1300,
+    "h": 625
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/renovation-tearout.jpg",
+   "w": 1000,
+   "h": 481
+  }
+ },
+ "sofa-by-door": {
+  "folder": "services",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/sofa-by-door-300.webp",
+    "w": 300,
+    "h": 300
+   },
+   {
+    "file": "assets/images/services/sofa-by-door-500.webp",
+    "w": 500,
+    "h": 500
+   },
+   {
+    "file": "assets/images/services/sofa-by-door-700.webp",
+    "w": 700,
+    "h": 700
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/sofa-by-door.jpg",
+   "w": 700,
+   "h": 700
+  }
+ },
+ "fridge-in-room": {
+  "folder": "services",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/fridge-in-room-300.webp",
+    "w": 300,
+    "h": 300
+   },
+   {
+    "file": "assets/images/services/fridge-in-room-500.webp",
+    "w": 500,
+    "h": 500
+   },
+   {
+    "file": "assets/images/services/fridge-in-room-700.webp",
+    "w": 700,
+    "h": 700
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/fridge-in-room.jpg",
+   "w": 700,
+   "h": 700
+  }
+ },
+ "mattress-at-curb": {
+  "folder": "services",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/mattress-at-curb-300.webp",
+    "w": 300,
+    "h": 300
+   },
+   {
+    "file": "assets/images/services/mattress-at-curb-500.webp",
+    "w": 500,
+    "h": 500
+   },
+   {
+    "file": "assets/images/services/mattress-at-curb-700.webp",
+    "w": 700,
+    "h": 700
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/mattress-at-curb.jpg",
+   "w": 700,
+   "h": 700
+  }
+ },
+ "yard-waste-truck": {
+  "folder": "services",
+  "crop": [
+   1600,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services/yard-waste-truck-300.webp",
+    "w": 300,
+    "h": 300
+   },
+   {
+    "file": "assets/images/services/yard-waste-truck-500.webp",
+    "w": 500,
+    "h": 500
+   },
+   {
+    "file": "assets/images/services/yard-waste-truck-700.webp",
+    "w": 700,
+    "h": 700
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services/yard-waste-truck.jpg",
+   "w": 700,
+   "h": 700
+  }
+ },
+ "garage-clutter-before": {
+  "folder": "before-after",
+  "crop": [
+   1600,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/garage-clutter-before-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/garage-clutter-before-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/garage-clutter-before.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "garage-after": {
+  "folder": "before-after",
+  "crop": [
+   1678,
+   1678
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/garage-after-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/garage-after-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/garage-after-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/garage-after-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/garage-after.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "band-basement": {
+  "folder": "services-page",
+  "crop": [
+   2000,
+   2000
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-basement-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-basement-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/band-basement-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/services-page/band-basement-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-basement.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "band-tearout": {
+  "folder": "services-page",
+  "crop": [
+   793,
+   793
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-tearout-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-tearout-793.webp",
+    "w": 793,
+    "h": 793
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-tearout.jpg",
+   "w": 793,
+   "h": 793
+  }
+ },
+ "band-sofa": {
+  "folder": "services-page",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-sofa-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-sofa-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/band-sofa-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/services-page/band-sofa-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-sofa.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "band-fridge": {
+  "folder": "services-page",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-fridge-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-fridge-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/band-fridge-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/services-page/band-fridge-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-fridge.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "band-man-mattress": {
+  "folder": "services-page",
+  "crop": [
+   1591,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-man-mattress-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-man-mattress-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/band-man-mattress-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/services-page/band-man-mattress-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-man-mattress.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "band-yard-truck": {
+  "folder": "services-page",
+  "crop": [
+   1600,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/services-page/band-yard-truck-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/services-page/band-yard-truck-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/services-page/band-yard-truck-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/services-page/band-yard-truck-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/services-page/band-yard-truck.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "basement-boxes-before": {
+  "folder": "before-after",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/basement-boxes-before-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/basement-boxes-before-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/basement-boxes-before-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/basement-boxes-before-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/basement-boxes-before.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "basement-empty-after": {
+  "folder": "before-after",
+  "crop": [
+   1601,
+   1601
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/basement-empty-after-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/basement-empty-after-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/basement-empty-after.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "yard-branches-before": {
+  "folder": "before-after",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/yard-branches-before-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/yard-branches-before-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/yard-branches-before.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "yard-lawn-after": {
+  "folder": "before-after",
+  "crop": [
+   1605,
+   1605
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/yard-lawn-after-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/yard-lawn-after-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/yard-lawn-after-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/yard-lawn-after-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/yard-lawn-after.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "shed-old-before": {
+  "folder": "before-after",
+  "crop": [
+   1600,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/shed-old-before-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/shed-old-before-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/shed-old-before.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "shed-gone-after": {
+  "folder": "before-after",
+  "crop": [
+   1607,
+   1607
+  ],
+  "webp": [
+   {
+    "file": "assets/images/before-after/shed-gone-after-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/before-after/shed-gone-after-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/before-after/shed-gone-after.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "dresser-on-street": {
+  "folder": "donate",
+  "crop": [
+   1771,
+   1771
+  ],
+  "webp": [
+   {
+    "file": "assets/images/donate/dresser-on-street-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/donate/dresser-on-street-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/donate/dresser-on-street-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/donate/dresser-on-street-1600.webp",
+    "w": 1600,
+    "h": 1600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/donate/dresser-on-street.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "old-pickup-driveway": {
+  "folder": "about",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/old-pickup-driveway-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/about/old-pickup-driveway-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/about/old-pickup-driveway-1200.webp",
+    "w": 1200,
+    "h": 1200
+   },
+   {
+    "file": "assets/images/about/old-pickup-driveway-1500.webp",
+    "w": 1500,
+    "h": 1500
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/old-pickup-driveway.jpg",
+   "w": 800,
+   "h": 800
+  }
+ }
+}

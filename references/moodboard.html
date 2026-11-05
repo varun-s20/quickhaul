@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Haul references: moodboard</title>
+<style>
+  :root { --ink:#14181d; --muted:#5b6470; --line:#d9dde2; --paper:#f6f5f2; --card:#fff; --accent:#1f4fd1; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); }
+  header { padding:32px 24px 8px; max-width:1400px; margin:0 auto; }
+  h1 { font-size:24px; margin:0 0 6px; }
+  header p { margin:0 0 4px; color:var(--muted); max-width:80ch; }
+  main { max-width:1400px; margin:0 auto; padding:16px 24px 120px; display:grid; gap:20px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
+  article { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  article img { width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top; display:block; border-bottom:1px solid var(--line); background:#e9ebee; }
+  .body { padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .rank { font-size:12px; color:var(--muted); }
+  h2 { font-size:18px; margin:0; }
+  .role { display:inline-block; font-size:12px; font-weight:600; padding:2px 8px; border-radius:20px; background:#eef1f6; color:#2a3442; }
+  .role.primary { background:#e5ecff; color:#1b3a99; }
+  .reason { margin:0; }
+  .why { margin:0; color:var(--muted); font-size:14px; }
+  a { color:var(--accent); }
+  .picks { margin-top:auto; padding-top:10px; border-top:1px solid var(--line); display:grid; gap:8px; }
+  label { display:flex; gap:8px; align-items:center; cursor:pointer; }
+  input[type=text] { width:100%; padding:6px 8px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+  input[type=text]:disabled { background:#f3f4f6; }
+  input:focus-visible, button:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  footer { position:fixed; left:0; right:0; bottom:0; background:var(--ink); color:#fff; padding:12px 24px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  footer button { font:inherit; font-weight:600; padding:10px 18px; border-radius:24px; border:0; background:#fff; color:var(--ink); cursor:pointer; }
+  footer output { font-size:14px; opacity:.85; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Quick Haul: reference moodboard</h1>
+  <p>Pick one primary reference (the whole-site system we rebuild in Quick Haul's own brand) and any section donors (one named part each). Then press "Copy my picks" and paste the result back to the Scout or into picks.md.</p>
+  <p>Screenshots are first screens at 1440 wide, taken from the live sites on 2026-11-03. Full notes are in cards.md and shortlist.md.</p>
+</header>
+<main id="grid"></main>
+<footer>
+  <output id="status" aria-live="polite">No picks yet.</output>
+  <button type="button" id="copy">Copy my picks</button>
+</footer>
+<script>
+const SITES = [
+  { rank: "Primary candidate 1", primary: true, name: "FREITAG", url: "https://www.freitag.ch", shot: "screens/freitag-cycles-1440.png", role: "Primary candidate: visual system",
+    reason: "Hairline-ruled grid, oversized grotesque caps, mono fact labels and pill links. Type-led, so phone photos look finished in its frames.",
+    take: "Take the system. The booking structure comes from donors (Muval, Piece of Cake). Fonts are commercial (Akkurat)." },
+  { rank: "Primary candidate 2", primary: true, name: "Muval", url: "https://www.muval.com.au", shot: "screens/muval-first.png", role: "Primary candidate: structure",
+    reason: "Phone next to Get instant quotes, a What are you moving selector into Get prices, per-city price cards. Closest to where, cost, book.",
+    take: "Competent but generic design, all stock imagery to swap. Also a donor for the selector and town price cards." },
+  { rank: "Primary candidate 3", primary: true, name: "Piece of Cake Moving", url: "https://mypieceofcakemove.com", shot: "screens/pieceofcake-hero-1440.png", role: "Primary candidate: local-crew first screen",
+    reason: "Get quote plus Or get a call from us side by side (Shawn's exact ask), phone with hours, review-score row, date-first form at 390.",
+    take: "Avada theme with tells below the hero. Studio-shoot hero. Best used for the first screen and the review row." },
+  { rank: "Section donor", primary: false, name: "Truewerk", url: "https://truewerk.com", shot: "screens/truewerk-first.png", role: "Donor: dividers and accents",
+    reason: "Halftone dot band between sections and a hazard-stripe edge, with heavy caps and mono labels.",
+    take: "Use once, in slate and silver from the logo, not Truewerk's lime. Skip its em dashes and full-stop headlines." },
+  { rank: "Section donor", primary: false, name: "Furniture Bank", url: "https://www.furniturebank.org", shot: "screens/furniturebank-stats-1440.png", role: "Donor: Donate page",
+    reason: "A hauler with a donation story: removal you'd expect, impact you wouldn't, plus a numbers block with pickup buttons.",
+    take: "Impact figures for Quick Haul are unknown, so they stay placeholders (must-confirm). Elementor build, Poppins." },
+  { rank: "Section donor", primary: false, name: "Stuf Storage", url: "https://www.stufstorage.com", shot: "screens/stuf-first.png", role: "Donor: hero",
+    reason: "One colour field, a town or zip search with one full-width button, phone icon kept in the mobile header.",
+    take: "Hero only; below it turns generic. Swap the serif headline for Quick Haul's own type." }
+];
+const grid = document.getElementById('grid');
+SITES.forEach((s, i) => {
+  const id = 'site' + i;
+  const el = document.createElement('article');
+  el.innerHTML = `
+    <img src="${s.shot}" alt="First screen of ${s.name} at 1440 wide" loading="lazy">
+    <div class="body">
+      <div class="rank">${s.rank}</div>
+      <h2>${s.name}</h2>
+      <span class="role ${s.primary ? 'primary' : ''}">${s.role}</span>
+      <p class="reason">${s.reason}</p>
+      <p class="why">${s.take}</p>
+      <a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.url.replace(/^https?:\/\//, '')}</a>
+      <div class="picks">
+        <label><input type="radio" name="primary" value="${i}"> Primary reference</label>
+        <label><input type="checkbox" class="donor" data-i="${i}" id="${id}-d"> Section donor</label>
+        <input type="text" id="${id}-s" placeholder="Which section? e.g. pricing band" aria-label="Section to take from ${s.name}" disabled>
+      </div>
+    </div>`;
+  grid.appendChild(el);
+  const cb = el.querySelector('.donor'), tx = el.querySelector('input[type=text]');
+  cb.addEventListener('change', () => { tx.disabled = !cb.checked; if (cb.checked) tx.focus(); update(); });
+  tx.addEventListener('input', update);
+  el.querySelector('input[type=radio]').addEventListener('change', update);
+});
+function summary() {
+  const p = document.querySelector('input[name=primary]:checked');
+  const lines = ['## Varun\'s picks (Quick Haul, from moodboard)', ''];
+  lines.push('Primary: ' + (p ? `${SITES[p.value].name} (${SITES[p.value].url})` : 'none chosen'));
+  const donors = [...document.querySelectorAll('.donor:checked')];
+  lines.push('', 'Section donors:');
+  if (!donors.length) lines.push('- none');
+  donors.forEach(d => {
+    const s = SITES[d.dataset.i];
+    const sec = document.getElementById('site' + d.dataset.i + '-s').value.trim() || 'section not named';
+    lines.push(`- ${s.name} (${s.url}): ${sec}`);
+  });
+  return lines.join('\n');
+}
+function update() {
+  const p = document.querySelector('input[name=primary]:checked');
+  const n = document.querySelectorAll('.donor:checked').length;
+  document.getElementById('status').textContent = (p ? 'Primary: ' + SITES[p.value].name : 'No primary yet') + ' | ' + n + ' donor' + (n === 1 ? '' : 's');
+}
+document.getElementById('copy').addEventListener('click', async () => {
+  const text = summary();
+  const st = document.getElementById('status');
+  try { await navigator.clipboard.writeText(text); st.textContent = 'Copied. Paste it back to the Scout.'; }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+    if (ok) { ta.remove(); st.textContent = 'Copied. Paste it back to the Scout.'; }
+    else { ta.style.cssText = 'position:fixed;left:24px;right:24px;bottom:72px;height:180px;font:13px/1.4 monospace;z-index:9'; ta.readOnly = true; ta.select(); st.textContent = 'Clipboard blocked. Copy the text from the box above.'; }
+  }
+});
+</script>
+</body>
+</html>
