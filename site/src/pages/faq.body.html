@@ -5,15 +5,15 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: faq.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-faq banner-faq-phone
 -->
 <div class="t-faq">
 <!-- Every price, policy and hour here is a placeholder (data/faq.json, content/placeholders.md); the photo is logged stock, must-replace. Words: content/copy.md, FAQ. -->
 
-<!-- ===== FAQ: short banner. Heading and one line, the truck parked on the fold with a small load ===== -->
+<!-- ===== FAQ: short banner.  ===== -->
 <section class="o-pageBanner -short" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-faq" phone="banner-faq-phone" class="o-pageBanner__img" alt="A weathered wooden garden shed with glazed double doors" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -25,7 +25,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">Prices, booking, what we take and what to expect on the day. Can't find yours? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-eighth}}</div>
 </section>
 
 <!-- ===== FAQ: 17 questions in copy.md's four groups, generated from data/faq.json, which also writes this page's FAQPage JSON-LD. Three bands, not four cards, so a page with no natural picture gets a rhythm and one of its own: the load lined up on the fold under What we take (critic, FAQ r1) ===== -->

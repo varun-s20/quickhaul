@@ -5,15 +5,15 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: page.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-towns banner-towns-phone
 -->
 <div class="t-area">
 <!-- Town list, coverage and "same prices" are placeholders (data/towns.json, content/placeholders.md); the photo is logged stock, must-replace. Words: content/copy.md, Service area (hub). -->
 
-<!-- ===== Service area: page banner. Heading and one line, the truck parked on the fold with a quarter of a load, the same as the town pages it leads to ===== -->
+<!-- ===== Service area: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-towns" phone="banner-towns-phone" class="o-pageBanner__img" alt="A quiet neighborhood drive with a bright red shrub, a bare tree and a gray house" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -25,10 +25,9 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">Towns on both sides of the Massachusetts and New&nbsp;Hampshire line, all at the same prices.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
 </section>
 
-<!-- ===== Service area: find your town. The promo card from Home's towns band, with the drawn map in the picture's place. Town names only, no prices. A chip and its spot on the map light together. The map is our own drawing: the brief's Google Map waits for the real base town ===== -->
+<!-- ===== Service area: find your town. The promo card from Home's towns band, with the street map in the picture's place. Town names only, no prices. A chip and its pin on the map light together. Towns are placeholders (data/towns.json) ===== -->
 <section class="b-band -rise" aria-labelledby="area-title">
   <div class="m-promo a-inview">
     <div class="m-promo__copy">

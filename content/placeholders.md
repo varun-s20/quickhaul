@@ -162,7 +162,7 @@ How the source was established: the run that downloaded these was killed before 
 
 Services page, recuts of photos already logged above (band- files in site/assets/images/services-page/, square crops at quality 88): band-basement (basement-cleared, Point3D), band-sofa (sofa-by-door, Vlad Ionita), band-fridge (fridge-in-room, Raymond Petrik), band-yard-truck (yard-waste-truck, Ries Bosch), band-tearout (renovation-tearout, Annie Spratt inferred). Services also reuses pickup-trash-bags (iridial). All must-replace.
 
-Town pages (12, one template): pickup-trash-bags (iridial) is their og:image only, alt "A white pickup truck piled high with black trash bags". It is not of the town. Must replace. The what-we-haul band no longer shows it: that band now shows the map with the page's town marked (critic, Service area r1). The service area map is our own drawing of placeholder towns at public map positions; its state line is approximate. Replace or confirm once the real town list and base town exist.
+Town pages (12, one template): pickup-trash-bags (iridial) is their og:image only, alt "A white pickup truck piled high with black trash bags". It is not of the town. Must replace. The what-we-haul band no longer shows it: that band now shows the map with the page's town marked (critic, Service area r1). The service area map is a real street map (OpenStreetMap data, OpenFreeMap tiles) with a pin for each placeholder town at its public map position. Pins follow data/towns.json, so they update with the real list.
 
 Each pair in the Reviews gallery is two different places from two photographers: no free stock shows one spot before and after. Same must-replace note as the homepage pair.
 
@@ -217,7 +217,7 @@ Donate alt text now on the page, and the og:image alt (rewrite when Shawn's phot
 No new stock. og:image is pickup-trash-bags (iridial, logged above), alt "A white pickup truck piled high with black trash bags", not of any job. Must replace. Every price, policy and hour on the page is a placeholder logged above; prices now also sit in site/data/faq.json's answers as well as site/data/prices.json and src/partials/ticket.html. The page's four line drawings are our own (no licence question).
 
 ## Contact (Developer, 2026-11-04)
-No new stock. og:image is pickup-trash-bags (iridial, logged above), alt "A white pickup truck piled high with black trash bags", not of any job. Must replace. The phone, email, hours, "Closed Sundays", towns and the commercial cell are placeholders logged above. The map is our own drawing: placeholder towns at public map positions, an approximate state line and a river moved off the labels, so it's less true around Lawrence. It isn't the brief's Google Map, which waits for the real base town. Copy.md's map centre (Salem, NH, placeholder) isn't marked on it. The form has no backend: photos stay hidden and a send shows the failure state with the phone until window.SITE_FORM_ENDPOINT is set. The drawing above the form is our own.
+No new stock. og:image is pickup-trash-bags (iridial, logged above), alt "A white pickup truck piled high with black trash bags", not of any job. Must replace. The phone, email, hours, "Closed Sundays", towns and the commercial cell are placeholders logged above. The map is a real street map with pins at the placeholder towns' public map positions. It isn't a Google Map: see site/README.md, Before launch. Copy.md's map centre (Salem, NH, placeholder) isn't marked on it. The form has no backend: photos stay hidden and a send shows the failure state with the phone until window.SITE_FORM_ENDPOINT is set. The drawing above the form is our own.
 
 ## Commercial enquiry (Developer, 2026-11-04)
 No new stock. og:image is pickup-trash-bags (iridial, logged above), alt "A white pickup truck piled high with black trash bags", not of any job. Must replace. The whole page is placeholder wording until Shawn says he does commercial or repeat work (row above); the phone is the placeholder logged above. The form has no backend: photos stay hidden and a send shows the failure state with the phone until window.SITE_FORM_ENDPOINT is set. The banner's drawing is our own, of no real building.
@@ -385,7 +385,7 @@ No new facts. Every line with a dagger in copy.md's Book is already logged: time
 |---|---|---|---|---|
 | banners/page-street, page-street-phone | portsmouth-street, Emi Mo | Banner | A sunny street of old wooden houses with a brick sidewalk | |
 
-The map is our own drawing, not stock: placeholder towns at public map positions, with the state line and river drawn by hand and approximate. In this batch the line and the river moved a little so no town sits on them. It isn't the brief's Google Map, which waits for the real base town. If the real town list isn't these 12, map labels need rechecking with build/tmp/p2/map_measure.py. No new facts.
+The map is a real street map, not stock, with pins at the placeholder towns' public map positions. It isn't a Google Map: see site/README.md, Before launch. If the real town list isn't these 12, check the pin labels at phone widths (the side each name sits on is MAP_SIDE in tools/build.py). No new facts.
 
 ### Town pages (12, one template)
 | File | Original, photographer | Slot | Alt on the page |
@@ -546,7 +546,7 @@ FAQ's line-up on the fold (branches, mattress, fridge, sofa, armchair, dresser a
 |---|---|---|---|---|
 | banners/page-street, page-street-phone | portsmouth-street, Emi Mo | Short banner | A sunny street of old wooden houses with a brick sidewalk | |
 
-The map is our own drawing, placeholder towns at public map positions (see the hub). copy.md's map center, Salem NH, is a placeholder and isn't marked on it. The form has no backend: photos stay hidden and a send shows the failed state with the phone until window.SITE_FORM_ENDPOINT is set. Commercial's line is already logged ("Commercial, reworded"). The fridge and boxes on the form's card are our own drawing. No new facts. og:image is the shared crop, assets/images/home/og-home.jpg.
+The map is a street map with pins at the placeholder towns' public map positions (see the hub). copy.md's map center, Salem NH, is a placeholder and isn't marked on it. The form has no backend: photos stay hidden and a send shows the failed state with the phone until window.SITE_FORM_ENDPOINT is set. Commercial's line is already logged ("Commercial, reworded"). The fridge and boxes on the form's card are our own drawing. No new facts. og:image is the shared crop, assets/images/home/og-home.jpg.
 
 ### Commercial
 | File | Original, photographer | Slot | Alt on the page | Notes |
@@ -609,3 +609,8 @@ Older rows above still name the old pages. These lines replace their "where used
 | garage-after | Home's compare and Reviews' garage pair |
 | pickup-trash-bags | Home's tile, Services' band, town tiles, Reviews' grid and the og:image on most pages |
 | assets/fx/grain.svg | Deleted, with the old pages' banner rule |
+
+## Page banners and the estimate band, photos (trucks retired from both)
+Only Home's hero keeps a truck. All stock, must-replace, Unsplash License, logged with their sources above. Crop only.
+- Services: man-boxes-van. Pricing: storage-room-clutter. Reviews: backyard-lawn-fence. Donate: dresser-and-chair. FAQ: shed-weathered. Contact: man-carrying-mattress. Commercial: renovation-tearout. 404: basement-cleared. Service area and the 12 town pages: fall-house-drive, which isn't of any listed town. About and Book keep portsmouth-street.
+- Estimate band, every page that has it: cta-after (garage-after) large, compare-before (garage-clutter-before) as the "Before" snapshot. As on Home's slider, these are two different stock garages, not one job. Replace with one real before and after pair from Shawn, or the Before and After tags say something untrue at launch.

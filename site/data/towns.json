@@ -1,5 +1,5 @@
 {
-  "_note": "Placeholder towns (content/placeholders.md). Feeds Home's town chips, the service area list and map, and one page per town at service-area/<slug>.html (tools/build.py). lat and lon place the town on the drawn map; they are public map positions, not client facts.",
+  "_note": "Placeholder towns (content/placeholders.md). Feeds Home's town chips, the service area list and map, and one page per town at service-area/<slug>.html (tools/build.py). lat and lon place the town's pin on the street map; they are public map positions, not client facts.",
   "towns": [
     {"name": "Lowell", "state": "Massachusetts", "abbr": "MA", "slug": "lowell-ma", "lat": 42.6334, "lon": -71.3162},
     {"name": "Andover", "state": "Massachusetts", "abbr": "MA", "slug": "andover-ma", "lat": 42.6583, "lon": -71.1368},

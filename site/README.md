@@ -1,6 +1,6 @@
 # Quick Haul website
 
-A custom static site: 25 HTML pages, one stylesheet, one script. No framework and no build step for visitors. Python only assembles the pages.
+A custom static site: 25 HTML pages, one stylesheet, one script, plus a map library that only loads on pages with a map. No framework and no build step for visitors. Python only assembles the pages.
 
 **State:** design preview. Phone, hours, towns, prices, reviews, photos and much of the wording are placeholders until Shawn confirms them. See "Before launch" below, content/placeholders.md and build/handover.md.
 
@@ -34,7 +34,8 @@ python tools/qa.py pricing.html <output folder> --section "<newline>## Pricing (
 |---|---|---|
 | Words on a page | `src/pages/<slug>.body.html` | build |
 | Town pages, all 12 | `src/templates/town.body.html` | build |
-| Town list, nearby towns, map positions | `data/towns.json` | build |
+| Town list, nearby towns, map pins | `data/towns.json` (which side a pin's name sits on: `MAP_SIDE` in `tools/build.py`) | build |
+| Map colours, library version, state labels | the "Service area map" block in `assets/global.js` | |
 | Header, phone menu, call bar | `src/partials/header.html` | build |
 | Footer | `src/partials/footer.html` | build |
 | Page title and description | the meta comment at the top of the page's body file | build |
@@ -135,5 +136,6 @@ Publish the root `.html` files, `service-area/`, `assets/`, `sitemap.xml` and `r
 - Connect the forms (`window.SITE_FORM_ENDPOINT`), and confirm the SMS wording.
 - Have someone qualified review the Privacy draft against the services really used, and add its "Last updated" date.
 - Check the general facts (state disposal rules and the rest) listed in `content/copy-v4-changes.md`.
+- The map loads MapLibre GL from jsDelivr (pinned to 4.7.1, with integrity hashes) and tiles from OpenFreeMap, both only on pages with a map and only when it nears the screen. If either fails, the slot shows the towns as links. Those services see a visitor's IP address, so add them to the Privacy review. Hosting the library under `assets/` is an option: change `LIB_JS` and `LIB_CSS`. The proposal says "Google Map": this is a real map but not Google's, because pins for every town need a Google API key and billing. Confirm that's fine, or swap it once there's a key.
 - Bio Sans ships as `.otf` with no licence file on hand. Confirm the web licence. Converting to woff2 needs fontTools, which isn't installed.
 - Strip working notes from HTML comments (they name Varun and decisions) before the site goes to the client.

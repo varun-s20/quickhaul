@@ -5,16 +5,16 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: services.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-services banner-services-phone
 -->
 <div class="t-services">
 <!-- Every fact on this page is a placeholder from content/placeholders.md; every photo is logged stock, must-replace. The "we take" lists need Shawn's check. Words: content/copy.md, Services. -->
 
-<!-- ===== Services: page banner. Colour photo, heading, one line (V5), and the truck parked on the fold with half a load. No pills: the header's Book now and number are right there, so it never reads as a second homepage hero ===== -->
+<!-- ===== Services: page banner.  ===== -->
 <!-- Stock, must-replace: the slot wants Shawn's truck on a real job. -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-services" phone="banner-services-phone" class="o-pageBanner__img" alt="A worker wheeling a tall stack of boxes on a hand truck past a white van" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -26,7 +26,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">Clean outs, single items, yard waste and demo work across Massachusetts and New&nbsp;Hampshire. What each one covers, and how to book it.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner}}</div>
 </section>
 
 <!-- ===== Services: jump chips. A long page gets an index ===== -->

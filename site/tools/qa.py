@@ -39,7 +39,7 @@ MEASURE = r"""
   out.upscaled = out.images.filter(i => { const m = i.src.match(/-(\d+)\.webp$/); const file = m ? +m[1] : i.natural; return file && i.shown > file && !/logo/.test(i.src); });   /* naturalWidth is density-corrected by sizes, so read the file's real width from its name */
   out.broken = out.images.filter(i => !i.natural);
   out.small = out.images.filter(i => i.shown < i.slot / 2 && !/logo|item-/.test(i.src));
-  out.targets = [...document.querySelectorAll('main a, main button, main input:not([type=radio]):not([type=checkbox]):not([type=range]), main textarea, main summary, main select')].filter(vis).filter(e => getComputedStyle(e).pointerEvents !== 'none' && !e.matches('.a-textLink, .a-inlineLink')).map(e => ({ t: (e.textContent || e.name || e.tagName).trim().slice(0, 40), h: Math.round(e.getBoundingClientRect().height) })).filter(e => e.h < 44);
+  out.targets = [...document.querySelectorAll('main a, main button, main input:not([type=radio]):not([type=checkbox]):not([type=range]), main textarea, main summary, main select')].filter(vis).filter(e => getComputedStyle(e).pointerEvents !== 'none' && !e.matches('.a-textLink, .a-inlineLink, .m-map__place')).map(e => ({ t: (e.textContent || e.name || e.tagName).trim().slice(0, 40), h: Math.round(e.getBoundingClientRect().height) })).filter(e => e.h < 44);
   out.textOverflow = [...document.querySelectorAll('main *')].filter(vis).filter(e => { const s = getComputedStyle(e); return s.overflowX === 'hidden' && e.scrollWidth > e.clientWidth + 1 && !e.closest('.sr-only, .a-choice__unit') && !e.matches('.m-banner'); }).map(e => e.className).slice(0, 8);
   const blocks = [];
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);

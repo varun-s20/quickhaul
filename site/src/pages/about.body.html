@@ -11,7 +11,7 @@ preload_picture: page-street page-street-phone
 <div class="t-about">
 <!-- Crew, phone habits, hours and donation practice are placeholders (content/placeholders.md). Photos are logged stock, must-replace. Words: content/copy.md, About. -->
 
-<!-- ===== About: page banner. Heading and one line, which does the old statement's job; the truck parked on the fold with a small load ===== -->
+<!-- ===== About: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
     {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
@@ -26,7 +26,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">Shawn and a small local crew, clearing garages, basements and yards across Massachusetts and New&nbsp;Hampshire, and taking down the old sheds and decks too.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-eighth}}</div>
 </section>
 
 <!-- ===== About: about Quick Haul, Varun's extra opening section ahead of the story (5 Nov). The lead recipe: centred heading, one wide photo with no vehicle and no person (critic, About r1), three small facts ===== -->
@@ -116,7 +115,7 @@ preload_picture: page-street page-street-phone
   </ul>
 </section>
 
-<!-- ===== About: where we work. The promo with the drawn map in the picture's place, words first when stacked. Towns are placeholders (data/towns.json) ===== -->
+<!-- ===== About: where we work. The promo with the street map in the picture's place, words first when stacked. Towns are placeholders (data/towns.json) ===== -->
 <section class="b-band o-svcBand" id="where" aria-labelledby="where-title">
   <div class="m-promo a-inview">
     <div class="m-promo__copy">
@@ -149,11 +148,14 @@ preload_picture: page-street page-street-phone
 
 <!-- ===== About: estimate band, the closing call, in its own words, with Shawn's agreed line. The meta above turns the footer's band off ===== -->
 <section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
-  {{> estimate-ring}}
+  {{> estimate-art}}
   <div class="o-estimate__inner a-inview">
     <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Got something</span> <span class="a-section__row">in the way?</span></h2>
     <p class="a-lede">Need help booking or have questions? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>. Or pick a day online.</p>
-    <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="o-estimate__actions">
+      <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="a-button -glass -large" href="tel:+16035550142" aria-label="Give us a call at (603) 555-0142" data-call-here><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-num">(603) 555-0142</span></a>
+    </div>
   </div>
 </section>
 

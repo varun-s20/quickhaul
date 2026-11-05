@@ -147,11 +147,11 @@
       }, { rootMargin: (-header.offsetHeight) + 'px 0px 0px 0px', threshold: [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1] });
       heroCalls.forEach(function (el) { callWatcher.observe(el); });
     }
-    /* the footer's own number, not the footer's top edge: between the two, the estimate band said "or call" with no number on screen (critic, FAQ r1) */
+    /* the whole footer: the band above carries its own number, and the bar must not sit over the footer's last line at the foot of the page */
     new IntersectionObserver(function (entries) {
       footerInView = entries[0].isIntersecting;
       sync();
-    }).observe($('.o-footer__phone') || footer);
+    }).observe(footer);
   }());
 
   /* ---- a town page's every Book link carries its town, not only the page's own: someone who reads to the estimate band and books there shouldn't type it again (critic, hub and towns r1). The chrome stays identical on every page; the page's wrapper says which town. Added to the link's own address, not built ---- */
@@ -939,15 +939,17 @@
     });
   })();
 
-  /* ===== Service area map: a town's row and its spot on the map light together =====
-     Pointing at either, or tabbing to a row, marks both, so the list and the map read as one thing. */
+  /* ===== Service area map: a real street map, loaded only when its slot nears the screen, with a pin per town =====
+     Pointing at a town's chip or its pin, or tabbing to the chip, marks both, so the list and the map read as one thing.
+     The library and tiles come from outside the site. If any of it fails, the slot shows its towns as chips. */
   (function () {
-    var marks = $$('[data-place]');
-    if (!marks.length) return;
+    var slots = $$('[data-map]');
+    var chips = $$('[data-place]');
+
     function light(place, on) {
-      marks.forEach(function (m) { if (m.getAttribute('data-place') === place) m.classList.toggle('is-lit', on); });
+      $$('[data-place]').forEach(function (m) { if (m.getAttribute('data-place') === place) { m.classList.toggle('is-lit', on); } });
     }
-    marks.forEach(function (m) {
+    function wire(m) {
       var place = m.getAttribute('data-place');
       function lit() { light(place, true); }
       function unlit() { light(place, false); }
@@ -955,6 +957,148 @@
       m.addEventListener('mouseleave', unlit);
       m.addEventListener('focus', lit);
       m.addEventListener('blur', unlit);
-    });
+    }
+    chips.forEach(wire);
+    if (!slots.length) { return; }
+
+    var LIB_JS = 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js';
+    var LIB_CSS = 'https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css';
+    var LIB_JS_SRI = 'sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj';
+    var LIB_CSS_SRI = 'sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V';
+    var STYLE = 'https://tiles.openfreemap.org/styles/positron';
+    /* The two state names sit in room the towns leave, each inside its own state */
+    var STATES = [['New Hampshire', -71.15, 42.85], ['Massachusetts', -71.4, 42.612]];
+    /* Tints of the site's own slate and cream, so the map belongs to the page */
+    var LAND = '#F1E9E5', GREEN = '#E3E2D8', WATER = '#B4BFCC', ROAD = '#FFFFFF', CASING = '#D6D0CC', TEXT = '#4A5263', SLATE = '#343D4E';
+
+    function tint(style, towns) {
+      var names = towns.map(function (t) { return t.name; });
+      var noise = /^(label_other|label_village|airport|aeroway|railway|highway-name-path|highway-name-minor|road_area_pier|road_pier|highway_path)/;
+      style.layers = style.layers.filter(function (l) { return !noise.test(l.id); });
+      style.layers.forEach(function (l) {
+        var p = l.paint = l.paint || {};
+        if (l.id === 'background') { p['background-color'] = LAND; }
+        else if (/^(park|landcover_wood)$/.test(l.id)) { p['fill-color'] = GREEN; }
+        else if (l.id === 'landuse_residential') { p['fill-color'] = '#ECE3DE'; }
+        else if (l.id === 'water') { p['fill-color'] = WATER; }
+        else if (l.id === 'waterway') { p['line-color'] = WATER; }
+        else if (l.id === 'building') { p['fill-color'] = '#E6DDD8'; p['fill-outline-color'] = '#DBD1CC'; }
+        else if (/casing/.test(l.id) && l.type === 'line') { p['line-color'] = CASING; }
+        else if (/^highway_/.test(l.id) && l.type === 'line') { p['line-color'] = ROAD; }
+        else if (l.id === 'boundary_3') {
+          /* the state line, not the county lines: it's what the page is talking about */
+          p['line-color'] = ['case', ['==', ['get', 'admin_level'], 4], SLATE, 'rgba(0,0,0,0)'];
+          p['line-width'] = 1.5;
+          p['line-dasharray'] = [3, 2];
+        } else if (l.type === 'symbol' && l.layout && l.layout['text-field']) {
+          p['text-color'] = TEXT;
+          p['text-halo-color'] = LAND;
+          /* our towns get a pin and a name of their own */
+          if (/^label_(town|city)/.test(l.id)) { l.filter = ['all', l.filter, ['!', ['in', ['get', 'name:latin'], ['literal', names]]]]; }
+        }
+      });
+      return style;
+    }
+
+    function failed(slot) { slot.classList.add('is-failed'); }
+
+    function draw(slot) {
+      var towns = $$('[data-map-town]', slot).map(function (a) {
+        return { name: a.textContent, slug: a.getAttribute('data-map-town'), href: a.getAttribute('href'), side: a.getAttribute('data-side'), lat: parseFloat(a.getAttribute('data-lat')), lon: parseFloat(a.getAttribute('data-lon')) };
+      });
+      window.fetch(STYLE).then(function (r) {
+        if (!r.ok) { throw new Error('map style'); }
+        return r.json();
+      }).then(function (style) {
+        var gl = window.maplibregl;
+        var bounds = new gl.LngLatBounds();
+        towns.forEach(function (t) { bounds.extend([t.lon, t.lat]); });
+        var map = new gl.Map({ container: slot, style: tint(style, towns), bounds: bounds, fitBoundsOptions: { padding: 60 }, minZoom: 6, maxZoom: 15, attributionControl: { compact: false }, cooperativeGestures: true, dragRotate: false, pitchWithRotate: false, touchPitch: false, fadeDuration: reduced ? 0 : 300 });
+        map.touchZoomRotate.disableRotation();
+        map.keyboard.disableRotation();
+        map.addControl(new gl.NavigationControl({ showCompass: false }), 'top-right');
+
+        /* Frame the towns in whatever room the slot has: on Contact, the room beside the card. A visitor's own pan or zoom is left alone after that */
+        var moved = false;
+        var band = slot.closest('.o-contactMap');
+        var card = band && $('.o-contactMap__card', band);
+        function frame() {
+          if (moved) { return; }
+          var box = slot.getBoundingClientRect();
+          var side = Math.max(44, Math.min(96, box.width * .14));
+          var left = side;
+          if (card) {
+            var c = card.getBoundingClientRect();
+            if (c.bottom > box.top + 1 && c.right > box.left) { left = c.right - box.left + 56; }
+          }
+          map.fitBounds(bounds, { padding: { top: 44, bottom: 44, left: left, right: side }, animate: false });
+        }
+        frame();
+        map.on('resize', frame);
+        ['dragstart', 'zoomstart'].forEach(function (name) {
+          map.on(name, function (e) { if (e.originalEvent || e.isZoomControl) { moved = true; } });
+        });
+        $$('.maplibregl-ctrl-group button', slot).forEach(function (b) { b.addEventListener('click', function () { moved = true; }); });
+
+        towns.forEach(function (t) {
+          var pin = document.createElement('a');
+          pin.className = 'm-map__place' + (t.side === 'left' ? ' -left' : t.side === 'top' ? ' -top' : '');
+          pin.href = t.href;
+          pin.tabIndex = -1;   /* the same towns are real links in the page's list; a dozen more tab stops would only slow the keyboard */
+          pin.setAttribute('data-place', t.slug);
+          pin.innerHTML = '<span class="m-map__dot"></span><span class="m-map__town"></span>';
+          pin.lastChild.textContent = t.name;
+          wire(pin);
+          new gl.Marker({ element: pin }).setLngLat([t.lon, t.lat]).addTo(map);
+          pin.setAttribute('aria-label', t.name);   /* after addTo: the library writes its own "Map marker" over it */
+        });
+        STATES.forEach(function (s) {
+          var tag = document.createElement('span');
+          tag.className = 'm-map__state';
+          tag.textContent = s[0];
+          new gl.Marker({ element: tag }).setLngLat([s[1], s[2]]).addTo(map);
+          tag.removeAttribute('aria-label');
+          tag.setAttribute('aria-hidden', 'true');
+        });
+
+        var ready = false;
+        map.once('load', function () { ready = true; slot.classList.add('is-ready'); });
+        map.on('error', function () { if (!ready) { map.remove(); failed(slot); ready = true; } });
+      }).catch(function () { failed(slot); });
+    }
+
+    /* Only pages with a map pay for the library, and only once someone is near it */
+    function loadLib(done, fail) {
+      if (window.maplibregl) { done(); return; }
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = LIB_CSS;
+      css.integrity = LIB_CSS_SRI;
+      css.crossOrigin = 'anonymous';
+      document.head.appendChild(css);
+      var js = document.createElement('script');
+      js.src = LIB_JS;
+      js.integrity = LIB_JS_SRI;
+      js.crossOrigin = 'anonymous';
+      js.onload = done;
+      js.onerror = fail;
+      document.head.appendChild(js);
+    }
+
+    function start() {
+      loadLib(function () {
+        slots.forEach(function (slot) {
+          try { draw(slot); } catch (e) { failed(slot); }
+        });
+      }, function () { slots.forEach(failed); });
+    }
+    if (!window.fetch || !('IntersectionObserver' in window)) { slots.forEach(failed); return; }
+    var near = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) {
+        near.disconnect();
+        start();
+      }
+    }, { rootMargin: '800px 0px' });
+    slots.forEach(function (slot) { near.observe(slot); });
   })();
 }());

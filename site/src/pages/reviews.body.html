@@ -5,15 +5,15 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: page.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-reviews banner-reviews-phone
 -->
 <div class="t-reviews">
 <!-- Sample cards from data/reviews.json, replaced and never edited into real-sounding reviews (content/placeholders.md). No stars, score or count (proposal term 05). Every photo is logged stock, must-replace. Words: content/copy.md, Reviews. -->
 
-<!-- ===== Reviews: page banner. Heading and one line, the truck parked on the fold with a quarter of a load ===== -->
+<!-- ===== Reviews: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-reviews" phone="banner-reviews-phone" class="o-pageBanner__img" alt="A fenced back yard with a clear lawn under a big tree and a blue sky" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -25,7 +25,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">Real reviews from our Facebook page land here, just as their writers left them. Until then, the cards below are samples.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
 </section>
 
 <!-- ===== Reviews: quotes mixed with photos in a loose grid. No filter column (revision.md: dead with few reviews). A photo never sits inside a quote card, so no photo reads as the job a review is about (copy.md) ===== -->

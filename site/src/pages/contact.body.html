@@ -5,7 +5,7 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: contact.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-contact banner-contact-phone
 -->
 <div class="t-contact">
 <!-- Phone, hours, Closed Sundays, towns and the commercial line are placeholders (content/placeholders.md); the photo is logged stock, must-replace. Words: content/copy.md, Contact. -->
@@ -13,7 +13,7 @@ preload_picture: page-street page-street-phone
 <!-- ===== Contact: short banner, with the one pill besides the town pages': the call, because the lede says it's the fastest way to a price. data-call-here hides the header's number and the phone's bar while it's on screen ===== -->
 <section class="o-pageBanner -short" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-contact" phone="banner-contact-phone" class="o-pageBanner__img" alt="A man walking down a sidewalk with a striped mattress on his head" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -28,7 +28,6 @@ preload_picture: page-street page-street-phone
     </div>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-eighth}}</div>
 </section>
 
 <!-- ===== Contact: which way is best. Three small facts, the banner's own three words in the same order, each one a way in. It rises over the banner, and the form follows it ===== -->
@@ -117,7 +116,7 @@ preload_picture: page-street page-street-phone
   </div>
 </section>
 
-<!-- ===== Contact: map and hours. The drawn map runs the band's full width, with the hours on a slate card over its empty west: two rounded cards in a row read as anyone's (critic, Contact r1). The map is our own drawing of placeholder towns: the brief's Google Map waits for the real base town (content/placeholders.md) ===== -->
+<!-- ===== Contact: map and hours. The street map runs the band's full width, with the hours on a slate card over its west. Towns are placeholders (data/towns.json) ===== -->
 <section class="b-band o-contactMap" aria-label="Map and hours">
   <div class="o-contactMap__card a-inview">
     <ul class="o-contactFacts">

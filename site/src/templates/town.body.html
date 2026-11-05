@@ -5,7 +5,7 @@ og_image: assets/images/home/og-home.jpg
 og_image_alt: A white pickup truck piled high with black trash bags
 schema: town.json
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-towns banner-towns-phone
 -->
 <div class="t-town" data-town-query="{{TOWN_QUERY}}">
 <!-- One template, only the town, state and abbreviation change (copy.md). No local claims per town until Shawn gives them. Towns and prices are placeholders (data/towns.json, data/prices.json, content/placeholders.md); photos are logged stock, must-replace. Words: content/copy.md, Town pages. -->
@@ -13,7 +13,7 @@ preload_picture: page-street page-street-phone
 <!-- ===== Town: page banner. The one banner besides Contact's that carries a pill: these are landing pages from search (revision.md section 5). The photo isn't of the town, so its alt never names it ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-towns" phone="banner-towns-phone" class="o-pageBanner__img" alt="A quiet neighborhood drive with a bright red shrub, a bare tree and a gray house" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -28,7 +28,6 @@ preload_picture: page-street page-street-phone
     </div>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-quarter}}</div>
 </section>
 
 <!-- ===== Town: what we haul. Heading, one line, Home's photo tiles with their names only ===== -->

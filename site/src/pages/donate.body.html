@@ -6,15 +6,15 @@ og_image_alt: A small wooden dresser set out on an empty street, in front of a w
 schema: page.json
 estimate: no
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-donate banner-donate-phone
 -->
 <div class="t-donate">
 <!-- Whether Quick Haul donates at all, and where, is unconfirmed: this whole page is placeholder wording (content/placeholders.md). No named charities, on purpose. Photos are logged stock, must-replace. Words: content/copy.md, Donate. -->
 
-<!-- ===== Donate: page banner. The truck with the good stuff set apart at the curb. The longest title on the site, so the small size ===== -->
+<!-- ===== Donate: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-donate" phone="banner-donate-phone" class="o-pageBanner__img" alt="A wooden dresser and a chair in a sunny room, by the window" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -26,7 +26,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">A lot of what we pick up still works, so the good stuff goes to local charities and reuse stores instead of the dump.</p>
   </div>
 
-  <div class="o-pageBanner__truck -wide a-reveal">{{> truck-banner-donate}}</div>
 </section>
 
 <!-- ===== Donate: what we can donate, the one band. A big photo beside what can go, what can't, where it goes and how to ask. Can is a plain line and can't is a marked list, so a refusal can't be mistaken for an offer ===== -->
@@ -94,11 +93,14 @@ preload_picture: page-street page-street-phone
 
 <!-- ===== Donate: estimate band, in its own words (copy.md). It sits in the page because the footer partial's band has fixed words, and the meta above turns that one off ===== -->
 <section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
-  {{> estimate-ring}}
+  {{> estimate-art}}
   <div class="o-estimate__inner a-inview">
     <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Ready to</span> <span class="a-section__row">clear it out?</span></h2>
     <p class="a-lede">Book a pickup and tell us what's still good. Want to check an item first? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a>.</p>
-    <a class="a-button -cream -large" href="book.html">Book a pickup<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="o-estimate__actions">
+      <a class="a-button -cream -large" href="book.html">Book a pickup<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="a-button -glass -large" href="tel:+16035550142" aria-label="Give us a call at (603) 555-0142" data-call-here><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-num">(603) 555-0142</span></a>
+    </div>
   </div>
 </section>
 

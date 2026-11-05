@@ -24,8 +24,8 @@
 <link rel="preload" href="/assets/fonts/biosans-extrabold.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="/assets/fonts/biosans-light.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="/assets/fonts/biosans-regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/images/banners/page-street-1000.webp 1000w, /assets/images/banners/page-street-1600.webp 1600w, /assets/images/banners/page-street-2200.webp 2200w, /assets/images/banners/page-street-2400.webp 2400w" imagesizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw" media="(min-width: 641px)" fetchpriority="high">
-<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/images/banners/page-street-phone-500.webp 500w, /assets/images/banners/page-street-phone-800.webp 800w" imagesizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw" media="(max-width: 640px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/images/banners/banner-empty-1000.webp 1000w, /assets/images/banners/banner-empty-1600.webp 1600w, /assets/images/banners/banner-empty-2200.webp 2200w" imagesizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw" media="(min-width: 641px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/images/banners/banner-empty-phone-500.webp 500w, /assets/images/banners/banner-empty-phone-800.webp 800w" imagesizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw" media="(max-width: 640px)" fetchpriority="high">
 <link rel="stylesheet" href="/assets/global.css">
 <script src="/assets/global.js" defer></script>
 <script type="application/ld+json">
@@ -122,10 +122,10 @@
 <div class="t-notFound">
 <!-- The photo is logged stock, must-replace. Words: content/copy.md, 404. tools/build.py writes every local path on this page from the site root, because a host serves it at whatever address was asked for. -->
 
-<!-- ===== 404: page banner. The empty truck parked on the fold: copy.md's "like the truck after a drop-off". One Book now, so no estimate band with a second one ===== -->
+<!-- ===== 404: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    <picture><source media="(max-width: 640px)" type="image/webp" srcset="/assets/images/banners/page-street-phone-500.webp 500w, /assets/images/banners/page-street-phone-800.webp 800w" sizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw"><source type="image/webp" srcset="/assets/images/banners/page-street-1000.webp 1000w, /assets/images/banners/page-street-1600.webp 1600w, /assets/images/banners/page-street-2200.webp 2200w, /assets/images/banners/page-street-2400.webp 2400w" sizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw"><img class="o-pageBanner__img" src="/assets/images/banners/page-street.jpg" width="1000" height="435" alt="A sunny street of old wooden houses with a brick sidewalk" fetchpriority="high" decoding="async"></picture>
+    <picture><source media="(max-width: 640px)" type="image/webp" srcset="/assets/images/banners/banner-empty-phone-500.webp 500w, /assets/images/banners/banner-empty-phone-800.webp 800w" sizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw"><source type="image/webp" srcset="/assets/images/banners/banner-empty-1000.webp 1000w, /assets/images/banners/banner-empty-1600.webp 1600w, /assets/images/banners/banner-empty-2200.webp 2200w" sizes="(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw"><img class="o-pageBanner__img" src="/assets/images/banners/banner-empty.jpg" width="1000" height="435" alt="An empty basement with white walls, square pillars and a clear wood floor" fetchpriority="high" decoding="async"></picture>
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -140,7 +140,6 @@
     </div>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal"><svg class="m-truck" viewBox="0 62 1064 558" aria-hidden="true" focusable="false"><use href="#qh-shadow"/><use href="#qh-chassis"/><g transform="translate(220 540)"><use href="#qh-wheelR"/><use href="#qh-wheelLight"/></g><g transform="translate(360 540)"><use href="#qh-wheelR"/><use href="#qh-wheelLight"/></g><g transform="translate(862 540)"><use href="#qh-wheelF"/><use href="#qh-wheelLight"/></g><use href="#qh-fender"/><use href="#qh-back"/><use href="#qh-side"/><use href="#qh-cabin"/></svg></div>
 </section>
 
 <!-- ===== 404: the ways on. The same slim rising band and chips as Services' index, which also gives the truck its fold ===== -->
@@ -159,10 +158,16 @@
 
 <footer class="o-footer">
   <div class="o-footer__inner">
-    <div class="o-footer__contact">
-      <a class="o-footer__phone" href="tel:+16035550142">(603) 555-0142</a>
-      <p class="o-footer__hours">Mon to Sat, 7am to 7pm</p>
-      <a class="o-footer__email" href="mailto:quickhaul@example.com">quickhaul@example.com</a>
+    <div class="o-footer__lead">
+      <div class="o-footer__brand">
+        <a class="o-footer__logo" href="/index.html"><img class="o-footer__mark" src="/assets/images/brand/quickhaul-mark.png" width="234" height="234" alt="Quick Haul home" loading="lazy" decoding="async"></a>
+        <p class="o-footer__fact">Junk removal and demo across Massachusetts and New&nbsp;Hampshire</p>
+      </div>
+      <div class="o-footer__contact">
+        <a class="o-footer__phone" href="tel:+16035550142"><svg class="o-footer__icon" aria-hidden="true"><use href="#i-phone"/></svg>(603) 555-0142</a>
+        <a class="o-footer__email" href="mailto:quickhaul@example.com">quickhaul@example.com</a>
+        <p class="o-footer__hours">Mon to Sat, 7am to 7pm</p>
+      </div>
     </div>
     <div class="o-footer__cols">
       <div class="m-footerCol">
@@ -184,7 +189,7 @@
           <li><a class="m-footerCol__link" href="/faq.html">FAQ</a></li>
         </ul>
       </div>
-      <div class="m-footerCol -wide">
+      <div class="m-footerCol">
         <h2 class="m-footerCol__title">Quick Haul</h2>
         <ul class="m-footerCol__list">
           <li><a class="m-footerCol__link" href="/about.html">About</a></li>
@@ -198,15 +203,11 @@
     <div class="o-footer__base">
       <!-- social profile URLs not given yet: bare platform addresses until Shawn sends them (content/placeholders.md) -->
       <ul class="o-footer__social">
-        <li><a class="a-socialPill" href="https://www.facebook.com/" target="_blank" rel="noopener"><svg class="a-socialPill__icon -facebook" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><a class="a-socialPill" href="https://www.instagram.com/" target="_blank" rel="noopener"><svg class="a-socialPill__icon -instagram" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><a class="a-socialPill" href="https://www.tiktok.com/" target="_blank" rel="noopener"><svg class="a-socialPill__icon -tiktok" aria-hidden="true"><use href="#i-tiktok"/></svg>TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a class="a-socialIcon" href="https://www.facebook.com/" target="_blank" rel="noopener"><svg class="a-socialIcon__svg" aria-hidden="true"><use href="#i-facebook"/></svg><span class="sr-only">Facebook (opens in a new tab)</span></a></li>
+        <li><a class="a-socialIcon" href="https://www.instagram.com/" target="_blank" rel="noopener"><svg class="a-socialIcon__svg" aria-hidden="true"><use href="#i-instagram"/></svg><span class="sr-only">Instagram (opens in a new tab)</span></a></li>
+        <li><a class="a-socialIcon" href="https://www.tiktok.com/" target="_blank" rel="noopener"><svg class="a-socialIcon__svg" aria-hidden="true"><use href="#i-tiktok"/></svg><span class="sr-only">TikTok (opens in a new tab)</span></a></li>
       </ul>
-      <p class="o-footer__fact">Junk removal and demo across Massachusetts and New&nbsp;Hampshire</p>
-      <div class="o-footer__legal">
-        <a class="a-link" href="#main"><span class="a-link__text">Back to top</span></a>
-        <p class="o-footer__credit">Created with love by Digital Heroes</p>
-      </div>
+      <a class="o-footer__credit" href="https://digitalheroesco.com/" target="_blank" rel="noopener">Created with love by <span class="o-footer__creditName">Digital Heroes</span><span class="sr-only"> (opens in a new tab)</span></a>
     </div>
   </div>
 </footer>

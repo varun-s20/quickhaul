@@ -6,15 +6,15 @@ og_image_alt: A white pickup truck piled high with black trash bags
 schema: pricing.json
 estimate: no
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-pricing banner-pricing-phone
 -->
 <div class="t-pricing">
 <!-- Every price, load size and rule here is a placeholder (data/prices.json, content/placeholders.md); every photo is logged stock, must-replace. Words: content/copy.md, Pricing. -->
 
-<!-- ===== Pricing: page banner. Heading and one line, the truck parked on the fold with half a load ===== -->
+<!-- ===== Pricing: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-pricing" phone="banner-pricing-phone" class="o-pageBanner__img" alt="A storage room crowded with tools, drums, shelving and a mower" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -26,7 +26,6 @@ preload_picture: page-street page-street-phone
     <p class="o-pageBanner__line a-reveal">You pay for how much of the truck your junk fills. What each load holds, what's in the price and what can change it.</p>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner}}</div>
 </section>
 
 <!-- ===== Pricing: jump chips ===== -->
@@ -176,11 +175,14 @@ preload_picture: page-street page-street-phone
 
 <!-- ===== Pricing: estimate band, in its own words, with Shawn's agreed call line. The meta above turns the footer's band off ===== -->
 <section class="b-band -slate o-estimate" aria-labelledby="estimate-title">
-  {{> estimate-ring}}
+  {{> estimate-art}}
   <div class="o-estimate__inner a-inview">
     <h2 class="a-section" id="estimate-title"><span class="a-section__row -light">Know your load?</span> <span class="a-section__row">Book it</span></h2>
     <p class="a-lede">Pick a day online in a couple of minutes. Need help booking or have questions? <a class="a-inlineLink" href="tel:+16035550142">Give us a call</a></p>
-    <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="o-estimate__actions">
+      <a class="a-button -cream -large" href="book.html">Book now<svg class="a-button__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="a-button -glass -large" href="tel:+16035550142" aria-label="Give us a call at (603) 555-0142" data-call-here><svg class="a-button__arrow" aria-hidden="true"><use href="#i-phone"/></svg><span class="a-num">(603) 555-0142</span></a>
+    </div>
   </div>
 </section>
 

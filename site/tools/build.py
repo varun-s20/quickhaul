@@ -210,9 +210,9 @@ def price_offers():
     return json.dumps([{'@type': 'Offer', 'name': c['label'], 'price': str(c['price']), 'priceCurrency': 'USD', 'description': c['size'] + ' ' + c['holds']} for c in data['cards']], indent=2, ensure_ascii=False)
 
 
-def block_estimate_ring():
-    """The estimate band's faint ring, for a page that prints the band in its own words: one copy, in the footer partial."""
-    return re.search(r'<svg class="o-estimate__glyph".*?</svg>', read(SRC, 'partials', 'footer.html'), re.S).group(0)
+def block_estimate_art():
+    """The estimate band's photos, for a page that prints the band in its own words: one copy, in the footer partial."""
+    return re.search(r'<!-- estimate-art:start -->.*?<!-- estimate-art:end -->', read(SRC, 'partials', 'footer.html'), re.S).group(0)
 
 
 def block_town_list():
@@ -231,80 +231,22 @@ def block_town_list():
     return '\n'.join(groups)
 
 
-# Map window, in degrees. The frame is square, so the latitude span is the longitude span at 42.75N (cos = .734).
-# Cropped to the towns (was -71.62 to -70.98, critic r1: empty corners, crowded at 390): 18% more room between the dots.
-MAP_W, MAP_E, MAP_N = -71.56, -71.02, 42.94
-MAP_S = MAP_N - (MAP_E - MAP_W) * .734
-# Which side of the dot each label sits on, so no name crosses the state line (critic r1) and close neighbours read apart.
-# Right is the default. Salem goes left and Methuen right because each sits just inside the line on that side.
-MAP_LEFT = {'Dracut', 'Lowell', 'Nashua', 'Pelham', 'Salem', 'Haverhill'}   # Dracut: on its right, the river touched the T (critic, Contact r1). Londonderry: on its left, the river ran through the name
-# The state line, roughly, as a drawing rather than survey data.
-# (-71.17, 42.795) was -71.18: 15 more units between Salem's dot and the line, 2px at 390 (critic, hub). It's a drawing, and its towns are placeholders.
-MAP_BORDER = [(-71.62, 42.70), (-71.30, 42.70), (-71.25, 42.73), (-71.17, 42.795), (-71.13, 42.835), (-71.03, 42.875), (-70.98, 42.89)]
-# The Merrimack, roughly, unlabelled: public geography that ties the towns together, drawn rather than surveyed (critic r2: the map carried too little for its size).
-# It passes under Lawrence and its label and turns up east of them: through the town it ran over the dot and into the L (critic, Contact r1). Less true to the river there, and it's only ever a drawing.
-MAP_RIVER = [(-71.46, 43.0), (-71.47, 42.85), (-71.456, 42.77), (-71.425, 42.677), (-71.35, 42.645), (-71.31, 42.648), (-71.26, 42.66), (-71.1618, 42.682), (-71.0875, 42.687), (-71.0348, 42.697), (-71.0225, 42.742), (-70.98, 42.78)]
-# 56 units is 47px at 1440. Close neighbours' hit areas are shifted to meet instead of overlap, so the mouse gets the name it's on: Lawrence sits 39 units under Methuen (critic r2), Londonderry 31 under Derry (critic, hub and towns r1).
-MAP_HIT_SHIFT = {'Methuen': -9, 'Lawrence': 9, 'Derry': -13, 'Londonderry': 13}
-# Close neighbours pulled apart by a few units. Under 1025 only, in the CSS: level with their dots above that, where they have the room (critic, Contact r1: 7px high at 1440; hub: Derry and Londonderry read as one block at 390). Haverhill and Lowell sit under their dots to keep clear of the state line and the river.
-MAP_LABEL_DROP = {'Haverhill', 'Londonderry', 'Lawrence', 'Lowell'}
-MAP_LABEL_LIFT = {'Derry', 'Methuen'}
-
-
-def map_xy(lon, lat):
-    return (lon - MAP_W) / (MAP_E - MAP_W) * 800, (MAP_N - lat) / (MAP_N - MAP_S) * 800
-
-
-def map_smooth(points):
-    """A soft line through the points' midpoints, so the river doesn't read as a second faceted border."""
-    p = [map_xy(*q) for q in points]
-    d = 'M%.1f %.1f' % p[0]
-    for i in range(1, len(p) - 1):
-        d += 'Q%.1f %.1f %.1f %.1f' % (p[i][0], p[i][1], (p[i][0] + p[i + 1][0]) / 2, (p[i][1] + p[i + 1][1]) / 2)
-    return d + 'L%.1f %.1f' % p[-1]
+# Which side of its pin each town's name sits on, so close neighbours read apart at phone widths. Right is the default.
+MAP_SIDE = {'Nashua': 'top', 'Londonderry': 'left', 'Lowell': 'left', 'Dracut': 'left', 'Pelham': 'left', 'Methuen': 'left', 'Haverhill': 'top', 'Salem': 'top'}
 
 
 def block_town_map():
-    """Our own drawing of the service area: the state line, the river, the 12 placeholder towns from data/towns.json placed
-    by latitude and longitude. No third-party map: the brief's Google Map needs the real base town (content/placeholders.md).
-    The links are for the mouse only (tabindex -1, under role="img"); the same towns are real links in the hub's list."""
+    """The street map's slot. global.js turns the towns into pins on a real map when the slot nears the screen, by latitude and
+    longitude from data/towns.json. The same links show as chips if the map can't load, so a town is always one tap away."""
     data = json.loads(read(DATA, 'towns.json'))
-    # The state and the line run on past the square on both sides: a slot wider than the map (the hub's card on tablets) shows more of the same, not a floating shape with its edges in view. A square slot clips them, as it always did.
-    line = [map_xy(*p) for p in MAP_BORDER]
-    line = [(-2400, line[0][1])] + line + [(2400, line[-1][1])]
-    border = ' '.join('%.1f,%.1f' % p for p in line)
-    north = 'M-2400 -800H2400V%.1fL%s Z' % (line[-1][1], ' '.join('%.1f %.1f' % p for p in reversed(line)))
-    spots = []
-    for t in data['towns']:
-        x, y = map_xy(t['lon'], t['lat'])
-        spots.append({'town': t, 'name': t['name'], 'x': x, 'y': y, 'left': t['name'] in MAP_LEFT})
-    places = []
-    for s in spots:
-        t, name, x, y = s['town'], s['name'], s['x'], s['y']
-        wide = len(name) * 15   # the label's width at the desktop size, near enough for a hit area
-        top = y - 28 + MAP_HIT_SHIFT.get(name, 0)
-        if s['left']:
-            tx, anchor = x - 14, ' text-anchor="end"'
-            hit = (x - 14 - wide, top, wide + 21, 56)
-        else:
-            tx, anchor = x + 14, ''
-            hit = (x - 7, top, wide + 21, 56)
-        nudge = ' -drop' if name in MAP_LABEL_DROP else ' -lift' if name in MAP_LABEL_LIFT else ''
-        mark = '<rect class="m-map__dot" x="%.1f" y="%.1f" width="10" height="10" rx="5"/><text class="m-map__town%s" x="%.1f" y="%.1f"%s>%s</text>' % (x - 5, y - 5, nudge, tx, y + 6, anchor, esc(name))
-        places.append(
-            '      <a class="m-map__place m-map__link" href="service-area/%s.html" tabindex="-1" data-place="%s"><rect class="m-map__hit" x="%.1f" y="%.1f" width="%d" height="%d"/>%s</a>'
-            % (esc(t['slug']), esc(t['slug']), hit[0], hit[1], hit[2], hit[3], mark))
+    links = '\n'.join(
+        '        <li><a class="a-chip -light" href="service-area/%s.html" data-map-town="%s" data-lat="%s" data-lon="%s" data-side="%s">%s</a></li>'
+        % (esc(t['slug']), esc(t['slug']), t['lat'], t['lon'], MAP_SIDE.get(t['name'], 'right'), esc(t['name']))
+        for t in sorted(data['towns'], key=lambda t: t['name']))
     return (
-        # 700 tall of the 800 the map's window spans: its foot was empty, with the towns crowded above (critic, hub and towns r1). The state and the river run on past it, so a slot of another shape shows more of the same
-        '<svg class="m-map" viewBox="0 0 800 700" role="img" aria-label="Map of the towns Quick Haul covers in Massachusetts and New Hampshire" focusable="false">\n'
-        '      <path class="m-map__north" d="%s"/>\n'
-        '      <path class="m-map__river" d="%s"/>\n'
-        '      <polyline class="m-map__border" points="%s"/>\n'
-        # Each name inside its own state, in the room the towns leave, so the map reads as two places: in the corners at 11px they were missed (critic, hub). Clear of the river and the line: build/tmp/p2/map_measure.py
-        '      <text class="m-map__state" x="440" y="62">New Hampshire</text>\n'
-        '      <text class="m-map__state" x="400" y="676">Massachusetts</text>\n'
-        '%s\n'
-        '    </svg>' % (north, map_smooth(MAP_RIVER + [(-70.4, 42.86)]), border, '\n'.join(places)))
+        '<div class="m-map" data-map role="group" aria-label="Map of the towns Quick Haul covers in Massachusetts and New Hampshire">\n'
+        '      <ul class="m-map__list">\n%s\n      </ul>\n'
+        '    </div>' % links)
 
 
 def faq_rows(items, indent):
@@ -408,7 +350,7 @@ BLOCKS = {
     'sum-couch': lambda: block_price_sum('eighth'),
     'sum-basement': lambda: block_price_sum('half', 'One fridge'),
     'fridge-fee': lambda: '$%d' % json.loads(read(DATA, 'prices.json'))['fridge_fee'],
-    'estimate-ring': block_estimate_ring,
+    'estimate-art': block_estimate_art,
     'review-grid': block_review_grid,
     'town-list': block_town_list,
     'town-map': block_town_map,
@@ -422,6 +364,9 @@ COVER_SIZES = {
     'hero-yard': '(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 225vw, 100vw',
     'page-street': '(min-width: 641px) and (max-width: 1024px) and (orientation: portrait) 190vw, (orientation: landscape) and (max-height: 500px) 130vw, 100vw',
 }
+
+for _n in ('services', 'pricing', 'reviews', 'donate', 'faq', 'contact', 'commercial', 'empty', 'towns'):
+    COVER_SIZES['banner-' + _n] = COVER_SIZES['page-street']
 
 _manifest = None
 
@@ -471,6 +416,7 @@ def expand(body, page):
         if name not in BLOCKS:
             sys.exit('%s: unknown block {{> %s}}' % (page, name))
         return BLOCKS[name]()
+    body = re.sub(r'\{\{>\s*([\w-]+)\s*\}\}', inc, body)
     body = re.sub(r'\{\{>\s*([\w-]+)\s*\}\}', inc, body)
 
     def pic(m):

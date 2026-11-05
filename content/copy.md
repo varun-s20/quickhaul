@@ -64,19 +64,13 @@ On every page except Book, Commercial, 404 and Privacy (Varun, 5 Nov: the lighte
 - Column: Quick Haul. About; Reviews; Donate; Contact (contact.html); Privacy (privacy.html)
 - Social pills: Facebook; Instagram; TikTok (each adds "opens in a new tab" for screen readers; profile links wait for Shawn†)
 - Fact line: Junk removal and demo across Massachusetts and New Hampshire
-- Back to top
-- Created with love by Digital Heroes
+- Created with love by Digital Heroes (links to https://digitalheroesco.com/)
 
 ### Truck labels (accessible names, one load per page as revision.md section 5 suggests)
 - Home hero: The Quick Haul truck, piled high with a sofa, boxes, a mattress, a dresser, a bike and yard waste
 - Load picker, Home and Book, changes with the chip: The Quick Haul truck carrying an eighth of a load; a quarter of a load; half a load; a full load, piled high
 - Price row, Services, Pricing and town pages: The Quick Haul truck with an eighth of a load; with a quarter of a load; with half a load; with a full load, piled high
-- Services and Pricing banners: The Quick Haul truck, half loaded, parked on the street
-- Reviews and town banners: The Quick Haul truck, a quarter loaded, parked on the street
-- FAQ, Contact and About banners: The Quick Haul truck with a small load, parked on the street
-- Donate banner: The Quick Haul truck with a dresser and a bike set apart at the curb
-- Commercial banner: The Quick Haul truck with a full load, parked on the street
-- 404 empty truck and the drawn items on seated cards: decorative, no label
+- Drawn items on seated cards: decorative, no label
 
 ---
 
@@ -631,7 +625,7 @@ No stock person here, and no name but Shawn's. This slot wants Shawn's own photo
 - The crew. A small local team, with enough hands for the job in front of them.†
 - On your property. They'll check with you first, then do the lifting. You don't need to help.†
 
-### Where we work (new, promo with the drawn map, anchor #where)
+### Where we work (new, promo with the street map, anchor #where)
 - Headline: Where / **we work**
 - Line: Both sides of the Massachusetts and New Hampshire line, at the same prices in every town.†
 - Plain line†: **In Massachusetts** Andover, Dracut, Haverhill, Lawrence, Lowell and Methuen.

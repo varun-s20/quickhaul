@@ -6,15 +6,15 @@ og_image_alt: A white pickup truck piled high with black trash bags
 schema: page.json
 estimate: no
 preload: assets/fonts/biosans-extrabold.otf, assets/fonts/biosans-light.otf, assets/fonts/biosans-regular.otf
-preload_picture: page-street page-street-phone
+preload_picture: banner-empty banner-empty-phone
 -->
 <div class="t-notFound">
 <!-- The photo is logged stock, must-replace. Words: content/copy.md, 404. tools/build.py writes every local path on this page from the site root, because a host serves it at whatever address was asked for. -->
 
-<!-- ===== 404: page banner. The empty truck parked on the fold: copy.md's "like the truck after a drop-off". One Book now, so no estimate band with a second one ===== -->
+<!-- ===== 404: page banner.  ===== -->
 <section class="o-pageBanner" aria-labelledby="page-title">
   <div class="o-pageBanner__media">
-    {{picture name="page-street" phone="page-street-phone" class="o-pageBanner__img" alt="A sunny street of old wooden houses with a brick sidewalk" sizes="100vw" eager}}
+    {{picture name="banner-empty" phone="banner-empty-phone" class="o-pageBanner__img" alt="An empty basement with white walls, square pillars and a clear wood floor" sizes="100vw" eager}}
     <span class="o-pageBanner__scrim" aria-hidden="true"></span>
   </div>
 
@@ -29,7 +29,6 @@ preload_picture: page-street page-street-phone
     </div>
   </div>
 
-  <div class="o-pageBanner__truck a-reveal">{{> truck-banner-empty}}</div>
 </section>
 
 <!-- ===== 404: the ways on. The same slim rising band and chips as Services' index, which also gives the truck its fold ===== -->

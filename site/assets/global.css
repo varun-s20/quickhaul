@@ -278,13 +278,10 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .m-loadPicker[data-level="0"] .m-loadPicker__thumb { opacity: 0; }
 @media (hover: hover) and (any-pointer: fine) { .m-loadPicker.-light .a-choice:hover .a-choice__input:not(:checked) + .a-choice__face { box-shadow: inset 0 0 0 1px var(--c-slate); color: var(--c-ink); } }
 
-.a-socialPill { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); padding: 0 1.6rem 0 1.2rem; border-radius: 5rem; box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .2); color: var(--c-cream); font: var(--w-semi) 1.4rem/1 var(--f-body); text-decoration: none; transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), transform 160ms var(--e-out); }
-.a-socialPill__icon { flex: none; width: 1.6rem; height: 1.6rem; fill: currentColor; }
-.a-socialPill__icon.-facebook { fill: #0866FF; }    /* V10: a brand's own colour on its own badge. 3.9:1 on ink, non-text */
-.a-socialPill__icon.-instagram { fill: #FF0069; }   /* 4.7:1 on ink, non-text */
-.a-socialPill__icon.-tiktok { fill: currentColor; } /* single-colour mark: cream on ink, ink on the cream hover fill */
-.a-socialPill:active { transform: scale(.97); }
-@media (hover: hover) and (any-pointer: fine) { .a-socialPill:hover { background: var(--c-cream); color: var(--c-ink); } }
+.a-socialIcon { display: grid; place-items: center; width: var(--h-button); height: var(--h-button); border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(247, 239, 236, .22); color: var(--c-cream); transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui), box-shadow var(--d-ui) var(--e-ui); }
+.a-socialIcon__svg { width: 1.8rem; height: 1.8rem; fill: currentColor; }
+.a-socialIcon:active { transform: scale(.97); }
+@media (hover: hover) and (any-pointer: fine) { .a-socialIcon:hover { background: var(--c-cream); box-shadow: none; color: var(--c-ink); } }
 
 /* ===== Chrome: preview label ===== */
 /* Off for now (Varun, 4 Nov). Must come back, or be gated, before any deploy-preview (brief; choices.md): tools/build.py PREVIEW_LABEL */
@@ -439,18 +436,16 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
    The bottom padding keeps the words above the truck on phones and portrait tablets, whatever the sentence's row count: .5244 is the drawing's height over its width (558 of 1064). Then the hero's flex centring sits them in the space that's left. */
 .o-homeHero__copy, .o-pageBanner__copy { position: relative; z-index: 4; width: 100%; padding: calc(var(--logo) - var(--h-header) + var(--s-5)) var(--gutter) calc(var(--truckW) * .5244 + var(--r-band) + var(--s-3)) var(--heroInset); container-type: inline-size; }
 .o-homeHero .a-hero, .o-pageBanner .a-hero { text-shadow: 0 .2rem 2.8rem rgba(15, 20, 28, .4); }
-/* The letters' side bearing, about 4px at 104px, set the headline's left edge inside the sentence's (critic, Reviews r1 and r2) */
-.o-pageBanner .a-hero { margin-left: -.03em; }
 .o-homeHero__line, .o-pageBanner__line { max-width: 36ch; margin-top: var(--s-4); font: var(--w-body) 1.9rem/1.35 var(--f-body); text-shadow: 0 .1rem 1.4rem rgba(15, 20, 28, .6); text-wrap: balance; }   /* balance, not pretty: the nowrap phrase and New Hampshire's nbsp left a short row at 320 and 1024 (critic, home r2) */
 /* Own width, not stretched: two 350px bars outweighed the sentence and covered the photo (critic, home r1) */
 .o-homeHero__actions, .o-pageBanner__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); margin-top: var(--s-5); }
 /* Very narrow phones: less padding, because the label and number together ran 23px past the pill at 320 and were clipped */
 @media (max-width: 379px) { .o-homeHero__actions .a-button { gap: var(--s-2); padding: 0 1.4rem; font-size: 1.5rem; } }
 /* Landscape tablets and small laptops: phone icon and number only, the pill's accessible name keeps the words. The shorter pill keeps clear of the truck's load at short window heights (critic r2: 1033px of overlap at 1025x700). Portrait has the room, so the words stay (critic, home r1) */
-@media (min-width: 641px) and (max-width: 1240px) and (orientation: landscape) { .o-homeHero__callLabel, .o-pageBanner__callLabel { display: none; } }
-.o-homeHero__truck, .o-pageBanner__truck { position: absolute; right: .8rem; bottom: calc(var(--r-band) - .6rem); z-index: 3; width: var(--truckW); pointer-events: none; }
+@media (min-width: 641px) and (max-width: 1240px) and (orientation: landscape) { .o-homeHero__callLabel { display: none; } }
+.o-homeHero__truck { position: absolute; right: .8rem; bottom: calc(var(--r-band) - .6rem); z-index: 3; width: var(--truckW); pointer-events: none; }
 /* 3.58%: the drawing's ground line sits that far up from the bottom of its viewBox (20 of 558 units). So the tyres land .6rem inside the band at any size. On the svg, not the holder, because the holder carries the roll-in's transform. */
-.o-homeHero__truck .m-truck, .o-pageBanner__truck .m-truck { transform: translateY(3.58%); }
+.o-homeHero__truck .m-truck { transform: translateY(3.58%); }
 .m-truck { display: block; width: 100%; height: auto; overflow: visible; }
 .js .o-homeHero__truck { visibility: hidden; }
 .js.is-loaded .o-homeHero__truck { visibility: visible; }
@@ -459,8 +454,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 
 @media (min-width: 641px) {
   .o-homeHero { --truckW: min(88vw, 64vh); }
-  .o-pageBanner { --truckW: min(70vw, 40vh); }
-  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__truck { right: 2.4rem; }
   .o-homeHero__line, .o-pageBanner__line { max-width: 40ch; font-size: 2.2rem; }
   .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
   /* V5: darken only where the words sit. An ellipse round the copy; the lawn, the fence and the house keep their colour. */
@@ -474,21 +468,15 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 @media (min-width: 641px) and (orientation: landscape) {
   .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: calc(var(--r-band) + 5vh); }
   .o-homeHero { --heroInset: max(var(--gutter), 5vw); }
-  .o-pageBanner { --heroInset: max(var(--gutter), 5vw); }
 }
 /* The sentence stops short of the truck beside it (measured 32px of overlap at 1024x768 before this) */
 @media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
   .o-homeHero__line, .o-pageBanner__line { max-width: 42vw; }
 }
-/* Landscape tablets: the truck was 307px at 1024x768, smaller than at 768 wide and half its size one pixel wider (critic, Reviews r2, About r1 and r2). Measured with build/tmp/p2/banner_check.py. Short phones on their side keep their own rule, below */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) {
-  .o-pageBanner { --truckW: min(38vw, 50vh); }
-}
 @media (min-width: 1025px) {
   /* 78vh and 46vw keep the truck's load clear of the lower words: measured at 1025x700 up to 2560x1300, see revision.md */
   .o-homeHero { --truckW: min(46vw, 78vh); --heroInset: 5.5vw; }
-  .o-pageBanner { --truckW: min(42vw, 70vh); --heroInset: 5.5vw; }
-  .o-homeHero__truck, .o-pageBanner__truck { right: 2.4rem; }
+  .o-homeHero__truck { right: 2.4rem; }
   .o-homeHero__copy, .o-pageBanner__copy { width: min(68vw, 96rem); }
   .o-homeHero__line, .o-pageBanner__line { max-width: 44ch; }
   /* The same two-part wash, the main ellipse over the words and the small one behind the sentence, which needs 4.5:1 where the headline needs 3:1.
@@ -502,11 +490,10 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 }
 @media (min-width: 1241px) {
   .o-homeHero { --truckW: min(52vw, 78vh, 100rem); --heroInset: 8.33vw; }
-  .o-pageBanner { --truckW: min(46vw, 70vh, 88rem); --heroInset: 8.33vw; }
 }
 @media (orientation: landscape) and (max-height: 500px) {
-  .o-homeHero, .o-pageBanner { --truckW: 42vw; min-height: 46rem; }
-  .o-homeHero__truck, .o-pageBanner__truck { right: 1.6rem; }
+  .o-homeHero { --truckW: 42vw; min-height: 46rem; }
+  .o-homeHero__truck { right: 1.6rem; }
   .o-homeHero__copy, .o-pageBanner__copy { padding-bottom: var(--r-band); }
   .o-homeHero__line, .o-pageBanner__line { max-width: 44vw; font-size: 1.7rem; }
   .o-homeHero__actions, .o-pageBanner__actions { flex-direction: row; flex-wrap: wrap; }
@@ -730,116 +717,128 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .m-promo__label { color: var(--c-chrome); font: var(--w-semi) 1.6rem/1.2 var(--f-body); }
 .m-promo__group .m-promo__chips { margin-top: var(--s-2); }
 
-/* The drawn map in the picture's slot (hub and Contact). Our own drawing, placeholder towns at public map positions. Cream under it, so the labels read as they did. It fills the slot from 1025 up and letterboxes itself. Hangs off .-map so the old pages keep their own map until they move */
-/* The ground is a touch darker than the band, slate at 3%, so the drawing reads as a panel: on the band's own cream, only a hairline held that side of the card (critic, hub) */
-.m-promo__media.-map { aspect-ratio: 8 / 7; background: linear-gradient(rgba(52, 61, 78, .02), rgba(52, 61, 78, .02)), var(--c-cream); }
-.m-promo__media.-map .m-map { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
-/* The hub: the drawing gets half the card, because it's this band's picture, and at 5 of 12 columns it read thin beside the slate and its labels ran small (critic, hub). Stacked, the words and chips come first, because under 1025 the map isn't a link and the chips are how you get to a town: first, it filled the screen at 1024 and looked tappable with no title */
-@media (min-width: 1025px) {
-  .t-area .m-promo { grid-template-columns: 1fr 1fr; }
-  /* They flow, as on phones, but stop short of the column so the row breaks at four or three: at the full width one town was left alone on its row, and as a grid the columns nearly lined up (critic, hub and towns r1) */
-  .t-area .m-promo__chips { max-width: 46rem; }
-}
-/* A hairline round the drawing: cream on the cream band, the card's edge dissolved into the page on its map side. On ::after, because the drawing paints over an inset shadow on the slot itself */
+/* The street map in the picture's slot (hub, About and Contact). global.js puts a real map in .m-map when the slot nears the screen. The land's colour sits under it, so the slot never flashes empty. If the map can't load, the towns show as chips instead */
+.m-promo__media.-map { aspect-ratio: 1; overflow: hidden; background: #F1E9E5; }
+.m-map { position: absolute; inset: 0; display: block; width: 100%; height: 100%; font-family: var(--f-body); }
+.m-map__list { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: var(--s-2); height: 100%; padding: var(--s-5); }
+.js .m-map:not(.is-failed) .m-map__list { display: none; }
+/* A hairline round the map, on ::after so it paints over the canvas */
 .m-promo__media.-map { border-radius: var(--r-image) var(--r-image) 0 0; }
-.m-promo__media.-map::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(52, 61, 78, .16); pointer-events: none; }
+.m-promo__media.-map::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(52, 61, 78, .16); pointer-events: none; }
 @media (min-width: 1025px) { .m-promo__media.-map { border-radius: 0 var(--r-image) var(--r-image) 0; } }
-@media (max-width: 1024px) {
-  .t-area .m-promo__media.-map { order: 1; border-radius: 0 0 var(--r-image) var(--r-image); }
-}
-/* The card's slate moves onto the words: under the map's cream its round corners showed a dark fringe */
+/* The hub: half the card from 1025. Stacked, the words and chips come first, then the map */
+@media (min-width: 1025px) { .t-area .m-promo { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 1024px) { .t-area .m-promo__media.-map { order: 1; border-radius: 0 0 var(--r-image) var(--r-image); } }
+/* The card's slate moves onto the words: under the map's light ground its round corners showed a dark fringe */
 .m-promo:has(.m-promo__media.-map) { background: none; }
 .m-promo:has(.m-promo__media.-map) .m-promo__copy { background: var(--c-slate); }
-/* Wider apart than the seated card's 8%, so the two states read as two places. The river is a soft band in the drawing's own units, not a hairline that could be a road (critic, hub and towns r1) */
-.m-promo__media.-map .m-map__north { fill: rgba(52, 61, 78, .11); stroke: none; }
-.m-promo__media.-map .m-map__river { fill: none; stroke: var(--c-chromeMid); stroke-width: 9; stroke-linecap: round; opacity: .32; }
-.m-promo__media.-map .m-map__border { fill: none; stroke: var(--c-slate); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
-/* Round, with a cream edge: a square read as a bullet, and square bullets retired with the old look (critic, hub and towns r1; revision.md section 1). rx is in tools/build.py */
-.m-promo__media.-map .m-map__dot { fill: var(--c-slate); stroke: var(--c-cream); stroke-width: 2px; transform: scale(1.5); transform-box: fill-box; transform-origin: center; transition: transform var(--d-ui) var(--e-ui); }
-/* Sizes in px on purpose: inside the SVG a px is one of the drawing's units, so a label keeps its place against the lines at any width. In rem they grew with the root past 1440 while the map's spacing didn't, and HAVERHILL reached the state line at 1920. 26 units on phones, 22 on tablets, 20 from 1025: measured clear of each other, the lines and the edge at 14 widths, build/tmp/p2/map_measure.py */
-.m-promo__media.-map .m-map__town { fill: var(--c-ink); font: var(--w-semi) 26px/1 var(--f-display); letter-spacing: .01em; text-transform: uppercase; stroke: var(--c-cream); stroke-width: 6px; stroke-linejoin: round; paint-order: stroke; transition: fill var(--d-ui) var(--e-ui), stroke var(--d-ui) var(--e-ui), stroke-width var(--d-ui) var(--e-ui); }
-.m-promo__media.-map .m-map__state { fill: var(--c-steel); font: var(--w-semi) 24px/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
-.m-promo__media.-map .m-map__link { pointer-events: none; }
-.m-promo__media.-map .m-map__hit { fill: transparent; }
-.m-promo__media.-map .m-map__place.is-lit .m-map__dot { transform: scale(1.8); }
-/* Lit: the name's own outline thickens into a slate tag with cream words, the same look as a lit chip's opposite. Bold alone was easy to miss, 500px from the chip that lit it (critic, hub and towns r1) */
-.m-promo__media.-map .m-map__place.is-lit .m-map__town { fill: var(--c-cream); stroke: var(--c-slate); stroke-width: 16px; }
-/* Under 1025: close neighbours pulled apart by a few units, so each pair reads as two names (critic, hub) */
-@media (max-width: 1024px) {
-  .m-promo__media.-map .m-map__town.-drop { transform: translateY(6px); }
-  .m-promo__media.-map .m-map__town.-lift { transform: translateY(-6px); }
-}
-@media (min-width: 641px) and (max-width: 1024px) {
-  .m-promo__media.-map { aspect-ratio: 4 / 3; }
-  .m-promo__media.-map .m-map__town { font-size: 22px; }
-  .m-promo__media.-map .m-map__state { font-size: 20px; }
-}
+@media (min-width: 641px) and (max-width: 1024px) { .m-promo__media.-map { aspect-ratio: 4 / 3; } }
 @media (min-width: 1025px) {
   .m-promo__media.-map { aspect-ratio: auto; }
   .m-promo:has(.m-promo__media.-map) .m-promo__copy { display: flex; flex-direction: column; justify-content: center; align-self: stretch; }
-  .m-promo__media.-map .m-map__dot { transform: none; }
-  /* The lit dot grows away from nothing: at 1.8 it nearly touched its name (critic, hub) */
-  .m-promo__media.-map .m-map__place.is-lit .m-map__dot { transform: scale(1.4); }
-  .m-promo__media.-map .m-map__town { font-size: 20px; }
-  .m-promo__media.-map .m-map__state { font-size: 18px; }
 }
-@media (min-width: 1025px) and (hover: hover) and (any-pointer: fine) { .m-promo__media.-map .m-map__link { cursor: pointer; pointer-events: auto; } }
+/* A pin: the box is the dot, so the map centres the dot on the town. The name hangs off it. ::before widens what a finger can hit without moving anything. The name's halo keeps it readable over roads and water */
+.m-map__place { position: absolute; display: block; width: 1.4rem; height: 1.4rem; color: var(--c-ink); text-decoration: none; cursor: pointer; }
+.m-map__place::before { content: ""; position: absolute; inset: -.8rem; }
+.m-map__dot { position: absolute; inset: 0; border: 2px solid var(--c-cream); border-radius: 50%; background: var(--c-slate); box-shadow: 0 1px 3px rgba(15, 20, 28, .45); transition: transform var(--d-ui) var(--e-ui), background-color var(--d-ui) var(--e-ui); }
+.m-map__town { position: absolute; top: 50%; left: calc(100% + .5rem); padding: .1rem .4rem; border-radius: .4rem; font: var(--w-semi) 1.2rem/1.2 var(--f-body); letter-spacing: .02em; white-space: nowrap; text-shadow: 0 0 2px var(--c-cream), 0 0 2px var(--c-cream), 0 0 4px var(--c-cream), 0 0 6px var(--c-cream); transform: translateY(-50%); transition: background-color var(--d-ui) var(--e-ui), color var(--d-ui) var(--e-ui); }
+.m-map__place.-left .m-map__town { right: calc(100% + .5rem); left: auto; }
+.m-map__place.-top .m-map__town { top: auto; bottom: calc(100% + .3rem); left: 50%; transform: translateX(-50%); }
+.m-map__place.is-lit { z-index: 2; }
+.m-map__place.is-lit .m-map__dot { transform: scale(1.25); }
+.m-map__place.is-lit .m-map__town { background: var(--c-slate); color: var(--c-cream); text-shadow: none; }
+.m-map__place:focus-visible { outline-offset: 1px; border-radius: 50%; }
+@media (hover: hover) and (any-pointer: fine) { .m-map__place:hover .m-map__dot { background: var(--c-ink); } }
+@media (max-width: 379px) { .m-map__town { padding: 0 .2rem; font-size: 1.1rem; letter-spacing: 0; } .m-map__place { width: 1.2rem; height: 1.2rem; } .m-map__state { display: none; } }
+@media (min-width: 641px) { .m-map__town { font-size: 1.3rem; } .m-map__place { width: 1.6rem; height: 1.6rem; } }
+@media (min-width: 1025px) { .m-map__town { font-size: 1.4rem; } }
+/* The two states' names, so the line reads as two places. Never in the way of a pin */
+.m-map__state { color: var(--c-steel); font: var(--w-semi) 1.1rem/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; text-shadow: 0 0 3px #F1E9E5, 0 0 3px #F1E9E5; pointer-events: none; }
+@media (min-width: 1025px) { .m-map__state { font-size: 1.2rem; } }
+/* The map's own controls in the site's language: round slate buttons, and the credit quiet but legible. The library's stylesheet loads after this one, hence the extra specificity */
+.m-map .maplibregl-ctrl-group { overflow: hidden; border-radius: 1.2rem; box-shadow: 0 1px 4px rgba(15, 20, 28, .3); }
+.m-map .maplibregl-ctrl-group button { width: 3.6rem; height: 3.6rem; }
+.m-map .maplibregl-ctrl-attrib { font: var(--w-body) 1.1rem/1.4 var(--f-body); background: rgba(247, 239, 236, .85); color: var(--c-steel); }
+.m-map .maplibregl-ctrl-attrib a { color: inherit; }
+.m-map .maplibregl-cooperative-gesture-screen { font-family: var(--f-body); }
+.m-map canvas:focus-visible { outline: 2px solid var(--c-slate); outline-offset: -4px; }
 
-/* ===== Estimate band (V10) ===== */
-/* Round 2: on Home, How it works lands here as three small facts (agreed scope, three steps). Inner pages show the same band without the list. No call line: the footer's number sits right below (critic r1). */
-.o-estimate { overflow: hidden; text-align: center; }
-/* -40deg: unturned, the ring's tail ended in a hard cut on the page's centre line, at the band's foot, and read as an accident (critic, home v3 r1). Turned, the three arrowheads sit round the words and the foot of the ring is a clean curve */
-.o-estimate__glyph { position: absolute; top: 50%; left: 50%; width: 76rem; max-width: 170vw; color: var(--c-cream); opacity: .07; transform: translate(-50%, -50%) rotate(-40deg); pointer-events: none; }
-.o-estimate__inner { position: relative; display: flex; flex-direction: column; align-items: center; }
-.o-estimate__steps { display: grid; gap: var(--s-4); max-width: 112rem; margin-top: var(--s-6); }
-/* Phones and tablets: the band is shorter than the ring, so the turn that suits 1440 cut an arrowhead on the band's top edge, a small notch (critic, hub and towns r1). At -30deg the edges cross the ring's plain curve */
-@media (max-width: 1024px) { .o-estimate__glyph { transform: translate(-50%, -50%) rotate(-30deg); } }
-/* Phones: the ring whole inside the band, because at 170vw it cropped into arcs nobody could read as the logo's arrows (critic, FAQ r1, Contact r1) */
-@media (max-width: 640px) { .o-estimate__glyph { max-width: 96vw; } }
-@media (min-width: 641px) { .o-estimate__steps { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); } }
-.o-estimate .a-button { margin-top: var(--s-6); }
+/* ===== Estimate band: the closing call ===== */
+/* Words on the slate, and what the job leaves behind coming up out of it, with the mess it started as on a snapshot. Phones and tablets stack words, then photo. The art comes first in the source and is decorative, so the order only changes what's seen */
+.o-estimate { display: flex; flex-direction: column; overflow: hidden; padding: var(--s-8) var(--gutter) 0; }
+.o-estimate__inner { position: relative; z-index: 2; order: 1; width: 100%; min-width: 0; container-type: inline-size; }
+/* 11.4cqi: KNOW YOUR LOAD?, the longest row at 7.9em, just fits its column at any width */
+.o-estimate .a-section { font-size: min(8rem, 11.4cqi); }
+.o-estimate .a-lede { max-width: 56rem; text-wrap: pretty; }
+.o-estimate__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
+.o-estimate__actions .a-button { flex: 1 1 100%; }
+.o-estimate__steps { display: grid; gap: var(--s-4); margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--c-rule); counter-reset: step; }
+.o-estimate__steps .m-fact { position: relative; min-height: 3.2rem; padding-left: 4.4rem; counter-increment: step; }
+.o-estimate__steps .m-fact::before { content: counter(step); position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--c-chromeMid); font: var(--w-semi) 1.4rem/1 var(--f-mono); }
+.o-estimate__art { position: relative; order: 2; aspect-ratio: 4 / 3; margin: var(--s-5) calc(var(--gutter) * -1) 0; }
+.o-estimate__photo { position: absolute; inset: 0; -webkit-mask-image: linear-gradient(transparent, #000 38%); mask-image: linear-gradient(transparent, #000 38%); }
+.o-estimate__photo::after { content: ""; position: absolute; inset: 0; background: rgba(52, 61, 78, .14); }
+.o-estimate__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.o-estimate__tag { position: absolute; bottom: var(--s-3); left: var(--s-3); z-index: 1; padding: .5rem 1.2rem; border-radius: var(--r-pill); background: var(--c-cream); color: var(--c-ink); font: var(--w-semi) 1.3rem/1.2 var(--f-body); }
+.o-estimate__tag.-after { right: var(--s-4); bottom: var(--s-4); left: auto; z-index: 2; }
+/* The snapshot: the mess the job starts from, set down on the cleared room with a little tilt. The holder carries the reveal, which ends on transform: none, so the tilt lives on the card inside it */
+.o-estimate__before { position: absolute; bottom: var(--s-4); left: var(--gutter); z-index: 3; width: 52%; max-width: 40rem; }
+.o-estimate__snap { position: relative; overflow: hidden; aspect-ratio: 1.45; border: .4rem solid var(--c-cream); border-radius: 1.8rem; background: var(--c-cream); box-shadow: 0 1.6rem 4rem rgba(15, 20, 28, .45); transform: rotate(-3deg); }
+.o-estimate__snapImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 480px) { .o-estimate__actions .a-button { flex: 0 1 auto; } }
+@media (min-width: 641px) {
+  .o-estimate { padding-top: var(--s-9); }
+  .o-estimate__art { aspect-ratio: 2 / 1; }
+  .o-estimate__before { width: 38%; }
+}
+@container (min-width: 56rem) {
+  .o-estimate__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
+  .o-estimate__steps .m-fact { padding: 4.4rem 0 0; }
+}
+/* From 900 the band is one row: words left, the cleared room filling the right and fading into the slate behind them, the snapshot bridging the two */
+@media (min-width: 900px) {
+  .o-estimate { justify-content: center; min-height: 56rem; padding: var(--s-9) var(--gutter); }
+  .o-estimate__inner { width: 50%; margin-left: max(0rem, calc((100% - 134.4rem) / 2)); }
+  .o-estimate__art { position: absolute; inset: 0; order: 0; aspect-ratio: auto; margin: 0; }
+  .o-estimate__photo { left: 47%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 34%); mask-image: linear-gradient(90deg, transparent, #000 34%); }
+  .o-estimate__before { bottom: var(--s-7); left: 53%; width: min(26vw, 44rem); max-width: none; }
+  .o-estimate__tag.-after { right: max(var(--gutter), calc((100% - 134.4rem) / 2)); bottom: var(--s-7); }
+}
 
 /* ===== Inner pages: the pattern every inner page follows (design/revision.md, inner-page pattern) ===== */
-/* ---- banner: the hero's recipe, shorter. Photo, words, truck parked on the fold. Shared rules sit with the hero above ---- */
-/* 520px at 1440, inside V5's 440 to 580: heading and one line, no pills, so the next band is in view on the first screen and it doesn't read as a second homepage hero (critic r2-1, r2-2). Phones let the words and the truck set the height. */
-.o-pageBanner__img { object-position: 50% 62%; }
-/* The foot of the crop from 1025 up: the brick walk and the road show under the truck, so it has ground to stand on (revision.md section 7; critic, Services r1: "barely shows somewhere a truck could park") */
-@media (min-width: 1025px) { .o-pageBanner__img { object-position: 50% 100%; } }
+/* ---- banner: a full-bleed photo of its own for each kind of page, with the words laid over it. Shared rules sit with the hero above. The homepage alone keeps a truck ---- */
+.o-pageBanner { --truckW: 0rem; justify-content: flex-end; min-height: min(60rem, 72svh); }
+.o-pageBanner__img { object-position: 50% 50%; }
+/* The words on the page's axis, on every page but Home. Home keeps its words left and its truck right */
+.o-pageBanner__copy { width: 100%; text-align: center; }
+.o-pageBanner__line { margin: var(--s-4) auto 0; }
+.o-pageBanner__actions { align-items: center; justify-content: center; }
 .a-hero.-banner { font-size: min(10.4rem, 15.4cqi, 13.4vh); }   /* 15.4cqi: "SERVICES" and the longer titles keep to two rows inside the column */
 /* The long rows: SOMEONE WANTS IT runs about 9.2em, the longest of them. It fits at 10.4cqi and keeps the title to two rows (conventions) */
 .a-hero.-long { font-size: min(8.4rem, 10.4cqi, 12vh); }
-/* Phones: stops above the truck, and as light as the words allow, so the street keeps its colour (critic r2-2). Lightest over the headline, which needs 3:1; darkest behind the sentence, which needs 4.5:1. Sampled: revision.md.
-   The dark part starts at 24%, was 33%: the pages with a long title set it smaller, so their sentence sits higher, about 26% down, and read 3.7:1 (build/tmp/v3/banner_check.py, 5 Nov) */
-.o-pageBanner__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 20, 28, .46) 0%, rgba(15, 20, 28, .5) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
-@media (min-width: 641px) {
-  /* Stops well short of the truck and the far houses, so the street keeps its evening sun. Sampled: revision.md */
-  .o-pageBanner__scrim { background: radial-gradient(ellipse 30% 15% at 28% 59%, rgba(15, 20, 28, .25) 0%, rgba(15, 20, 28, .19) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
-}
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
-  .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .62) 0%, rgba(15, 20, 28, .6) 58%, rgba(15, 20, 28, .1) 76%, rgba(15, 20, 28, 0) 86%); }
-}
-/* Landscape tablets: a shorter banner, so the sentence sits lower and the small wash follows it (measured 4.44:1 without this) */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
-  .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .2) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
+/* Phones and portrait tablets: the photo clear at the top, the words anchored at the foot. The wash is measured up from the foot in rem, because the words are a fixed height from there whatever the photo or the window */
+.o-pageBanner__copy { padding-top: calc(var(--logo) - var(--h-header) + var(--s-6)); padding-bottom: calc(var(--r-band) + var(--s-6)); }
+.o-pageBanner__scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15, 20, 28, .84) 0, rgba(15, 20, 28, .74) 30rem, rgba(15, 20, 28, .62) 42rem, rgba(15, 20, 28, .3) 56rem, rgba(15, 20, 28, .3) 100%); }
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) { .o-pageBanner { min-height: min(68rem, 58svh); } }
+/* Landscape and up: the wash sits behind the centred words, wide enough for the longest title, SOMEONE WANTS IT, and both sides of the photo keep their colour */
+@media (min-width: 641px) and (orientation: landscape), (min-width: 1025px) {
+  .o-pageBanner { justify-content: center; min-height: 0; }
+  .o-pageBanner__copy { padding-top: var(--s-7); padding-bottom: calc(var(--r-band) + var(--s-6)); }
+  .o-pageBanner__line { max-width: 56ch; }
+  .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .32) 0, rgba(15, 20, 28, 0) 26%), radial-gradient(ellipse 66% 100% at 50% 46%, rgba(15, 20, 28, .78) 0, rgba(15, 20, 28, .72) 58%, rgba(15, 20, 28, .4) 84%, rgba(15, 20, 28, .2) 100%); }
 }
 @media (min-width: 1025px) {
   .o-pageBanner { min-height: min(52rem, calc(100svh - var(--h-header) - 8rem)); }
-  .o-pageBanner__copy { padding-top: var(--s-6); padding-bottom: calc(var(--r-band) + var(--s-5)); }
 }
-/* Short banner: utility pages (Book, FAQ, Contact, Commercial), about 440px at 1440x900 (revision.md section 5). Phones let the words and the truck set the height, as the full banner does */
+/* Short banner: utility pages (Book, FAQ, Contact, Commercial), about 440px at 1440x900 */
 @media (min-width: 1025px) {
-  .o-pageBanner.-short { min-height: min(44rem, calc(100svh - var(--h-header) - 8rem)); --truckW: min(38vw, 58vh, 72rem); }
+  .o-pageBanner.-short { min-height: min(44rem, calc(100svh - var(--h-header) - 8rem)); }
   .o-pageBanner.-short .o-pageBanner__copy { padding-top: var(--s-5); padding-bottom: calc(var(--r-band) + var(--s-4)); }
 }
-/* Book: no truck (revision.md, Book), so the room the words keep for one goes too. Must follow .-short, which sets the same value */
-.o-pageBanner.-noTruck { --truckW: 0rem; }
-/* And no street to keep clear for a truck: the words run down to the fold, so on phones and portrait tablets the scrim does too. It faded out behind the sentence, 1.23:1 at 768x1024 and 1.96:1 at 390x844 */
-@media (max-width: 640px), (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
-  .o-pageBanner.-noTruck .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .46) 0%, rgba(15, 20, 28, .62) 40%, rgba(15, 20, 28, .62) 100%); }
+/* Phones on their side */
+@media (orientation: landscape) and (max-height: 500px) {
+  .o-pageBanner__copy { padding-top: var(--s-7); padding-bottom: calc(var(--r-band) + var(--s-4)); }
 }
-/* Donate's drawing is 1464 units wide to the truck's 1064, with the dresser and bike at the curb. Its box grows by that ratio, so the truck stays the size it is on other banners. Phones: the whole drawing fits the width and the truck goes smaller */
-.o-pageBanner__truck.-wide { width: calc(var(--truckW) * 1.376); }
-@media (max-width: 640px) { .o-pageBanner__truck.-wide { width: var(--truckW); } }
 
 /* ---- form parts: every form on the site. Bio Sans, round corners, 56px fields. "Optional" is written into the label (copy.md) ---- */
 .a-button.-block { width: 100%; }
@@ -1084,10 +1083,6 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 
 /* ---- About: the call pill. Its label and number run about 300px at the large pill's padding, and the promo's words are 302px wide at 390. Tighter on phones; number and icon alone under 380, the aria-label still says "Call Shawn" ---- */
 .m-promo__callLabel { display: inline; }
-/* These two sentences run three and four rows at 1366 and up, so their last rows fall below the shared small wash: 4.34:1 at 1440 on About, 4.47 on Reviews at 1400x1050. A taller, lower one, for these pages only (build/tmp/p2/banner_check.py) */
-@media (min-width: 1025px) {
-  .t-about .o-pageBanner__scrim, .t-reviews .o-pageBanner__scrim, .t-pricing .o-pageBanner__scrim, .t-services .o-pageBanner__scrim { background: radial-gradient(ellipse 32% 22% at 27% 66%, rgba(15, 20, 28, .22) 0%, rgba(15, 20, 28, .17) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .5) 0%, rgba(15, 20, 28, .46) 62%, rgba(15, 20, 28, .18) 84%, rgba(15, 20, 28, 0) 100%); }
-}
 @media (max-width: 640px) { .t-about .m-promo__action { padding: 0 1.6rem; font-size: 1.5rem; } }
 @media (max-width: 379px) { .m-promo__callLabel { display: none; } }
 
@@ -1133,45 +1128,17 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .o-donateBand__words { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); }
   .o-donateBand__facts { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-/* The drawing is 1.376 times the truck's width (request 002), and the words run long here, so the truck comes down a little to keep clear of them. Measured from 1026x700 up with a 15px scrollbar too (build/tmp/p2/banner_check.py --gutter 15), because the words hang off the left and the truck off the right: at 57vh the plant came 16px from IT at 1440x900 with one showing (critic, Donate r1), and at 38vw it touched on tall windows, 1280x1024 and 1600x1200 among them. 33vw and 54vh held about 48px at every shape, tall ones too. Since the lighter load (Studio Lead's ruling, 5 Nov) the plant's gone and the same window reads 64px or more, so the width stayed: nothing needed it bigger */
-@media (min-width: 1025px) { .t-donate .o-pageBanner { --truckW: min(33vw, 54vh, 72rem); } }
-/* Its drawing is wider than any other banner's, so it stays at the old size on landscape tablets: 14px clear at 1024x768 */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) { .t-donate .o-pageBanner { --truckW: min(70vw, 40vh); } }
-/* Phones: the page's idea is the dresser and bike set apart, and at this size they were 37 and 48px beside a 280px truck (critic, Donate r1). So the truck comes down, the pair goes up and off the band's rounded corner, and they stand on one ground line. In the drawing's own units */
-.m-truck__rig, .m-truck__curb { transform-box: view-box; }
-@media (max-width: 640px) {
-  .t-donate .m-truck__rig { transform: scale(.8); transform-origin: 1064px 600px; }
-  .t-donate .m-truck__curb { transform: translateX(118px) scale(1.2); transform-origin: -392px 600px; }
-}
 /* The H1 is the page's biggest line, as on the town pages, and a clear step above the bands under it: its long row can't reach the usual heading size. 82 and 64px at 1440, 36 and 30px at 390 (revision.md's 64px slim band; critic, Donate r1: 82 against 72 read as two headlines) */
 .t-donate { --t-section: min(5.6rem, 7.8vw); }
 @media (min-width: 1025px) { .t-donate { --t-section: min(6.4rem, 4.45vw); } }
 @media (max-width: 640px) { .t-donate { --t-section: min(5rem, 7.7vw); } }
 /* Phones on their side: the H1 is sized off the height there, so the band headings follow it */
 @media (orientation: landscape) and (max-height: 500px) { .t-donate { --t-section: 9.4vh; } }
-/* Landscape tablets: the long row ran over the load, 14px clear of the plant at 1024x768 */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 501px) {
-  .t-donate .a-hero.-long { font-size: min(7.4rem, 10.4cqi, 12vh); }
-  /* The truck is parked on the fold, so more room under the words lifts them off the load */
-  .t-donate .o-pageBanner__copy { padding-bottom: calc(var(--r-band) + 5vh + 3.2rem); }
-}
 
 /* ---- FAQ: four groups in three bands. revision.md asks for one list with small labels, and offers a seated card a group if it reads flat. Built that way it read as four identical grey cards with captions for headings (critic, FAQ r1, 7.75): group names now wear the headline system, and the middle band is slate, with the load lined up on the fold, the move the truck makes on every banner. Reading order is still copy.md's ---- */
 /* 39px at 390, a clear step under the 54px H1, and 64px at 1440, revision.md's size for a slim band. Phones on their side: the H1 goes by the height, so these do too */
 .t-faq { --t-sectionSmall: min(6.4rem, 10vw); }
 @media (orientation: landscape) and (max-height: 500px) { .t-faq { --t-sectionSmall: 9.4vh; } }
-/* The sentence sits lower here than on a full banner, 66 to 79% down, so it fell under the shared small wash and read 3.74:1 at 1440 on the sunlit shingles. A wash where it actually is, from 1025 up, where the crop runs to the foot of the photo (build/tmp/p2/banner_check.py) */
-@media (min-width: 1025px) {
-  .t-faq .o-pageBanner__scrim { background: radial-gradient(ellipse 34% 24% at 20% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .21) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
-}
-/* Landscape tablets: the two big rows fill the crop's bright top, a window and sunlit shingle under QUESTIONS, 2.59:1 at its worst pixel at 1024x768 (critic, FAQ r1) */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
-  .t-faq .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .26) 0%, rgba(15, 20, 28, .2) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 54% 80% at 21% 42%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
-}
-/* Phones: the light word sits on sky and roof, 3.24:1 at its worst pixel at 390 (critic, FAQ r2). The shared stops, a touch deeper at the top */
-@media (max-width: 640px) {
-  .t-faq .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .54) 0%, rgba(15, 20, 28, .58) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
-}
 .o-faqBand .m-head { margin-bottom: var(--s-5); }
 /* A card holds its rows and nothing else, so the first row needs no line above it */
 .o-faqSet__card { max-width: 84rem; margin: 0 auto; padding: var(--s-2) var(--s-5); }
@@ -1293,23 +1260,10 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .js .m-form__often { display: none; }
 .js .m-form__often.is-open { display: block; }
 
-/* ---- Contact ---- */
-/* The light word over sunlit shingle and a window: 3.21:1 at the 99.5th percentile and 2.4 at its worst pixel at 1024x768, 2.8 at 1440. The shared washes, a little deeper over the headline (build/tmp/p2/banner_check.py, as on FAQ) */
-@media (min-width: 1025px) {
-  .t-contact .o-pageBanner__scrim { background: radial-gradient(ellipse 30% 15% at 28% 59%, rgba(15, 20, 28, .1) 0%, rgba(15, 20, 28, .08) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 50% 74% at 21% 46%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
-}
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
-  .t-contact .o-pageBanner__scrim, .t-commercial .o-pageBanner__scrim { background: radial-gradient(ellipse 36% 22% at 26% 72%, rgba(15, 20, 28, .3) 0%, rgba(15, 20, 28, .24) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 54% 80% at 21% 42%, rgba(15, 20, 28, .58) 0%, rgba(15, 20, 28, .54) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
-}
-@media (max-width: 640px) {
-  .t-contact .o-pageBanner__scrim, .t-commercial .o-pageBanner__scrim { background: linear-gradient(180deg, rgba(15, 20, 28, .54) 0%, rgba(15, 20, 28, .58) 18%, rgba(15, 20, 28, .62) 24%, rgba(15, 20, 28, .62) 54%, rgba(15, 20, 28, .08) 66%, rgba(15, 20, 28, 0) 74%); }
-}
 /* Headline, sentence and pill filled the 440px short banner, 42px under the bar and 21px over the fold at 1440. 480 gives the pill its room */
 @media (min-width: 1025px) { .t-contact .o-pageBanner.-short { min-height: min(48rem, calc(100svh - var(--h-header) - 8rem)); } }
 /* Under 380 the pill's 326px ran out of the window, cut at the phone number at 320 (build/tmp/p2/sweep.py). Icon and number alone, as on About; its aria-label still says all of it */
 @media (max-width: 379px) { .o-pageBanner__callLabel { display: none; } }
-/* Landscape tablets drop the pill's label for short windows, where the load comes near. This page's load is small and its pill is the lead action, so it keeps the words where there's height (critic, Contact r1) */
-@media (min-width: 900px) and (max-width: 1240px) and (orientation: landscape) and (min-height: 600px) { .t-contact .o-pageBanner__callLabel { display: block; } }
 /* The form band. On a seated card, because it's long and has no picture, with items out of its own hint, "one old fridge in the basement": they stand on the card's corner in the row with the heading, so no gap is left just to hold them. The fridge alone under 1025, because the sentence runs close; nothing at 320, where it would touch */
 .t-contact .a-section { scroll-margin-top: var(--s-5); }
 .t-contact .m-seatCard__art { right: var(--s-5); }
@@ -1347,12 +1301,11 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
 .o-contactMore .m-takes { color: var(--c-soft); text-wrap: balance; }
 /* Less air under it than a band usually keeps: 128px left the line floating (critic, Contact r2) */
 @media (min-width: 1025px) { .o-contactAsk { padding-bottom: var(--s-8); } }
-/* The map band: the drawing is the band's own ground, full width, and the hours sit on a slate card. overflow visible on the drawing: its state and line run on past its square, so they fill the band to both edges and up behind the card. The band clips them. Phones and tablets: card, then map */
-.o-contactMap { overflow: hidden; padding: var(--s-7) var(--gutter) 0; background: linear-gradient(rgba(52, 61, 78, .02), rgba(52, 61, 78, .02)), var(--c-cream); }
-.o-contactMap__card { position: relative; z-index: 1; padding: var(--s-6) var(--s-5); border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
-.o-contactMap__map.m-promo__media.-map { margin: var(--s-3) calc(var(--gutter) * -1) 0; border-radius: 0; background: none; }
+/* The map band: the map is the band's own ground, full width, and the hours sit on a slate card. Phones and tablets: card, then map */
+.o-contactMap { overflow: hidden; padding: var(--s-7) var(--gutter) 0; background: var(--c-cream); }
+.o-contactMap__card { position: relative; z-index: 4; padding: var(--s-6) var(--s-5); border-radius: var(--r-image); background: var(--c-slate); color: var(--c-cream); --c-focus: var(--c-chrome); --c-soft: var(--c-chrome); }
+.o-contactMap__map.m-promo__media.-map { margin: var(--s-5) calc(var(--gutter) * -1) 0; border-radius: 0; }
 .o-contactMap__map.m-promo__media.-map::after { display: none; }
-.o-contactMap .m-map { overflow: visible; }
 .o-contactFacts { display: grid; gap: var(--s-6); }
 .o-contactFacts .m-fact__title { font-size: 2.4rem; }
 .o-contactFacts .m-fact__text { margin-top: var(--s-1); font-size: 1.8rem; }
@@ -1362,18 +1315,14 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
   .o-contactFacts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }
   .o-contactMap__map.m-promo__media.-map { aspect-ratio: 16 / 11; }
 }
-/* From 900: the card floats over the map's empty west, and the drawing's own square sits to its right, so the towns stay clear of it. 38%: Nashua, the westernmost name, stays clear of the card, 150px at 1440 and 19px at 900, the narrowest (build/tmp/p2/m_contact_map.js). Its left edge is the banner's words', 120px at 1440 */
+/* From 900: the card floats over the map's west, and global.js frames the towns in the room to its right. Its left edge is the banner's words' */
 @media (min-width: 900px) {
   .o-contactMap { display: flex; align-items: center; min-height: 56rem; padding-top: var(--s-7); padding-bottom: var(--s-7); }
   .o-contactMap__card { width: min(44rem, 38%); margin-left: max(0rem, calc((100% - 120rem) / 2)); padding: var(--s-7) var(--s-6); }
-  .o-contactMap__map.m-promo__media.-map { position: absolute; top: 0; right: 0; bottom: 0; left: 38%; min-height: 0; margin: 0; aspect-ratio: auto; }
+  .o-contactMap__map.m-promo__media.-map { position: absolute; inset: 0; min-height: 0; margin: 0; aspect-ratio: auto; }
 }
 
 /* ---- Commercial ---- */
-/* A three-row sentence under a long headline, 62 to 84% down: 4.13:1 at 1440 under the shared washes. A wider wash where it is, and a deeper base that runs further right, because COMMERCIAL AND's long row reaches past the other banners' (critic, Commercial r1: 3.2:1 near x=771). Landscape tablets and phones share Contact's rules above */
-@media (min-width: 1025px) {
-  .t-commercial .o-pageBanner__scrim { background: radial-gradient(ellipse 38% 28% at 24% 73%, rgba(15, 20, 28, .12) 0%, rgba(15, 20, 28, .1) 60%, rgba(15, 20, 28, 0) 100%), radial-gradient(ellipse 58% 74% at 24% 44%, rgba(15, 20, 28, .56) 0%, rgba(15, 20, 28, .52) 62%, rgba(15, 20, 28, .2) 84%, rgba(15, 20, 28, 0) 100%); }
-}
 /* The form on a seated card, as on Contact, with what's in its own hint, "tenant left furniture and a full basement". There's no heading above this form and copy.md gives none, so the load is the band's opening: it stands in the band's top padding, on the corner away from the truck, and the strip is cut to its height (critic, Commercial r1: 128px of strip with an empty right side). The card is 120rem, the banner's left edge, 120px at 1440, so the band ties to it */
 .t-commercial .b-band.-rise { padding-top: 8rem; }
 .t-commercial .m-seatCard__art { right: auto; left: var(--s-5); gap: var(--s-1); }
@@ -1408,6 +1357,8 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
   .m-jump > li { flex: none; }
 }
 /* 404: three chips, so no swipe row. They run 297px at the usual padding and a 320 phone has 280 inside its gutters, so the third stood 3px from the glass and the row scrolled 17px (request 012) */
+/* Only four chips here, so they wrap: on phones the row hid Contact off the edge with nothing to say it scrolls */
+@media (max-width: 640px) { .t-notFound .m-jump { flex-wrap: wrap; justify-content: center; margin: 0; padding: 0; overflow: visible; } }
 @media (max-width: 379px) { .t-notFound .a-chip { padding: 0 1.6rem; } }
 
 /* ---- services page rhythm: centred lead, slate promo, three cards, two cards, slate price row, slim light band ---- */
@@ -1606,7 +1557,6 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
 @media (min-width: 1025px) { .o-homeHaul__takes { font-size: 1.8rem; } }
 .m-promo__copy > .a-link { margin-top: var(--s-2); }
 /* ---- About: the map promo. Half the card from 1025 and words first when stacked, as on the hub, because the map is the band's picture ---- */
-@media (min-width: 641px) and (max-width: 1024px) { .t-about .m-promo__media.-map { aspect-ratio: 4 / 3; } }
 @media (max-width: 1024px) { .t-about .m-promo__media.-map { order: 1; border-radius: 0 0 var(--r-image) var(--r-image); } }
 @media (min-width: 1025px) { .t-about .m-promo:has(.m-promo__media.-map) { grid-template-columns: 1fr 1fr; } }
 /* ---- Services ---- */
@@ -1637,8 +1587,6 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
 @media (min-width: 1025px) { .t-pricing .o-svcBand > .m-head .a-section__row { display: inline; } }
 /* FOUR LOADS, FOUR PRICES ran past the column on one row at 88px, and broke as FOUR LOADS, FOUR / PRICES (look at 1440) */
 .t-pricing .o-svcPrice .a-section__row { display: block; }
-/* Phones: KNOW YOUR LOAD? (7.9em) and GOT SOMETHING are the longest estimate headings. Each took three rows on the band's own size at 390 */
-@media (max-width: 640px) { .t-pricing .o-estimate .a-section, .t-about .o-estimate .a-section { font-size: 11vw; } }
 /* ---- the two worked sums: a label and a figure a row, the total stronger. A sum needs its one rule; the hairlines otherwise stay on Book ---- */
 .o-sums { display: grid; gap: var(--s-5); max-width: 120rem; margin: 0 auto; }
 .m-sumCard { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border-radius: var(--r-image); background: var(--c-cream); }
@@ -1655,44 +1603,53 @@ body:has(.m-formState.is-sent) .o-estimate { display: none; }
 @media (min-width: 641px) { .o-sums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1025px) { .m-sumCard__words { padding: var(--s-6); } .m-sum__row.-total dd { font-size: 6.4rem; } }
 
-/* ===== Footer (V10) ===== */
-/* margin-top -1px: overlaps the slate band, so a fractional boundary can't show the page's cream through as a light line (critic r1, rulings R0 A7). No room kept for the call bar: it hides while the footer is on screen. */
-.o-footer { position: relative; margin-top: -1px; padding: var(--s-8) var(--gutter) var(--s-5); overflow: hidden; background: var(--c-ink); color: var(--c-cream); --c-focus: var(--c-chrome); }
-.o-footer::before { content: ""; position: absolute; inset: 0; background: url("fx/footer-joists-1400.webp") 50% 50% / cover no-repeat; opacity: .14; pointer-events: none; }
-.o-footer__inner { position: relative; display: grid; gap: var(--s-7); }
-/* grid children may shrink, so a long email or link can never widen the page at 320 */
-.o-footer__contact, .m-footerCol { min-width: 0; }
-/* offset in em, under the brackets at either size; no skip-ink, or the brackets break the line into pieces (critic, home r1) */
-.o-footer__phone { display: inline-flex; align-items: center; min-height: 4.4rem; font: 700 3.2rem/1 var(--f-mono); letter-spacing: -.02em; text-underline-offset: .3em; text-decoration-thickness: 2px; text-decoration-skip-ink: none; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
-.o-footer__hours { margin-top: var(--s-3); color: var(--c-chrome); font-size: 1.6rem; }
-.o-footer__email { display: inline-flex; align-items: center; min-height: 4.4rem; font: 600 1.8rem/1 var(--f-body); text-underline-offset: .3rem; transition: color var(--d-ui) var(--e-ui), text-decoration-color var(--d-ui) var(--e-ui); }
-@media (hover: hover) and (any-pointer: fine) { .o-footer__phone:hover, .o-footer__email:hover { color: var(--c-chrome); text-decoration-color: transparent; } }
-.o-footer__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-5); }
-/* Phones: three lists in two columns left the last one alone with an empty half beside it (critic, home v3 r1). It takes the row, its links on the same two columns */
-@media (max-width: 640px) {
-  .m-footerCol.-wide { grid-column: 1 / -1; }
-  .m-footerCol.-wide .m-footerCol__list { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-5); }
+/* ===== Footer ===== */
+/* Clean ink: the contact block and the links read as one calm system, with the number at the size of a heading, not a poster. margin-top -1px: overlaps the band, so a fractional boundary can't show the page's cream through as a light line. */
+.o-footer { position: relative; margin-top: -1px; padding: var(--s-7) var(--gutter) var(--s-4); background: var(--c-ink); color: var(--c-cream); --c-focus: var(--c-chrome); }
+.o-footer__inner { display: grid; gap: var(--s-6); max-width: 134.4rem; margin: 0 auto; }
+.o-footer__lead, .m-footerCol, .o-footer__contact, .o-footer__brand { min-width: 0; }
+.o-footer__lead { display: grid; gap: var(--s-5); }
+.o-footer__brand { display: flex; align-items: center; gap: var(--s-4); }
+.o-footer__logo { flex: none; display: block; width: 6.4rem; border-radius: 50%; }
+.o-footer__mark { border-radius: 50%; }
+.o-footer__fact { max-width: 30rem; color: var(--c-chrome); font-size: 1.5rem; line-height: 1.4; text-wrap: pretty; }
+.o-footer__contact { display: grid; justify-items: start; }
+.o-footer__icon { flex: none; width: 1.6rem; height: 1.6rem; }
+.o-footer__phone { display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--h-button); font: 600 2rem/1 var(--f-mono); letter-spacing: -.01em; white-space: nowrap; text-decoration: none; transition: color var(--d-ui) var(--e-ui); }
+.o-footer__email { display: inline-flex; align-items: center; min-height: var(--h-button); max-width: 100%; color: var(--c-chrome); font: var(--w-body) 1.5rem/1.2 var(--f-body); overflow-wrap: anywhere; text-decoration: underline 1px; text-underline-offset: .3rem; transition: color var(--d-ui) var(--e-ui); }
+.o-footer__hours { color: var(--c-chrome); font-size: 1.5rem; line-height: 1.4; }
+@media (hover: hover) and (any-pointer: fine) {
+  .o-footer__phone:hover { color: var(--c-chrome); }
+  .o-footer__email:hover { color: var(--c-cream); }
 }
-.m-footerCol__title { font: var(--w-heavy) 1.4rem/1 var(--f-display); letter-spacing: var(--tr-nav); text-transform: uppercase; }
+.o-footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-4); }
+/* Phones: three lists in two columns left the last one alone with an empty half beside it. It takes the row, its links on the same two columns */
+@media (max-width: 640px) {
+  .m-footerCol:last-child { grid-column: 1 / -1; }
+  .m-footerCol:last-child .m-footerCol__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
+}
+.m-footerCol__title { color: var(--c-chrome); font: var(--w-semi) 1.3rem/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; }
 .m-footerCol__list { margin-top: var(--s-2); }
-.m-footerCol__link { display: inline-flex; align-items: center; min-height: var(--h-button); color: var(--c-chrome); font-size: 1.5rem; line-height: 1.2; text-decoration: underline transparent 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-nudge) var(--e-out), color var(--d-ui) var(--e-ui); }
+.m-footerCol__link { display: inline-flex; align-items: center; min-height: var(--h-button); color: var(--c-cream); font-size: 1.5rem; line-height: 1.2; text-decoration: underline transparent 1px; text-underline-offset: .3rem; transition: text-decoration-color var(--d-nudge) var(--e-out); }
 .m-footerCol__link:focus-visible { text-decoration-color: currentColor; }
-@media (hover: hover) and (any-pointer: fine) { .m-footerCol__link:hover { color: var(--c-cream); text-decoration-color: currentColor; } }
-.o-footer__base { display: grid; gap: var(--s-4); padding-top: var(--s-5); border-top: 1px solid var(--c-rule); }
+@media (hover: hover) and (any-pointer: fine) { .m-footerCol__link:hover { text-decoration-color: currentColor; } }
+.o-footer__base { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3) var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--c-rule); }
 .o-footer__social { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-.o-footer__fact { color: var(--c-chrome); font-size: 1.5rem; }
-.o-footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-5); font-size: 1.4rem; }
-.o-footer__credit { color: var(--c-chrome); }
+.o-footer__credit { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 .4em; min-height: var(--h-button); color: var(--c-chrome); font-size: 1.4rem; line-height: 1.3; text-decoration: none; transition: color var(--d-ui) var(--e-ui); }
+.o-footer__creditName { color: var(--c-cream); text-decoration: underline 1px; text-underline-offset: .3rem; }
+@media (hover: hover) and (any-pointer: fine) { .o-footer__credit:hover { color: var(--c-cream); } }
 @media (min-width: 641px) {
-  .o-footer { padding-bottom: var(--s-5); }
-  .o-footer__cols { grid-template-columns: repeat(3, 1fr); }
+  .o-footer { padding-top: var(--s-8); }
+  .o-footer__lead { grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: var(--s-6); }
+  .o-footer__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
 }
 @media (min-width: 1025px) {
-  .o-footer__inner { grid-template-columns: 5fr 7fr; }
-  .o-footer__phone { font-size: 4.4rem; }
-  .o-footer__hours { margin-top: var(--s-4); }
-  .o-footer__base { grid-column: 1 / -1; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s-6); }
+  .o-footer__inner { grid-template-columns: 5fr 7fr; column-gap: var(--s-8); }
+  .o-footer__lead { grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--s-5); }
+  .o-footer__base { grid-column: 1 / -1; }
+  /* A mouse doesn't need the phone's tap height, and the columns read tighter without it. Fine pointers only */
 }
+@media (min-width: 1025px) and (any-pointer: fine) { .m-footerCol__link { min-height: 3.6rem; } }
 
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {

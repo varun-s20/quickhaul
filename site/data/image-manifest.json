@@ -1195,5 +1195,516 @@
    "w": 800,
    "h": 800
   }
+ },
+ "cta-after": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2181,
+   1678
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/cta-after-800.webp",
+    "w": 800,
+    "h": 615
+   },
+   {
+    "file": "assets/images/banners/cta-after-1200.webp",
+    "w": 1200,
+    "h": 923
+   },
+   {
+    "file": "assets/images/banners/cta-after-1600.webp",
+    "w": 1600,
+    "h": 1231
+   },
+   {
+    "file": "assets/images/banners/cta-after-2000.webp",
+    "w": 2000,
+    "h": 1539
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/cta-after.jpg",
+   "w": 800,
+   "h": 615
+  }
+ },
+ "banner-services": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-services-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-services-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-services-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-services.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-services-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1178,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-services-phone-500.webp",
+    "w": 500,
+    "h": 675
+   },
+   {
+    "file": "assets/images/banners/banner-services-phone-800.webp",
+    "w": 800,
+    "h": 1080
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-services-phone.jpg",
+   "w": 800,
+   "h": 1080
+  }
+ },
+ "banner-pricing": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-pricing-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-pricing-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-pricing-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-pricing.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-pricing-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1184,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-pricing-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-pricing-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-pricing-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-reviews": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1043
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-reviews-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-reviews-1600.webp",
+    "w": 1600,
+    "h": 695
+   },
+   {
+    "file": "assets/images/banners/banner-reviews-2200.webp",
+    "w": 2200,
+    "h": 956
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-reviews.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-reviews-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1188,
+   1605
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-reviews-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-reviews-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-reviews-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-donate": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-donate-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-donate-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-donate-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-donate.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-donate-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   3243
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-donate-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-donate-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-donate-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-faq": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-faq-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-faq-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-faq-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-faq.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-faq-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1184,
+   1600
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-faq-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-faq-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-faq-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-contact": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-contact-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-contact-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-contact-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-contact.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-contact-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1178,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-contact-phone-500.webp",
+    "w": 500,
+    "h": 675
+   },
+   {
+    "file": "assets/images/banners/banner-contact-phone-800.webp",
+    "w": 800,
+    "h": 1080
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-contact-phone.jpg",
+   "w": 800,
+   "h": 1080
+  }
+ },
+ "banner-commercial": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1043
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-commercial-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-commercial-1600.webp",
+    "w": 1600,
+    "h": 695
+   },
+   {
+    "file": "assets/images/banners/banner-commercial-2200.webp",
+    "w": 2200,
+    "h": 956
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-commercial.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-commercial-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1180,
+   1594
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-commercial-phone-500.webp",
+    "w": 500,
+    "h": 675
+   },
+   {
+    "file": "assets/images/banners/banner-commercial-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-commercial-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-empty": {
+  "folder": "assets/images/banners",
+  "crop": [
+   3000,
+   1304
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-empty-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-empty-1600.webp",
+    "w": 1600,
+    "h": 695
+   },
+   {
+    "file": "assets/images/banners/banner-empty-2200.webp",
+    "w": 2200,
+    "h": 956
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-empty.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-empty-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   1480,
+   2000
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-empty-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-empty-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-empty-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
+ },
+ "banner-towns": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2400,
+   1044
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-towns-1000.webp",
+    "w": 1000,
+    "h": 435
+   },
+   {
+    "file": "assets/images/banners/banner-towns-1600.webp",
+    "w": 1600,
+    "h": 696
+   },
+   {
+    "file": "assets/images/banners/banner-towns-2200.webp",
+    "w": 2200,
+    "h": 957
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-towns.jpg",
+   "w": 1000,
+   "h": 435
+  }
+ },
+ "banner-towns-phone": {
+  "folder": "assets/images/banners",
+  "crop": [
+   2368,
+   3200
+  ],
+  "webp": [
+   {
+    "file": "assets/images/banners/banner-towns-phone-500.webp",
+    "w": 500,
+    "h": 676
+   },
+   {
+    "file": "assets/images/banners/banner-towns-phone-800.webp",
+    "w": 800,
+    "h": 1081
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/banners/banner-towns-phone.jpg",
+   "w": 800,
+   "h": 1081
+  }
  }
 }
