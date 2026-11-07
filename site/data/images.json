@@ -59,6 +59,15 @@
     {"name": "banner-empty", "folder": "banners", "src": "basement-cleared.jpg", "ratio": 2.3, "focus": [0.5, 0.58], "widths": [1000, 1600, 2200]},
     {"name": "banner-empty-phone", "folder": "banners", "src": "basement-cleared.jpg", "ratio": 0.74, "focus": [0.42, 0.55], "widths": [500, 800]},
     {"name": "banner-towns", "folder": "banners", "src": "fall-house-drive.jpg", "ratio": 2.3, "focus": [0.5, 0.34], "widths": [1000, 1600, 2200]},
-    {"name": "banner-towns-phone", "folder": "banners", "src": "fall-house-drive.jpg", "ratio": 0.74, "focus": [0.56, 0.36], "widths": [500, 800]}
+    {"name": "banner-towns-phone", "folder": "banners", "src": "fall-house-drive.jpg", "ratio": 0.74, "focus": [0.56, 0.36], "widths": [500, 800]},
+
+    {"name": "review-dresser", "folder": "reviews", "src": "dresser-and-chair.jpg", "ratio": 1, "focus": [0.5, 0.52], "zoom": 1.1, "widths": [400, 800, 1200]},
+    {"name": "review-house", "folder": "reviews", "src": "fall-house-drive.jpg", "ratio": 1, "focus": [0.5, 0.42], "widths": [400, 800, 1200]},
+    {"name": "crew-owner", "folder": "about", "src": "man-carrying-mattress.jpg", "ratio": 1.3333333333333333, "focus": [0.62, 0.5], "widths": [400, 800, 1200]},
+    {"name": "crew-team", "folder": "about", "src": "man-boxes-van.jpg", "ratio": 1.3333333333333333, "focus": [0.725, 0.566], "zoom": 1.9, "widths": [400, 800]},
+    {"name": "crew-property", "folder": "about", "src": "backyard-lawn-deck.jpg", "ratio": 1.3333333333333333, "focus": [0.62, 0.45], "zoom": 1.25, "widths": [400, 800, 1200]},
+    {"name": "pricing-one-item", "folder": "pricing", "src": "dresser-on-street.jpg", "ratio": 1.3333333333333333, "focus": [0.5, 0.75], "zoom": 2, "widths": [400, 800, 1200]},
+    {"name": "pricing-demo", "folder": "pricing", "src": "shed-weathered.jpg", "ratio": 1.3333333333333333, "focus": [0.52, 0.56], "zoom": 1.05, "widths": [400, 800, 1200]},
+    {"name": "pricing-regular", "folder": "pricing", "src": "portsmouth-street.jpg", "ratio": 1.3333333333333333, "focus": [0.45, 0.5], "zoom": 1.1, "widths": [400, 800, 1200]}
   ]
 }

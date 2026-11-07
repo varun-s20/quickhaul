@@ -60,10 +60,10 @@ preload_picture: banner-pricing banner-pricing-phone
   </div>
   <div class="m-seatCard a-inview">
     <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -sofa" src="assets/trucks/item-sofa.svg" width="248" height="142" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -boxes" src="assets/trucks/item-boxes.svg" width="190" height="158" alt="" loading="lazy" decoding="async"></div>
-  <ul class="m-factRow -three">
-    <li class="m-fact"><strong class="m-fact__title">Picture a pickup</strong> <span class="m-fact__text">Stand in front of your pile and count how many pickup beds it would fill.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">Count the big stuff</strong> <span class="m-fact__text">Couches, fridges and mattresses take up the most room.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">Still not sure?</strong> <span class="m-fact__text">Pick "Not sure" when you book and add a few photos. We'll tell you which load fits.</span></li>
+  <ul class="m-factRow -three -icons">
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-truck"/></svg><strong class="m-fact__title">Picture a pickup</strong> <span class="m-fact__text">Stand in front of your pile and count how many pickup beds it would fill.</span></li>
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-sofa"/></svg><strong class="m-fact__title">Count the big stuff</strong> <span class="m-fact__text">Couches, fridges and mattresses take up the most room.</span></li>
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-camera"/></svg><strong class="m-fact__title">Still not sure?</strong> <span class="m-fact__text">Pick "Not sure" when you book and add a few photos. We'll tell you which load fits.</span></li>
   </ul>
   </div>
 </section>
@@ -144,16 +144,16 @@ preload_picture: banner-pricing banner-pricing-phone
   </div>
 </section>
 
-<!-- ===== Pricing: not quite a load. Three small facts on cream, rising over the panel ===== -->
+<!-- ===== Pricing: not quite a load. Three small facts on cream, rising over the panel, a photo over each (Varun, 7 Nov). Logged stock, must-replace; nothing says they are real jobs ===== -->
 <section class="b-band -rise o-factBand" aria-labelledby="quite-title">
   <div class="m-head a-inview">
     <h2 class="a-section -small" id="quite-title"><span class="a-section__row -light">Not quite</span> <span class="a-section__row">a load?</span></h2>
     <p class="a-lede">Some jobs don't fit the four sizes, so they're priced a little differently.</p>
   </div>
-  <ul class="m-factRow -three a-inview">
-    <li class="m-fact"><strong class="m-fact__title">Just one item</strong> <span class="m-fact__text">It's priced as a 1/8 load, so that's {{> price-from}}. A fridge or freezer adds its {{> fridge-fee}}.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">Demo</strong> <span class="m-fact__text">Every job is different, so it's priced per job. Send photos or call and we'll price it with you.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">Regular pickups</strong> <span class="m-fact__text">Landlord, realtor or property manager? Tell us what you need on our <a class="a-inlineLink" href="commercial.html">commercial page</a>.</span></li>
+  <ul class="m-factRow -three -photos a-inview">
+    <li class="m-fact"><div class="m-fact__media">{{picture name="pricing-one-item" class="m-fact__img" alt="A small wooden dresser set out on an empty street, in front of a wooden fence" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">Just one item</strong> <span class="m-fact__text">It's priced as a 1/8 load, so that's {{> price-from}}. A fridge or freezer adds its {{> fridge-fee}}.</span></li>
+    <li class="m-fact"><div class="m-fact__media">{{picture name="pricing-demo" class="m-fact__img" alt="A weathered wooden garden shed with glazed double doors" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">Demo</strong> <span class="m-fact__text">Every job is different, so it's priced per job. Send photos or call and we'll price it with you.</span></li>
+    <li class="m-fact"><div class="m-fact__media">{{picture name="pricing-regular" class="m-fact__img" alt="A row of old shingled houses along a quiet sidewalk" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">Regular pickups</strong> <span class="m-fact__text">Landlord, realtor or property manager? Tell us what you need on our <a class="a-inlineLink" href="commercial.html">commercial page</a>.</span></li>
   </ul>
 </section>
 
@@ -165,10 +165,10 @@ preload_picture: banner-pricing banner-pricing-phone
   </div>
   <div class="m-seatCard a-inview">
     <div class="m-seatCard__art" aria-hidden="true"><img class="o-seatBand__item -bags" src="assets/trucks/item-bags.svg" width="216" height="110" alt="" loading="lazy" decoding="async"><img class="o-seatBand__item -bike" src="assets/trucks/item-bike.svg" width="200" height="112" alt="" loading="lazy" decoding="async"></div>
-  <ul class="m-factRow -three">
-    <li class="m-fact"><strong class="m-fact__title">You pick</strong> <span class="m-fact__text">Choose a load and a day online, and add photos if you can. Or call and do it by phone.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">Shawn confirms</strong> <span class="m-fact__text">He checks the job and gets back to you with the time and the price.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">We haul, you pay</strong> <span class="m-fact__text">We load it and leave the space clear. You pay when the job's done.</span></li>
+  <ul class="m-factRow -three -icons">
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-calendar"/></svg><strong class="m-fact__title">You pick</strong> <span class="m-fact__text">Choose a load and a day online, and add photos if you can. Or call and do it by phone.</span></li>
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-clipboard"/></svg><strong class="m-fact__title">Shawn confirms</strong> <span class="m-fact__text">He checks the job and gets back to you with the time and the price.</span></li>
+    <li class="m-fact"><svg class="m-fact__icon" aria-hidden="true"><use href="#i-coins"/></svg><strong class="m-fact__title">We haul, you pay</strong> <span class="m-fact__text">We load it and leave the space clear. You pay when the job's done.</span></li>
   </ul>
   </div>
 </section>

@@ -1706,5 +1706,232 @@
    "w": 800,
    "h": 1081
   }
+ },
+ "review-dresser": {
+  "folder": "assets/images/reviews",
+  "crop": [
+   2182,
+   2181
+  ],
+  "webp": [
+   {
+    "file": "assets/images/reviews/review-dresser-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/reviews/review-dresser-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/reviews/review-dresser-1200.webp",
+    "w": 1200,
+    "h": 1199
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/reviews/review-dresser.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "review-house": {
+  "folder": "assets/images/reviews",
+  "crop": [
+   2400,
+   2400
+  ],
+  "webp": [
+   {
+    "file": "assets/images/reviews/review-house-400.webp",
+    "w": 400,
+    "h": 400
+   },
+   {
+    "file": "assets/images/reviews/review-house-800.webp",
+    "w": 800,
+    "h": 800
+   },
+   {
+    "file": "assets/images/reviews/review-house-1200.webp",
+    "w": 1200,
+    "h": 1200
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/reviews/review-house.jpg",
+   "w": 800,
+   "h": 800
+  }
+ },
+ "crew-owner": {
+  "folder": "assets/images/about",
+  "crop": [
+   2121,
+   1591
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/crew-owner-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/about/crew-owner-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/about/crew-owner-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/crew-owner.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "crew-team": {
+  "folder": "assets/images/about",
+  "crop": [
+   1116,
+   837
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/crew-team-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/about/crew-team-800.webp",
+    "w": 800,
+    "h": 600
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/crew-team.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "crew-property": {
+  "folder": "assets/images/about",
+  "crop": [
+   1714,
+   1286
+  ],
+  "webp": [
+   {
+    "file": "assets/images/about/crew-property-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/about/crew-property-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/about/crew-property-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/about/crew-property.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "pricing-one-item": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   1772,
+   1329
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-one-item-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/pricing/pricing-one-item-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/pricing/pricing-one-item-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-one-item.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "pricing-demo": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   2032,
+   1524
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-demo-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/pricing/pricing-demo-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/pricing/pricing-demo-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-demo.jpg",
+   "w": 800,
+   "h": 600
+  }
+ },
+ "pricing-regular": {
+  "folder": "assets/images/pricing",
+  "crop": [
+   1928,
+   1446
+  ],
+  "webp": [
+   {
+    "file": "assets/images/pricing/pricing-regular-400.webp",
+    "w": 400,
+    "h": 300
+   },
+   {
+    "file": "assets/images/pricing/pricing-regular-800.webp",
+    "w": 800,
+    "h": 600
+   },
+   {
+    "file": "assets/images/pricing/pricing-regular-1200.webp",
+    "w": 1200,
+    "h": 900
+   }
+  ],
+  "fallback": {
+   "file": "assets/images/pricing/pricing-regular.jpg",
+   "w": 800,
+   "h": 600
+  }
  }
 }

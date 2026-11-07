@@ -102,16 +102,17 @@ preload_picture: page-street page-street-phone
   </div>
 </section>
 
-<!-- ===== About: the crew. Three small facts on cream. No stock person and no name but Shawn's; this slot wants his own photo of the crew (alt then: Shawn and the Quick Haul crew beside the truck) ===== -->
+<!-- ===== About: the crew. Three small facts on cream, a photo over each (Varun, 7 Nov). No name but Shawn's ===== -->
+<!-- Stock placeholders, must-replace (content/placeholders.md): the first slot wants Shawn's own photo, the second the crew at work, the third a customer's drive or yard. Alts describe the stock photo and never name Shawn; rewrite them with the real photos (alt then: "Shawn, owner of Quick Haul", "The Quick Haul crew loading the truck"). -->
 <section class="b-band o-svcBand o-factBand" id="crew" aria-labelledby="crew-title">
   <div class="m-head a-inview">
     <h2 class="a-section -small" id="crew-title"><span class="a-section__row -light">The</span> <span class="a-section__row">crew</span></h2>
     <p class="a-lede">Quick Haul is small on purpose. The people you talk to are the people who show up.</p>
   </div>
-  <ul class="m-factRow -three a-inview">
-    <li class="m-fact"><strong class="m-fact__title">Shawn</strong> <span class="m-fact__text">The owner. He answers the phone, looks over the jobs and works them too.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">The crew</strong> <span class="m-fact__text">A small local team, with enough hands for the job in front of them.</span></li>
-    <li class="m-fact"><strong class="m-fact__title">On your property</strong> <span class="m-fact__text">They'll check with you first, then do the lifting. You don't need to help.</span></li>
+  <ul class="m-factRow -three -photos a-inview">
+    <li class="m-fact"><div class="m-fact__media">{{picture name="crew-owner" class="m-fact__img" alt="A man walking down a sidewalk with a striped mattress on his head" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">Shawn</strong> <span class="m-fact__text">The owner. He answers the phone, looks over the jobs and works them too.</span></li>
+    <li class="m-fact"><div class="m-fact__media">{{picture name="crew-team" class="m-fact__img" alt="A man wheeling a tall stack of cardboard boxes on a hand truck along a street" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">The crew</strong> <span class="m-fact__text">A small local team, with enough hands for the job in front of them.</span></li>
+    <li class="m-fact"><div class="m-fact__media">{{picture name="crew-property" class="m-fact__img" alt="A sunny back yard with a wide lawn, a wooden fence and a gray house" sizes="(min-width: 1025px) 34vw, (min-width: 641px) 30vw, 100vw"}}</div><strong class="m-fact__title">On your property</strong> <span class="m-fact__text">They'll check with you first, then do the lifting. You don't need to help.</span></li>
   </ul>
 </section>
 

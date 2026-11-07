@@ -218,7 +218,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 /* 1fr in a fit-content grid: three columns, each as wide as the longest item, so the gaps between them match (critic, Services r1). From 1241, because three of those need about 991px inside the card; under that it stays at two columns, where nothing wraps */
 @media (min-width: 1241px) { .m-notList { grid-template-columns: repeat(3, 1fr); } }
 
-/* Small facts: a short title and one line. No icons, no cards, no numbers (anti-slop) */
+/* Small facts: a short title and one line. No cards, no numbers (anti-slop). Some rows carry an icon or a photo over each fact (Varun, 7 Nov: the plain rows read bland); the rest stay plain */
 .m-fact__title { display: block; font: var(--w-semi) 1.8rem/1.25 var(--f-body); }
 .m-fact__text { display: block; margin-top: .2rem; color: var(--c-soft); font: var(--w-body) 1.6rem/1.4 var(--f-body); text-wrap: pretty; }
 /* A rule of its own so check.py finds the class: the title and text carry the type */
@@ -228,6 +228,19 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 @media (min-width: 641px) {
   .m-factRow.-three { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
   .m-factRow.-two { grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+}
+/* Facts with an icon: a line icon (src/partials/icons.html, Lucide) in a slate disc on the fact's axis. The same disc as .m-notList__mark, at a size that holds a picture. More air between stacked facts, which are taller now */
+.m-fact__icon { display: block; width: 5.6rem; height: 5.6rem; margin: 0 auto var(--s-3); padding: 1.4rem; border-radius: 50%; background: var(--c-slate); color: var(--c-cream); }
+.m-factRow.-icons { row-gap: var(--s-6); }
+/* Facts with a photo: a rounded photo over each one. Logged stock until Shawn's own (content/placeholders.md). Wider on phones, so three stacked don't run the band long */
+.m-factRow.-photos { row-gap: var(--s-7); }
+.m-fact__media { position: relative; overflow: hidden; margin-bottom: var(--s-4); border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 3 / 2; }
+.m-fact__img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
+@media (min-width: 641px) { .m-fact__media { aspect-ratio: 4 / 3; } }
+@media (min-width: 1025px) {
+  .m-fact__icon { width: 6.4rem; height: 6.4rem; margin-bottom: var(--s-4); padding: 1.6rem; }
+  .m-factRow.-photos { max-width: 124rem; }
+  .m-fact__media { margin-bottom: var(--s-5); }
 }
 
 /* A centred heading and its line, the opening of most bands (V7: one axis) */
@@ -639,7 +652,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 
 /* ===== Home: reviews ===== */
 /* Its own band, so before and after holds one idea (critic r2). Five sample cards shaped like what will fill them: a Facebook review, with who wrote it and when (V8: testimonial card with an initials avatar).
-   No stock job photo beside them, because a review shouldn't borrow a job that isn't the writer's. The picture is the load's own sofa and chair, set down on one card's edge, the same move as the truck on the fold (anti-slop: a custom illustration when real media is missing). A real job photo can take their place. */
+   The load's own sofa and chair sit on one card's edge, the same move as the truck on the fold. Stock photos stand between the cards (Varun, 7 Nov: the band read plain), never inside one and never beside a card about the same job, because a review shouldn't borrow a job that isn't the writer's (copy.md). */
 /* Some air of its own above the heading, so it doesn't read as the tail of before and after (critic, home r1) */
 .o-homeReview { padding-top: var(--s-6); padding-bottom: var(--s-8); }
 .o-homeReview .m-head { margin-bottom: 0; text-align: center; }
@@ -660,9 +673,13 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .m-quote.-card .m-quote__source { color: var(--c-chrome); }
 .m-quote.-card .m-quote__text { font-size: 2.2rem; }
 .m-quote.-card .m-quote__foot { margin-top: auto; padding-top: var(--s-4); }
-/* Five cards. Stacked on phones, 2 + 1 + 2 on tablets, 3 + 2 from laptops up (the two wider cards hold the longer samples). The seated card's art needs the room above its edge: that's the margin on it, or from laptops up on the whole grid, because it stands in the top row */
+/* Five cards and three photos, in reading order from data/reviews.json. Stacked on phones; two columns on tablets, the seated card across both; from laptops up four columns and two rows, a card and a photo taking turns. The seated card's art needs the room above its edge: that's the margin on it, or from laptops up on the whole grid, because it stands in the top row */
 .o-homeReview__grid { display: grid; gap: var(--s-3); max-width: 134.4rem; margin: var(--s-6) auto 0; }
 .o-homeReview__grid .m-seatCard { max-width: none; margin: 8.8rem 0 0; padding: var(--s-5); }
+.o-homeReview__photo { position: relative; overflow: hidden; border-radius: var(--r-image); background: var(--c-slate); aspect-ratio: 3 / 2; }
+.o-homeReview__img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
+/* -wide: only in the four columns. Under them the grid closes up without it */
+.o-homeReview__photo.-wide { display: none; }
 .o-homeReview .m-rowActions { margin-top: var(--s-4); }
 @media (min-width: 641px) {
   .m-seatCard { padding: var(--s-7) var(--s-7) var(--s-6); }
@@ -671,25 +688,33 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .m-quote__chair { width: 10rem; }
   .o-homeReview__grid .m-seatCard__art { right: var(--s-5); }
 }
+/* Tablets: dense, so the photo after the seated card fills the hole beside the card before it. A photo beside a card takes the card's height */
 @media (min-width: 641px) and (max-width: 1024px) {
-  .o-homeReview__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
+  .o-homeReview__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: var(--s-4); }
   .o-homeReview__grid .m-seatCard { grid-column: 1 / -1; margin-top: 10.4rem; padding: var(--s-6); }
+  .o-homeReview__photo { min-height: 24rem; aspect-ratio: auto; }
 }
 @media (min-width: 1025px) {
   .m-quote__text { font-size: 3.2rem; }
   .o-homeReview { padding-top: var(--s-8); padding-bottom: var(--s-9); }
-  .o-homeReview__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); margin-top: 12.8rem; }
-  .o-homeReview__grid .m-quote { grid-column: span 2; padding: var(--s-6); }
-  .o-homeReview__grid .m-quote:nth-child(n + 4) { grid-column: span 3; }
+  .o-homeReview__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); margin-top: 12.8rem; }
+  .o-homeReview__grid .m-quote { padding: var(--s-6) var(--s-5) var(--s-5); }
   .o-homeReview__grid .m-seatCard { margin: 0; }
-  .o-homeReview__grid .m-seatCard__art { right: var(--s-6); }
+  .o-homeReview__grid .m-seatCard__art { right: var(--s-5); }
+  .o-homeReview__photo { min-height: 30rem; aspect-ratio: auto; }
+  .o-homeReview__photo.-wide { display: block; }
   .m-quote.-card .m-quote__text { font-size: 2.6rem; }
+  /* a quarter of the row: a size down, so a sample keeps five or six words a line */
+  .o-homeReview__grid .m-quote.-card .m-quote__text { font-size: 2.4rem; }
   .o-homeReview .m-rowActions { margin-top: var(--s-5); }
-}
-/* Small laptops: the top row's cards are narrower than the sofa and chair at their tablet size */
-@media (min-width: 1025px) and (max-width: 1240px) {
+  /* the sofa and chair inside one column's width */
   .o-homeReview__grid .m-quote__sofa { width: 15rem; }
   .o-homeReview__grid .m-quote__chair { width: 8rem; }
+}
+/* Small laptops: a column is narrower still */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .o-homeReview__grid .m-quote__sofa { width: 12rem; }
+  .o-homeReview__grid .m-quote__chair { width: 6.4rem; }
 }
 
 /* ===== Home: towns (V8 promo card: one photo, a heading, the names) ===== */
@@ -896,6 +921,9 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .o-bookBand { padding-top: var(--s-7); }
   .o-bookBand .m-factRow { gap: var(--s-3); }
   .o-bookBand .o-book { margin-top: var(--s-5); }
+  /* the icon beside its words, not over them, so the steps stay about as short as they were */
+  .o-bookBand .m-factRow.-icons .m-fact { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-3); align-items: center; text-align: left; }
+  .o-bookBand .m-fact__icon { grid-row: 1 / span 2; width: 4.4rem; height: 4.4rem; margin: 0; padding: 1.1rem; }
 }
 /* overflow clip, not hidden: hidden would make this box the sticky call line's scroller */
 .o-book { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 134.4rem; margin: var(--s-7) auto 0; overflow: clip; border-radius: var(--r-image); box-shadow: inset 0 0 0 1px var(--c-line); }

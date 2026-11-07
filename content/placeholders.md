@@ -614,3 +614,24 @@ Older rows above still name the old pages. These lines replace their "where used
 Only Home's hero keeps a truck. All stock, must-replace, Unsplash License, logged with their sources above. Crop only.
 - Services: man-boxes-van. Pricing: storage-room-clutter. Reviews: backyard-lawn-fence. Donate: dresser-and-chair. FAQ: shed-weathered. Contact: man-carrying-mattress. Commercial: renovation-tearout. 404: basement-cleared. Service area and the 12 town pages: fall-house-drive, which isn't of any listed town. About and Book keep portsmouth-street.
 - Estimate band, every page that has it: cta-after (garage-after) large, compare-before (garage-clutter-before) as the "Before" snapshot. As on Home's slider, these are two different stock garages, not one job. Replace with one real before and after pair from Shawn, or the Before and After tags say something untrue at launch.
+
+## Varun's revision: review photos, crew photos, fact icons (2026-11-07)
+All stock, must-replace, Unsplash License, logged with their sources above. Crop only (site/data/images.json), no new downloads. No alt names Shawn or calls a photo a Quick Haul job.
+
+| Crop (site/assets/images/) | From (site/src/stock/) | Where used | Alt now on the page | Must replace with |
+|---|---|---|---|---|
+| reviews/review-dresser | dresser-and-chair (Clay Banks) | Home, reviews grid, top row | A wooden dresser with a mirror and lamp beside a wooden rocking chair, by a sunny window | Shawn's own job photos, or drop the photos when real reviews arrive |
+| reviews/review-house | fall-house-drive (logged above) | Home, reviews grid, second row | A gray house with a barn-shaped roof behind a bright red shrub and a big tree, with a paved drive in front | as above |
+| reviews/cellar-shelves (existing crop) | cellar-shelves (logged above) | Home, reviews grid, second row, from 1025 up only; still on Reviews too | Dark wooden shelves crammed with jars, saws, hardware and bags | as above |
+| about/crew-owner | man-carrying-mattress (Rosa Jakobi) | About, the crew, "Shawn" | A man walking down a sidewalk with a striped mattress on his head | A photo of Shawn |
+| about/crew-team | man-boxes-van (Richard Stachmann) | About, the crew, "The crew" | A man wheeling a tall stack of cardboard boxes on a hand truck along a street | A photo of the crew at work |
+| about/crew-property | backyard-lawn-deck (Josh Lemmon) | About, the crew, "On your property" | A sunny back yard with a wide lawn, a wooden fence and a gray house | A customer's yard or drive after a job, with permission |
+| pricing/pricing-one-item | dresser-on-street (logged above) | Pricing, not quite a load, "Just one item" | A small wooden dresser set out on an empty street, in front of a wooden fence | Shawn's own photo |
+| pricing/pricing-demo | shed-weathered (Ries Bosch) | Pricing, not quite a load, "Demo" | A weathered wooden garden shed with glazed double doors | Shawn's own demo photo |
+| pricing/pricing-regular | portsmouth-street (logged above) | Pricing, not quite a load, "Regular pickups" | A row of old shingled houses along a quiet sidewalk | Shawn's own photo |
+
+Notes:
+- This undoes two earlier calls, on Varun's instruction. Home's reviews had no stock photos, so that none would read as the job a review is about; the photos now sit between the cards, never inside one and never beside a card about the same job (data/reviews.json, _home_note). About's crew had no stock person; it now has two. As the first photo under "Shawn", the mattress carrier will read as him, so the crop keeps his face hidden behind the mattress. The crew photo keeps the Turkish plate and the "Dikkat köpek var" sign out of frame (crop zoom 1.9), but the street is still Istanbul's.
+- Not used, on purpose: room-stacked-boxes (brand lettering on every stack, see above) and renovation-tearout for any new crop (Makita cases, SterlingOSB print and an Elliott dumper in most of the frame).
+- The "not on the site" row under request 014 no longer holds for dresser-and-chair and man-boxes-van.
+- Fact icons on Pricing (which load, from estimate to booked), Reviews (word for word, used us already), Donate (getting it ready) and Book (the three steps): Lucide line icons, ISC licence, in site/src/partials/icons.html. Not a placeholder; nothing to replace.

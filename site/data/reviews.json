@@ -1,11 +1,15 @@
 {
   "_note": "Sample cards from content/copy.md, worded so nobody can mistake them for real reviews. No stars, score, count, job tags, source or links on a sample. Each one holds the place of one of Shawn's real Facebook reviews and is logged in content/placeholders.md as must-replace; replace them word for word (initials, name, date, post link), never edit them into real-sounding reviews. home feeds the five cards on the homepage, the same words as cards 1 to 5 of reviews_page. reviews_page feeds the Reviews page grid in reading order: a quote item is one card, a photo item is one stock photo (a name from data/image-manifest.json and its alt), never inside a card, and never next to a card about the same job at any width (copy.md; order checked in the browser at nine widths, build/tmp/v3/photo_order.py). col is the column an item lands in from 1025 up; below that they flow in reading order. lead puts a photo at the top of its column from 1025 up. tone soft sets a card on the seated ground. art names a drawn item from assets/trucks for the card's top edge. A real review adds source (Facebook), date and url, and the cards print those slots only when they are there. facebook_url is the bare platform address until Shawn sends his page (content/placeholders.md).",
   "facebook_url": "https://www.facebook.com/",
+  "_home_note": "Home's grid in reading order (Varun, 7 Nov: photos between the cards). From 1025 up it fills four columns, two rows: card, photo, card, seated card, then photo, card, photo, card. seat marks the card with the drawn sofa and chair on its edge; it must stay in the top row. wide shows a photo from 1025 up only, so the tablet and phone grids close up. The same rule as reviews_page: no photo beside a card about the same job at any width.",
   "home": [
     { "quote": "Sample review. A garage clean out goes here, told by the person whose garage it was.", "who": "Sample review", "initials": "SR" },
+    { "photo": "review-dresser", "alt": "A wooden dresser with a mirror and lamp beside a wooden rocking chair, by a sunny window" },
     { "quote": "Sample review. A quick word about a mattress pickup.", "who": "Sample review", "initials": "SR" },
-    { "quote": "Sample review. A real customer's words about a furniture pickup belong here.", "who": "Sample review", "initials": "SR" },
+    { "seat": true, "quote": "Sample review. A real customer's words about a furniture pickup belong here.", "who": "Sample review", "initials": "SR" },
+    { "photo": "review-house", "alt": "A gray house with a barn-shaped roof behind a bright red shrub and a big tree, with a paved drive in front" },
     { "quote": "Sample review. A longer one fits here, about a yard cleanup, the kind people write after a big job.", "who": "Sample review", "initials": "SR" },
+    { "wide": true, "photo": "cellar-shelves", "alt": "Dark wooden shelves crammed with jars, saws, hardware and bags" },
     { "quote": "Sample review. Saved for a shed or deck demo, with the writer's name and date.", "who": "Sample review", "initials": "SR" }
   ],
   "reviews_page": [

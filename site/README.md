@@ -41,7 +41,8 @@ python tools/qa.py pricing.html <output folder> --section "<newline>## Pricing (
 | Page title and description | the meta comment at the top of the page's body file | build |
 | Prices and what each load holds | `data/prices.json` | build. Then also the hand-typed prices its `_note` lists |
 | FAQ questions, and their FAQPage JSON-LD | `data/faq.json` | build |
-| Review cards | `data/reviews.json` | build |
+| Review cards, and the photos between Home's cards | `data/reviews.json` | build |
+| Fact icons | `src/partials/icons.html` (Lucide, ISC). A page names one with `<svg class="m-fact__icon" aria-hidden="true"><use href="#i-name"/></svg>`; the build adds only the icons that page uses | build |
 | Colours, fonts, sizes | `:root` in `assets/global.css`, and `design/tokens.css` to match | |
 | Behaviour | `assets/global.js` | |
 | Structured data | `src/schema/<slug>.json` | build |

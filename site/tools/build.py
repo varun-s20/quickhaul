@@ -88,20 +88,26 @@ def quote_foot(r):
 
 
 def block_review_home():
-    """Home: five sample cards until Shawn picks real reviews (Varun, 5 Nov). The drawn sofa and chair sit on one card's edge, the third, which is the furniture one while these are samples (copy.md). The layout in global.css counts on the third card being the seated one."""
+    """Home: five sample cards until Shawn picks real reviews (Varun, 5 Nov), with photos between them (Varun, 7 Nov), in reading order from
+    data/reviews.json. The drawn sofa and chair sit on the edge of the card marked seat, the furniture one while these are samples (copy.md).
+    A photo is never inside a card, so none reads as the job a review is about. wide: a photo shown only from 1025 up, where the grid has four columns."""
     data = json.loads(read(DATA, 'reviews.json'))
     art = ('      <div class="m-seatCard__art" aria-hidden="true"><img class="m-quote__sofa" src="assets/trucks/item-sofa.svg" width="248" height="142" alt="" loading="lazy" decoding="async">'
            '<img class="m-quote__chair" src="assets/trucks/item-armchair.svg" width="124" height="132" alt="" loading="lazy" decoding="async"></div>\n')
-    cards = []
-    for i, r in enumerate(data['home']):
-        seated = i == 2
-        cards.append(
+    rows = []
+    for r in data['home']:
+        if 'photo' in r:
+            rows.append('    <div class="o-homeReview__photo%s a-inview">{{picture name="%s" class="o-homeReview__img" alt="%s" sizes="(min-width: 1025px) 25vw, (min-width: 641px) 50vw, 100vw"}}</div>'
+                        % (' -wide' if r.get('wide') else '', r['photo'], r['alt']))
+            continue
+        seated = r.get('seat')
+        rows.append(
             '    <figure class="m-quote -card%s a-inview">\n'
             '%s'
             '      <blockquote class="m-quote__text"><p>&ldquo;%s&rdquo;</p></blockquote>\n'
             '%s\n'
             '    </figure>' % (' m-seatCard' if seated else '', art if seated else '', esc(r['quote']), quote_foot(r)))
-    return '\n'.join(cards)
+    return '\n'.join(rows)
 
 
 def load_radios(first_checked):
@@ -516,6 +522,18 @@ def prefix_paths(doc, prefix):
     return re.sub(r'\b(srcset|imagesrcset)="([^"]+)"', many, doc)
 
 
+def add_icons(doc):
+    """Fact icons: only the symbols a page uses go into its sprite, from src/partials/icons.html (Lucide, ISC), so no page carries
+    an icon it doesn't show. A name that isn't there is left alone, and check.py fails its #anchor."""
+    lib = {m.group(1): m.group(0) for m in re.finditer(r'<symbol id="([\w-]+)".*?</symbol>', read(SRC, 'partials', 'icons.html'), re.S)}
+    used = []
+    for name in re.findall(r'<use href="#([\w-]+)"', doc):
+        if name in lib and name not in used:
+            used.append(name)
+    note = '  <!-- fact icons from Lucide (lucide.dev), ISC licence -->\n' if used else ''
+    return re.sub(r' *<!-- fact-icons:.*?-->\n', lambda m: note + ''.join('  %s\n' % lib[n] for n in used), doc, count=1)
+
+
 def build_page(slug, raw, source, parts):
     page = source
     meta, body = parse_meta(raw, page)
@@ -534,6 +552,7 @@ def build_page(slug, raw, source, parts):
     footer = expand(footer, 'src/partials/footer.html')
     doc = head.replace('{{GENERATED}}', GENERATED_NOTE % source)
     doc = '%s\n<body>\n%s\n<main id="main" class="t-page">\n%s\n</main>\n%s\n</body>\n</html>\n' % (doc, header.strip(), body.strip(), footer.strip())
+    doc = add_icons(doc)
     if slug == '404':
         doc = prefix_paths(doc, '/')
     elif '/' in slug:

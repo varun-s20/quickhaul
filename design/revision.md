@@ -38,7 +38,7 @@ The site's one recurring character is the logo's truck, redrawn. It parks on the
 Three kinds of text carry the extra words, so paragraphs don't come back:
 - **The lede** (.a-lede): 15 to 30 words under a heading. Never two paragraphs.
 - **One line under a photo** (.m-tile__line): 5 to 12 words, on the cream, so the photo stays clean.
-- **Short lists and facts:** a list of things goes in one plain line with a bold lead (.m-takes: "We take couches, recliners and dressers"). Small facts (.m-fact, a short title and one line) say how something works. Fact chips (.a-factChip, V3) are for one row of two or three short facts on a page at most: a whole list of them read as a wall of buttons (critic r2-1). No icons, no numbers. Pills are links or actions; a fact chip is the one exception.
+- **Short lists and facts:** a list of things goes in one plain line with a bold lead (.m-takes: "We take couches, recliners and dressers"). Small facts (.m-fact, a short title and one line) say how something works. Fact chips (.a-factChip, V3) are for one row of two or three short facts on a page at most: a whole list of them read as a wall of buttons (critic r2-1). No numbers. Icons only where Varun asked for them (7 Nov): a Lucide line icon in a slate disc over each fact (.m-factRow.-icons) on Pricing's which load and from estimate to booked, Reviews' word for word and used us already, Donate's getting it ready and Book's three steps. A photo over each fact (.m-factRow.-photos) on About's crew and Pricing's not quite a load. Other fact rows stay plain. Pills are links or actions; a fact chip is the one exception.
 
 Homepage as built, words a visitor can see in main (screen-reader-only text left out, measured in the browser):
 
