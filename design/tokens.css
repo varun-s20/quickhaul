@@ -4,10 +4,10 @@
    Palette: Varun's pick 1, Slate wall, sampled from assets/logo.png (design/choices.md). Colours are unchanged in the revision.
    Type: Varun's pick A, Bio Sans with Roboto Mono; in the revision Bio Sans Regular takes over body text and the mono keeps one small job.
    Root is 62.5%, so 1rem = 10px at 1440; past 1440 the root grows with the viewport, capped at the 2560 size.
-   Breakpoint steps of these tokens (--t-lede, --gutter, --h-header, --logo, --logoSmall) sit with their rules in global.css.
+   Breakpoint steps of these tokens (--t-lede, --gutter, --h-header, --logo) sit with their rules in global.css.
    Tokens the revision retired (--t-hero, --t-price, --t-label, --cell, --h-bar and others) live on until the old inner pages are rebuilt,
    set on .t-legacy at the end of global.css; the old values are in build/site-v1-backup/assets/global.css.
-   Added in the revision and marked "new" below; --heroInset is set per section, --c-soft per band, --logoSettled by global.js. */
+   Added in the revision and marked "new" below; --heroInset is set per section, --c-soft per band. */
 :root {
   /* ---- colour: unchanged. Palette 1, Slate wall, from the logo's pixels. No new UI colour (2b decision 1) ---- */
   --c-slate: #343D4E;      /* logo wall. Header and dark bands. Cream text on it 9.62:1, chrome text 7.38:1 */
@@ -64,8 +64,7 @@
   --r-band: 3.2rem;         /* new: V7 rising band */
 
   /* ---- logo: the sharp ceiling is 108 to 117px on a 2x screen (mark is 234px in the phone screenshot) ---- */
-  --logo: 8.8rem;           /* new */
-  --logoSmall: .68;         /* new: scale once the page has scrolled 32px, so it fits inside the bar. 60px on phones (critic r2: 55px was small) */
+  --logo: 5.4rem;           /* inside the 64px bar, centred (Shawn, 10 Nov: the logo must not come out of the navbar) */
 
   /* ---- motion ---- */
   --e-out: cubic-bezier(.22, 1, .36, 1);

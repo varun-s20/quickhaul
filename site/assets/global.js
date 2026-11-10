@@ -75,23 +75,6 @@
     });
   }());
 
-  /* ---- the logo settles into the bar over the first 32px of scroll. Tied to the scroll position, not a timer, so a hard flick can't catch it half way and sit it on a heading (critic r2-2).
-          32px is short enough on every layout: the logo is back inside the bar before the first heading can reach it. With reduced motion it just switches, at 12px ---- */
-  (function () {
-    var header = $('[data-header]');
-    if (!header) { return; }
-    var last = -1;
-    function settle() {
-      var y = Math.max(window.pageYOffset, 0);
-      var settled = reduced ? (y > 12 ? 1 : 0) : Math.min(y / 32, 1);
-      if (settled === last) { return; }
-      last = settled;
-      header.style.setProperty('--logoSettled', settled);
-    }
-    settle();
-    window.addEventListener('scroll', settle, { passive: true });
-  }());
-
   /* ---- header states and the phone's call bar. The number shows once per screen (Varun: stop saying it again and again):
           the first screen's pill (data-call-here, on a hero or banner that carries one) while it's on screen, the header or the phone's bar in the middle of the page, the footer's at the end ---- */
   (function () {

@@ -635,3 +635,10 @@ Notes:
 - Not used, on purpose: room-stacked-boxes (brand lettering on every stack, see above) and renovation-tearout for any new crop (Makita cases, SterlingOSB print and an Elliott dumper in most of the frame).
 - The "not on the site" row under request 014 no longer holds for dresser-and-chair and man-boxes-van.
 - Fact icons on Pricing (which load, from estimate to booked), Reviews (word for word, used us already), Donate (getting it ready) and Book (the three steps): Lucide line icons, ISC licence, in site/src/partials/icons.html. Not a placeholder; nothing to replace.
+
+## Shawn's first review (2026-11-10)
+| Item | Now | Was | Status |
+|---|---|---|---|
+| Smallest load and single item | $79 (1/8 truck), everywhere $149 was: prices.json, Home hero and meta, Pricing meta and sums, town meta, FAQ, schema | $149 | Confirmed by Shawn as his minimum; he may still make exceptions. The 1/4, 1/2 and full prices ($249, $399, $649) are still placeholders, and he hasn't decided load pricing yet |
+| Paint | Taken: off Home, off the Services can't-take list (and its drawing), off the FAQ answer | On every can't-take list | Confirmed by Shawn ("we'll pretty much take anything, even paint"). The rest of the list (oil and chemicals, propane, asbestos, medical waste, car batteries, gas-connected items) is unconfirmed |
+| Home towns band | Three region chips: Northern Massachusetts, Southern Massachusetts, Southern New Hampshire, all linking to service-area.html | Twelve town chips | Region names are Shawn's rough wording ("etc"); the list is unconfirmed. The service area page, map and 12 town pages are unchanged |

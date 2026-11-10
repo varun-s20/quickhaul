@@ -9,22 +9,17 @@ rear axle and a heap of junk, facing right. Drawn side-on at 150 units to the me
 proportions (wheelbase about 3.9m, cab 1.8m long, 0.8m tyres), so it holds up large. Chrome like the logo; the
 load is the only colour. Our own drawing: nothing traced or copied.
 
-Usage: python tools/build_trucks.py   (from the site folder; needs Pillow for the door decal only)
+Usage: python tools/build_trucks.py   (from the site folder)
 """
-import base64
-import io
 import math
 import os
 import re
 
-from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-PROJECT = os.path.dirname(ROOT)
 OUT = os.path.join(ROOT, 'assets', 'trucks')
 PARTS = os.path.join(ROOT, 'src', 'partials', 'trucks')
-LOGO = os.path.join(PROJECT, 'assets', 'logo.png')
 
 VIEW = '0 62 1064 558'     # room for the tallest load and the ground shadow
 INK = '#0F141C'
@@ -318,19 +313,7 @@ DOOR = 'M826 284L966 282Q974 282 978 288L1000 372Q1004 392 1004 416V452H826Z'
 GLASS = 'M842 297L958 296Q966 296 968 303L986 374L842 376Z'
 
 
-def logo_uri():
-    src = Image.open(LOGO).convert('RGB')
-    cx, cy, r = 372, 798.6, 117    # the mark in the unchanged phone screenshot (see m-header__logoImg in the built site)
-    crop = src.crop((int(cx - r), int(cy - r), int(cx + r), int(cy + r))).resize((132, 132), Image.LANCZOS)
-    mask = Image.new('L', (528, 528), 0)
-    ImageDraw.Draw(mask).ellipse((2, 2, 526, 526), fill=255)
-    crop.putalpha(mask.resize((132, 132), Image.LANCZOS))
-    buf = io.BytesIO()
-    crop.save(buf, 'WEBP', quality=84, method=6)
-    return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode('ascii')
-
-
-def cab(uri):
+def cab():
     s = []
     # shell and metal
     s.append(pth(CAB_SHELL, 'url(#qh-cab)'))
@@ -382,9 +365,7 @@ def cab(uri):
     s.append(rr(842, 392, 40, 14, 5, '#3A404B'))
     s.append(rr(846, 395, 32, 7, 3.5, 'url(#qh-rail)', 'stroke="#23272F" stroke-width=".7"'))
     s.append(cir(890, 399, 3.2, 'url(#qh-hub)', 'stroke="#23272F" stroke-width=".7"'))
-    # the client's real mark on the door
-    s.append(cir(934, 414, 31.5, '#343D4E', 'stroke="#23272F" stroke-opacity=".6" stroke-width="1"'))
-    s.append('<image href="%s" x="903" y="383" width="62" height="62"/>' % uri)
+    # no decal on the door: the round logo badge read as stuck on (Shawn, 10 Nov)
     # front corner: indicator, headlamp, marker, grille ribs
     s.append(pth('M1008 384L1028 381L1030 396L1009 400Z', 'url(#qh-amber)', 'stroke="#20242C" stroke-width="1"'))
     s.append(pth('M1008 403L1030.5 399Q1036 418 1036 438L1008 440Q1004.5 420 1008 403Z', '#20242C'))
@@ -714,7 +695,7 @@ def load_defs():
 
 
 # ===== Truck groups =====
-def truck_defs(uri):
+def truck_defs():
     d = [PAINT,
          '<g id="qh-wheelF">%s</g>' % wheel_parts(False),
          '<g id="qh-wheelR">%s</g>' % wheel_parts(True),
@@ -723,7 +704,7 @@ def truck_defs(uri):
          '<g id="qh-fender">%s</g>' % rear_fender(),
          '<g id="qh-back">%s</g>' % bed_back(),
          '<g id="qh-side">%s</g>' % bed_side(),
-         '<g id="qh-cabin">%s</g>' % cab(uri),
+         '<g id="qh-cabin">%s</g>' % cab(),
          '<g id="qh-shadow">%s</g>' % SHADOW,
          load_defs(),
          '<g id="qh-load-full">%s</g>' % uses(4)]
@@ -886,8 +867,7 @@ def item_files(paint):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    uri = logo_uri()
-    defs = truck_defs(uri)
+    defs = truck_defs()
     variants = [('truck-empty.svg', 0, 'The Quick Haul truck, empty'),
                 ('truck-eighth.svg', 1, 'The Quick Haul truck with an eighth of a load'),
                 ('truck-quarter.svg', 2, 'The Quick Haul truck with a quarter of a load'),
